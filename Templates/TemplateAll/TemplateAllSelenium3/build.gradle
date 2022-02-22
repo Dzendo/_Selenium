@@ -1,0 +1,69 @@
+buildscript {
+    dependencies {
+        classpath('net.serenity-bdd:serenity-gradle-plugin:3.0.5')
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+    id 'io.qameta.allure' version '2.9.3'
+}
+
+apply plugin: 'net.serenity-bdd.aggregator'
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    allureVersion = '2.16.1'
+    fluentleniumVersion = '4.8.0'
+}
+
+sourceCompatibility = '15'
+targetCompatibility = '15'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+[compileKotlin, compileTestKotlin].forEach {
+    it.kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+    testImplementation('com.codeborne:selenide:5.25.0')
+    testImplementation("io.qameta.allure:allure-selenide:${allureVersion}")
+    testImplementation('net.serenity-bdd:serenity-core:3.0.5')
+    testImplementation('net.serenity-bdd:serenity-junit:3.0.5')
+    testImplementation("org.fluentlenium:fluentlenium-core:${fluentleniumVersion}")
+    testImplementation("org.fluentlenium:fluentlenium-assertj:${fluentleniumVersion}")
+    testImplementation("org.fluentlenium:fluentlenium-testng:${fluentleniumVersion}")
+    testImplementation('com.epam.jdi:jdi-light-html:1.3.17')
+    testImplementation('io.qameta.atlas:atlas-webdriver:1.8.0')
+    testImplementation('io.github.bonigarcia:webdrivermanager:4.4.3')
+    testImplementation('org.assertj:assertj-core:3.21.0')
+    testImplementation('com.google.truth:truth:1.1.3')
+    testImplementation('org.hamcrest:hamcrest:2.2')
+    testImplementation('org.slf4j:slf4j-simple:1.7.30')
+
+    testImplementation('org.testng:testng:7.4.0')
+}
+
+test {
+    useTestNG()
+}
+allure {
+    autoconfigure = true
+    version = "${allureVersion}"
+
+    useTestNG {
+        version = "${allureVersion}"
+    }
+}
