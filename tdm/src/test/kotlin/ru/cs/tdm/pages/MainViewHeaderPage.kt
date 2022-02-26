@@ -17,10 +17,8 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     /**
      * конструктор класса, занимающийся инициализацией полей класса
      */
-    //var driver: WebDriver
     init {
         PageFactory.initElements(driver, this)
-       // this.driver = driver
     }
 
     /**
@@ -61,7 +59,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     @FindBy(xpath = "//*[@id='ext-element-4']/head/title") //[contains(text(),'TDMS Web')]") //*[@id="ext-element-4"]/head/title
     private lateinit var title: WebElement
     fun title(): String {
-        Thread.sleep(100)   // Костыль  --  аоменять на ожидание Selenium
+        Thread.sleep(100)   // Костыль  --  поменять на ожидание Selenium
         var titleStr = driver.title
         titleStr = if (titleStr.contains(" ")) titleStr.split(" ").toTypedArray()[0] else titleStr
         println("Ответ title = $titleStr")
@@ -75,20 +73,22 @@ class MainViewHeaderPage(private val driver: WebDriver) {
 
 
     @FindBy(xpath = "//a[contains(text(),'TDMS Web')]")
-    private lateinit var tdmsWebBtn: WebElement
+    lateinit var tdmsWebBtn: WebElement
     fun ClickTDMSWeb(): Boolean {
-        println("нажатия кнопки TDMSWeb")
+        println("нажатия кнопки TDMSWeb ${objectsBtn.getAttribute("aria-pressed") =="true"}")
         tdmsWebBtn.click()
+        //println("tdmsWebBtn.text = ${tdmsWebBtn.text}")
+        //println(" tdmsWebBtn.ariaRole = ${tdmsWebBtn.ariaRole}")
 
-        //if (!tdmsWebBtn.isSelected) {  //  aria-pressed = true/false
-        if (!tdmsWebBtn.isSelected) {  //  aria-pressed = true/false
-                  println(" tdmsWebBtn.ariaRole = ${tdmsWebBtn.ariaRole}");
-        }
-        return tdmsWebBtn.isSelected
+        return objectsBtn.getAttribute("aria-pressed") =="true"
     }
 
     /**
      * метод для нажатия кнопки РАБОЧИЙ СТОЛ
+     * <a class="x-btn header-button x-unselectable x-btn-default-small x-btn-pressed"
+     * hidefocus="on" unselectable="on" role="button" aria-hidden="false" aria-disabled="false"
+     * id="button-1095" tabindex="0" href="#desktop" aria-pressed="true">
+     * <b>РАБОЧИЙ СТОЛ</b></a>
      */
     @FindBy(xpath = "//a[contains(@href,'#desktop')]") //@FindBy(xpath = "//b[contains(text(),'РАБОЧИЙ СТОЛ')]/ancestor::a")
     //@FindBy(xpath = "//b[contains(text(),'РАБОЧИЙ СТОЛ')]/../../../..")
@@ -97,10 +97,20 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     fun ClickDesktop(): Boolean {
         println("нажатия кнопки РАБОЧИЙ СТОЛ")
         desktopBtn.click()
-        if (!desktopBtn.isSelected) {   // class aria-pressed = true/false
-               println(" desktopBtn = ${desktopBtn.ariaRole}");
-        }
-        return desktopBtn.isSelected
+      //  println(" desktopBtn text = ${desktopBtn.text}")  // РАБОЧИЙ СТОЛ
+      //  println(" desktopBtn ariaRole = ${desktopBtn.ariaRole}")  // button
+      //  println(" desktopBtn size = ${desktopBtn.size}")  // (120, 22)
+      //  println(" desktopBtn aria-pressed = ${desktopBtn.getAttribute("aria-pressed")}") // true  String
+      //  println(" desktopBtn aria-pressed = ${desktopBtn.getAttribute("aria-pressed")}") // true
+      //  println(" desktopBtn class = ${desktopBtn.getAttribute("class")}")  // выдал весь класс
+      //  println(" desktopBtn.accessibleName = ${desktopBtn.accessibleName}")  // Доступное имя = РАБОЧИЙ СТОЛ
+      //  println(" desktopBtn.tagName = ${desktopBtn.tagName}")  // a
+      //  println(" desktopBtn.getDomAttribute(class) = ${desktopBtn.getDomAttribute("class")}") // выдал весь класс
+      //  println(" desktopBtn.getDomProperty(class) = ${desktopBtn.getDomProperty("class")}")  // null
+      //  println(" desktopBtn.isDisplayed = ${desktopBtn.isDisplayed}")
+      //  println(" desktopBtn.isSelected = ${desktopBtn.isSelected}")
+
+        return desktopBtn.getAttribute("aria-pressed") =="true"
     }
 
     /**
@@ -113,7 +123,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     fun ClickObjects(): Boolean {
         println("нажатия кнопки ОБЪЕКТЫ")
         objectsBtn.click()
-        return objectsBtn.isSelected
+        return objectsBtn.getAttribute("aria-pressed") =="true"
     }
 
     /**
@@ -126,7 +136,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     fun ClickMail(): Boolean {
         println("нажатия кнопки ПОЧТА")
         mailBtn.click()
-        return mailBtn.isSelected
+        return mailBtn.getAttribute("aria-pressed") =="true"
     }
 
     /**
@@ -139,7 +149,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     fun ClickChat(): Boolean {
         println("нажатия кнопки СОВЕЩАНИЯ")
         chatBtn.click()
-        return chatBtn.isSelected
+        return chatBtn.getAttribute("aria-pressed") =="true"
     }
 
     /**
@@ -152,7 +162,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     fun ClickHelp(): Boolean {
         println("нажатия кнопки СПРАВКА")
         helpBtn.click()
-        return helpBtn.isSelected
+        return helpBtn.getAttribute("aria-pressed") =="true"
     }
 
     /**
@@ -225,10 +235,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
     @FindBy(xpath = "//a[@id='button-1098']") // SYSADMIN
     private lateinit var userMenu: WebElement
     fun entryMenu() {
-       /* Actions(driver)
-            .moveToElement(userMenu)
-            .perform()
-        */
+       // Actions(driver).moveToElement(userMenu).perform()
         println("нажатия кнопки меню пользователя")
         userMenu.click()
     }

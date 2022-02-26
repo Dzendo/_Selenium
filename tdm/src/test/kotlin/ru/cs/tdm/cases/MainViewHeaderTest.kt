@@ -6,13 +6,12 @@ import org.junit.jupiter.api.BeforeEach
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.data.ConfProperties
 import java.time.Duration
-import kotlin.concurrent.thread
 
 /**
  * при выходе на http://tdms-srv2a:444/client/#objects/ открывает страницу аутентификации;
@@ -61,26 +60,29 @@ class MainViewHeaderTest {
 
     @Test
     @DisplayName("Testing each menu separately")
-    fun menuTest() = repeat(10) {
-            mainViewHeaderPage.ClickTDMSWeb()
+    fun menuTest() = repeat(1) {
+            // mainViewHeaderPage.ClickTDMSWeb()
+            assertTrue(mainViewHeaderPage.ClickTDMSWeb())
             assertEquals("TDM365", mainViewHeaderPage.title())
-            //assertEquals("TDM365", driver.title)
-            mainViewHeaderPage.ClickDesktop()
+
+            assertTrue(mainViewHeaderPage.ClickDesktop())
             assertEquals("Рабочий", mainViewHeaderPage.title())
-            mainViewHeaderPage.ClickObjects()
+            assertTrue(mainViewHeaderPage.ClickObjects())
             assertEquals("TDM365", mainViewHeaderPage.title())
-            mainViewHeaderPage.ClickMail()
+            assertTrue(mainViewHeaderPage.ClickMail())
             assertEquals("Почта", mainViewHeaderPage.title())
-            mainViewHeaderPage.ClickChat()
+            assertTrue(mainViewHeaderPage.ClickChat())
             assertEquals("Совещания", mainViewHeaderPage.title())
-            mainViewHeaderPage.ClickHelp()
-            //assertEquals("Untitled", mainViewHeaderPage.title())
-            mainViewHeaderPage.ClickObjects()
-            mainViewHeaderPage.InputSearch("Лебедев")
-            mainViewHeaderPage.ClickSearchEnter() // КОСТЫЛЬ посылаю Enter вместо Лупы
+            assertTrue(mainViewHeaderPage.ClickHelp())
+            //assertEquals("undefined", mainViewHeaderPage.title())
+            assertTrue(mainViewHeaderPage.ClickObjects())
+            assertTrue(mainViewHeaderPage.InputSearch("Лебедев"))
+            assertTrue(mainViewHeaderPage.ClickSearchEnter()) // КОСТЫЛЬ посылаю Enter вместо Лупы
+            assertEquals("Результаты", mainViewHeaderPage.title())
             // mainViewHeaderPage.ClickMagnifier(); // не работает
-            mainViewHeaderPage.ClickMessages()
-            mainViewHeaderPage.CloseMessages() // КОСТЫЛЬ посылаю ESC вместо крестика закрытия окна
+            assertTrue(mainViewHeaderPage.ClickMessages())
+            //assertEquals("Результаты", mainViewHeaderPage.title())
+            assertTrue(mainViewHeaderPage.CloseMessages()) // КОСТЫЛЬ посылаю ESC вместо крестика закрытия окна
 
             // mainViewHeaderPage.entryMenu() // Халтура - button
             // mainViewHeaderPage.entryMenu() // Халтура - button
