@@ -63,6 +63,7 @@ class LoginTestTDM {
         loginPage.clickLoginBtn()
 
         //получаем отображаемый логин
+        Thread.sleep(3000)
         val user = mainViewHeaderPage.firstUserName // Халтура - button
         //и сравниваем его с логином из файла настроек
         assertEquals(ConfProperties.getProperty("loginTDM"), user)

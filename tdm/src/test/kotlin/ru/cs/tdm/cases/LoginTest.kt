@@ -40,7 +40,6 @@ class LoginTest {
         val loginpageTDM = ConfProperties.getProperty("loginpageTDM")
         driver.get(loginpageTDM)
         login = Login(driver)
-
     }
 
     /**
@@ -56,7 +55,7 @@ class LoginTest {
         login.loginIn(loginTDM, passwordTDM)
 
         //получаем отображаемый логин
-        val user = login.loginUserName() // Халтура - button
+        val user = login.loginUserName()
         //и сравниваем его с логином из файла настроек
         assertEquals(loginTDM, user)
     }

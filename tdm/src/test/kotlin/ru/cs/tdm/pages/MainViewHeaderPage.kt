@@ -1,5 +1,6 @@
 package ru.cs.tdm.pages
 
+import org.openqa.selenium.By
 import org.openqa.selenium.Keys
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.FindBy
@@ -245,7 +246,8 @@ class MainViewHeaderPage(private val driver: WebDriver) {
      * // *[@id="root"]/div/div[2]/div[1]/header/div[2]/div[2]/div/div/div/ul/div[1]/div/span/text()
      * //span[@id="button-1098-btnInnerEl"]
      */
-    @FindBy(xpath = "//span[@id='button-1098-btnInnerEl']") //@FindBy(xpath = "//a[@id='button-1098']/span//span//span[2]")
+   // @FindBy(xpath = "//span[@id='button-1098-btnInnerEl']") //@FindBy(xpath = "//a[@id='button-1098']/span//span//span[2]")
+    @FindBy(xpath = "//a[contains(@data-qtip, 'Настройки')]/span/span/span[2]")
     private lateinit var userAccountName: WebElement
 
     /**
@@ -261,7 +263,7 @@ class MainViewHeaderPage(private val driver: WebDriver) {
         get() {
             var userName = userAccountName.text
             userName = if (userName.contains(" ")) userName.split(" ").toTypedArray()[0] else userName
-            println("получения первого имени пользователя из меню пользователя$userName")
+            println("получения первого имени пользователя из меню пользователя $userName")
             return userName
         }// New 4.1.2
 
@@ -318,7 +320,12 @@ class MainViewHeaderPage(private val driver: WebDriver) {
             .perform()
 
         */
-        logoutOKBtn.click()
+        //logoutOKBtn.click()
+        val listElements =  driver.findElements(By.xpath("//span[text()='Да']/ancestor::a"))
+        if (listElements == null) return
+        println ("найдено ${listElements.size} элементов Да")
+        listElements.last().click()
+
     }
     fun logout() {
        // entryMenu()
@@ -344,5 +351,12 @@ class MainViewHeaderPage(private val driver: WebDriver) {
              .perform()
 
         logoutOKBtn.click()
+    }
+    fun CloseWindowLast(): Boolean {
+        val listElements =  driver.findElements(By.xpath("//div[contains(@data-qtip, 'Закрыть диалог')]"))
+        if (listElements == null) return false
+        println ("найдено ${listElements.size} элементов Х")
+        listElements.last().click()
+        return true
     }
 }

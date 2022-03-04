@@ -1,7 +1,6 @@
 package ru.cs.tdm.code
 
 import ru.cs.tdm.pages.LoginPage
-import ru.cs.tdm.pages.MainViewHeaderPage
 import org.openqa.selenium.WebDriver
 
 /**
@@ -16,15 +15,14 @@ class Login(val driver: WebDriver) {
 
     // объявления переменных на созданные ранее классы-страницы
     private val loginPage: LoginPage = LoginPage(driver)
-    private val mainViewHeaderPage: MainViewHeaderPage = MainViewHeaderPage(driver)
+    private val tools: Tools = Tools(driver)
 
     /**
      * метод для осуществления аутентификации
      */
 
-    fun loginIn(login: String, password: String ) {
+    fun loginIn(login: String, password: String) {
         //получение доступа к методам класса LoginPage для взаимодействия с элементами страницы
-        //значение login/password берутся из файла настроек по аналогии с chromedriver и loginpage
         //вводим логин  ХАЛТУРА - только тема 1
         loginPage.inputLogin(login)
         //вводим пароль
@@ -32,11 +30,18 @@ class Login(val driver: WebDriver) {
         //нажимаем кнопку входа
         loginPage.clickLoginBtn()
     }
-    fun loginUserName(): String = mainViewHeaderPage.firstUserName // Халтура - button
 
-        fun loginOut() {
-            mainViewHeaderPage.entryMenu() // Халтура - button
-            mainViewHeaderPage.userLogout()
-            mainViewHeaderPage.logoutOKBtn()
-        }
+    fun loginUserName(): String {
+        Thread.sleep(3000)
+        //val userName = tools.xpathLast("//a[contains(@data-qtip, 'Настройки')]/span/span/span[2]")?.text ?: ""
+        val userName = tools.xpathLast("//a[contains(@data-qtip, 'Настройки')]")?.text ?: ""
+        println("получения первого имени пользователя из меню пользователя $userName")
+        return if (userName.contains(" ")) userName.split(" ").toTypedArray()[0] else userName
+    }
+
+    fun loginOut() {
+        tools.qtipClickLast("Настройки")
+        tools.qtipClickLast("Выйти из приложения")
+        tools.closeXLast()
+    }
 }

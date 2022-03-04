@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.openqa.selenium.By
 import ru.cs.tdm.code.Login
+import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
 import ru.cs.tdm.pages.ToolsPage
 import java.time.Duration
@@ -31,6 +32,7 @@ class ToolsTest {
     // объявления переменных на созданные ранее классы-страницы
     lateinit var mainViewHeaderPage: MainViewHeaderPage
     lateinit var toolsPage: ToolsPage
+    lateinit var tools: Tools
 
     /**
      * осуществление первоначальной настройки
@@ -46,6 +48,7 @@ class ToolsTest {
         // В качестве параметра указываем созданный перед этим объект driver,
         mainViewHeaderPage = MainViewHeaderPage(driver)
         toolsPage = ToolsPage(driver)
+        tools = Tools(driver)
         //окно разворачивается на полный экран
         driver.manage().window().maximize()
         // задержка на выполнение теста = 10 сек.
@@ -60,11 +63,11 @@ class ToolsTest {
     }
 
     /**
-     * тестовый метод для осуществления аутентификации
+     * тестовый метод нажатия на кнопки
      */
 
     @Test
-    @DisplayName("Testing Tools Menu-Icons")
+    @DisplayName("Testing Head Menu")
     fun toolsTestTDM() = repeat(1) {
         println("********************Проход $it *******************************")
         Thread.sleep(3000)

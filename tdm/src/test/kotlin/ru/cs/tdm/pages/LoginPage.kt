@@ -26,9 +26,10 @@ class LoginPage(driver: WebDriver) {
      * определение локатора поля ввода логина
      */
     //@FindBy(xpath = "//input [contains(@id, 'textfield-1054-inputEl')]")
-    @FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//input") // @FindBy(xpath = "//input[contains(@placeholder,'Пользователь')]")  // Тема 2
+    // @FindBy(xpath = "//input[contains(@placeholder,'Пользователь')]")  // Тема 2
     //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/../../..//input")
     //@FindBy(xpath = "//input [contains(@type, 'text') and contains(@class, 'x-form-field') and contains(@class, 'x-form-required-field')]")
+    @FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//input")
     private lateinit var  loginField: WebElement
 
     /**
@@ -44,28 +45,22 @@ class LoginPage(driver: WebDriver) {
      */
     //@FindBy(xpath = "//*[@id="button-1060"]")
     //@FindBy(xpath = "//span [contains(@id,'button-1060-btnInnerEl')]/ancestor::a")
-    @FindBy(xpath = "//span [contains(text(), 'Войти')]/ancestor::a") //@FindBy(xpath = "//span [contains(text(), 'Войти')]/../../..")
+    //@FindBy(xpath = "//span [contains(text(), 'Войти')]/../../..")
+    @FindBy(xpath = "//span [contains(text(), 'Войти')]/ancestor::a")
     private lateinit var loginBtn: WebElement
-
 
     /**
      * метод для ввода логина
      */
-    fun inputLogin(login: String) {
-        loginField.sendKeys(login)
-    }
+    fun inputLogin(login: String) = loginField.sendKeys(login)
 
     /**
      * метод для ввода пароля
      */
-    fun inputPasswd(passwd: String) {
-        passwdField.sendKeys(passwd)
-    }
+    fun inputPasswd(passwd: String) = passwdField.sendKeys(passwd)
 
     /**
      * метод для осуществления нажатия кнопки входа в аккаунт
      */
-    fun clickLoginBtn() {
-        loginBtn.click()
-    }
+    fun clickLoginBtn() = loginBtn.click()
 }

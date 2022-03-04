@@ -123,10 +123,18 @@ class ToolsPage(val driver: WebDriver) {
         println ("найдено ${listElements.size} элементов $qtip")
         return listElements.last()
     }
+
     fun CloseEsc(): Boolean {
         println("закрыть Окно ")
         val action = Actions(driver)
         action.sendKeys(Keys.ESCAPE).perform()
+        return true
+    }
+    fun yesClick(): Boolean {
+        val listElements = driver.findElements(By.xpath("//span[text()='Да']/ancestor::a"))
+        if (listElements == null) return false
+        println("найдено ${listElements.size} элементов Да")
+        listElements.last().click()
         return true
     }
 }
