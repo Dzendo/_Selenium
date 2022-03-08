@@ -8,9 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.interactions.Actions
 import java.time.Duration
 
-class MainPageTest {
+class JetBrainsTest {
     private lateinit var driver: WebDriver
-    private lateinit var mainPage: MainPage
+    private lateinit var brainsPage: JetBrainsPage
 
     @BeforeEach
     fun setUp() {
@@ -20,30 +20,30 @@ class MainPageTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
         driver.get("https://www.jetbrains.com/")
 
-        mainPage = MainPage(driver)
+        brainsPage = JetBrainsPage(driver)
     }
 
-    @Test
+    @RepeatedTest(3)
     fun search() {
-        mainPage.searchButton.click()
-        mainPage.searchField.sendKeys("Selenium")
-        mainPage.submitButton.click()
-        assertEquals("Selenium", mainPage.searchPageField.getAttribute("value"))
+        brainsPage.searchButton.click()
+        brainsPage.searchField.sendKeys("Selenium")
+        brainsPage.submitButton.click()
+        assertEquals("Selenium", brainsPage.searchPageField.getAttribute("value"))
     }
 
-    @Test
+    @RepeatedTest(3)
     fun toolsMenu() {
         Actions(driver)
-            .moveToElement(mainPage.toolsMenu)
+            .moveToElement(brainsPage.toolsMenu)
             .perform()
-        mainPage.toolsMenu.click()
-        assertTrue(mainPage.menuPopup.isDisplayed)
+        brainsPage.toolsMenu.click()
+        assertTrue(brainsPage.menuPopup.isDisplayed)
     }
 
-    @Test
+    @RepeatedTest(3)
     fun navigationToAllTools() {
-        mainPage.seeAllToolsButton.click()
-        assertTrue(mainPage.productsList.isDisplayed)
+        brainsPage.seeAllToolsButton.click()
+        assertTrue(brainsPage.productsList.isDisplayed)
         assertEquals("All Developer Tools and Products by JetBrains", driver.title)
     }
 
