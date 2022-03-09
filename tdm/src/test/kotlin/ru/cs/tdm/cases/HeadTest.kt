@@ -68,7 +68,7 @@ class HeadTest {
      *
      */
 
-    @RepeatedTest(50)
+    @RepeatedTest(25)
     @DisplayName("Testing each menu separately")
     fun headMenuTest()  {
 
@@ -104,25 +104,14 @@ class HeadTest {
         tools.qtipClickLast("Очистить")
         tools.qtipClickLast("Объекты")
 
-        /**
-         * <div id="window-1241_header-title-textEl" data-ref="textEl"
-         * class="x-title-text x-title-text-default x-title-item"
-         * unselectable="on" role="presentation"
-         * >Окно сообщений</div>
-         * <div id="window-1241-ghost_header-title-textEl" data-ref="textEl"
-         * class="x-title-text x-title-text-default x-title-item"
-         * unselectable="on" role="presentation"
-         * >Окно сообщений</div>
-         * //div[starts-with(@id, "window") and contains(@id, "title") and contains(@id, "textEl") and not(contains(@id, "ghost"))]
-         */
         tools.qtipClickLast("Уведомления")
         assertEquals("Окно сообщений", tools.windowTitle())
         tools.closeXLast()
     }
-    @RepeatedTest(25)
+    @RepeatedTest(15)
     @DisplayName("Testing Tools Box")
     fun toolsTest()  {
-        tools.qtipClickLast0("Главное меню")
+        tools.qtipClickLast("Главное меню")
         tools.qtipClickLast("Показать/скрыть дерево")
         tools.qtipClickLast("Показать/скрыть дерево")
         tools.qtipClickLast("Показать/скрыть панель предварительного просмотра")
