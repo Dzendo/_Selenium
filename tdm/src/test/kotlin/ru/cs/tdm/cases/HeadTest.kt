@@ -56,7 +56,7 @@ class HeadTest {
      *
      */
 
-    @RepeatedTest(50)
+    @RepeatedTest(25)
     @DisplayName("Testing each menu separately")
     fun headMenuTest()  {
 
@@ -102,7 +102,7 @@ class HeadTest {
         assertEquals("Окно сообщений", tools.windowTitle())
         tools.closeXLast()
     }
-    @RepeatedTest(25)
+    @RepeatedTest(15)
     @DisplayName("Testing Tools Box")
     fun toolsTest()  {
         tools.qtipClickLast("Главное меню")
