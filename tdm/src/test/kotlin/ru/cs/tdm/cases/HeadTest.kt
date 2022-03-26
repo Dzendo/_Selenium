@@ -56,7 +56,7 @@ class HeadTest {
      *
      */
 
-    @RepeatedTest(30)
+    @RepeatedTest(300)
     @DisplayName("Testing each menu separately")
     fun headMenuTest()  {
 
@@ -102,7 +102,7 @@ class HeadTest {
         assertEquals("Окно сообщений", tools.windowTitle())
         tools.closeXLast()
     }
-    @RepeatedTest(50)
+    @RepeatedTest(300)
     @DisplayName("Testing Tools Box")
     fun toolsTest()  {
         tools.qtipClickLast("Главное меню")
@@ -148,13 +148,38 @@ class HeadTest {
         assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
         tools.closeXLast()
 
-        fun pressCETD(){
-            assertFalse(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
-            tools.qtipClickLast("СЭТД")
+        fun openCETD(){
+           // assertFalse(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
+           // tools.qtipClickLast("СЭТД")
+           // assertTrue(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
+            repeat(7) {
+                tools.qtipClickLast("СЭТД")
+                if (tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false) return
+                println("####### СЭТД Повтор *##*$it  открытия через $it sec #######")
+                repeat(3) { tools.closeEsc() }
+                tools.qtipClickLast("Главное меню")
+                Thread.sleep(1000L*it)
+            }
+            println("&&&&&&&&& Не открылось СЭТД за 7 опросов  &&&&&&&&&")
             assertTrue(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
         }
-        pressCETD()
-        tools.xpathClickMenu("Поток - Проверка статуса проекта")
+        fun clickMenu(menu:String, title:String ):Boolean {
+            repeat(7) {
+                openCETD()
+                tools.xpathClickMenu(menu)
+                if (tools.messageTitleWait(title)) return true
+                println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
+                tools.closeEsc()
+                tools.qtipClickLast("Главное меню")
+                Thread.sleep(1000L*it)
+            }
+            println("&&&&&&&&& Не нажалось $menu за 7 нажатий $title  &&&&&&&&&")
+            assertTrue(tools.messageTitleWait(title))
+            return false
+        }
+        //openCETD()
+        //tools.xpathClickMenu("Поток - Проверка статуса проекта")
+        clickMenu("Поток - Проверка статуса проекта", "TDMS" )
         assertTrue(tools.messageTitleWait("TDMS"))
         val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
         assertTrue(msgText.contains("Да - Ввод GUID проекта вручную"))
@@ -165,20 +190,23 @@ class HeadTest {
         assertTrue(tools.messageTitleWait("TDMS"))
         tools.closeXLast()
 
-        pressCETD()
-        tools.xpathClickMenu("Поток 0 - Отправка проекта")
+        //openCETD()
+        //tools.xpathClickMenu("Поток 0 - Отправка проекта")
+        clickMenu("Поток 0 - Отправка проекта", "TDMS")
         assertTrue(tools.messageTitleWait("TDMS"))
         tools.closeXLast()
 
-        pressCETD()
-        tools.xpathClickMenu("Поток 1 - Отправка передаточного документа")
+        //openCETD()
+        //tools.xpathClickMenu("Поток 1 - Отправка передаточного документа")
+        clickMenu("Поток 1 - Отправка передаточного документа", "Ввод пути к папке синхронизации")
         assertTrue(tools.messageTitleWait("Ввод пути к папке синхронизации"))
         tools.closeXLast()
         assertTrue(tools.messageTitleWait("TDMS"))
         tools.closeXLast()
 
-        pressCETD()
-        tools.xpathClickMenu("Поток 2.1 - Ответ о результате передаче РЗ")
+        //openCETD()
+        //tools.xpathClickMenu("Поток 2.1 - Ответ о результате передаче РЗ")
+        clickMenu("Поток 2.1 - Ответ о результате передаче РЗ", "TDMS")
         assertTrue(tools.messageTitleWait("TDMS"))
         tools.closeXLast()
         assertTrue(tools.selectedDialogTitleWait("Выбор Реестра замечаний"))
@@ -186,14 +214,13 @@ class HeadTest {
         assertTrue(tools.messageTitleWait("TDMS"))
         tools.closeXLast()
 
-        pressCETD()
-        tools.xpathClickMenu("Поток 3 - Отправка ответов на замечания")
+        //openCETD()
+        //tools.xpathClickMenu("Поток 3 - Отправка ответов на замечания")
+        clickMenu("Поток 3 - Отправка ответов на замечания", "TDMS")
         assertTrue(tools.messageTitleWait("TDMS"))
         tools.closeXLast()
         assertTrue(tools.selectedDialogTitleWait("Выбор Реестра замечаний"))
         tools.closeXLast()
-
-
 
     }
 
