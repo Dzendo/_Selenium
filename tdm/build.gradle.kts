@@ -20,6 +20,7 @@ plugins {
 
     tasks.test {
         useJUnitPlatform()
+        testLogging { events("passed", "skipped", "failed") }
     }
 
     tasks.withType<KotlinCompile> {
@@ -39,10 +40,18 @@ plugins {
         testImplementation("io.github.bonigarcia:webdrivermanager:5.1.0")
         testImplementation("org.slf4j:slf4j-simple:1.7.36")
 
-        //testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-        //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-        testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+        // https://junit.org/junit5/docs/current/user-guide/#running-tests agregator
+        testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
+        //testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+        //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+        //testImplementation(platform("org.junit:junit-bom:${junitVersion}"))
+        //testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
+
+        // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+        //testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.8.2")
+        //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
+// java -jar junit-platform-console-standalone-1.8.2.jar <Options>
     }
 
 application {
