@@ -21,8 +21,8 @@ import ru.cs.tdm.data.ConfProperties
 @DisplayName("Testing Tools Menu-Icons Test")
 class ToolsTest {
     companion object {
-        const val DT: Int = 9
-    const val NN:Int = 30
+    const val DT: Int = 5
+    const val NN:Int = 3
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -103,53 +103,67 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Главное меню")
         fun mainMenuTest() {
-            tools.qtipClickLast("Главное меню")
+            val mainMenu = "Главное меню"
+            if (DT>8) println("Test нажатия на $mainMenu TDMS Web")
+            tools.qtipClickLast(mainMenu)
             assertTrue(tools.titleContain("TDM365"))
             assertTrue(tools.qtipPressedLast("Объекты"))
         }
         @RepeatedTest(NN)
         @DisplayName("Рабочий стол")
         fun workTableTest() {
-            tools.qtipClickLast("Рабочий стол")
-            assertTrue(tools.titleContain("Рабочий"))
-            assertTrue(tools.qtipPressedLast("Рабочий стол"))
+            val workTable = "Рабочий стол"
+            if (DT>8) println("Test нажатия на $workTable")
+            tools.qtipClickLast(workTable)
+            assertTrue(tools.titleContain(workTable))
+            assertTrue(tools.qtipPressedLast(workTable))
         }
         @RepeatedTest(NN)
         @DisplayName("Объекты")
-        fun objectTest() {
-            tools.qtipClickLast("Объекты")
-            tools.qtipClickLast("Объекты")
+        fun objectsTest() {
+            val objects = "Объекты"
+            if (DT>8) println("Test нажатия на $objects")
+            tools.qtipClickLast(objects)
+            tools.qtipClickLast(objects)
             assertTrue(tools.titleContain("TDM365"))
-            assertTrue(tools.qtipPressedLast("Объекты"))
+            assertTrue(tools.qtipPressedLast(objects))
         }
         @RepeatedTest(NN)
         @DisplayName("Почта")
         fun mailTest() {
-            tools.qtipClickLast("Почта")
-            assertTrue(tools.titleContain("Почта"))
-            assertTrue(tools.qtipPressedLast("Почта"))
+            val mail = "Почта"
+            if (DT>8) println("Test нажатия на $mail")
+            tools.qtipClickLast(mail)
+            assertTrue(tools.titleContain(mail))
+            assertTrue(tools.qtipPressedLast(mail))
         }
         @RepeatedTest(NN)
         @DisplayName("Совещания")
         fun meetingTest() {
-            tools.qtipClickLast("Совещания")
-            assertTrue(tools.titleContain("Совещания"))
-            assertTrue(tools.qtipPressedLast("Совещания"))
+            val meeting = "Совещания"
+            if (DT>8) println("Test нажатия на $meeting")
+            tools.qtipClickLast(meeting)
+            assertTrue(tools.titleContain(meeting))
+            assertTrue(tools.qtipPressedLast(meeting))
         }
         @RepeatedTest(NN)
         @DisplayName("Справка")
         fun helpTest() {
-            tools.qtipClickLast("Справка")
-            //assertFalse(tools.titleContain("Справка"))      // Исправить!!! NOT
-            assertTrue(tools.qtipPressedLast("Справка"))
+            val help = "Справка"
+            if (DT>8) println("Test нажатия на $help")
+            tools.qtipClickLast(help)
+            //assertFalse(tools.titleContain(help))      // Исправить!!! NOT
+            assertTrue(tools.qtipPressedLast(help))
         }
         @RepeatedTest(NN)
         @DisplayName("Искать")
         fun searchTest() {
+            val search = "Искать"
+            if (DT>8) println("Test нажатия на $search")
             tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка
             tools.qtipClickLast("Объекты")
             tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
-            tools.qtipClickLast("Искать")
+            tools.qtipClickLast(search)
             assertTrue(tools.titleContain("Результаты"))
             //val value = driver.findElement(By.xpath("//input[contains(@data-qtip, 'Введите текст')]")).getAttribute("value")
             assertEquals("Лебедев", tools.qtipLast("Введите текст")?.getAttribute("value"))
@@ -159,7 +173,9 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Уведомления")
         fun notificationTest() {
-            tools.qtipClickLast("Уведомления")
+            val notification = "Уведомления"
+            if (DT>8) println("Test нажатия на $notification")
+            tools.qtipClickLast(notification)
             assertEquals("Окно сообщений", tools.windowTitle())
             tools.closeXLast()
         }
@@ -183,44 +199,59 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть дерево")
         fun open_showTreeTest() {
-            assertTrue(tools.qtipPressedLast("Показать/скрыть дерево"))
-            tools.qtipClickLast("Показать/скрыть дерево")   // Скрыть дерево
-            assertFalse(tools.qtipPressedLast("Показать/скрыть дерево"))
-            tools.qtipClickLast("Показать/скрыть дерево")   // Показать дерево
-            assertTrue(tools.qtipPressedLast("Показать/скрыть дерево"))
+            driver.navigate().refresh()
+            val open_showTree = "Показать/скрыть дерево"
+            if (DT>8) println("Test нажатия на $open_showTree")
+            assertTrue(tools.qtipPressedLast(open_showTree))
+            tools.qtipClickLast(open_showTree)   // Скрыть дерево
+            assertFalse(tools.qtipPressedLast(open_showTree))
+            tools.qtipClickLast(open_showTree)   // Показать дерево
+            assertTrue(tools.qtipPressedLast(open_showTree))
         }
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть панель предварительного просмотра")
         fun open_showPreviewPanelTest() {
-            assertTrue(tools.qtipPressedLast("Показать/скрыть панель предварительного просмотра"))
-            tools.qtipClickLast("Показать/скрыть панель предварительного просмотра")
-            assertFalse(tools.qtipPressedLast("Показать/скрыть панель предварительного просмотра"))
-            tools.qtipClickLast("Показать/скрыть панель предварительного просмотра")
-            assertTrue(tools.qtipPressedLast("Показать/скрыть панель предварительного просмотра"))
+            driver.navigate().refresh()
+            val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
+            if (DT>8) println("Test нажатия на $open_showPreviewPanel")
+            assertTrue(tools.qtipPressedLast(open_showPreviewPanel))
+            tools.qtipClickLast(open_showPreviewPanel)
+            assertFalse(tools.qtipPressedLast(open_showPreviewPanel))
+            tools.qtipClickLast(open_showPreviewPanel)
+            assertTrue(tools.qtipPressedLast(open_showPreviewPanel))
 
         }
         @RepeatedTest(NN)
         @DisplayName("Создать фильтр")
         fun filterTest() {
-            tools.qtipClickLast("Создать фильтр")
+            val filter = "Создать фильтр"
+            if (DT>8) println("Test нажатия на $filter")
+            tools.qtipClickLast(filter)
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
         }
         @RepeatedTest(NN)
         @DisplayName("Обновить")
         fun renewTest() {
-            tools.qtipClickLast("Обновить")
+            driver.navigate().refresh()
+            val renew = "Обновить"
+            if (DT>8) println("Test нажатия на $renew")
+            tools.qtipClickLast(renew)
         }
         @RepeatedTest(NN)
         @DisplayName("Администрирование групп")
         fun adminUserTest() {
-            tools.qtipClickLast("Администрирование групп")
+            val adminUser = "Администрирование групп"
+            if (DT>8) println("Test нажатия на $adminUser")
+            tools.qtipClickLast(adminUser)
             assertTrue(tools.windowTitleWait("Редактирование групп"))
             tools.closeXLast()
         }
         @RepeatedTest(NN)
         @DisplayName("Настройка Camunda")
         fun camundaTest() {
+            val camunda = "Настройка Camunda"
+            if (DT>8) println("Test нажатия на $camunda")
             tools.qtipClickLast("Настройка Camunda")
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
@@ -228,28 +259,36 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Удалить структуру объектов")
         fun delObjectsTest() {
-            tools.qtipClickLast("Удалить структуру объектов")
+            val delObjects = "Удалить структуру объектов"
+            if (DT>8) println("Test нажатия на $delObjects")
+            tools.qtipClickLast(delObjects)
             assertTrue(tools.selectedDialogTitleWait("Удаление структуры объектов"))
             tools.closeXLast()
         }
         @RepeatedTest(NN)
         @DisplayName("Создать объект разработки")
-        fun createObjectsTest() {
-            tools.qtipClickLast("Создать объект разработки")
+        fun createObjectTest() {
+            val createObject = "Создать объект разработки"
+            if (DT>8) println("Test нажатия на $createObject")
+            tools.qtipClickLast(createObject)
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
         }
         @RepeatedTest(NN)
         @DisplayName("Параметры системы")
         fun systemParametersTest() {
-            tools.qtipClickLast("Параметры системы")
+            val systemParameters = "Параметры системы"
+            if (DT>8) println("Test нажатия на $systemParameters")
+            tools.qtipClickLast(systemParameters)
             assertTrue(tools.windowTitleWait("Параметры системы"))
             tools.closeXLast()
         }
         @RepeatedTest(NN)
         @DisplayName("Настройка шаблона уведомлений")
         fun configuringNotificationTest() {
-            tools.qtipClickLast("Настройка шаблона уведомлений")
+            val configuringNotification = "Настройка шаблона уведомлений"
+            if (DT>8) println("Test нажатия на $configuringNotification")
+            tools.qtipClickLast(configuringNotification)
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
         }
@@ -286,9 +325,11 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Поток - Проверка статуса проекта")
         fun flowTest() {
+            val flow = "Поток - Проверка статуса проекта"
+            if (DT>8) println("Test нажатия на $flow")
             //openCETD()
-            //tools.xpathClickMenu("Поток - Проверка статуса проекта")
-            clickMenu("Поток - Проверка статуса проекта", "TDMS")
+            //tools.xpathClickMenu(flow)
+            clickMenu(flow, "TDMS")
             assertTrue(tools.messageTitleWait("TDMS"))
             val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
             assertTrue(msgText.contains("Да - Ввод GUID проекта вручную"))
@@ -302,18 +343,22 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Поток 0 - Отправка проекта")
         fun flow0Test() {
+            val flow0 = "Поток 0 - Отправка проекта"
+            if (DT>8) println("Test нажатия на $flow0")
             //openCETD()
-            //tools.xpathClickMenu("Поток 0 - Отправка проекта")
-            clickMenu("Поток 0 - Отправка проекта", "TDMS")
+            //tools.xpathClickMenu(flow0)
+            clickMenu(flow0, "TDMS")
             assertTrue(tools.messageTitleWait("TDMS"))
             tools.closeXLast()
         }
         @RepeatedTest(NN)
         @DisplayName("Поток 1 - Отправка передаточного документа")
         fun flow1Test() {
+            val flow1 = "Поток 1 - Отправка передаточного документа"
+            if (DT>8) println("Test нажатия на $flow1")
             //openCETD()
             //tools.xpathClickMenu("Поток 1 - Отправка передаточного документа")
-            clickMenu("Поток 1 - Отправка передаточного документа", "Ввод пути к папке синхронизации")
+            clickMenu(flow1, "Ввод пути к папке синхронизации")
             assertTrue(tools.messageTitleWait("Ввод пути к папке синхронизации"))
             tools.closeXLast()
             assertTrue(tools.messageTitleWait("TDMS"))
@@ -322,9 +367,11 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Поток 2.1 - Ответ о результате передаче РЗ")
         fun flow2Test() {
+            val flow2 = "Поток 2.1 - Ответ о результате передаче РЗ"
+            if (DT>8) println("Test нажатия на $flow2")
             //openCETD()
-            //tools.xpathClickMenu("Поток 2.1 - Ответ о результате передаче РЗ")
-            clickMenu("Поток 2.1 - Ответ о результате передаче РЗ", "TDMS")
+            //tools.xpathClickMenu(flow2)
+            clickMenu(flow2, "TDMS")
             assertTrue(tools.messageTitleWait("TDMS"))
             tools.closeXLast()
            assertTrue(tools.selectedDialogTitleWait("Выбор Реестра замечаний"))
@@ -335,9 +382,11 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Поток 3 - Отправка ответов на замечания")
         fun flow3Test() {
+            val flow3 = "Поток 3 - Отправка ответов на замечания"
+            if (DT>8) println("Test нажатия на $flow3")
             //openCETD()
             //tools.xpathClickMenu("Поток 3 - Отправка ответов на замечания")
-            clickMenu("Поток 3 - Отправка ответов на замечания", "TDMS")
+            clickMenu(flow3, "TDMS")
             assertTrue(tools.messageTitleWait("TDMS"))
             tools.closeXLast()
             assertTrue(tools.selectedDialogTitleWait("Выбор Реестра замечаний"))

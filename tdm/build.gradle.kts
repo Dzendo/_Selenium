@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
     java
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.6.20-RC2"
     application
 }
 group = "ru.cs.tdm"
@@ -51,7 +51,7 @@ dependencies {
     //testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
-// java -jar junit-platform-console-standalone-1.8.2.jar <Options>
+    // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
 }
 
 application {

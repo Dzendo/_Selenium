@@ -55,7 +55,8 @@ class Login(val driver: WebDriver) {
     fun loginOut() {
         tools.qtipClickLast("Настройки")
         tools.qtipClickLast("Выйти из приложения")
-        tools.closeXLast()
+        //tools.closeXLast()
+        tools.clickOK()
         //loginPage.ClickYesBtn()
     }
 }

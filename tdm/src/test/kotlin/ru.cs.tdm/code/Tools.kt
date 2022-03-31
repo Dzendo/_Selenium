@@ -90,7 +90,7 @@ class Tools(val driver: WebDriver) {
     }
     fun closeEsc5(): Boolean {
         if (DT >7) println("ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера ")
-        repeat(5) { ToolsTest.tools.closeEsc() }
+        repeat(5) { closeEsc() }
         return true
     }
     fun xpathClickMenu(menu:String): Boolean {
@@ -149,4 +149,21 @@ class Tools(val driver: WebDriver) {
         xpathLast("//div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun selectedDialogTitleWait(title: String): Boolean =
         xpathWaitTextTry("//div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
+    fun selectedGridDialogTitleWait(title: String): Boolean =
+        xpathWaitTextTry("//div[starts-with(@id, 'tdmsSelectObjectGridDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
+
+    fun clickOK(): Boolean {
+        repeat(7) {
+            try {  // 41e 41a  41e 43a
+                val element = fluentWait.until {
+                    xpathLast("//span[text() = 'Ок' or text() = 'ОК' or text() = 'Да']/ancestor::a")
+                        ?.click() }
+                if (element != null) return true
+            } catch (_: TimeoutException) {}
+            catch (_: StaleElementReferenceException) {}
+            if (DT >5) println("####*##*N$it попытка ### qtipClickLast Не нажат  OK #######")
+        }
+        if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек OK &&&&&&&&&")
+        return false
+    }
 }
