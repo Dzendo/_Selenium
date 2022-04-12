@@ -5,11 +5,14 @@ import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.*
 import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
+import org.openqa.selenium.By
 import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.interactions.Action
 import org.openqa.selenium.interactions.Actions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
+import kotlin.concurrent.thread
 
 
 /**
@@ -81,12 +84,11 @@ PPS Можно добавить тест: не удалять созданног
 Можно еще проверить работоспособность остальных кнопок формы 2 шт.
  */
 @DisplayName("Testing Tools Menu-Icons Test")
-@TestMethodOrder(MethodOrderer.Alphanumeric::class)
-//@TestMethodOrder(MethodOrderer.MethodName:class)
+@TestMethodOrder(MethodOrderer.MethodName::class)
 class AdminUserTest {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 1
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -158,6 +160,16 @@ class AdminUserTest {
         if (DT>8) println("Test нажатия на $adminUser")
         tools.qtipClickLast(adminUser)
         assertTrue(tools.windowTitleWait("Редактирование групп"))
+        //tools.xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")
+        val titl = tools.xpathLast("//div[contains(text(),'Редактирование групп')]")
+        val idTitle = titl?.getAttribute("id")
+        println("id = $idTitle")
+        val idWin = idTitle?.split("_")?.get(0)
+        println("id = $idWin")
+        val win = driver.findElement(By.id(idWin))
+        println ("DIV ${win.getAttribute("id")}  ${win.getAttribute("style")}")
+        println("location = ${win.location} size= ${win.size} ")
+        println("x = ${win.location.x} y = \${win.location.y width= ${win.size.width} height= ${win.size.height} }")
     }
 
     /**
@@ -183,14 +195,33 @@ class AdminUserTest {
      * <div id="tooltip-1273-innerCt" data-ref="innerCt" style=""
      * class="x-autocontainer-innerCt">Создать пользователя</div>
      * // *[@id="button-1230"]
+     * /html/body/div[6]/div[2]/div[1]/div/div/div/div/div/a[4]/span/span/span[1]
+     * /html/body/div[8]/div[1]/div/div/div  // толтип
+     *
      */
     @Test
     @DisplayName("Создать пользователя")
     fun n04_createUserTest() {
         val createUser = "Создать пользователя"
         if (DT>8) println("Test нажатия на $createUser")
-        //tools.xpathLast("//div[text()= 'Создать пользователя']")?.click()
-        tools.xpathLast("//a[@id='button-1230']")?.click()    //  ХХХХХХХХХХХХ
+        //tools.xpathLast("//div[text()= 'Создать пользователя']")?.click()?: println("null")
+        //tools.xpathLast("//a[@id='button-1633']")?.click()    //  ХХХХХХХХХХХХ
+        val button = tools.xpathLast("//a[@id='button-1229']")?: return
+        val idButtom = button?.getAttribute("id")
+        println("id = $idButtom")
+        println ("DIV ${button.getAttribute("id")}  ${button.getAttribute("style")}")
+        println("location = ${button.location} size= ${button.size} ")
+        println("x = ${button.location.x} y = \${win.location.y width= ${button.size.width} height= ${button.size.height} }")
+
+            Thread.sleep(2000)
+            Actions(driver).moveByOffset(1259, 331).perform()
+        repeat(10) {
+            Thread.sleep(2000)
+            Actions(driver).moveByOffset(25, 27).perform()
+            Thread.sleep(2000)
+            Actions(driver).moveByOffset(-25, -27).perform()
+            Thread.sleep(2000)
+        }
         assertTrue(tools.windowTitleWait("Редактирование пользователя"))
     }
 
@@ -198,7 +229,7 @@ class AdminUserTest {
      * Описание lable  //label[text()='Описание']/following::div[1]/span под ним div внутри input
      */
     @Test
-    @DisplayName("Редактирование пользователя")
+    @DisplayName("Заполнение нового пользователя")
     fun n05_fillingUserTest() {
         val fillingUser = "Редактирование пользователя"
         if (DT>8) println("Test нажатия на $fillingUser")
@@ -220,14 +251,19 @@ class AdminUserTest {
             ?.sendKeys("9291234567")
         tools.xpathLast("//label[text()='E-mail']/following-sibling::div[1]/descendant::input")
             ?.sendKeys("ya@ya")
-        tools.xpathLast("//*[@id='button-1280']")?.click()   // Добавить профиль  ХХХХХХХХ
+        /*
+        tools.xpathLast("// *[@id='button-1280']")?.click()   // Добавить профиль  ХХХХХХХХ
         assertTrue(tools.selectedGridDialogTitleWait("Выбор профиля"))
         val profileUser = "Руководитель"
         if (DT>8) println("Test нажатия на $profileUser")
         val element = tools.xpathLast("//div[text()= 'Руководитель']/ancestor::table")
-        val action = Actions(driver)   // Не работает
-        action.doubleClick(element).build().perform()
+        val action = Actions(driver)   // Не работает  // *[@id="menuitem-2015-itemEl"]
+        action.moveToElement(element).build().perform()
+        tools.xpathLast("// *[@id='menuitem-1349-itemEl']")?.click()
+        //element?.click()
+        //action.doubleClick(element).build().perform()
         tools.clickOK()
+        */
         tools.clickOK()
         tools.clickOK()
     }

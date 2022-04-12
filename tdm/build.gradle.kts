@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
-    java
-    kotlin("jvm") version "1.6.20-RC2"
+    //java
+    kotlin("jvm") version "1.6.20"
     application
 }
 group = "ru.cs.tdm"
@@ -15,20 +15,26 @@ repositories {
     mavenCentral()
 }
 
-//sourceCompatibility = '15'
-//targetCompatibility = '15'
+//sourceCompatibility = '11'
+//targetCompatibility = '11'
 
 tasks.test {
     useJUnitPlatform()
     testLogging { events("passed", "skipped", "failed") }
 }
-
+/*
+[compileKotlin, compileTestKotlin].forEach {
+    it.kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+*/
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 tasks.withType<KotlinTest> {
-    //kotlinOptions.jvmTarget = "1.8"
-    //options.jvmTarget = "1.8"
+    //kotlinOptions.jvmTarget = "11"
+    //options.jvmTarget = "11"
 }
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
@@ -36,7 +42,7 @@ tasks.withType<JavaCompile> {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.1.2")
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.1.3")
     testImplementation("io.github.bonigarcia:webdrivermanager:5.1.0")
     testImplementation("org.slf4j:slf4j-simple:1.7.36")
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
+import kotlin.test.Ignore
 
 
 /**
@@ -21,8 +22,8 @@ import ru.cs.tdm.data.ConfProperties
 @DisplayName("Testing Tools Menu-Icons Test")
 class ToolsTest {
     companion object {
-    const val DT: Int = 5
-    const val NN:Int = 3
+    const val DT: Int = 9
+    const val NN:Int = 10
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -224,6 +225,7 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Создать фильтр")
         fun filterTest() {
+            //driver.navigate().refresh()
             val filter = "Создать фильтр"
             if (DT>8) println("Test нажатия на $filter")
             tools.qtipClickLast(filter)
@@ -247,6 +249,7 @@ class ToolsTest {
             assertTrue(tools.windowTitleWait("Редактирование групп"))
             tools.closeXLast()
         }
+        @Ignore
         @RepeatedTest(NN)
         @DisplayName("Настройка Camunda")
         fun camundaTest() {
@@ -285,13 +288,34 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Настройка шаблона уведомлений")
-        fun configuringNotificationTest() {
+        fun configuringNotificationTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
             val configuringNotification = "Настройка шаблона уведомлений"
-            if (DT>8) println("Test нажатия на $configuringNotification")
+            val nomerTesta: Int = repetitionInfo.currentRepetition
+           if (nomerTesta % 10 == 0) driver.navigate().refresh()
+            if (DT>8) println("Test $nomerTesta нажатия на $configuringNotification")
+            Thread.sleep(2000)
             tools.qtipClickLast(configuringNotification)
+            Thread.sleep(2000)
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
+            Thread.sleep(2000)
         }
+    }
+    @Nested
+    @DisplayName("Testing CETD")
+    inner class CETDTest  {
+            @BeforeEach
+            fun beforeEach(){
+                if (DT>7)  println("Вызов inner Tools BeforeEach")
+                tools.qtipClickLast("Главное меню")
+                assertTrue(tools.titleContain("TDM365"))
+                assertTrue(tools.qtipPressedLast("Объекты"))
+            }
+            @AfterEach
+            fun afterEach(){
+                if (DT>7) println("Вызов inner Tools AfterEach 5 раз closeEsc")
+                tools.closeEsc5()
+            }
             private fun openCETD() {
                 // assertFalse(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
                 // tools.qtipClickLast("СЭТД")
