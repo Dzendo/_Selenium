@@ -156,7 +156,7 @@ class Tools(val driver: WebDriver) {
         repeat(7) {
             try {  // 41e 41a  41e 43a
                 val element = fluentWait.until {
-                    xpathLast("//span[text() = 'Ок' or text() = 'ОК' or text() = 'Да']/ancestor::a")
+                    xpathLast("//span[text() = 'Ок' or text() = 'ОК' or text() = 'ОК' or text() = 'Да']/ancestor::a")
                         ?.click() }
                 if (element != null) return true
             } catch (_: TimeoutException) {}
@@ -164,6 +164,20 @@ class Tools(val driver: WebDriver) {
             if (DT >5) println("####*##*N$it попытка ### qtipClickLast Не нажат  OK #######")
         }
         if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек OK &&&&&&&&&")
+        return false
+    }
+    fun clickButton(name: String): Boolean {
+        repeat(7) {
+            try {  // 41e 41a  41e 43a
+                val element = fluentWait.until {
+                    xpathLast("//span[text() = '$name']/ancestor::a")
+                        ?.click() }
+                if (element != null) return true
+            } catch (_: TimeoutException) {}
+            catch (_: StaleElementReferenceException) {}
+            if (DT >5) println("####*##*N$it попытка ### $name Не нажат  OK #######")
+        }
+        if (DT >4) println("&&&&&&&&& $name за 7 опросов по 1 сек OK &&&&&&&&&")
         return false
     }
 }

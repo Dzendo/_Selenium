@@ -91,7 +91,7 @@ class ToolsTest {
         @BeforeEach
         fun beforeEach(){
             if (DT>7) println("Вызов inner Head BeforeEach")
-            tools.qtipClickLast("Главное меню")
+            tools.qtipClickLast("Объекты")
             assertTrue(tools.titleContain("TDM365"))
             assertTrue(tools.qtipPressedLast("Объекты"))
         }
@@ -102,9 +102,9 @@ class ToolsTest {
         }
 
         @RepeatedTest(NN)
-        @DisplayName("Главное меню")
+        @DisplayName("Объекты")
         fun mainMenuTest() {
-            val mainMenu = "Главное меню"
+            val mainMenu = "Объекты"
             if (DT>8) println("Test нажатия на $mainMenu TDMS Web")
             tools.qtipClickLast(mainMenu)
             assertTrue(tools.titleContain("TDM365"))
@@ -124,7 +124,6 @@ class ToolsTest {
         fun objectsTest() {
             val objects = "Объекты"
             if (DT>8) println("Test нажатия на $objects")
-            tools.qtipClickLast(objects)
             tools.qtipClickLast(objects)
             assertTrue(tools.titleContain("TDM365"))
             assertTrue(tools.qtipPressedLast(objects))
@@ -188,7 +187,7 @@ class ToolsTest {
         @BeforeEach
         fun beforeEach(){
             if (DT>7)  println("Вызов inner Tools BeforeEach")
-            tools.qtipClickLast("Главное меню")
+            tools.qtipClickLast("Объекты")
             assertTrue(tools.titleContain("TDM365"))
             assertTrue(tools.qtipPressedLast("Объекты"))
         }
@@ -295,7 +294,7 @@ class ToolsTest {
             if (DT>8) println("Test $nomerTesta нажатия на $configuringNotification")
             Thread.sleep(2000)
             tools.qtipClickLast(configuringNotification)
-            Thread.sleep(2000)
+            //Thread.sleep(2000)
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
             Thread.sleep(2000)
@@ -307,7 +306,7 @@ class ToolsTest {
             @BeforeEach
             fun beforeEach(){
                 if (DT>7)  println("Вызов inner Tools BeforeEach")
-                tools.qtipClickLast("Главное меню")
+                tools.qtipClickLast("Объекты")
                 assertTrue(tools.titleContain("TDM365"))
                 assertTrue(tools.qtipPressedLast("Объекты"))
             }
@@ -325,7 +324,7 @@ class ToolsTest {
                     if (tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false) return
                     if (DT>6)  println("####### СЭТД Повтор *##*$it  открытия через $it sec #######")
                     repeat(3) { tools.closeEsc() }
-                    tools.qtipClickLast("Главное меню")
+                    tools.qtipClickLast("Объекты")
                     Thread.sleep(1000L * it)
                 }
                 if (DT>5) println("&&&&&&&&& Не открылось СЭТД за 7 опросов  &&&&&&&&&")
@@ -339,7 +338,7 @@ class ToolsTest {
                     if (tools.messageTitleWait(title)) return true
                     if (DT>6)  println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                     tools.closeEsc()
-                    tools.qtipClickLast("Главное меню")
+                    tools.qtipClickLast("Объекты")
                     Thread.sleep(1000L * it)
                 }
                 if (DT>5)  println("&&&&&&&&& Не нажалось $menu за 7 нажатий $title  &&&&&&&&&")

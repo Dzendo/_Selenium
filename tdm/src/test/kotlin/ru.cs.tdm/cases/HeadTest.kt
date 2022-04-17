@@ -60,7 +60,7 @@ class HeadTest {
     @DisplayName("Testing each menu separately")
     fun headMenuTest()  {
 
-        tools.qtipClickLast("Главное меню")
+        tools.qtipClickLast("Объекты")
         assertTrue(tools.titleContain("TDM365"))
         assertTrue(tools.qtipPressedLast("Объекты"))
 
@@ -105,7 +105,7 @@ class HeadTest {
     @RepeatedTest(3)
     @DisplayName("Testing Tools Box")
     fun toolsTest()  {
-        tools.qtipClickLast("Главное меню")
+        tools.qtipClickLast("Объекты")
         assertTrue(tools.titleContain("TDM365"))
         assertTrue(tools.qtipPressedLast("Объекты"))
 
@@ -157,7 +157,7 @@ class HeadTest {
                 if (tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false) return
                 println("####### СЭТД Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
-                tools.qtipClickLast("Главное меню")
+                tools.qtipClickLast("Объекты")
                 Thread.sleep(1000L*it)
             }
             println("&&&&&&&&& Не открылось СЭТД за 7 опросов  &&&&&&&&&")
@@ -170,7 +170,7 @@ class HeadTest {
                 if (tools.messageTitleWait(title)) return true
                 println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                 tools.closeEsc()
-                tools.qtipClickLast("Главное меню")
+                tools.qtipClickLast("Объекты")
                 Thread.sleep(1000L*it)
             }
             println("&&&&&&&&& Не нажалось $menu за 7 нажатий $title  &&&&&&&&&")
