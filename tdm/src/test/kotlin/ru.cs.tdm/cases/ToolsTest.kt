@@ -198,8 +198,8 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть дерево")
-        fun open_showTreeTest() {
-            driver.navigate().refresh()
+        fun open_showTreeTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val open_showTree = "Показать/скрыть дерево"
             if (DT>8) println("Test нажатия на $open_showTree")
             assertTrue(tools.qtipPressedLast(open_showTree))
@@ -210,8 +210,8 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть панель предварительного просмотра")
-        fun open_showPreviewPanelTest() {
-            driver.navigate().refresh()
+        fun open_showPreviewPanelTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
             if (DT>8) println("Test нажатия на $open_showPreviewPanel")
             assertTrue(tools.qtipPressedLast(open_showPreviewPanel))
@@ -223,8 +223,8 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Создать фильтр")
-        fun filterTest() {
-            //driver.navigate().refresh()
+        fun filterTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val filter = "Создать фильтр"
             if (DT>8) println("Test нажатия на $filter")
             tools.qtipClickLast(filter)
@@ -290,7 +290,7 @@ class ToolsTest {
         fun configuringNotificationTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
             val configuringNotification = "Настройка шаблона уведомлений"
             val nomerTesta: Int = repetitionInfo.currentRepetition
-           if (nomerTesta % 10 == 0) driver.navigate().refresh()
+           if ((nomerTesta == 1) or (nomerTesta % 10 == 0)) driver.navigate().refresh()
             if (DT>8) println("Test $nomerTesta нажатия на $configuringNotification")
             Thread.sleep(2000)
             tools.qtipClickLast(configuringNotification)

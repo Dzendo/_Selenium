@@ -12,6 +12,7 @@ import org.openqa.selenium.interactions.Actions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
+import java.time.LocalDateTime
 
 
 /**
@@ -20,7 +21,7 @@ import ru.cs.tdm.data.ConfProperties
 - TDMS Web> Администрирование групп > Окно Редактирование групп:
 В левом списке «Группы пользователей» выделить «Все пользователи»
 Справа кнопка «Создать пользователя» > Окно «Редактирование пользователя»
-Описание: Фамилия 1.2.9-6.1.109 22032022
+Описание: Фамилия 1.2.11-6.1.123 25042022
 Логин: ФИО
 Чекбокс: Разрешить вход в TDMS
 Имя: Имя
@@ -179,6 +180,19 @@ class AdminUserTest {
         if (DT > 6) println("конец процедуры eWin")
         return eWin
     }
+    fun cursorElement(title: String, x: Int, y: Int):WebElement {
+        val eWinC = eWin(title)
+
+        val elementCursor = Actions(driver).moveToElement(eWinC,   // moveByOffset(1259, 331) //a[@id="button-1179"]
+            //-eWinC.size.width/2 + 654 + 7+ 14,-eWinC.size.height/2 + 36 + 29 + 12)
+            -eWinC.size.width/2 + x,-eWinC.size.height/2 + y)
+            .contextClick().release().perform()
+        val elementActive = driver.switchTo().activeElement()
+        if (DT>8) println("Курсор (${elementActive.location.x},${elementActive.location.y }) ${elementActive.text}\n" +
+                "//${elementActive.tagName}[@id ='${elementActive.getAttribute("id")}']")
+        return elementActive
+    }
+
     fun eButton(number: String):WebElement {
         if (DT > 6) println("начало процедуры eButton $number")
         val eButton = driver.findElement(By.id("button-$number"))
@@ -197,16 +211,12 @@ class AdminUserTest {
      */
     @RepeatedTest(NN)
     @DisplayName("Создать/Удалить пользователя")
-    fun n04_createUserTest() {
+    fun n04_createUserTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
         val createUser = "Создать пользователя"
         if (DT>8) println("Test нажатия на $createUser")
-        val eWinC = eWin("Редактирование групп")
 
-        Actions(driver).moveToElement(eWinC,   // moveByOffset(1259, 331)
-            -eWinC.size.width/2 + 654 + 7+ 14,-eWinC.size.height/2 + 36 + 29 + 12)
-            .pause(1000).click().perform()
-
-        if (DT>8) println("Нажата кнопка создать пользователя x= ${eWinC.location.x + 654 + 7} y= ${eWinC.location.y + 36 + 29}" )
+        // создать пользователя moveByOffset(1259, 331) //a[@id="button-1179"]
+        cursorElement("Редактирование групп", 654 + 7+ 14, 36 + 29 + 12).click()
         assertTrue(tools.windowTitleWait("Редактирование пользователя"))
     //}
 
@@ -216,13 +226,15 @@ class AdminUserTest {
     //@Test
     //@DisplayName("Заполнение нового пользователя")
     //fun n05_fillingUserTest() {
+        val nomberUser = "${repetitionInfo.currentRepetition} ${LocalDateTime.now()}"
+        //val testFIO = "Тестовая Фамилия $nomberUser"
         val fillingUser = "Редактирование пользователя"
         if (DT>8) println("Test нажатия на $fillingUser")
         assertTrue(tools.windowTitleWait(fillingUser))
         tools.xpathLast("//label[text()='Описание']/following-sibling::div[1]/descendant::input")
-            ?.sendKeys("Тестовая Фамилия 1.2.9-6.1.111 01042022")
+            ?.sendKeys("Тестовая Фамилия $nomberUser")
         tools.xpathLast("//label[text()='Логин']/following-sibling::div[1]/descendant::input")
-            ?.sendKeys("Логин 1.2.9-6.1.111 01042022")
+            ?.sendKeys("Логин $nomberUser")
         tools.xpathLast("//label[text()='Разрешить вход в TDMS']/following-sibling::div[1]/descendant::input")
             ?.click()
         tools.xpathLast("//label[text()='Имя']/following-sibling::div[1]/descendant::input")
@@ -246,31 +258,21 @@ class AdminUserTest {
         beforeEach()
         val editUser = "Редактировать пользователя"
         if (DT>8) println("Test нажатия на $editUser")
-        val eWinU = eWin("Редактирование групп")
-        val testUpFIO = "Тестовая Фамилия"
-        //eButton("1520")
-        if (DT>8) println("Редактирование $testUpFIO")
-        tools.xpathLast("//div[contains(text(), '$testUpFIO')]")?.click()
 
-        Actions(driver).moveToElement(eWinU,   // moveByOffset(1259, 331)
-            -eWinU.size.width/2 + 654 + 7+ 14,-eWinU.size.height/2 + 36 +28*2 + 29 + 12)
-            .pause(1000).click().perform()
+        //val testUpFIO = "Тестовая Фамилия"
 
-        if (DT>8) println("Нажата кнопка Редактировать пользователя x= ${eWinU.location.x + 654 + 7} y= ${eWinU.location.y + 36 +28*2 + 29}" )
+        if (DT>8) println("Редактирование $nomberUser")
+        tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
+
+        //  Редактировать пользователя moveByOffset(1259, 387-388) //a[@id="button-1179"]
+        cursorElement("Редактирование групп", 654 + 7+ 14,  36 +28*2 + 29 + 12).click()
         assertTrue(tools.windowTitleWait("Редактирование пользователя"))
-
-        //eButton("1226")
 
         /**
          *  тест добавление роли пользователю
          */
-
-        val eWinR = eWin("Редактирование пользователя")
-        Actions(driver).moveToElement(eWinU,   // moveByOffset(1169, 523)  Добавить роль
-            -eWinR.size.width/2 + 471 + 7+ 14,-eWinR.size.height/2 + 298 + 17 + 12)
-            .pause(1000).click().perform()
-
-        if (DT>8) println("Нажата кнопка Добавить профиль пользователя x= ${eWinR.location.x + 471 + 7} y= ${eWinR.location.y + 298 + 6 + 12+11}" )
+        //  кнопка Добавить профиль moveByOffset(1169, 523) //a[@id="button-1179"]
+        cursorElement("Редактирование пользователя", 471 + 7+ 14,  298 + 17 + 12).click()
         assertTrue(tools.selectedGridDialogTitleWait("Выбор профиля"))
 
         val profileUser = "Руководитель"
@@ -278,14 +280,7 @@ class AdminUserTest {
 
         tools.xpathLast("//span[text()= '$profileUser']/ancestor::td")?.click()
         tools.clickOK()  // закрыть выбор профиля с выбором руководителя
-        /*
-        val director = tools.xpathLast("//span[text()= '$profileUser']")
-        val action = Actions(driver)   // работает  // (1096, 366)
-        action.moveToElement(director).build().perform()
-        Thread.sleep(1000)
-        action.doubleClick().perform()
-       */
-        //Thread.sleep(3000)
+
         assertTrue(tools.windowTitleWait("Редактирование пользователя"))
         // проверка что есть профиль руководитель
         tools.clickOK()
@@ -300,16 +295,18 @@ class AdminUserTest {
          */
         beforeEach()
 
-        val eWinD = eWin("Редактирование групп")
+     //   val eWinD = eWin("Редактирование групп")
         assertTrue(tools.windowTitleWait("Редактирование групп"))
-        val testFIO = "Тестовая Фамилия"
-        if (DT>8) println("Удаление на $testFIO")
-        tools.xpathLast("//div[contains(text(), '$testFIO')]")?.click()
-
-        Actions(driver).moveToElement(eWinD,
+        //val testFIO = "Тестовая Фамилия"
+        if (DT>8) println("Удаление на $nomberUser")
+        tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
+        //  кнопка Удалить пользователя moveByOffset(1169, 523) //a[@id="button-1179"]
+        cursorElement("Редактирование групп", 654 + 7+ 14,  64 + 29 + 12).click()
+        /*Actions(driver).moveToElement(eWinD,
             -eWinD.size.width /2 + 654 + 7+ 14,-eWinD.size.height /2 + 64 + 29 + 12)
             .pause(1000).click().perform()
         if (DT>8) println("Нажата кнопка Удалить пользователя x= ${eWinD.location.x + 654 + 7} y= ${eWinD.location.y +  64 + 29}" )
+         */
         tools.clickButton("Да")
         tools.clickButton("ОК")
 
