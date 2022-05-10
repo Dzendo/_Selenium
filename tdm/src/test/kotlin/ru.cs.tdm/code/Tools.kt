@@ -77,6 +77,20 @@ class Tools(val driver: WebDriver) {
         if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек qtipClickLast=$qtip &&&&&&&&&")
         return false
     }
+    fun referenceClickLast(data_reference: String): Boolean {
+
+        repeat(7) {
+            try {
+                val element = fluentWait.until { xpathLast("//*[@data-reference='$data_reference']")?.click() }
+                //val element = fluentWait.until { qtipLast(qtip)?.click() }
+                if (element != null) return true
+            } catch (_: TimeoutException) {}
+            catch (_: StaleElementReferenceException) {}
+            if (DT >5) println("####*##*N$it попытка ### qtipClickLast Не нажат  data_reference=$data_reference #######")
+        }
+        if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек data_reference=$data_reference &&&&&&&&&")
+        return false
+    }
     fun qtipPressedLast(qtip: String): Boolean = qtipLast(qtip)?.getAttribute("aria-pressed") =="true"
 
     fun closeXLast() = qtipClickLast("Закрыть диалог")

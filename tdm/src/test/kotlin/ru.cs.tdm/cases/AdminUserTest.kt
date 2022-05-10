@@ -88,7 +88,7 @@ PPS Можно добавить тест: не удалять созданног
 class AdminUserTest {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 25
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -107,7 +107,7 @@ class AdminUserTest {
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             WebDriverManager.chromedriver().setup()
             //окно разворачивается на полный второй экран
-            driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
+            driver = ChromeDriver(ChromeOptions().addArguments("--window-position=3000,-1000"))
             driver.manage().window().maximize()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.

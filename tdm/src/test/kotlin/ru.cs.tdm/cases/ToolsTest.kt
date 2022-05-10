@@ -23,7 +23,7 @@ import kotlin.test.Ignore
 class ToolsTest {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 30
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -42,7 +42,7 @@ class ToolsTest {
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             WebDriverManager.chromedriver().setup()
             //окно разворачивается на полный второй экран
-            driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
+            driver = ChromeDriver(ChromeOptions().addArguments("--window-position=1500,-1000"))
             driver.manage().window().maximize()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
@@ -227,7 +227,7 @@ class ToolsTest {
             if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val filter = "Создать фильтр"
             if (DT>8) println("Test нажатия на $filter")
-            tools.qtipClickLast(filter)
+            tools.referenceClickLast("CMD_CREATE_USER_QUERY")
             assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
             tools.closeXLast()
         }

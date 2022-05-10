@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
     //java
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.7.0-Beta"
     application
 }
 group = "ru.cs.tdm"
@@ -42,7 +42,7 @@ tasks.withType<JavaCompile> {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.1.3")
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.1.4")
     testImplementation("io.github.bonigarcia:webdrivermanager:5.1.1")
     testImplementation("org.slf4j:slf4j-simple:1.7.36")
 
