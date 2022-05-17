@@ -23,7 +23,7 @@ import kotlin.test.Ignore
 class ToolsTest {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 30
+    const val NN:Int = 10
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -42,8 +42,9 @@ class ToolsTest {
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             WebDriverManager.chromedriver().setup()
             //окно разворачивается на полный второй экран
-            driver = ChromeDriver(ChromeOptions().addArguments("--window-position=1500,-1000"))
-            driver.manage().window().maximize()
+        driver = ChromeDriver(ChromeOptions().addArguments("--window-position=1500,-1000"))
+        //driver = ChromeDriver()
+        driver.manage().window().maximize()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
@@ -363,6 +364,7 @@ class ToolsTest {
             assertTrue(tools.messageTitleWait("TDMS"))
             tools.closeXLast()
         }
+
         @RepeatedTest(NN)
         @DisplayName("Поток 0 - Отправка проекта")
         fun flow0Test() {
@@ -374,6 +376,7 @@ class ToolsTest {
             assertTrue(tools.messageTitleWait("TDMS"))
             tools.closeXLast()
         }
+
         @RepeatedTest(NN)
         @DisplayName("Поток 1 - Отправка передаточного документа")
         fun flow1Test() {
@@ -387,6 +390,7 @@ class ToolsTest {
             assertTrue(tools.messageTitleWait("TDMS"))
             tools.closeXLast()
         }
+
         @RepeatedTest(NN)
         @DisplayName("Поток 2.1 - Ответ о результате передаче РЗ")
         fun flow2Test() {

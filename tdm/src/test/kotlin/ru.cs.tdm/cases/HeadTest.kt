@@ -36,7 +36,8 @@ class HeadTest {
         // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         WebDriverManager.chromedriver().setup()
         //окно разворачивается на полный второй экран
-        driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
+        //driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
+        driver = ChromeDriver()
         driver.manage().window().maximize()
 
         // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
