@@ -1,18 +1,19 @@
 package ru.cs.tdm.cases
 
-import org.openqa.selenium.WebDriver
 import io.github.bonigarcia.wdm.WebDriverManager
+import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
-import org.openqa.selenium.By
-import org.openqa.selenium.WebElement
-import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
+import java.io.File
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.*
 
 
 /**
@@ -88,7 +89,7 @@ PPS Можно добавить тест: не удалять созданног
 class AdminUserTest {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 15
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -105,10 +106,10 @@ class AdminUserTest {
         fun beforeAll() {
         if (DT>7) println("Вызов BeforeAll AdminUserTest")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
-            WebDriverManager.chromedriver().setup()
-            //окно разворачивается на полный второй экран
-            driver = ChromeDriver(ChromeOptions().addArguments("--window-position=3000,-1000"))
-        //driver = ChromeDriver()
+        WebDriverManager.chromedriver().setup()
+        driver = ChromeDriver()
+        //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
+        driver.manage().window().position = Point(0,-1000)
         driver.manage().window().maximize()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
@@ -159,9 +160,15 @@ class AdminUserTest {
     @AfterEach
     fun afterEach(){
         if (DT>7) println("Вызов AfterEach AdminUserTest")
+        //screenShot()
         tools.closeEsc5()
         // Thread.sleep(2000)
         driver.navigate().refresh()
+    }
+    fun screenShot(name: String = "image") {
+        val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
+        val sdf = SimpleDateFormat("ddMMyyyyhhmmss")
+        copyFile(scrFile, File("./$name${sdf.format(Date())}.png"))
     }
 
     /**

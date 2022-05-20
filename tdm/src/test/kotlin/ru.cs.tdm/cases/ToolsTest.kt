@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.*
 import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
+import org.openqa.selenium.Point
 import org.openqa.selenium.chrome.ChromeOptions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
@@ -41,9 +42,9 @@ class ToolsTest {
         if (DT>7) println("Вызов BeforeAll")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             WebDriverManager.chromedriver().setup()
-            //окно разворачивается на полный второй экран
-        driver = ChromeDriver(ChromeOptions().addArguments("--window-position=1500,-1000"))
-        //driver = ChromeDriver()
+        driver = ChromeDriver()
+        //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
+        driver.manage().window().position = Point(2000,-1000)
         driver.manage().window().maximize()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
@@ -138,13 +139,16 @@ class ToolsTest {
             assertTrue(tools.titleContain(mail))
             assertTrue(tools.qtipPressedLast(mail))
         }
+        //@Ignore
         @RepeatedTest(NN)
         @DisplayName("Совещания")
         fun meetingTest() {
-            val meeting = "Совещания"
+            //val meeting = "Совещания"
+            val meeting = "Чат"
             if (DT>8) println("Test нажатия на $meeting")
             tools.qtipClickLast(meeting)
-            assertTrue(tools.titleContain(meeting))
+            //assertTrue(tools.titleContain(meeting))
+            assertTrue(tools.titleContain("Каналы"))
             assertTrue(tools.qtipPressedLast(meeting))
         }
         @RepeatedTest(NN)
