@@ -3,6 +3,7 @@ package ru.cs.tdm.examples
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import org.openqa.selenium.Point
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.interactions.Actions
@@ -16,6 +17,7 @@ class JetBrainsTest {
     fun setUp() {
         WebDriverManager.chromedriver().setup()
         driver = ChromeDriver()   //  98.0.4758.102  98.0.4758.102
+        driver.manage().window().position = Point(0,-1000)
         driver.manage().window().maximize()
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
         driver.get("https://www.jetbrains.com/")

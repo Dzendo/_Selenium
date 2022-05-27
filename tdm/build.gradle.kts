@@ -9,7 +9,7 @@ plugins {
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.8.2"
+val junitVersion = "5.9.0-M1" //"5.8.2"
 
 repositories {
     mavenCentral()
@@ -43,8 +43,8 @@ tasks.withType<JavaCompile> {
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.seleniumhq.selenium:selenium-java:4.1.4")
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.1.1")
-    testImplementation("org.slf4j:slf4j-simple:1.7.36")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.0")
+    testImplementation("org.slf4j:slf4j-simple:1.8.0-beta4") //1.7.36")
 
     // https://junit.org/junit5/docs/current/user-guide/#running-tests agregator
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
@@ -55,7 +55,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
     //testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.8.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.0-M1") //1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
     // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
 }

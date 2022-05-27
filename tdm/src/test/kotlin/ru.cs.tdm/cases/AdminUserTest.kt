@@ -89,7 +89,7 @@ PPS Можно добавить тест: не удалять созданног
 class AdminUserTest {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 15
+    const val NN:Int = 10
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
