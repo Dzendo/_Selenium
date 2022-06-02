@@ -21,6 +21,7 @@ import kotlin.test.Ignore
  */
 
 @DisplayName("Testing Tools Menu-Icons Test")
+@TestMethodOrder(MethodOrderer.MethodName::class)
 class ToolsTest {
     companion object {
     const val DT: Int = 9
@@ -139,7 +140,7 @@ class ToolsTest {
             assertTrue(tools.titleContain(mail))
             assertTrue(tools.qtipPressedLast(mail))
         }
-        @Ignore
+       //@Ignore
         @RepeatedTest(NN)
         @DisplayName("Совещания")
         fun meetingTest() {
@@ -150,6 +151,18 @@ class ToolsTest {
             assertTrue(tools.titleContain(meeting))
             //assertTrue(tools.titleContain("Каналы"))
             assertTrue(tools.qtipPressedLast(meeting))
+        }
+        //@Ignore
+        @RepeatedTest(NN)
+        @DisplayName("Диаграмма Ганта")
+        fun ganttchartTest(repetitionInfo: RepetitionInfo) {
+            driver.navigate().refresh()
+        if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
+            val ganttchart = "Диаграмма Ганта"
+            if (DT>8) println("Test нажатия на $ganttchart")
+            tools.qtipClickLast(ganttchart)
+            //assertTrue(tools.titleContain(ganttchart))  // Нет заголовка
+            assertTrue(tools.qtipPressedLast(ganttchart))
         }
         @RepeatedTest(NN)
         @DisplayName("Справка")
@@ -188,6 +201,7 @@ class ToolsTest {
 
     @Nested
     @DisplayName("Testing Tools Box")
+    @TestMethodOrder(MethodOrderer.MethodName::class)
     inner class ToolTest  {
         @BeforeEach
         fun beforeEach(){
@@ -203,7 +217,7 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть дерево")
-        fun open_showTreeTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+        fun open_showTreeTest(repetitionInfo: RepetitionInfo) {
             if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val open_showTree = "Показать/скрыть дерево"
             if (DT>8) println("Test нажатия на $open_showTree")
@@ -215,7 +229,7 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть панель предварительного просмотра")
-        fun open_showPreviewPanelTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+        fun open_showPreviewPanelTest(repetitionInfo: RepetitionInfo) {
             if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
             if (DT>8) println("Test нажатия на $open_showPreviewPanel")
@@ -228,7 +242,7 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Создать фильтр")
-        fun filterTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+        fun filterTest(repetitionInfo: RepetitionInfo) {
             if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
             val filter = "Создать фильтр"
             if (DT>8) println("Test нажатия на $filter")
@@ -253,16 +267,7 @@ class ToolsTest {
             assertTrue(tools.windowTitleWait("Редактирование групп"))
             tools.closeXLast()
         }
-        @Ignore
-        @RepeatedTest(NN)
-        @DisplayName("Настройка Camunda")
-        fun camundaTest() {
-            val camunda = "Настройка Camunda"
-            if (DT>8) println("Test нажатия на $camunda")
-            tools.qtipClickLast("Настройка Camunda")
-            assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
-            tools.closeXLast()
-        }
+
         @RepeatedTest(NN)
         @DisplayName("Удалить структуру объектов")
         fun delObjectsTest() {
@@ -292,7 +297,7 @@ class ToolsTest {
         }
         @RepeatedTest(NN)
         @DisplayName("Настройка шаблона уведомлений")
-        fun configuringNotificationTest( testInfo:TestInfo ,  repetitionInfo: RepetitionInfo) {
+        fun configuringNotificationTest(repetitionInfo: RepetitionInfo) {
             val configuringNotification = "Настройка шаблона уведомлений"
             val nomerTesta: Int = repetitionInfo.currentRepetition
            if ((nomerTesta == 1) or (nomerTesta % 10 == 0)) driver.navigate().refresh()
@@ -307,6 +312,7 @@ class ToolsTest {
     }
     @Nested
     @DisplayName("Testing CETD")
+    @TestMethodOrder(MethodOrderer.MethodName::class)
     inner class CETDTest  {
             @BeforeEach
             fun beforeEach(){
