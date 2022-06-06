@@ -144,15 +144,15 @@ class ToolsTest {
         @RepeatedTest(NN)
         @DisplayName("Совещания")
         fun meetingTest() {
-            val meeting = "Совещания"
-            //val meeting = "Чат"
+            //val meeting = "Совещания"
+            val meeting = "Чат"
             if (DT>8) println("Test нажатия на $meeting")
             tools.qtipClickLast(meeting)
-            assertTrue(tools.titleContain(meeting))
-            //assertTrue(tools.titleContain("Каналы"))
+            //assertTrue(tools.titleContain(meeting))
+            assertTrue(tools.titleContain("Каналы"))
             assertTrue(tools.qtipPressedLast(meeting))
         }
-        //@Ignore
+        @Ignore
         @RepeatedTest(NN)
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest(repetitionInfo: RepetitionInfo) {
