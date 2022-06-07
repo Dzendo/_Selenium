@@ -50,6 +50,18 @@ class Tools(val driver: WebDriver) {
         if (DT >4) println("&&&&&&&&& qtipLast за 7 опросов по 1 сек qtipLast=$qtip &&&&&&&&&")
         return null
     }
+    fun referenceLast(reference: String): WebElement? {
+        repeat(7) {
+            try {
+                val element = fluentWait.until { xpathLast("//*[contains(@data-reference, '$reference')]") }
+                if (element != null) return element
+            } catch (_: TimeoutException) {}
+            catch (_: StaleElementReferenceException) {}
+            if (DT >5) println("###*##*N$it попытка #### referenceLast Не найден qtipLast=$reference #######")
+        }
+        if (DT >4) println("&&&&&&&&& referenceLast за 7 опросов по 1 сек referenceLast=$reference &&&&&&&&&")
+        return null
+    }
     fun qtipLastClass(qtip: String): String? {
         repeat(7) {
             try {
@@ -85,7 +97,7 @@ class Tools(val driver: WebDriver) {
                 if (element != null) return true
             } catch (_: TimeoutException) {}
             catch (_: StaleElementReferenceException) {}
-            if (DT >5) println("####*##*N$it попытка ### qtipClickLast Не нажат  data_reference=$data_reference #######")
+            if (DT >5) println("####*##*N$it попытка ### referenceClickLast Не нажат  data_reference=$data_reference #######")
         }
         if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек data_reference=$data_reference &&&&&&&&&")
         return false
@@ -136,6 +148,8 @@ class Tools(val driver: WebDriver) {
     }
     fun xpathWaitText(xpath: String, text: String): Boolean =
         fluentWait.until (textToBePresentInElement(xpathLast(xpath), text)) //{ xpathLast(xpath)?.text ?:"" }
+    fun referenceWaitText(reference: String, text: String): Boolean =
+        fluentWait.until (textToBePresentInElement(xpathLast("//*[@data-reference= '$reference']"), text))
     fun xpathFluentWaitText(xpath: String, text: String): Boolean =
         fluentWait.until (textToBePresentInElement(xpathLast(xpath), text))
     fun qtipFluentWaitText(qtip: String, text: String): Boolean =
