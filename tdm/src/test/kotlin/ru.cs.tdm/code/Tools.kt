@@ -21,23 +21,37 @@ class Tools(val driver: WebDriver) {
 
 
     fun xpathLast(xpath: String): WebElement? {
+        //val xpathHtml = xpath
+        val xpathHtml = "//html/body/descendant::${xpath.drop(2)}"
         repeat(7) {
             try {
-                val listElements = fluentWait.until(presenceOfAllElementsLocatedBy(By.xpath(xpath)))
+                val listElements = fluentWait.until(presenceOfAllElementsLocatedBy(By.xpath(xpathHtml))) //"//html/body${xpath.drop(1)}")))
                 if ((listElements!=null) and (listElements.size > 0)) {
-                    if (DT >7) println("N$it xpathLast найдено ${listElements.size} элементов $xpath")
+                    if (DT >7) println("N$it xpathLast найдено ${listElements.size} элементов $xpathHtml")
                     return listElements.lastOrNull()
                 }
-                if (DT >6) println("**N$it НЕ найдено элементов $xpath")
+                if (DT >6) println("**N$it НЕ найдено элементов $xpathHtml")
                // return null
             } catch (_: TimeoutException) {}
             catch (_: StaleElementReferenceException) {}
-            if (DT >5) println("###*##*N$it попытка ####xpathLast не нашлось  поле xpathLast=$xpath #######")
+            if (DT >5) println("###*##*N$it попытка ####xpathLast не нашлось  поле xpathLast=$xpathHtml #######")
         }
-        if (DT >4) println("&&&&&&&&&xpathLast catch TIME OUT за 7 опросов по 1 сек xpathLast=$xpath &&&&&&&&&")
+        if (DT >4) println("&&&&&&&&&xpathLast catch TIME OUT за 7 опросов по 1 сек xpathLast=$xpathHtml &&&&&&&&&")
         return null
     }
+    fun xpathClickLast(xpath: String): Boolean {
 
+        repeat(7) {
+            try {
+                val element = fluentWait.until { xpathLast(xpath)?.click() }
+                if (element != null) return true
+            } catch (_: TimeoutException) {}
+            catch (_: StaleElementReferenceException) {}
+            if (DT >5) println("####*##*N$it попытка ### xpathClickLast Не нажат  xpathClickLast=$xpath #######")
+        }
+        if (DT >4) println("&&&&&&&&& xpathClickLast за 7 опросов по 1 сек xpathClickLast=$xpath &&&&&&&&&")
+        return false
+    }
     fun qtipLast(qtip: String): WebElement? {
         repeat(7) {
             try {
@@ -88,11 +102,13 @@ class Tools(val driver: WebDriver) {
         if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек qtipClickLast=$qtip &&&&&&&&&")
         return false
     }
-    fun referenceClickLast(data_reference: String): Boolean {
+    fun referenceClickLast(data_reference: String): Boolean =
+        fluentWait.until { xpathLast("//*[@data-reference='$data_reference']")?.click()} != null
+   /* {
 
         repeat(7) {
             try {
-                val element = fluentWait.until { xpathLast("//*[@data-reference='$data_reference']")?.click() }
+                val element = fluentWait.until { xpathLast("// *[@data-reference='$data_reference']")?.click() }
                 //val element = fluentWait.until { qtipLast(qtip)?.click() }
                 if (element != null) return true
             } catch (_: TimeoutException) {}
@@ -101,7 +117,7 @@ class Tools(val driver: WebDriver) {
         }
         if (DT >4) println("&&&&&&&&& qtipClickLast за 7 опросов по 1 сек data_reference=$data_reference &&&&&&&&&")
         return false
-    }
+    }*/
     fun qtipPressedLast(qtip: String): Boolean = qtipLast(qtip)?.getAttribute("aria-pressed") =="true"
 
     fun closeXLast() = qtipClickLast("Закрыть диалог")
@@ -202,9 +218,9 @@ class Tools(val driver: WebDriver) {
                 if (element != null) return true
             } catch (_: TimeoutException) {}
             catch (_: StaleElementReferenceException) {}
-            if (DT >5) println("####*##*N$it попытка ### $name Не нажат  OK #######")
+            if (DT >5) println("####*##*N$it попытка ### $name Не нажат  #######")
         }
-        if (DT >4) println("&&&&&&&&& $name за 7 опросов по 1 сек OK &&&&&&&&&")
+        if (DT >4) println("&&&&&&&&& $name за 7 опросов по 1 сек &&&&&&&&&")
         return false
     }
 }

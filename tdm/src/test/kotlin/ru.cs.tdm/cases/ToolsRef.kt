@@ -5,13 +5,12 @@ import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.*
 import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
+import org.openqa.selenium.By
 import org.openqa.selenium.Point
 import org.openqa.selenium.chrome.ChromeOptions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
-
-
 
 /**
  * при выходе на http://tdms-srv2a:444/client/#objects/ открывает страницу аутентификации;
@@ -30,6 +29,8 @@ class ToolsRef {
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
     lateinit var tools: Tools
+    lateinit var loginIN: String
+    lateinit var passwordIN:String
     /**
      * осуществление первоначальной настройки
      * Предупреждение: Не смешивайте неявные и явные ожидания.
@@ -60,7 +61,9 @@ class ToolsRef {
             val password = ConfProperties.getProperty("passwordTDM")
             if (DT>8) println("login= $login   password= $password")
             Login(driver).loginIn(login, password)
-        }
+            loginIN = login
+            passwordIN = password
+    }
 
         @JvmStatic
         @AfterAll
@@ -144,20 +147,25 @@ class ToolsRef {
         @RepeatedTest(NN)
         @DisplayName("Совещания")
         fun meetingTest() {
-            val meeting = "Совещания"
-            // val meeting = "Чат"
+           var meeting = "Совещания"
+           var title = meeting
+           if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Чат')]")).size > 0) {
+               meeting = "Чат"
+               title = "Каналы"
+           }
             if (DT>8) println("Test нажатия на $meeting")
             tools.qtipClickLast(meeting)
-            assertTrue(tools.titleContain(meeting))
-            //assertTrue(tools.titleContain("Каналы"))
+            assertTrue(tools.titleContain(title))
             assertTrue(tools.qtipPressedLast(meeting))
         }
-        @Disabled
+        //@Disabled
         @RepeatedTest(NN)
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest(repetitionInfo: RepetitionInfo) {
             driver.navigate().refresh()
-        if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
+            Thread.sleep(1000)
+        if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // Костыль
+        //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val ganttchart = "Диаграмма Ганта"
             if (DT>8) println("Test нажатия на $ganttchart")
             tools.qtipClickLast(ganttchart)
@@ -212,13 +220,13 @@ class ToolsRef {
         }
         @AfterEach
         fun afterEach(){
-            if (DT>7) println("Вызов inner Tools AfterEach 5 раз closeEsc")
+            if (DT>7) println("Вызов inner Tools AfterEach пять раз closeEsc")
             tools.closeEsc5()
         }
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть дерево")
         fun open_showTreeTest(repetitionInfo: RepetitionInfo) {
-            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
+            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val open_showTree = "Показать/скрыть дерево"
             if (DT>8) println("Test нажатия на $open_showTree")
             assertTrue(tools.qtipPressedLast(open_showTree))
@@ -232,7 +240,7 @@ class ToolsRef {
         @RepeatedTest(NN)  // Не сделан reference
         @DisplayName("Показать/скрыть панель предварительного просмотра")
         fun open_showPreviewPanelTest(repetitionInfo: RepetitionInfo) {
-            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
+            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
             if (DT>8) println("Test нажатия на $open_showPreviewPanel")
             assertTrue(tools.qtipPressedLast(open_showPreviewPanel))
@@ -245,7 +253,7 @@ class ToolsRef {
         @RepeatedTest(NN)
         @DisplayName("Создать фильтр")
         fun filterTest(repetitionInfo: RepetitionInfo) {
-            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
+            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val filter = "Создать фильтр"
             if (DT>8) println("Test нажатия на $filter")
             tools.referenceClickLast("CMD_CREATE_USER_QUERY")
@@ -257,7 +265,7 @@ class ToolsRef {
         @RepeatedTest(NN)
         @DisplayName("Обновить")
         fun renewTest(repetitionInfo: RepetitionInfo) {
-            if (repetitionInfo.currentRepetition == 1) driver.navigate().refresh()
+            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val renew = "Обновить"
             if (DT>8) println("Test нажатия на $renew")
             tools.referenceClickLast("TDMS_COMMAND_UPDATE")

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.*
 import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
-import org.openqa.selenium.interactions.Actions
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
@@ -89,7 +88,7 @@ PPS Можно добавить тест: не удалять созданног
 class AdminUserRef {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 3
+    const val NN:Int = 10
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -206,7 +205,7 @@ class AdminUserRef {
         val fillingUser = "Редактирование пользователя"
         if (DT>8) println("Test нажатия на $fillingUser")
         assertTrue(tools.windowTitleWait(fillingUser))
-
+        // //html/body/descendant::div[@data-reference]
         tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
             ?.sendKeys("Тестовая Фамилия $nomberUser")
         tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/descendant::input")  // Логин
