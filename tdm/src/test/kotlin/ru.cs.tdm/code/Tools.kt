@@ -138,7 +138,7 @@ class Tools(val driver: WebDriver) {
         repeat(7) {
             try {
                 fluentWait.until{
-                    xpathLast("//span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),\'$menu\')]/parent::a")
+                    xpathLast("//span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'$menu')]/parent::a")
                     }?.click()
                 if (DT >7) println(" ClickMenu=$menu ")
                 return true
@@ -173,6 +173,10 @@ class Tools(val driver: WebDriver) {
 
     fun titleContain(title: String): Boolean = fluentWait.until(titleContains(title))
 
+    fun title(window:String): String =
+        xpathLast("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
+    fun titleWait(window:String, title: String): Boolean =
+        xpathWaitTextTry("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
     fun windowTitle(): String =
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun windowTitleWait(title: String): Boolean =
