@@ -26,7 +26,7 @@ import ru.cs.tdm.data.ConfProperties
 class HeadRef {
     companion object {
         const val DT: Int = 9
-        const val NN: Int = 10
+        const val NN: Int = 1
 
         // переменная для драйвера
         lateinit var driver: WebDriver
@@ -365,9 +365,9 @@ class HeadRef {
         // вспомогательная процедура открытия системного меню SubSysadmin и для СЭТД
         private fun openSubSysadmin() {
             repeat(7) {
-                Thread.sleep(1000)
+                ///Thread.sleep(1000)
                 tools.referenceClickLast("SUB_SYSADMIN")
-                Thread.sleep(1000)
+                ///Thread.sleep(1000)
                 if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
@@ -386,9 +386,9 @@ class HeadRef {
         private fun clickMenu(menu: String, window: String, title: String): Boolean {
             repeat(7) {
                 //openSubSysadmin()
-                Thread.sleep(1000)
+                ///Thread.sleep(1000)
                 tools.xpathClickMenu(menu)
-                Thread.sleep(1000)
+                ///Thread.sleep(1000)
                 if (tools.titleWait(window, title)) return true
                 if (DT > 6) println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                 tools.closeEsc()
@@ -476,6 +476,7 @@ class HeadRef {
         // data-reference="FORM_SERVER_LOG"
         // data-reference="QUERY_SERVER_LOG"
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Журнал сервера")
         fun serverLogTest() {
             val serverLog = "Журнал сервера"
@@ -533,12 +534,12 @@ class HeadRef {
                     openSubSysadmin()
                     Thread.sleep(1000)
                     val click = tools.xpathClickMenu("Имитация ИУС СЭТД")
-                    Thread.sleep(1000)
+                    //Thread.sleep(1000)
                     if (click) return
                     if (DT > 6) println("####### ИУС СЭТД Повтор *##*$it  открытия через $it sec #######")
                     repeat(3) { tools.closeEsc() }
                     tools.qtipClickLast("Объекты")
-                    Thread.sleep(1000L * it)
+                    //Thread.sleep(1000L * it)
                 }
                 if (DT > 5) println("&&&&&&&&& Не открылось ИУС СЭТД за 7 опросов  &&&&&&&&&")
                 assertTrue(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
@@ -563,7 +564,7 @@ class HeadRef {
                 if (DT > 8) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
-                Thread.sleep(3000)
+                Thread.sleep(1000)
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
             }
@@ -606,9 +607,12 @@ class HeadRef {
                 openCETD()
                 clickMenu(flow1, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
+                tools.clickOK()
+                //tools.closeXLast()
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Передаточного документа"))
                 tools.closeXLast()
-                assertTrue(tools.titleWait("messagebox","TDMS"))
-                tools.closeXLast()
+                //assertTrue(tools.titleWait("messagebox","TDMS"))
+                //tools.closeXLast()
             }
 
             @RepeatedTest(NN)

@@ -47,7 +47,7 @@ class LoginTest {
     /**
      * тестовый метод для осуществления аутентификации
      */
-    @RepeatedTest(30)
+    @RepeatedTest(3)
     @DisplayName("Проверка входа-выхода Login - Password")
     fun loginTest() {
 

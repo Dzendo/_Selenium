@@ -122,8 +122,6 @@ class Tools(val driver: WebDriver) {
 
     fun closeXLast() = qtipClickLast("Закрыть диалог")
 
-    fun yesClickLast() = fluentWait.until{ xpathLast("//span[text()='Да']/ancestor::a")?.click() }
-
     fun closeEsc(): Boolean {
         //println("ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера ")
         Actions(driver).sendKeys(Keys.ESCAPE).perform()
@@ -179,26 +177,6 @@ class Tools(val driver: WebDriver) {
         xpathWaitTextTry("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
     fun windowTitle(): String =
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
-    fun windowTitleWait(title: String): Boolean =
-        xpathWaitTextTry("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
-
-    fun messageTitle(): String =
-        xpathLast("//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
-    fun messageTitleWait(title: String): Boolean =
-        xpathWaitTextTry("//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]", title)
-
-    fun editDialogT9itle(): String =
-        xpathLast("//div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
-    fun editDialogTitleWait(title: String): Boolean =
-        xpathWaitTextTry("//div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
-
-    fun selectedDialogTitle(): String =
-        xpathLast("//div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
-    fun selectedDialogTitleWait(title: String): Boolean =
-        xpathWaitTextTry("//div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
-    fun selectedGridDialogTitleWait(title: String): Boolean =
-        xpathWaitTextTry("//div[starts-with(@id, 'tdmsSelectObjectGridDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
-
     fun clickOK(): Boolean {
         repeat(7) {
             try {  // 41e 41a  41e 43a

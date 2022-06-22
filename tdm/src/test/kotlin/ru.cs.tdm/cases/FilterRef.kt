@@ -53,7 +53,7 @@ class FilterRef {
     val localDateTimeNow = LocalDate.now()  //LocalDateTime.now()
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 1
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -148,7 +148,7 @@ class FilterRef {
         if (DT>8) println("Test нажатия на $createUser")
 
         tools.referenceClickLast("CMD_CREATE_USER_QUERY")
-        assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
+        assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
         tools.referenceClickLast("tabbar-FORM_USER_QUERY")
 //        assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
@@ -171,7 +171,7 @@ class FilterRef {
             if (DT > 8) println("Test нажатия на $fillingUser")
             tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateTimeNow')]")
             tools.referenceClickLast("CMD_EDIT_ATTRS")
-            assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
+            assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
 
             tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
                 ?.sendKeys(" @")
@@ -214,7 +214,7 @@ class FilterRef {
 
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
         tools. referenceClickLast("BUTTON_USER_EDIT")
-        assertTrue(tools.windowTitleWait("Редактирование пользователя"))
+        assertTrue(tools.titleWait("window", "Редактирование пользователя"))
 
         val description = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
 
@@ -228,7 +228,7 @@ class FilterRef {
          */
         //  кнопка Добавить профиль data-reference="BUTTON_PROFILE_ADD"
         tools.referenceClickLast("BUTTON_PROFILE_ADD")
-        assertTrue(tools.selectedGridDialogTitleWait("Выбор профиля"))
+        assertTrue(tools.titleWait("tdmsSelectObjectGridDialog","Выбор профиля"))
 
         val profileUser = "Руководитель"
         if (DT>8) println("Test нажатия на $profileUser")
@@ -236,7 +236,7 @@ class FilterRef {
         tools.xpathLast("//span[text()= '$profileUser']/ancestor::td")?.click()
         tools.clickOK()  // закрыть выбор профиля с выбором руководителя
 
-        assertTrue(tools.windowTitleWait("Редактирование пользователя"))
+        assertTrue(tools.titleWait("window", "Редактирование пользователя"))
         // проверка что есть профиль руководитель
 
 
@@ -269,7 +269,7 @@ class FilterRef {
        //       ?.getAttribute("value") ==
        //   "Фильтр $nomberFilter $localDateTimeNow")
        tools.referenceClickLast("CMD_DELETE_USER_QUERY")
-       assertTrue(tools.messageTitleWait("TDM365"))
+       assertTrue(tools.titleWait("messagebox", "TDM365"))
        // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
        //assertTrue(tools.editDialogTitleWait("Редактирование объекта"))
        //assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))

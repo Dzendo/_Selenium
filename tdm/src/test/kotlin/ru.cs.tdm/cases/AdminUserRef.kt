@@ -88,7 +88,7 @@ PPS Можно добавить тест: не удалять созданног
 class AdminUserRef {
     companion object {
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 1
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -153,7 +153,7 @@ class AdminUserRef {
         val adminUser = "Администрирование групп"
         if (DT>8) println("Test нажатия на $adminUser")
         tools.qtipClickLast(adminUser)
-        assertTrue(tools.windowTitleWait("Редактирование групп"))
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"))
 
         val allUsers = "Все пользователи"
@@ -191,7 +191,7 @@ class AdminUserRef {
 
         // создать пользователя data-reference="BUTTON_USER_CREATE"
         tools.referenceClickLast("BUTTON_USER_CREATE")
-        assertTrue(tools.windowTitleWait("Редактирование пользователя"))
+        assertTrue(tools.titleWait("window", "Редактирование пользователя"))
     //}
 
         /**
@@ -204,7 +204,7 @@ class AdminUserRef {
         //val testFIO = "Тестовая Фамилия $nomberUser"
         val fillingUser = "Редактирование пользователя"
         if (DT>8) println("Test нажатия на $fillingUser")
-        assertTrue(tools.windowTitleWait(fillingUser))
+        assertTrue(tools.titleWait("window", fillingUser))
         // //html/body/descendant::div[@data-reference]
         tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
             ?.sendKeys("Тестовая Фамилия $nomberUser")
@@ -241,7 +241,7 @@ class AdminUserRef {
 
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
         tools. referenceClickLast("BUTTON_USER_EDIT")
-        assertTrue(tools.windowTitleWait("Редактирование пользователя"))
+        assertTrue(tools.titleWait("window", "Редактирование пользователя"))
 
         val description = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
 
@@ -255,7 +255,8 @@ class AdminUserRef {
          */
         //  кнопка Добавить профиль data-reference="BUTTON_PROFILE_ADD"
         tools.referenceClickLast("BUTTON_PROFILE_ADD")
-        assertTrue(tools.selectedGridDialogTitleWait("Выбор профиля"))
+        //assertTrue(tools.selectedGridDialogTitleWait("Выбор профиля"))
+        assertTrue(tools.titleWait("tdmsSelectObjectGridDialog","Выбор профиля"))
 
         val profileUser = "Руководитель"
         if (DT>8) println("Test нажатия на $profileUser")
@@ -263,7 +264,7 @@ class AdminUserRef {
         tools.xpathLast("//span[text()= '$profileUser']/ancestor::td")?.click()
         tools.clickOK()  // закрыть выбор профиля с выбором руководителя
 
-        assertTrue(tools.windowTitleWait("Редактирование пользователя"))
+        assertTrue(tools.titleWait("window", "Редактирование пользователя"))
         // проверка что есть профиль руководитель
 
 
@@ -281,7 +282,7 @@ class AdminUserRef {
          */
         beforeEach()
 
-        assertTrue(tools.windowTitleWait("Редактирование групп"))
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
         //val testFIO = "Тестовая Фамилия"
         if (DT>8) println("Удаление на $nomberUser")
         tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
