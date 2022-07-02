@@ -29,11 +29,13 @@ class LoginPage(driver: WebDriver) {
     /**
      * определение локатора поля ввода логина
      */
+    // data-errorqtip="<ul class="x-list-plain"><li>Это поле обязательно для заполнения</li></ul>"
     //@FindBy(xpath = "//input [contains(@id, 'textfield-1054-inputEl')]")
     // @FindBy(xpath = "//input[contains(@placeholder,'Пользователь')]")  // Тема 2
     //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/../../..//input")
     //@FindBy(xpath = "//input [contains(@type, 'text') and contains(@class, 'x-form-field') and contains(@class, 'x-form-required-field')]")
     @FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//input")
+    //@FindBy(xpath = "//input[contains(@data-errorqtip, 'Это поле обязательно для заполнения')]")
     private lateinit var  loginField: WebElement
 
     /**

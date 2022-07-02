@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
-import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.Point
 import ru.cs.tdm.code.Login
 import java.time.Duration
 
@@ -33,7 +33,10 @@ class LoginTest {
     fun setup() {
         // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         WebDriverManager.chromedriver().setup()
-        driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
+        driver = ChromeDriver()
+        //driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
+        //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
+        driver.manage().window().position = Point(2000, -1000)
         //окно разворачивается на полный экран
         driver.manage().window().maximize()
         // задержка на выполнение теста = 10 сек.

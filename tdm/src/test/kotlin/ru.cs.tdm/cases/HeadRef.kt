@@ -25,8 +25,9 @@ import ru.cs.tdm.data.ConfProperties
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class HeadRef {
     companion object {
+        const val threadSleep = 1000L
         const val DT: Int = 9
-        const val NN: Int = 1
+        const val NN: Int = 10
 
         // переменная для драйвера
         lateinit var driver: WebDriver
@@ -181,9 +182,9 @@ class HeadRef {
             tools.qtipClickLast(ganttchart)
             //assertTrue(tools.titleContain(ganttchart))  // Нет заголовка
             assertTrue(tools.qtipPressedLast(ganttchart))
-            Thread.sleep(1000)
+            Thread.sleep(threadSleep)
             driver.navigate().refresh()
-            Thread.sleep(1000)
+            Thread.sleep(threadSleep)
             if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // Костыль
         }
 
@@ -328,14 +329,15 @@ class HeadRef {
             val nomerTesta: Int = repetitionInfo.currentRepetition
             if ((nomerTesta % 10 == 1)) driver.navigate().refresh()
             if (DT > 8) println("Test $nomerTesta нажатия на $configuringNotification")
-            Thread.sleep(2000)
+            Thread.sleep(threadSleep*3)
             tools.referenceClickLast("CMD_NOTIFICATIONS_SETTINGS")
             //tools.qtipClickLast(configuringNotification)
+            Thread.sleep(threadSleep*2)
             assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
             assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование"))
             assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента"))
             tools.closeXLast()
-            Thread.sleep(2000)
+            Thread.sleep(threadSleep*2)
         }
     }  // конец inner - nested Testing Tools Box
 
@@ -365,14 +367,14 @@ class HeadRef {
         // вспомогательная процедура открытия системного меню SubSysadmin и для СЭТД
         private fun openSubSysadmin() {
             repeat(7) {
-                ///Thread.sleep(1000)
+                ///Thread.sleep(threadSleep)
                 tools.referenceClickLast("SUB_SYSADMIN")
-                ///Thread.sleep(1000)
+                ///Thread.sleep(threadSleep)
                 if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
                 tools.qtipClickLast("Объекты")
-                Thread.sleep(1000L * it)
+                Thread.sleep(threadSleep * it)
             }
             if (DT > 5) println("&&&&&&&&& Не открылось SUB_SYSADMIN за 7 опросов  &&&&&&&&&")
             assertTrue(tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false)
@@ -386,14 +388,14 @@ class HeadRef {
         private fun clickMenu(menu: String, window: String, title: String): Boolean {
             repeat(7) {
                 //openSubSysadmin()
-                ///Thread.sleep(1000)
+                ///Thread.sleep(threadSleep)
                 tools.xpathClickMenu(menu)
-                ///Thread.sleep(1000)
+                ///Thread.sleep(threadSleep)
                 if (tools.titleWait(window, title)) return true
                 if (DT > 6) println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                 tools.closeEsc()
                 tools.qtipClickLast("Объекты")
-                Thread.sleep(1000L * it)
+                Thread.sleep(threadSleep * it)
             }
             if (DT > 5) println("&&&&&&&&& Не нажалось $menu за 7 нажатий $title  &&&&&&&&&")
             assertTrue(tools.titleWait(window, title))
@@ -486,6 +488,7 @@ class HeadRef {
             //println("FORM_SERVER_LOG = ${tools.referenceLast("FORM_SERVER_LOG")?.text}")
             //println("QUERY_SERVER_LOG = ${tools.referenceLast("QUERY_SERVER_LOG")?.text}")
             // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
+            Thread.sleep(threadSleep)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_SERVER_LOG']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='QUERY_SERVER_LOG']")) != null)
             assertTrue(tools.referenceWaitText("FORM_SERVER_LOG", serverLog))
@@ -532,14 +535,14 @@ class HeadRef {
             private fun openCETD() {
                 repeat(7) {
                     openSubSysadmin()
-                    Thread.sleep(1000)
+                    Thread.sleep(threadSleep)
                     val click = tools.xpathClickMenu("Имитация ИУС СЭТД")
-                    //Thread.sleep(1000)
+                    Thread.sleep(threadSleep)
                     if (click) return
                     if (DT > 6) println("####### ИУС СЭТД Повтор *##*$it  открытия через $it sec #######")
                     repeat(3) { tools.closeEsc() }
                     tools.qtipClickLast("Объекты")
-                    //Thread.sleep(1000L * it)
+                    Thread.sleep(threadSleep * it)
                 }
                 if (DT > 5) println("&&&&&&&&& Не открылось ИУС СЭТД за 7 опросов  &&&&&&&&&")
                 assertTrue(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
@@ -564,7 +567,6 @@ class HeadRef {
                 if (DT > 8) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
-                Thread.sleep(1000)
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
             }
@@ -579,11 +581,12 @@ class HeadRef {
                 clickMenu(flow, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
-                assertTrue(msgText.contains("Да - Ввод GUID проекта вручную"))
-                assertTrue(msgText.contains("Нет - Выбор проекта в системе"))
+                //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
+                //assertTrue(msgText.contains("Нет")) // - Выбор проекта в системе"))
                 tools.closeXLast()
                 assertTrue(tools.titleWait("messagebox","Ввод значения"))
                 tools.closeXLast()
+                Thread.sleep(threadSleep)
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
             }
@@ -626,6 +629,7 @@ class HeadRef {
                 tools.closeXLast()
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Реестра замечаний"))
                 tools.closeXLast()
+                Thread.sleep(threadSleep)
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
             }

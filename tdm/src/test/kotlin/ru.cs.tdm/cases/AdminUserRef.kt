@@ -87,8 +87,10 @@ PPS Можно добавить тест: не удалять созданног
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class AdminUserRef {
     companion object {
+// задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
+    const val threadSleep = 1000L
     const val DT: Int = 9
-    const val NN:Int = 1
+    const val NN:Int = 10
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -168,7 +170,7 @@ class AdminUserRef {
         if (DT>7) println("Вызов AfterEach AdminUserTest")
         //screenShot()
         tools.closeEsc5()
-        // Thread.sleep(2000)
+        // Thread.sleep(threadSleep)
         //driver.navigate().refresh()
     }
     fun screenShot(name: String = "image") {
@@ -191,6 +193,7 @@ class AdminUserRef {
 
         // создать пользователя data-reference="BUTTON_USER_CREATE"
         tools.referenceClickLast("BUTTON_USER_CREATE")
+        Thread.sleep(threadSleep)
         assertTrue(tools.titleWait("window", "Редактирование пользователя"))
     //}
 
@@ -207,7 +210,7 @@ class AdminUserRef {
         assertTrue(tools.titleWait("window", fillingUser))
         // //html/body/descendant::div[@data-reference]
         tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
-            ?.sendKeys("Тестовая Фамилия $nomberUser")
+            ?.sendKeys("Тестовый $nomberUser")
         tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/descendant::input")  // Логин
             ?.sendKeys("Логин $nomberUser")
         tools.xpathLast("//*[@data-reference='ATTR_TDMS_LOGIN_ENABLE']/descendant::input")  // Разрешить вход в TDMS
@@ -241,14 +244,15 @@ class AdminUserRef {
 
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
         tools. referenceClickLast("BUTTON_USER_EDIT")
+        Thread.sleep(threadSleep)
         assertTrue(tools.titleWait("window", "Редактирование пользователя"))
 
         val description = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
 
         //.sendKeys("Тестовая Фамилия $nomberUser")
-        assertTrue(description?.getAttribute("value") == "Тестовая Фамилия $nomberUser")
+        assertTrue(description?.getAttribute("value") == "Тестовый $nomberUser")
         description?.sendKeys(" @")
-        assertTrue(description?.getAttribute("value") == "Тестовая Фамилия $nomberUser @")
+        assertTrue(description?.getAttribute("value") == "Тестовый $nomberUser @")
 
         /**
          *  тест добавление роли пользователю
@@ -269,7 +273,7 @@ class AdminUserRef {
 
 
         val  description_new= tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")
-        assertTrue(description_new?.getAttribute("value") == "Тестовая Фамилия $nomberUser @")
+        assertTrue(description_new?.getAttribute("value") == "Тестовый $nomberUser @")
         tools.clickOK()
         tools.clickOK()
    // }
