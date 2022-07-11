@@ -9,7 +9,7 @@ plugins {
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.9.0-M1" //"5.8.2"
+val junitVersion = "5.9.0-RC1" //"5.9.0-M1" //"5.8.2"
 
 repositories {
     mavenCentral()
@@ -55,7 +55,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
     //testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.0-M1") // 1.8.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.0-RC1") // 1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
     // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
 }

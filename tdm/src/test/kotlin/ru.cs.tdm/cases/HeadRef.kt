@@ -25,7 +25,7 @@ import ru.cs.tdm.data.ConfProperties
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class HeadRef {
     companion object {
-        const val threadSleep = 1000L
+        const val threadSleep = 2000L
         const val DT: Int = 9
         const val NN: Int = 10
 
@@ -458,6 +458,7 @@ class HeadRef {
         // data-reference="FORM_EVENTS_LOG"
         // data-reference="GRID"
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Журнал событий")
         fun eventsLogTest() {
             val eventsLog = "Журнал событий"
@@ -557,6 +558,7 @@ class HeadRef {
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
+                tools.closeEsc()
             }
             // Отправка запроса на сервер - не надо
             // ✔ Соединение установлено (с авторизацией)
@@ -569,6 +571,7 @@ class HeadRef {
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
+                tools.closeEsc()
             }
 
             @RepeatedTest(NN)
@@ -629,9 +632,9 @@ class HeadRef {
                 tools.closeXLast()
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Реестра замечаний"))
                 tools.closeXLast()
-                Thread.sleep(threadSleep)
-                assertTrue(tools.titleWait("messagebox","TDMS"))
-                tools.closeXLast()
+                //Thread.sleep(threadSleep)
+                //assertTrue(tools.titleWait("messagebox","TDMS")) // нет в 1.2.18
+                //tools.closeXLast()
             }
 
             @RepeatedTest(NN)

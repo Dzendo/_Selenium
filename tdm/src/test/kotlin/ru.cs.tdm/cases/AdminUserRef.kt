@@ -276,6 +276,7 @@ class AdminUserRef {
         assertTrue(description_new?.getAttribute("value") == "Тестовый $nomberUser @")
         tools.clickOK()
         tools.clickOK()
+
    // }
    // @Test
    // @DisplayName("Удаление пользователя")
