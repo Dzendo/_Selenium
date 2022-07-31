@@ -36,22 +36,27 @@ class LoginTest {
         driver = ChromeDriver()
         //driver = ChromeDriver(ChromeOptions().addArguments("--window-position=2000,0"))
         //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
-        driver.manage().window().position = Point(2000, -1000)
+        driver.manage().window().position = Point(2000, 0)
         //окно разворачивается на полный экран
         driver.manage().window().maximize()
         // задержка на выполнение теста = 10 сек.
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
         //получение ссылки на страницу входа из файла настроек
         val loginpageTDM = ConfProperties.getProperty("loginpageTDM")
+        // Драйверу командуем открыть эту страницу
         driver.get(loginpageTDM)
+        // Берем ссылку на класс Логин, которую будем использовать ниже в тестах.
         login = Login(driver)
     }
 
     /**
      * тестовый метод для осуществления аутентификации
      */
+   // Аннтотация Junit5 -Объявляем функцию тестом и повторяемым 3-раза.
     @RepeatedTest(3)
-    @DisplayName("Проверка входа-выхода Login - Password")
+    // Аннтотация Junit5 - Отображать человеческое имя вместо имени функции
+    // С рускими именами есть проблема  в настройках JB и наверное будет проблема дальше
+    @DisplayName("Checking the input-output Login - Password")
     fun loginTest() {
 
         //значение login/password берутся из файла настроек по аналогии с chromedriver и loginpage
@@ -65,12 +70,16 @@ class LoginTest {
         //и сравниваем его с логином из файла настроек
         //assertEquals(loginTDM, user)
         //assertTrue(login.loginUserNameWait(loginTDM))
+        // assertTrue проверяет труе или фалс возвращает функция qtipLoginUserNameWait из класса login
         assertTrue(login.qtipLoginUserNameWait(loginTDM))
     }
-
+    // После теста зовет login.loginOut(), а тот используя мой тулс через qtip нажимает на что надо, что бы выйти из логина
+    // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
             login.loginOut()
             driver.quit() //  закрытия окна браузера
         }
 }
+// Мы перскачили в LoginPage через явное ожидание webDriverWait - следующий урок
+// Перескачили как срабатывает мой тулс и его ожидания FluentWait упомянуты в JB test

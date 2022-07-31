@@ -44,7 +44,7 @@ class JetBrainsTest {
         // Это и есть самая важная вещь из пакета Selenium
         driver = ChromeDriver()
         // устанавливает координаты верхнего левого угла окна браузера
-        driver.manage().window().position = Point(0,0)
+        driver.manage().window().position = Point(2000,0)
         // Развернуть полностью экран, но можно и указать размера
         driver.manage().window().maximize()
         // В Selenium есть три типа ожиданий, что очень важно т.к. браузер и сервер тормозят.

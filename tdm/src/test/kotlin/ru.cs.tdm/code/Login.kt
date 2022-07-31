@@ -44,6 +44,13 @@ class Login(val driver: WebDriver) {
         println("ожидание $name пользователя из меню пользователя ")
         return bool
     }
+
+    /**
+     * Процедура, которая получает имя пользователя, обращается в tools оттуда получает имя пользователя
+     * Потом сравнивает имена, если равно - то труе, если не равно - фалсе.
+     * И возвращает что определила.
+     *
+     */
     fun qtipLoginUserNameWait(name: String): Boolean {
         Thread.sleep(3000)
         val bool = tools.qtipFluentWaitText("Настройки",
