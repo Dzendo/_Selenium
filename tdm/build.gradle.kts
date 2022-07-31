@@ -9,7 +9,7 @@ plugins {
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.9.0-RC1" //"5.9.0-M1" //"5.8.2"
+val junitVersion = "5.9.0" //"5.9.0-M1" //"5.8.2"
 
 repositories {
     mavenCentral()

@@ -6,8 +6,16 @@ import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.support.PageFactory
 
 // https://www.jetbrains.com/
+/**
+ * Обычный котлиновский класс который здесь выполняет функцию обращения по ссылкам к сайту
+ */
 class JetBrainsPage(driver: WebDriver) {
+    /**
+     * Статический блок в котлине, который выполняется первым при инициализации класса
+     */
     init {
+        // Специальная процедура, которая инициализирует - связывает переменные Котлина с полями сайта
+        // Применяется паттерн Фабрика - надо, что бы это работало
         PageFactory.initElements(driver, this)
     }
     //@FindBy(css = "[data-test='search-input']")
@@ -40,7 +48,18 @@ class JetBrainsPage(driver: WebDriver) {
     //*[@id="js-site-header"]/div/div/div[2]/div[1]/div/div/div/div[1]/button
     //*[@data-test='site-header-search-action']
 
-    //@FindBy(css = "[data-test='site-header-search-action']")
+    /**
+     * Объявляется переменная searchButton типа WebElement !!! (selenium-java) с отложенным присвоением
+     * @FindBy (selenium) - указывает с чем связать переменную.
+     * Самое простое - это применить фабрику и указать связь переменной с локатором
+     * Если так делать, то все остальное сделает сам selenium, т.е.
+     * При обращении к переменной он обратиться через драйвер к браузеру
+     * Отдаст ему локатор, если надо, то подождет 10 сек
+     * После этого в программе мы можем просто обращаться к Котлиновской переменной типа WebElement
+     * и командовать им, а selenium через эту связь будет туда - обратно гонять.
+     * Паттерн он надевает уздечку на коня а мы потом за нее дергаем направо-налево
+     */
+    //@FindBy(css = "[data-test='site-header-search-action']")  JB ошибочно и через CSS
     @FindBy(xpath = "//button[@data-test='site-header-search-action']")
     lateinit var searchButton: WebElement
 
