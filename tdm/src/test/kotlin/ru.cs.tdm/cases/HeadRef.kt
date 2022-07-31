@@ -14,26 +14,30 @@ import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.ConfProperties
 
 /**
- * при выходе на http://tdms-srv2a:444/client/#objects/ открывает страницу аутентификации;
- * Пользователь производит ввод валидных логина и пароля;
- * Пользователь осуществляет выход из аккаунта путем нажатия на имя пользователя в верхнем правом углу окна с последующим нажатием на кнопку «Выйти…».
- * Тест считается успешно пройденным в случае, когда пользователю удалось выполнить все вышеперечисленные пункты.
+ *
  * data-reference="SUB_SYSADMIN"
  */
-
+// Видимое имя класса при тестах, но нигде не показывается
 @DisplayName("Testing Tools Menu-Icons Test")
+// Аннотация Junit выполнять тесты по алфавиту. Здесь не обязательно, исследую для сквозного порядка
 @TestMethodOrder(MethodOrderer.MethodName::class)
+// Класс тестовый в котором лежит все остальное - требование Котлин
 class HeadRef {
+    // Статический блок - распределяется при старте программы, а не при создании экземпляра
+    // BeforeAll и AfterAll должны быть статическими требование Junit
+    // и естественно все переменные, которыми они пользуются
     companion object {
-        const val threadSleep = 1000L
-        const val DT: Int = 9
-        const val NN: Int = 10
+        // вынесены переменные, что бы менять их тольок здесь, а они поменяются там внизу в тестах
+        const val threadSleep = 1000L // задержки где они есть 1сек
+        const val DT: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
+        const val NN: Int = 3 // количество повторений тестов
 
         // переменная для драйвера
         lateinit var driver: WebDriver
 
         // объявления переменных на созданные ранее классы-страницы
         lateinit var tools: Tools
+        // костыль для диаграммы ганта повторного ввода пароля
         lateinit var loginIN: String
         lateinit var passwordIN: String
 
@@ -44,7 +48,9 @@ class HeadRef {
          * Например, установка неявного ожидания 10 секунд и явного ожидания 15 секунд
          * может привести к таймауту через 20 секунд.
          */
+        // Аннтотация Котлин, которая говорит, что эта функция будет статичная и Java совместимая
         @JvmStatic
+        // Аннотация Junit выполнять один раз перед всеми тестами
         @BeforeAll
         fun beforeAll() {
             if (DT > 7) println("Вызов BeforeAll")
@@ -55,7 +61,7 @@ class HeadRef {
             driver.manage().window().position = Point(2000, -1000)
             driver.manage().window().maximize()
 
-            // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
+            // Создаем экземпляры классов и присвоим ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
 
@@ -67,11 +73,13 @@ class HeadRef {
             val password = ConfProperties.getProperty("passwordTDM")
             if (DT > 8) println("login= $login   password= $password")
             Login(driver).loginIn(login, password)
+            // Запоминаю логин и пароль для диаграммы ганта - костыль.
             loginIN = login
             passwordIN = password
         }
 
         @JvmStatic
+        // Аннотация Junit выполнять один раз после всех тестов
         @AfterAll
         fun afterAll() {
             //tools.idList()
@@ -80,9 +88,11 @@ class HeadRef {
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
         }
-    }
+    }  //конец companion object
 
     // верхний срабатывает на все тесты
+
+    // Как обычно, выполняется перед каждым тестом, только он пустой
     @BeforeEach
     fun beforeEach() {
         if (DT > 7) println("Вызов BeforeEach верхний")
@@ -90,6 +100,8 @@ class HeadRef {
     }
 
     // верхний срабатывает на все тесты
+
+    // Как обычно, выполняется после каждого теста, только он пустой
     @AfterEach
     fun afterEach() {
         if (DT > 7) println("Вызов AfterEach верхний")
@@ -98,8 +110,11 @@ class HeadRef {
     }
 
     /**
-     * тестовый метод нажатия на пункты меню в верхней полосе
+     * Тестовый метод нажатия на пункты меню в верхней полосе
      */
+
+    // Аннотация Junit5 вложенных классов тестов - ничего не дает кроме порядка в тестах
+    // HeadMenuTest все тесты нажимающие на верхнее меню - можно запустить отдельно
     @Nested
     @DisplayName("Testing each menu separately")
     inner class HeadMenuTest {
@@ -123,8 +138,11 @@ class HeadRef {
         fun mainMenuTest() {
             val mainMenu = "Объекты"
             if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
+            // Клик на элемент с data-qtip="Объекты"
             tools.qtipClickLast(mainMenu)
+            // Проверяем заголовок закладки Junit
             assertTrue(tools.titleContain("TDM365"))
+            // Проверяем, что утоплена кнопка Объекты
             assertTrue(tools.qtipPressedLast("Объекты"))
         }
 
@@ -204,13 +222,16 @@ class HeadRef {
         fun searchTest() {
             val search = "Искать"
             if (DT > 8) println("Test нажатия на $search")
-            tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка
+            tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка !! Убрать
             tools.qtipClickLast("Объекты")
             tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
             tools.qtipClickLast(search)
             assertTrue(tools.titleContain("Результаты"))
+            // Из поля с data-qtip="Введите текст" получить значение этого поля и сравнить с Лебедев,
+            // если да, то тест прошел, если нет, то упал
             assertEquals("Лебедев", tools.qtipLast("Введите текст")?.getAttribute("value"))
             tools.qtipClickLast("Очистить")
+            // Проверяется, что поле поиска пустое
             assertEquals("", tools.qtipLast("Введите текст")?.getAttribute("value"))
         }
 
@@ -220,12 +241,13 @@ class HeadRef {
             val notification = "Уведомления"
             if (DT > 8) println("Test нажатия на $notification")
             tools.qtipClickLast(notification)
+            // Запрашивает заголовок открывшегося окна и проверяет, что он Окно сообщений
             assertEquals("Окно сообщений", tools.windowTitle())
             tools.closeXLast()
         }
     }
     /**
-     * тестовый метод нажатия на иконки инструментов
+     * Тестовый метод нажатия на иконки инструментов
      * во второй строке под SYSADMIN только ОБЪЕКТЫ
      * системного подменю расположено ниже в отдельном классе
      */
@@ -249,11 +271,14 @@ class HeadRef {
 
         @RepeatedTest(NN)
         @DisplayName("Показать/скрыть дерево")
+        // repetitionInfo (Junit) объект, который содержит в т.ч. номер повтора теста repetitionInfo.currentRepetition
         fun open_showTreeTest(repetitionInfo: RepetitionInfo) {
-            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
+            // Если номер повтора теста 1,11,21 (остаток от деления на 10 равно 1) и тд, то обновить экран
+            // У TDM подмерзает экран если много команд показать-скрыть
+            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh() // Костыль проверить убрать
             val open_showTree = "Показать/скрыть дерево"
             if (DT > 8) println("Test нажатия на $open_showTree")
-            assertTrue(tools.qtipPressedLast(open_showTree))
+            assertTrue(tools.qtipPressedLast(open_showTree)) // Исправить на референс
             tools.referenceClickLast("TDMS_COMMAND_COMMON_SHOWTREE")  // Скрыть дерево
             //tools.qtipClickLast(open_showTree)   // Скрыть дерево
             assertFalse(tools.qtipPressedLast(open_showTree))
@@ -343,7 +368,7 @@ class HeadRef {
     }  // конец inner - nested Testing Tools Box
 
     /**
-     * тестовый метод нажатия на пункты системного подменю
+     * Тестовый метод нажатия на пункты системного подменю
      * во второй строке под SYSADMIN не только ОБЪЕКТЫ
      * имеет вложенный класс тестирования СЭТД
      */
@@ -382,8 +407,8 @@ class HeadRef {
         }
 
         /**
-         * вспомогательная процедура нажатия на пункты системного меню SubSysadmin и СЭТД
-         * ожидает рткрытия попап окна с заданнным заголовком
+         * Вспомогательная процедура нажатия на пункты системного меню SubSysadmin и СЭТД
+         * ожидает открытия попап окна с заданным заголовком
          * вообще годится для любого меню - вынести в Tools.kt
          */
         private fun clickMenu(menu: String, window: String, title: String): Boolean {
@@ -405,7 +430,7 @@ class HeadRef {
 
         // data-reference="FORM_SYSTEM_SETTINGS"
         @RepeatedTest(NN)
-        @DisplayName("Параметры системы")
+        @DisplayName("Информация о системе")
         fun systemParametersTest() {
             val systemParameters = "Информация о системе"
             if (DT > 8) println("Test нажатия на $systemParameters")
@@ -430,6 +455,7 @@ class HeadRef {
             openSubSysadmin()
             clickMenu(sysAttributes, "window", "Атрибуты")
             //println("FORM_ATTRS_LIST = ${tools.referenceLast("FORM_ATTRS_LIST")?.text}")
+            // Скилл Selenium изучаю присутствия элемента в DOM страницы
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_ATTRS_LIST']")) != null)
             assertTrue(tools.referenceWaitText("FORM_ATTRS_LIST", "Атрибуты"))
             assertTrue(tools.titleWait("window", "Атрибуты"))
@@ -511,9 +537,11 @@ class HeadRef {
         }
 
         /**
-         * тестовый метод нажатия на пункты подменю СЭТД
+         * Тестовый метод нажатия на пункты подменю СЭТД
          * во второй строке под SYSADMIN и Имитация ИУС СЭТД
-         * вложенн в верхний класс тестирования меню системщика
+         * вложен в верхний класс тестирования меню системщика
+         * вложенный класс во вложенный класс пробую и логически это так и есть
+         * Можно его запускать отдельно, т.к. он оформлен отдельным классом
          */
         @Nested
         @DisplayName("Testing CETD")
