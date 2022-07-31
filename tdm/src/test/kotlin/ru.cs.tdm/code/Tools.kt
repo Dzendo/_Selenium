@@ -175,14 +175,15 @@ class Tools(val driver: WebDriver) {
         xpathLast("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun titleWait(window:String, title: String): Boolean =
         xpathWaitTextTry("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
-    fun windowTitle(): String =
+        fun windowTitle(): String =
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
-    fun clickOK(): Boolean {
+    fun clickOK(OK: String = ""): Boolean {
+        //41e 43a 41e 41a 4f 4b 414 430
         repeat(repeateOut) {
-            try {  // 41e 41a  41e 43a
-                val element = fluentOutWait.until {
-                    xpathLast("//span[text() = 'Ок' or text() = 'ОК' or text() = 'ОК' or text() = 'Да']/ancestor::a")
-                        ?.click() }
+            val xpath: String = if (OK.isNotEmpty()) "//span[text() = '$OK']/ancestor::a"
+                                else "//span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a"
+            try {
+                val element = fluentOutWait.until { xpathLast(xpath)?.click() }
                 if (element != null) return true
             } catch (_: TimeoutException) {}
             catch (_: StaleElementReferenceException) {}
@@ -204,5 +205,58 @@ class Tools(val driver: WebDriver) {
         }
         if (DT >4) println("&&&&&&&&& $name за $repeateOut опросов по 1 сек &&&&&&&&&")
         return false
+    }
+    // // *[@id="messagebox-1379_header-title-textEl"]
+    // //div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost')) and contains(text(),'TDMS')]
+    //div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost')) and contains(text(),"Редактирование групп")]
+    fun nomberTitle(window:String, title: String): Int {
+        val element = xpathLast(
+            "//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost')) and contains(text(),'$title')]"
+        ) ?: return -1
+        val id: String = element.getAttribute("id")
+        if (id.isEmpty()) return 0
+        var nomberString = id.drop(window.length+1)
+        nomberString = nomberString.substring(0, minOf(nomberString.indexOf("_"),nomberString.indexOf("-")))
+        if (nomberString.isEmpty()) return 0
+        val nomberInt = nomberString.toIntOrNull()?:0
+        println("Запрошено окно $nomberInt из $nomberString c $window титл $title \n id= $id")
+        return nomberInt
+    }
+    fun idRef(reference:String): String? {
+        val element = referenceLast(reference) ?: return null
+        val id: String = element.getAttribute("id")
+        if (id.isEmpty()) return ""
+        println("Запрошен элемент reference = $reference получен id= $id")
+        return id
+    }
+    fun dropID(id: String): String = id.substringBefore("-")
+    fun nomberID(id: String): String = id.filter { it.isDigit() }
+       // string.replace("[^0-9]".toRegex(), "")
+    fun headTeg(id: String): String {
+        val drop = dropID(id)
+        val nomber = nomberID(id)
+        return "$drop-$nomber"
+    }
+
+
+    fun byID(id: String) :WebElement? = driver.findElement(By.id(id))
+
+
+    fun idList() {
+        println("ID List...")
+        var _staleElementReferenceException: Int = 0
+        val elementList = driver.findElements(By.xpath("//*[contains(@id,'-') or contains(@id,'_')]"))
+        val idList: List<String> = elementList.map {
+            try {
+                it.getAttribute("id")
+            }catch (_: StaleElementReferenceException) {
+                _staleElementReferenceException++
+                "_StaleElementReferenceException"}
+        }
+        val idName: List<String> = idList.map{ idname -> idname.substringBefore("-") }
+        val idSet:Set <String> = idName.sorted().toSet()
+        println ("elementlist = ${elementList.size}  _StaleException= $_staleElementReferenceException idSet = ${idSet.size} ")
+        for (id in idSet) println(id)
+
     }
 }

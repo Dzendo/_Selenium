@@ -84,6 +84,7 @@ class FilterRef {
         @JvmStatic
         @AfterAll
         fun afterAll() {
+            //tools.idList()
             if (DT>7) println("Вызов AfterAll AdminUserTest")
             tools.closeEsc5()
             Login(driver).loginOut()
@@ -246,7 +247,7 @@ class FilterRef {
        //    tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
        //        ?.getAttribute("value"))
        //sendKeys(" $nomberFilter $localDateNow")
-       tools.clickButton("Да")
+       tools.clickOK("Да")
        if (errors > 0) assertTrue(false)
    }
 }

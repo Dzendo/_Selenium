@@ -25,7 +25,7 @@ import ru.cs.tdm.data.ConfProperties
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class HeadRef {
     companion object {
-        const val threadSleep = 2000L
+        const val threadSleep = 1000L
         const val DT: Int = 9
         const val NN: Int = 10
 
@@ -74,6 +74,7 @@ class HeadRef {
         @JvmStatic
         @AfterAll
         fun afterAll() {
+            //tools.idList()
             if (DT > 7) println("Вызов BeforeAll")
             tools.closeEsc5()
             Login(driver).loginOut()
@@ -616,6 +617,7 @@ class HeadRef {
                 tools.clickOK()
                 //tools.closeXLast()
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Передаточного документа"))
+               // tools.idList()
                 tools.closeXLast()
                 //assertTrue(tools.titleWait("messagebox","TDMS"))
                 //tools.closeXLast()

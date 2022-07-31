@@ -271,7 +271,6 @@ class AdminUserRef {
         assertTrue(tools.titleWait("window", "Редактирование пользователя"))
         // проверка что есть профиль руководитель
 
-
         val  description_new= tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")
         assertTrue(description_new?.getAttribute("value") == "Тестовый $nomberUser @")
         tools.clickOK()
@@ -292,8 +291,8 @@ class AdminUserRef {
         if (DT>8) println("Удаление на $nomberUser")
         tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
         tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
-        tools.clickButton("Да")
-        tools.clickButton("ОК")
+        tools.clickOK("Да")
+        tools.clickOK("ОК")
 
     }
 }

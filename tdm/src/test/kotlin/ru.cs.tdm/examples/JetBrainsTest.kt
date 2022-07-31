@@ -12,6 +12,9 @@ import org.openqa.selenium.Point
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.FluentWait
+import org.openqa.selenium.support.ui.WebDriverWait
 import java.time.Duration
 /**
  * Классический пример теста переданный JB и подшаманенный, т.к. был не рабочий
@@ -22,6 +25,9 @@ class JetBrainsTest {
     // Они объявлены в классе, т.к. присваиваются в BeforeEach, а используются в тестах ниже
     private lateinit var driver: WebDriver
     private lateinit var brainsPage: JetBrainsPage
+    // Для разных типов ожиданий; см Wait
+    private lateinit var webDriverWait: WebDriverWait
+    private lateinit var fluentWait: FluentWait<WebDriver>
 
     /**
      * Функция которая выполняется перед каждым тестом, в т.ч. перед повторными
@@ -46,7 +52,11 @@ class JetBrainsTest {
         // На все команды по усмотрению Selenium ждать 10 сек. и только потом давать тайм-аут и тест упал
         // Одна команда действует на весь модуль и на весь сеанс этого драйвера
         // Она не идеальна, поэтому и существуют две другие более сложные
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
+        //https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html
+        webDriverWait = WebDriverWait(driver, Duration.ofSeconds(10))     // Явное ожидание
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))  // Неявное ожидание
+        fluentWait = FluentWait<WebDriver>(driver)                              // Беглое ожидание (сложное)
+
         // Через драйвер=ChromeDriver() мы говорим браузеру Открой эту страницу
         driver.get("https://www.jetbrains.com/")
 
@@ -67,6 +77,9 @@ class JetBrainsTest {
     // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
     // Зовем из него переменную searchField и посылаем ему строку
         brainsPage.searchField.sendKeys("Selenium")
+    // пример явного ожидания ждем до 10 сек пока кнопка не будет Clickable
+    // Теоретически нельзя применять с включенным неявным ожиданием
+    webDriverWait.until(ExpectedConditions.elementToBeClickable(brainsPage.submitButton))
     // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
     // Зовем из него переменную submitButton и говорим ему клик
         brainsPage.submitButton.click()
@@ -75,7 +88,7 @@ class JetBrainsTest {
      * Junit о Selenium не знает и наоборот то же
      * Можно управлять браузером и ничего не спрашивать Junit 5 (jupiter)
      */
-    // brainsPage.searchPageField.getAttribute("value") -
+    // brainsPage.searchPageField.getAttribute("value") - берем поле и вынимаем его значени
         assertEquals("Selenium", brainsPage.searchPageField.getAttribute("value"))
         println("Конец функции search")
 
