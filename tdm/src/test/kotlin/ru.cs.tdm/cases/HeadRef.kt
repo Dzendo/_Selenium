@@ -30,7 +30,7 @@ class HeadRef {
         // вынесены переменные, что бы менять их тольок здесь, а они поменяются там внизу в тестах
         const val threadSleep = 1000L // задержки где они есть 1сек
         const val DT: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
-        const val NN: Int = 3 // количество повторений тестов
+        const val NN: Int = 10 // количество повторений тестов
 
         // переменная для драйвера
         lateinit var driver: WebDriver
@@ -640,11 +640,9 @@ class HeadRef {
                 val flow1 = "Поток 1 - Отправка передаточного документа"
                 if (DT > 8) println("Test нажатия на $flow1")
                 openCETD()
-                clickMenu(flow1, "messagebox", "TDMS")
-                assertTrue(tools.titleWait("messagebox","TDMS"))
-                tools.clickOK()
+                clickMenu(flow1, "window", "Выбор сценария")
                 //tools.closeXLast()
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Передаточного документа"))
+                assertTrue(tools.titleWait("window", "Выбор сценария"))
                // tools.idList()
                 tools.closeXLast()
                 //assertTrue(tools.titleWait("messagebox","TDMS"))
