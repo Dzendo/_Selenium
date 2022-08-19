@@ -90,7 +90,7 @@ class AdminUser {
 // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
     const val threadSleep = 1000L
     const val DT: Int = 9
-    const val NN:Int = 1
+    const val NN:Int = 10
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -270,7 +270,7 @@ class AdminUser {
 
         val profileUser = "Руководитель"
         if (DT>8) println("Test нажатия на $profileUser")
-        tools.idList()
+        //tools.idList()
         tools.xpathLast("//span[text()= '$profileUser']/ancestor::td")?.click()
         tools.clickOK()  // закрыть выбор профиля с выбором руководителя
 
