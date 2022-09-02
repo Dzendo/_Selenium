@@ -634,6 +634,7 @@ class HeadRef {
                 tools.closeXLast()
             }
 
+            //@Disabled
             @RepeatedTest(NN)
             @DisplayName("Поток 1 - Отправка передаточного документа")
             fun flow1Test() {

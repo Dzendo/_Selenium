@@ -90,7 +90,7 @@ class AdminUser {
 // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
     const val threadSleep = 1000L
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 100
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -299,7 +299,9 @@ class AdminUser {
         inputGpoup?.sendKeys("Тестовая")
         tools.clickOK("OK")  // создать Тестовая
         println("Ура заработало = ${tools.nomberTitle("messagebox", "TDMS")}")
+        Thread.sleep(threadSleep)
         assertTrue(tools.titleWait("messagebox", "TDMS"))
+        Thread.sleep(threadSleep)
         assertTrue(tools.titleWait("messagebox", "TDMS"))
         tools.clickOK("OK")  // создана тестовая
         tools.clickOK("ОК")     // закрыть адимин

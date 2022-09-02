@@ -43,8 +43,8 @@ tasks.withType<JavaCompile> {
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.seleniumhq.selenium:selenium-java:4.4.0")
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.2.2")
-    testImplementation("org.slf4j:slf4j-simple:2.0.0-beta1") //1.7.36")  // 2.0.0-alpha7 // 1.8.0-beta4
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
+    testImplementation("org.slf4j:slf4j-simple:2.0.0") //1.7.36")  // 2.0.0-alpha7 // 1.8.0-beta4
 
     // https://junit.org/junit5/docs/current/user-guide/#running-tests agregator
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
