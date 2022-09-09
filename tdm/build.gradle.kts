@@ -58,6 +58,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.0") // 1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
     // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
+    testImplementation("org.assertj:assertj-core:3.23.1")
 }
 
 application {
