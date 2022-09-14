@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver
  * Тест считается успешно пройденным в случае, когда пользователю удалось выполнить все вышеперечисленные пункты.
  */
 class Login(val driver: WebDriver) {
-
+    val threadSleep = 1000L
     // объявления переменных на созданные ранее классы-страницы
     private val loginPage: LoginPage = LoginPage(driver)
     private val tools: Tools = Tools(driver)
@@ -32,13 +32,13 @@ class Login(val driver: WebDriver) {
     }
 
     fun loginUserName(): String {
-        Thread.sleep(3000)
+        Thread.sleep(threadSleep)
         val userName = tools.xpathGetText("//a[contains(@data-qtip, 'Настройки')]")
         println("получение первого имени пользователя из меню пользователя $userName")
         return if (userName.contains(" ")) userName.split(" ").toTypedArray()[0] else userName
     }
     fun loginUserNameWait(name: String): Boolean {
-        Thread.sleep(3000)
+        Thread.sleep(threadSleep)
         val bool = tools.xpathFluentWaitText("//a[contains(@data-qtip, 'Настройки')]",
             if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
         println("ожидание $name пользователя из меню пользователя ")
@@ -52,7 +52,7 @@ class Login(val driver: WebDriver) {
      *
      */
     fun qtipLoginUserNameWait(name: String): Boolean {
-        Thread.sleep(3000)
+        Thread.sleep(threadSleep)
         val bool = tools.qtipFluentWaitText("Настройки",
             if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
         println("ожидание $name пользователя из меню пользователя")

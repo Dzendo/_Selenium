@@ -21,12 +21,13 @@ class Pass {
     companion object {
     const val threadSleep = 1000L
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 1
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
     lateinit var tools: Tools
-
+    lateinit var loginSYS: String
+    lateinit var passSYS: String
         @JvmStatic
         @BeforeAll
         fun beforeAll() {
@@ -51,6 +52,8 @@ class Pass {
             val password = ConfProperties.getProperty("passwordTDM")
             if (DT>8) println("login= $login   password= $password")
             Login(driver).loginIn(login, password)
+            loginSYS = login
+            passSYS = password
         }
 
         @JvmStatic
@@ -117,9 +120,9 @@ class Pass {
 
          // //html/body/descendant::div[@data-reference]
          tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
-             ?.sendKeys("Pass")
+             ?.sendKeys("ChangePass")
          tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/descendant::input")  // Логин
-             ?.sendKeys("Pass")
+             ?.sendKeys("ChangePass")
          tools.xpathLast("//*[@data-reference='ATTR_TDMS_LOGIN_ENABLE']/descendant::input")  // Разрешить вход в TDMS
              ?.click()
          tools.xpathLast("//*[@data-reference='ATTR_USER_NAME']/descendant::input")  // Имя
@@ -132,9 +135,15 @@ class Pass {
              ?.sendKeys("9291234567")
          tools.xpathLast("//*[@data-reference='ATTR_USER_EMAIL']/descendant::input")  // E-mail
              ?.sendKeys("ya@ya")
-         // Проверить поля
+
          tools.clickOK()
-         // Проверить что создался Pass
+         // Проверить что Pass есть в списке
+         assertTrue(tools.titleWait("window", "Редактирование групп"))
+         if (DT > 8) println("Проверка Pass")
+         tools.xpathLast("//div[contains(text(), 'ChangePass')]")?.click()
+         Thread.sleep(threadSleep)
+         assertTrue((tools.xpathLast("//tr[@aria-selected='true']")?.text ?: "None") == "ChangePass")
+
          tools.clickOK()
 
          if (DT>7) println("Выход из под SYSADMIN")
@@ -150,7 +159,7 @@ class Pass {
     fun n02_enterUserPass() {
             val fillingUser = "Вход под пользователем Pass"
             if (DT > 8) println("Test нажатия на $fillingUser")
-            Login(driver).loginIn("Pass", "tdm365")
+            Login(driver).loginIn("ChangePass", "tdm365")
 // Проверить, что вошли
             //
         }
@@ -172,9 +181,10 @@ class Pass {
         tools.xpathLast("//input[@name='confirm']")  // Подтверждение
             ?.sendKeys("Tdm365")
         tools.clickOK("Сменить пароль")
-// Проверить, что вышли
-        Login(driver).loginIn("Pass", "Tdm365")
+
+        Login(driver).loginIn("ChangePass", "Tdm365")
         // Проверить, что вошли
+        assertTrue( Login(driver).loginUserName() == "ChangePass")
 
         //val fillingUser = "Смена пароля"
         if (DT > 8) println("Test нажатия на $fillingUser")
@@ -190,8 +200,53 @@ class Pass {
             ?.sendKeys("TDm365")
         tools.clickOK("Сменить пароль")
 // Проверить, что вышли
-        Login(driver).loginIn("Pass", "TDm365")
+        Login(driver).loginIn("ChangePass", "TDm365")
         // Проверить, что вошли
+        assertTrue( Login(driver).loginUserName() == "ChangePass")
+        Login(driver).loginOut()
+    }
+    /**
+     *  тест удаление пользователя
+     */
+    @Test
+    @DisplayName("Delete user Pass")
+    fun n09_CreateUserPass() {
+        if (DT > 8) println("Test удаление user Pass")
+        Login(driver).loginIn(loginSYS, passSYS)
+        val mainMenu = "Объекты"
+        if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
+        tools.qtipClickLast(mainMenu)
+        assertTrue(tools.titleContain("TDM365"))
+        assertTrue(tools.qtipPressedLast("Объекты"))
+
+        val adminUser = "Администрирование групп"
+        if (DT > 8) println("Test нажатия на $adminUser")
+        tools.qtipClickLast(adminUser)
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
+        assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"))
+
+        // data-reference="GRID_GROUPS"
+        val headTeg = tools.idRef("GRID_GROUPS")
+        val allUsers = "Все пользователи"
+        if (DT > 8) println("Test нажатия на $allUsers")
+        // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
+        tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
+        assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers))
+        if (DT > 7) println("Открыли всех пользователей")
+
+
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
+
+        if (DT > 8) println("Удаление Pass")
+        tools.xpathLast("//div[contains(text(), 'ChangePass')]")?.click()
+        tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
+        tools.clickOK("Да")
+        // Проверка, что Pass отсутствует GRID_USERS
+        Thread.sleep(threadSleep)
+        assertTrue (driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[text()= 'ChangePass']")).isEmpty())
+
+        tools.clickOK("ОК")
+
     }
 
 }
