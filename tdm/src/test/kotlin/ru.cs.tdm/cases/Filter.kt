@@ -62,7 +62,7 @@ class Filter {
     val localDateNow = LocalDate.now().format(formatter)  //LocalDateTime.now()
 
     companion object {
-    const val threadSleep = 1000L
+    const val threadSleep = 2000L
     const val DT: Int = 9
     const val NN:Int = 10
     // переменная для драйвера
@@ -405,7 +405,7 @@ class Filter {
      *  тест Удаление фильтра
      */
    @RepeatedTest(NN)
-   @DisplayName("Удалить фильтр")
+   @DisplayName("Удаление фильтров")
    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         workTable()
 
