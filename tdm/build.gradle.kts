@@ -4,12 +4,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
     //java
-    kotlin("jvm") version "1.7.20-RC" //"1.7.10"
+    kotlin("jvm") version "1.7.20" //"1.7.20-RC" //"1.7.10"
     application
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.9.0" //"5.9.0-M1" //"5.8.2"
+val junitVersion = "5.9.1" //"5.9.0-M1" //"5.8.2"
 
 repositories {
     mavenCentral()
@@ -44,7 +44,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.seleniumhq.selenium:selenium-java:4.4.0")
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
-    testImplementation("org.slf4j:slf4j-simple:2.0.1") //1.7.36")  // 2.0.0-alpha7 // 1.8.0-beta4
+    testImplementation("org.slf4j:slf4j-simple:2.0.2") //1.7.36")  // 2.0.0-alpha7 // 1.8.0-beta4
 
     // https://junit.org/junit5/docs/current/user-guide/#running-tests agregator
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
@@ -55,7 +55,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
     //testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.0") // 1.8.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
     // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
     testImplementation("org.assertj:assertj-core:3.23.1")

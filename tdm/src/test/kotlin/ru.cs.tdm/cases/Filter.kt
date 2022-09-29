@@ -62,7 +62,7 @@ class Filter {
     val localDateNow = LocalDate.now().format(formatter)  //LocalDateTime.now()
 
     companion object {
-    const val threadSleep = 2000L
+    const val threadSleep = 1000L
     const val DT: Int = 9
     const val NN:Int = 10
     // переменная для драйвера
@@ -157,7 +157,7 @@ class Filter {
         if (DT>7) println("Вызов AfterEach FilterTest")
         //screenShot()
         tools.closeEsc5()
-        Thread.sleep(1000)
+        Thread.sleep(threadSleep)
         //driver.navigate().refresh()
     }
     fun screenShot(name: String = "image") {

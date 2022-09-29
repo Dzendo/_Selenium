@@ -88,7 +88,7 @@ PPS Можно добавить тест: не удалять созданног
 class AdminUser {
     companion object {
 // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
-    const val threadSleep = 2000L
+    const val threadSleep = 1000L
     const val DT: Int = 9
     const val NN:Int = 10
     // переменная для драйвера
@@ -336,6 +336,20 @@ class AdminUser {
          */
         beforeEach()
 
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
+        //val testFIO = "Тестовая Фамилия"
+        if (DT>8) println("Удаление на $nomberUser")
+        tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
+        tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
+        tools.clickOK("Да")
+        tools.clickOK("ОК")
+
+    }
+    @RepeatedTest(92)
+    @Disabled
+    @DisplayName("Удаление пользователей")
+    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
+        val nomberUser = "Тестовый ${repetitionInfo.currentRepetition + 7 } "
         assertTrue(tools.titleWait("window", "Редактирование групп"))
         //val testFIO = "Тестовая Фамилия"
         if (DT>8) println("Удаление на $nomberUser")
