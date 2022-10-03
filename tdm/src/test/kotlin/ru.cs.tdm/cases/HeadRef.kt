@@ -17,239 +17,239 @@ import ru.cs.tdm.data.ConfProperties
  *
  * data-reference="SUB_SYSADMIN"
  */
-// Р’РёРґРёРјРѕРµ РёРјСЏ РєР»Р°СЃСЃР° РїСЂРё С‚РµСЃС‚Р°С…, РЅРѕ РЅРёРіРґРµ РЅРµ РїРѕРєР°Р·С‹РІР°РµС‚СЃСЏ
+// Видимое имя класса при тестах, но нигде не показывается
 @DisplayName("Testing Tools Menu-Icons Test")
-// РђРЅРЅРѕС‚Р°С†РёСЏ Junit РІС‹РїРѕР»РЅСЏС‚СЊ С‚РµСЃС‚С‹ РїРѕ Р°Р»С„Р°РІРёС‚Сѓ. Р—РґРµСЃСЊ РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ, РёСЃСЃР»РµРґСѓСЋ РґР»СЏ СЃРєРІРѕР·РЅРѕРіРѕ РїРѕСЂСЏРґРєР°
+// Аннотация Junit выполнять тесты по алфавиту. Здесь не обязательно, исследую для сквозного порядка
 @TestMethodOrder(MethodOrderer.MethodName::class)
-// РљР»Р°СЃСЃ С‚РµСЃС‚РѕРІС‹Р№ РІ РєРѕС‚РѕСЂРѕРј Р»РµР¶РёС‚ РІСЃРµ РѕСЃС‚Р°Р»СЊРЅРѕРµ - С‚СЂРµР±РѕРІР°РЅРёРµ РљРѕС‚Р»РёРЅ
+// Класс тестовый в котором лежит все остальное - требование Котлин
 class HeadRef {
-    // РЎС‚Р°С‚РёС‡РµСЃРєРёР№ Р±Р»РѕРє - СЂР°СЃРїСЂРµРґРµР»СЏРµС‚СЃСЏ РїСЂРё СЃС‚Р°СЂС‚Рµ РїСЂРѕРіСЂР°РјРјС‹, Р° РЅРµ РїСЂРё СЃРѕР·РґР°РЅРёРё СЌРєР·РµРјРїР»СЏСЂР°
-    // BeforeAll Рё AfterAll РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СЃС‚Р°С‚РёС‡РµСЃРєРёРјРё С‚СЂРµР±РѕРІР°РЅРёРµ Junit
-    // Рё РµСЃС‚РµСЃС‚РІРµРЅРЅРѕ РІСЃРµ РїРµСЂРµРјРµРЅРЅС‹Рµ, РєРѕС‚РѕСЂС‹РјРё РѕРЅРё РїРѕР»СЊР·СѓСЋС‚СЃСЏ
+    // Статический блок - распределяется при старте программы, а не при создании экземпляра
+    // BeforeAll и AfterAll должны быть статическими требование Junit
+    // и естественно все переменные, которыми они пользуются
     companion object {
-        // РІС‹РЅРµСЃРµРЅС‹ РїРµСЂРµРјРµРЅРЅС‹Рµ, С‡С‚Рѕ Р±С‹ РјРµРЅСЏС‚СЊ РёС… С‚РѕР»СЊРѕРє Р·РґРµСЃСЊ, Р° РѕРЅРё РїРѕРјРµРЅСЏСЋС‚СЃСЏ С‚Р°Рј РІРЅРёР·Сѓ РІ С‚РµСЃС‚Р°С…
-        const val threadSleep = 1000L // Р·Р°РґРµСЂР¶РєРё РіРґРµ РѕРЅРё РµСЃС‚СЊ 1СЃРµРє
-        const val DT: Int = 9  // РіР»СѓР±РёРЅР° РѕС‚Р»Р°РґРѕС‡РЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё 0 - РЅРёС‡РµРіРѕ РЅРµ РїРµС‡Р°С‚Р°С‚СЊ, 9 - РІСЃРµ
-        const val NN: Int = 10 // РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕРІС‚РѕСЂРµРЅРёР№ С‚РµСЃС‚РѕРІ
+        // вынесены переменные, что бы менять их тольок здесь, а они поменяются там внизу в тестах
+        const val threadSleep = 1000L // задержки где они есть 1сек
+        const val DT: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
+        const val NN: Int = 10 // количество повторений тестов
 
-        // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РґСЂР°Р№РІРµСЂР°
+        // переменная для драйвера
         lateinit var driver: WebDriver
 
-        // РѕР±СЉСЏРІР»РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅС‹С… РЅР° СЃРѕР·РґР°РЅРЅС‹Рµ СЂР°РЅРµРµ РєР»Р°СЃСЃС‹-СЃС‚СЂР°РЅРёС†С‹
+        // объявления переменных на созданные ранее классы-страницы
         lateinit var tools: Tools
-        // РєРѕСЃС‚С‹Р»СЊ РґР»СЏ РґРёР°РіСЂР°РјРјС‹ РіР°РЅС‚Р° РїРѕРІС‚РѕСЂРЅРѕРіРѕ РІРІРѕРґР° РїР°СЂРѕР»СЏ
+        // костыль для диаграммы ганта повторного ввода пароля
         lateinit var loginIN: String
         lateinit var passwordIN: String
 
         /**
-         * РѕСЃСѓС‰РµСЃС‚РІР»РµРЅРёРµ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕР№ РЅР°СЃС‚СЂРѕР№РєРё
-         * РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ: РќРµ СЃРјРµС€РёРІР°Р№С‚Рµ РЅРµСЏРІРЅС‹Рµ Рё СЏРІРЅС‹Рµ РѕР¶РёРґР°РЅРёСЏ.
-         * Р­С‚Рѕ РјРѕР¶РµС‚ РїСЂРёРІРµСЃС‚Рё Рє РЅРµРїСЂРµРґСЃРєР°Р·СѓРµРјРѕРјСѓ РІСЂРµРјРµРЅРё РѕР¶РёРґР°РЅРёСЏ.
-         * РќР°РїСЂРёРјРµСЂ, СѓСЃС‚Р°РЅРѕРІРєР° РЅРµСЏРІРЅРѕРіРѕ РѕР¶РёРґР°РЅРёСЏ 10 СЃРµРєСѓРЅРґ Рё СЏРІРЅРѕРіРѕ РѕР¶РёРґР°РЅРёСЏ 15 СЃРµРєСѓРЅРґ
-         * РјРѕР¶РµС‚ РїСЂРёРІРµСЃС‚Рё Рє С‚Р°Р№РјР°СѓС‚Сѓ С‡РµСЂРµР· 20 СЃРµРєСѓРЅРґ.
+         * осуществление первоначальной настройки
+         * Предупреждение: Не смешивайте неявные и явные ожидания.
+         * Это может привести к непредсказуемому времени ожидания.
+         * Например, установка неявного ожидания 10 секунд и явного ожидания 15 секунд
+         * может привести к таймауту через 20 секунд.
          */
-        // РђРЅРЅС‚РѕС‚Р°С†РёСЏ РљРѕС‚Р»РёРЅ, РєРѕС‚РѕСЂР°СЏ РіРѕРІРѕСЂРёС‚, С‡С‚Рѕ СЌС‚Р° С„СѓРЅРєС†РёСЏ Р±СѓРґРµС‚ СЃС‚Р°С‚РёС‡РЅР°СЏ Рё Java СЃРѕРІРјРµСЃС‚РёРјР°СЏ
+        // Аннтотация Котлин, которая говорит, что эта функция будет статичная и Java совместимая
         @JvmStatic
-        // РђРЅРЅРѕС‚Р°С†РёСЏ Junit РІС‹РїРѕР»РЅСЏС‚СЊ РѕРґРёРЅ СЂР°Р· РїРµСЂРµРґ РІСЃРµРјРё С‚РµСЃС‚Р°РјРё
+        // Аннотация Junit выполнять один раз перед всеми тестами
         @BeforeAll
         fun beforeAll() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ BeforeAll")
-            // СЃРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂР° РґСЂР°Р№РІРµСЂР° (С‚.Рє. РѕРЅ РѕР±СЉСЏРІР»РµРЅ РІ РєР°С‡РµСЃС‚РІРµ РїРµСЂРµРјРµРЅРЅРѕР№):
+            if (DT > 7) println("Вызов BeforeAll")
+            // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             WebDriverManager.chromedriver().setup()
             driver = ChromeDriver()
-            //РѕРєРЅРѕ СЂР°Р·РІРѕСЂР°С‡РёРІР°РµС‚СЃСЏ РЅР° РїРѕР»РЅС‹Р№ РІС‚РѕСЂРѕР№ СЌРєСЂР°РЅ-1500 1500 3000 2000,0
+            //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
             driver.manage().window().position = Point(2000, -1000)
             driver.manage().window().maximize()
 
-            // РЎРѕР·РґР°РµРј СЌРєР·РµРјРїР»СЏСЂС‹ РєР»Р°СЃСЃРѕРІ Рё РїСЂРёСЃРІРѕРёРј СЃСЃС‹Р»РєРё РЅР° РЅРёС….
-            // Р’ РєР°С‡РµСЃС‚РІРµ РїР°СЂР°РјРµС‚СЂР° СѓРєР°Р·С‹РІР°РµРј СЃРѕР·РґР°РЅРЅС‹Р№ РїРµСЂРµРґ СЌС‚РёРј РѕР±СЉРµРєС‚ driver,
+            // Создаем экземпляры классов и присвоим ссылки на них.
+            // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
 
             val loginpage = ConfProperties.getProperty("loginpageTDM")
-            if (DT > 8) println("РћС‚РєСЂС‹С‚РёРµ СЃС‚СЂР°РЅРёС†С‹ $loginpage")
+            if (DT > 8) println("Открытие страницы $loginpage")
             driver.get(loginpage)
 
             val login = ConfProperties.getProperty("loginTDM")
             val password = ConfProperties.getProperty("passwordTDM")
             if (DT > 8) println("login= $login   password= $password")
             Login(driver).loginIn(login, password)
-            // Р—Р°РїРѕРјРёРЅР°СЋ Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ РґР»СЏ РґРёР°РіСЂР°РјРјС‹ РіР°РЅС‚Р° - РєРѕСЃС‚С‹Р»СЊ.
+            // Запоминаю логин и пароль для диаграммы ганта - костыль.
             loginIN = login
             passwordIN = password
         }
 
         @JvmStatic
-        // РђРЅРЅРѕС‚Р°С†РёСЏ Junit РІС‹РїРѕР»РЅСЏС‚СЊ РѕРґРёРЅ СЂР°Р· РїРѕСЃР»Рµ РІСЃРµС… С‚РµСЃС‚РѕРІ
+        // Аннотация Junit выполнять один раз после всех тестов
         @AfterAll
         fun afterAll() {
             //tools.idList()
-            if (DT > 7) println("Р’С‹Р·РѕРІ BeforeAll")
+            if (DT > 7) println("Вызов BeforeAll")
             tools.closeEsc5()
             Login(driver).loginOut()
-            driver.quit() //  Р·Р°РєСЂС‹С‚РёСЏ РѕРєРЅР° Р±СЂР°СѓР·РµСЂР°
+            driver.quit() //  закрытия окна браузера
         }
-    }  //РєРѕРЅРµС† companion object
+    }  //конец companion object
 
-    // РІРµСЂС…РЅРёР№ СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ РЅР° РІСЃРµ С‚РµСЃС‚С‹
+    // верхний срабатывает на все тесты
 
-    // РљР°Рє РѕР±С‹С‡РЅРѕ, РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРµСЂРµРґ РєР°Р¶РґС‹Рј С‚РµСЃС‚РѕРј, С‚РѕР»СЊРєРѕ РѕРЅ РїСѓСЃС‚РѕР№
+    // Как обычно, выполняется перед каждым тестом, только он пустой
     @BeforeEach
     fun beforeEach() {
-        if (DT > 7) println("Р’С‹Р·РѕРІ BeforeEach РІРµСЂС…РЅРёР№")
+        if (DT > 7) println("Вызов BeforeEach верхний")
         //driver.navigate().refresh()
     }
 
-    // РІРµСЂС…РЅРёР№ СЃСЂР°Р±Р°С‚С‹РІР°РµС‚ РЅР° РІСЃРµ С‚РµСЃС‚С‹
+    // верхний срабатывает на все тесты
 
-    // РљР°Рє РѕР±С‹С‡РЅРѕ, РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РїРѕСЃР»Рµ РєР°Р¶РґРѕРіРѕ С‚РµСЃС‚Р°, С‚РѕР»СЊРєРѕ РѕРЅ РїСѓСЃС‚РѕР№
+    // Как обычно, выполняется после каждого теста, только он пустой
     @AfterEach
     fun afterEach() {
-        if (DT > 7) println("Р’С‹Р·РѕРІ AfterEach РІРµСЂС…РЅРёР№")
+        if (DT > 7) println("Вызов AfterEach верхний")
         tools.closeEsc5()
         //driver.navigate().refresh()
     }
 
     /**
-     * РўРµСЃС‚РѕРІС‹Р№ РјРµС‚РѕРґ РЅР°Р¶Р°С‚РёСЏ РЅР° РїСѓРЅРєС‚С‹ РјРµРЅСЋ РІ РІРµСЂС…РЅРµР№ РїРѕР»РѕСЃРµ
+     * Тестовый метод нажатия на пункты меню в верхней полосе
      */
 
-    // РђРЅРЅРѕС‚Р°С†РёСЏ Junit5 РІР»РѕР¶РµРЅРЅС‹С… РєР»Р°СЃСЃРѕРІ С‚РµСЃС‚РѕРІ - РЅРёС‡РµРіРѕ РЅРµ РґР°РµС‚ РєСЂРѕРјРµ РїРѕСЂСЏРґРєР° РІ С‚РµСЃС‚Р°С…
-    // HeadMenuTest РІСЃРµ С‚РµСЃС‚С‹ РЅР°Р¶РёРјР°СЋС‰РёРµ РЅР° РІРµСЂС…РЅРµРµ РјРµРЅСЋ - РјРѕР¶РЅРѕ Р·Р°РїСѓСЃС‚РёС‚СЊ РѕС‚РґРµР»СЊРЅРѕ
+    // Аннотация Junit5 вложенных классов тестов - ничего не дает кроме порядка в тестах
+    // HeadMenuTest все тесты нажимающие на верхнее меню - можно запустить отдельно
     @Nested
     @DisplayName("Testing each menu separately")
     inner class HeadMenuTest {
 
         @BeforeEach
         fun beforeEach() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ inner Head BeforeEach")
-            tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+            if (DT > 7) println("Вызов inner Head BeforeEach")
+            tools.qtipClickLast("Объекты")
             assertTrue(tools.titleContain("TDM365"))
-            assertTrue(tools.qtipPressedLast("РћР±СЉРµРєС‚С‹"))
+            assertTrue(tools.qtipPressedLast("Объекты"))
         }
 
         @AfterEach
         fun afterEach() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ inner Head AfterEach 5 СЂР°Р· closeEsc")
+            if (DT > 7) println("Вызов inner Head AfterEach 5 раз closeEsc")
             tools.closeEsc5()
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РћР±СЉРµРєС‚С‹")
+        @DisplayName("Объекты")
         fun mainMenuTest() {
-            val mainMenu = "РћР±СЉРµРєС‚С‹"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $mainMenu TDMS Web")
-            // РљР»РёРє РЅР° СЌР»РµРјРµРЅС‚ СЃ data-qtip="РћР±СЉРµРєС‚С‹"
+            val mainMenu = "Объекты"
+            if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
+            // Клик на элемент с data-qtip="Объекты"
             tools.qtipClickLast(mainMenu)
-            // РџСЂРѕРІРµСЂСЏРµРј Р·Р°РіРѕР»РѕРІРѕРє Р·Р°РєР»Р°РґРєРё Junit
+            // Проверяем заголовок закладки Junit
             assertTrue(tools.titleContain("TDM365"))
-            // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ СѓС‚РѕРїР»РµРЅР° РєРЅРѕРїРєР° РћР±СЉРµРєС‚С‹
-            assertTrue(tools.qtipPressedLast("РћР±СЉРµРєС‚С‹"))
+            // Проверяем, что утоплена кнопка Объекты
+            assertTrue(tools.qtipPressedLast("Объекты"))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»")
+        @DisplayName("Рабочий стол")
         fun workTableTest() {
-            val workTable = "Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $workTable")
+            val workTable = "Рабочий стол"
+            if (DT > 8) println("Test нажатия на $workTable")
             tools.qtipClickLast(workTable)
             assertTrue(tools.titleContain(workTable))
             assertTrue(tools.qtipPressedLast(workTable))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РћР±СЉРµРєС‚С‹")
+        @DisplayName("Объекты")
         fun objectsTest() {
-            val objects = "РћР±СЉРµРєС‚С‹"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $objects")
+            val objects = "Объекты"
+            if (DT > 8) println("Test нажатия на $objects")
             tools.qtipClickLast(objects)
             assertTrue(tools.titleContain("TDM365"))
             assertTrue(tools.qtipPressedLast(objects))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РџРѕС‡С‚Р°")
+        @DisplayName("Почта")
         fun mailTest() {
-            val mail = "РџРѕС‡С‚Р°"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $mail")
+            val mail = "Почта"
+            if (DT > 8) println("Test нажатия на $mail")
             tools.qtipClickLast(mail)
             assertTrue(tools.titleContain(mail))
             assertTrue(tools.qtipPressedLast(mail))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РЎРѕРІРµС‰Р°РЅРёСЏ")
+        @DisplayName("Совещания")
         fun meetingTest() {
-            var meeting = "РЎРѕРІРµС‰Р°РЅРёСЏ"
+            var meeting = "Совещания"
             var title = meeting
-            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Р§Р°С‚')]")).size > 0) {
-                meeting = "Р§Р°С‚"
-                title = "РљР°РЅР°Р»С‹"
+            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Чат')]")).size > 0) {
+                meeting = "Чат"
+                title = "Каналы"
             }
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $meeting")
+            if (DT > 8) println("Test нажатия на $meeting")
             tools.qtipClickLast(meeting)
             assertTrue(tools.titleContain(title))
             assertTrue(tools.qtipPressedLast(meeting))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("Р”РёР°РіСЂР°РјРјР° Р“Р°РЅС‚Р°")
+        @DisplayName("Диаграмма Ганта")
         fun ganttchartTest(repetitionInfo: RepetitionInfo) {
 
             //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
-            val ganttchart = "Р”РёР°РіСЂР°РјРјР° Р“Р°РЅС‚Р°"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $ganttchart")
+            val ganttchart = "Диаграмма Ганта"
+            if (DT > 8) println("Test нажатия на $ganttchart")
             tools.qtipClickLast(ganttchart)
-            //assertTrue(tools.titleContain(ganttchart))  // РќРµС‚ Р·Р°РіРѕР»РѕРІРєР°
+            //assertTrue(tools.titleContain(ganttchart))  // Нет заголовка
             assertTrue(tools.qtipPressedLast(ganttchart))
             Thread.sleep(threadSleep)
             driver.navigate().refresh()
             Thread.sleep(threadSleep)
-            if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // РљРѕСЃС‚С‹Р»СЊ
+            if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // Костыль
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РЎРїСЂР°РІРєР°")
+        @DisplayName("Справка")
         fun helpTest() {
-            val help = "РЎРїСЂР°РІРєР°"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $help")
+            val help = "Справка"
+            if (DT > 8) println("Test нажатия на $help")
             tools.qtipClickLast(help)
-            //assertFalse(tools.titleContain(help))      // РСЃРїСЂР°РІРёС‚СЊ!!! NOT
+            //assertFalse(tools.titleContain(help))      // Исправить!!! NOT
             assertTrue(tools.qtipPressedLast(help))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РСЃРєР°С‚СЊ")
+        @DisplayName("Искать")
         fun searchTest() {
-            val search = "РСЃРєР°С‚СЊ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $search")
-            tools.qtipClickLast("Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»")  // РћС€РёР±РєР° TDMS - РѕС‚Р¶РёРјР°РµС‚СЃСЏ РєРЅРѕРїРєР° !! РЈР±СЂР°С‚СЊ
-            tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
-            tools.qtipLast("Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚")?.sendKeys("Р›РµР±РµРґРµРІ")
+            val search = "Искать"
+            if (DT > 8) println("Test нажатия на $search")
+            tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка !! Убрать
+            tools.qtipClickLast("Объекты")
+            tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
             tools.qtipClickLast(search)
-            assertTrue(tools.titleContain("Р РµР·СѓР»СЊС‚Р°С‚С‹"))
-            // РР· РїРѕР»СЏ СЃ data-qtip="Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚" РїРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ СЌС‚РѕРіРѕ РїРѕР»СЏ Рё СЃСЂР°РІРЅРёС‚СЊ СЃ Р›РµР±РµРґРµРІ,
-            // РµСЃР»Рё РґР°, С‚Рѕ С‚РµСЃС‚ РїСЂРѕС€РµР», РµСЃР»Рё РЅРµС‚, С‚Рѕ СѓРїР°Р»
-            assertEquals("Р›РµР±РµРґРµРІ", tools.qtipLast("Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚")?.getAttribute("value"))
-            tools.qtipClickLast("РћС‡РёСЃС‚РёС‚СЊ")
-            // РџСЂРѕРІРµСЂСЏРµС‚СЃСЏ, С‡С‚Рѕ РїРѕР»Рµ РїРѕРёСЃРєР° РїСѓСЃС‚РѕРµ
-            assertEquals("", tools.qtipLast("Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚")?.getAttribute("value"))
+            assertTrue(tools.titleContain("Результаты"))
+            // Из поля с data-qtip="Введите текст" получить значение этого поля и сравнить с Лебедев,
+            // если да, то тест прошел, если нет, то упал
+            assertEquals("Лебедев", tools.qtipLast("Введите текст")?.getAttribute("value"))
+            tools.qtipClickLast("Очистить")
+            // Проверяется, что поле поиска пустое
+            assertEquals("", tools.qtipLast("Введите текст")?.getAttribute("value"))
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РЈРІРµРґРѕРјР»РµРЅРёСЏ")
+        @DisplayName("Уведомления")
         fun notificationTest() {
-            val notification = "РЈРІРµРґРѕРјР»РµРЅРёСЏ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $notification")
+            val notification = "Уведомления"
+            if (DT > 8) println("Test нажатия на $notification")
             tools.qtipClickLast(notification)
-            // Р—Р°РїСЂР°С€РёРІР°РµС‚ Р·Р°РіРѕР»РѕРІРѕРє РѕС‚РєСЂС‹РІС€РµРіРѕСЃСЏ РѕРєРЅР° Рё РїСЂРѕРІРµСЂСЏРµС‚, С‡С‚Рѕ РѕРЅ РћРєРЅРѕ СЃРѕРѕР±С‰РµРЅРёР№
-            assertEquals("РћРєРЅРѕ СЃРѕРѕР±С‰РµРЅРёР№", tools.windowTitle())
+            // Запрашивает заголовок открывшегося окна и проверяет, что он Окно сообщений
+            assertEquals("Окно сообщений", tools.windowTitle())
             tools.closeXLast()
         }
     }
     /**
-     * РўРµСЃС‚РѕРІС‹Р№ РјРµС‚РѕРґ РЅР°Р¶Р°С‚РёСЏ РЅР° РёРєРѕРЅРєРё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
-     * РІРѕ РІС‚РѕСЂРѕР№ СЃС‚СЂРѕРєРµ РїРѕРґ SYSADMIN С‚РѕР»СЊРєРѕ РћР‘РЄР•РљРўР«
-     * СЃРёСЃС‚РµРјРЅРѕРіРѕ РїРѕРґРјРµРЅСЋ СЂР°СЃРїРѕР»РѕР¶РµРЅРѕ РЅРёР¶Рµ РІ РѕС‚РґРµР»СЊРЅРѕРј РєР»Р°СЃСЃРµ
+     * Тестовый метод нажатия на иконки инструментов
+     * во второй строке под SYSADMIN только ОБЪЕКТЫ
+     * системного подменю расположено ниже в отдельном классе
      */
     @Nested
     @DisplayName("Testing Tools Box")
@@ -257,42 +257,42 @@ class HeadRef {
     inner class ToolTest {
         @BeforeEach
         fun beforeEach() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ inner Tools BeforeEach")
-            tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+            if (DT > 7) println("Вызов inner Tools BeforeEach")
+            tools.qtipClickLast("Объекты")
             assertTrue(tools.titleContain("TDM365"))
-            assertTrue(tools.qtipPressedLast("РћР±СЉРµРєС‚С‹"))
+            assertTrue(tools.qtipPressedLast("Объекты"))
         }
 
         @AfterEach
         fun afterEach() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ inner Tools AfterEach РїСЏС‚СЊ СЂР°Р· closeEsc")
+            if (DT > 7) println("Вызов inner Tools AfterEach пять раз closeEsc")
             tools.closeEsc5()
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РџРѕРєР°Р·Р°С‚СЊ/СЃРєСЂС‹С‚СЊ РґРµСЂРµРІРѕ")
-        // repetitionInfo (Junit) РѕР±СЉРµРєС‚, РєРѕС‚РѕСЂС‹Р№ СЃРѕРґРµСЂР¶РёС‚ РІ С‚.С‡. РЅРѕРјРµСЂ РїРѕРІС‚РѕСЂР° С‚РµСЃС‚Р° repetitionInfo.currentRepetition
+        @DisplayName("Показать/скрыть дерево")
+        // repetitionInfo (Junit) объект, который содержит в т.ч. номер повтора теста repetitionInfo.currentRepetition
         fun open_showTreeTest(repetitionInfo: RepetitionInfo) {
-            // Р•СЃР»Рё РЅРѕРјРµСЂ РїРѕРІС‚РѕСЂР° С‚РµСЃС‚Р° 1,11,21 (РѕСЃС‚Р°С‚РѕРє РѕС‚ РґРµР»РµРЅРёСЏ РЅР° 10 СЂР°РІРЅРѕ 1) Рё С‚Рґ, С‚Рѕ РѕР±РЅРѕРІРёС‚СЊ СЌРєСЂР°РЅ
-            // РЈ TDM РїРѕРґРјРµСЂР·Р°РµС‚ СЌРєСЂР°РЅ РµСЃР»Рё РјРЅРѕРіРѕ РєРѕРјР°РЅРґ РїРѕРєР°Р·Р°С‚СЊ-СЃРєСЂС‹С‚СЊ
-            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh() // РљРѕСЃС‚С‹Р»СЊ РїСЂРѕРІРµСЂРёС‚СЊ СѓР±СЂР°С‚СЊ
-            val open_showTree = "РџРѕРєР°Р·Р°С‚СЊ/СЃРєСЂС‹С‚СЊ РґРµСЂРµРІРѕ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $open_showTree")
-            assertTrue(tools.qtipPressedLast(open_showTree)) // РСЃРїСЂР°РІРёС‚СЊ РЅР° СЂРµС„РµСЂРµРЅСЃ
-            tools.referenceClickLast("TDMS_COMMAND_COMMON_SHOWTREE")  // РЎРєСЂС‹С‚СЊ РґРµСЂРµРІРѕ
-            //tools.qtipClickLast(open_showTree)   // РЎРєСЂС‹С‚СЊ РґРµСЂРµРІРѕ
+            // Если номер повтора теста 1,11,21 (остаток от деления на 10 равно 1) и тд, то обновить экран
+            // У TDM подмерзает экран если много команд показать-скрыть
+            if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh() // Костыль проверить убрать
+            val open_showTree = "Показать/скрыть дерево"
+            if (DT > 8) println("Test нажатия на $open_showTree")
+            assertTrue(tools.qtipPressedLast(open_showTree)) // Исправить на референс
+            tools.referenceClickLast("TDMS_COMMAND_COMMON_SHOWTREE")  // Скрыть дерево
+            //tools.qtipClickLast(open_showTree)   // Скрыть дерево
             assertFalse(tools.qtipPressedLast(open_showTree))
-            tools.referenceClickLast("TDMS_COMMAND_COMMON_SHOWTREE")  // РџРѕРєР°Р·Р°С‚СЊ РґРµСЂРµРІРѕ
-            //tools.qtipClickLast(open_showTree)   // РџРѕРєР°Р·Р°С‚СЊ РґРµСЂРµРІРѕ
+            tools.referenceClickLast("TDMS_COMMAND_COMMON_SHOWTREE")  // Показать дерево
+            //tools.qtipClickLast(open_showTree)   // Показать дерево
             assertTrue(tools.qtipPressedLast(open_showTree))
         }
 
-        @RepeatedTest(NN)  // РќРµ СЃРґРµР»Р°РЅ reference
-        @DisplayName("РџРѕРєР°Р·Р°С‚СЊ/СЃРєСЂС‹С‚СЊ РїР°РЅРµР»СЊ РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРіРѕ РїСЂРѕСЃРјРѕС‚СЂР°")
+        @RepeatedTest(NN)  // Не сделан reference
+        @DisplayName("Показать/скрыть панель предварительного просмотра")
         fun open_showPreviewPanelTest(repetitionInfo: RepetitionInfo) {
             if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
-            val open_showPreviewPanel = "РџРѕРєР°Р·Р°С‚СЊ/СЃРєСЂС‹С‚СЊ РїР°РЅРµР»СЊ РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРіРѕ РїСЂРѕСЃРјРѕС‚СЂР°"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $open_showPreviewPanel")
+            val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
+            if (DT > 8) println("Test нажатия на $open_showPreviewPanel")
             assertTrue(tools.qtipPressedLast(open_showPreviewPanel))
             tools.qtipClickLast(open_showPreviewPanel)
             assertFalse(tools.qtipPressedLast(open_showPreviewPanel))
@@ -302,75 +302,75 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РЎРѕР·РґР°С‚СЊ С„РёР»СЊС‚СЂ")
+        @DisplayName("Создать фильтр")
         fun filterTest(repetitionInfo: RepetitionInfo) {
             if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
-            val filter = "РЎРѕР·РґР°С‚СЊ С„РёР»СЊС‚СЂ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $filter")
+            val filter = "Создать фильтр"
+            if (DT > 8) println("Test нажатия на $filter")
             tools.referenceClickLast("CMD_CREATE_USER_QUERY")
             //tools.qtipClickLast(filter)
-            assertTrue(tools.titleWait("tdmsEditObjectDialog", "Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р°"))
-            assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "РќР°РёРјРµРЅРѕРІР°РЅРёРµ С„РёР»СЊС‚СЂР°"))
+            assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
+            assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
             tools.closeXLast()
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РћР±РЅРѕРІРёС‚СЊ")
+        @DisplayName("Обновить")
         fun renewTest(repetitionInfo: RepetitionInfo) {
             if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
-            val renew = "РћР±РЅРѕРІРёС‚СЊ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $renew")
+            val renew = "Обновить"
+            if (DT > 8) println("Test нажатия на $renew")
             tools.referenceClickLast("TDMS_COMMAND_UPDATE")
             //tools.qtipClickLast(renew)
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РђРґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ РіСЂСѓРїРї")
+        @DisplayName("Администрирование групп")
         fun adminUserTest() {
-            val adminUser = "РђРґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ РіСЂСѓРїРї"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $adminUser")
+            val adminUser = "Администрирование групп"
+            if (DT > 8) println("Test нажатия на $adminUser")
             tools.referenceClickLast("CMD_GROUP_CHANGE")
             //tools.qtipClickLast(adminUser)
-            assertTrue(tools.titleWait("window", "Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РіСЂСѓРїРї"))
-            assertTrue(tools.referenceWaitText("STATIC1", "Р“СЂСѓРїРїС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№"))
+            assertTrue(tools.titleWait("window", "Редактирование групп"))
+            assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"))
             tools.closeXLast()
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РЎРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ СЂР°Р·СЂР°Р±РѕС‚РєРё")
+        @DisplayName("Создать объект разработки")
         fun createObjectTest() {
-            val createObject = "РЎРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ СЂР°Р·СЂР°Р±РѕС‚РєРё"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $createObject")
+            val createObject = "Создать объект разработки"
+            if (DT > 8) println("Test нажатия на $createObject")
             tools.referenceClickLast("CMD_OBJECT_STRUCTURE_CREATE")
             //tools.qtipClickLast(createObject)
-            assertTrue(tools.titleWait("tdmsEditObjectDialog","Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р°"))
-            assertTrue(tools.referenceWaitText("T_ATTR_OCC_CODE", "РљРѕРґ РѕР±СЉРµРєС‚Р°"))
+            assertTrue(tools.titleWait("tdmsEditObjectDialog","Редактирование объекта"))
+            assertTrue(tools.referenceWaitText("T_ATTR_OCC_CODE", "Код объекта"))
             tools.closeXLast()
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РќР°СЃС‚СЂРѕР№РєР° С€Р°Р±Р»РѕРЅР° СѓРІРµРґРѕРјР»РµРЅРёР№")
+        @DisplayName("Настройка шаблона уведомлений")
         fun configuringNotificationTest(repetitionInfo: RepetitionInfo) {
-            val configuringNotification = "РќР°СЃС‚СЂРѕР№РєР° С€Р°Р±Р»РѕРЅР° СѓРІРµРґРѕРјР»РµРЅРёР№"
+            val configuringNotification = "Настройка шаблона уведомлений"
             val nomerTesta: Int = repetitionInfo.currentRepetition
             if ((nomerTesta % 10 == 1)) driver.navigate().refresh()
-            if (DT > 8) println("Test $nomerTesta РЅР°Р¶Р°С‚РёСЏ РЅР° $configuringNotification")
+            if (DT > 8) println("Test $nomerTesta нажатия на $configuringNotification")
             Thread.sleep(threadSleep*3)
             tools.referenceClickLast("CMD_NOTIFICATIONS_SETTINGS")
             //tools.qtipClickLast(configuringNotification)
             Thread.sleep(threadSleep*2)
-            assertTrue(tools.titleWait("tdmsEditObjectDialog", "Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РѕР±СЉРµРєС‚Р°"))
-            assertTrue(tools.referenceWaitText("T_ATTR_NAME", "РќР°РёРјРµРЅРѕРІР°РЅРёРµ"))
-            assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Р’СЂРµРјСЏ Р·Р°РїСѓСЃРєР° РїСЂРѕРІРµСЂРєРё СЂРµРіР»Р°РјРµРЅС‚Р°"))
+            assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
+            assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование"))
+            assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента"))
             tools.closeXLast()
             Thread.sleep(threadSleep*2)
         }
-    }  // РєРѕРЅРµС† inner - nested Testing Tools Box
+    }  // конец inner - nested Testing Tools Box
 
     /**
-     * РўРµСЃС‚РѕРІС‹Р№ РјРµС‚РѕРґ РЅР°Р¶Р°С‚РёСЏ РЅР° РїСѓРЅРєС‚С‹ СЃРёСЃС‚РµРјРЅРѕРіРѕ РїРѕРґРјРµРЅСЋ
-     * РІРѕ РІС‚РѕСЂРѕР№ СЃС‚СЂРѕРєРµ РїРѕРґ SYSADMIN РЅРµ С‚РѕР»СЊРєРѕ РћР‘РЄР•РљРўР«
-     * РёРјРµРµС‚ РІР»РѕР¶РµРЅРЅС‹Р№ РєР»Р°СЃСЃ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ РЎР­РўР”
+     * Тестовый метод нажатия на пункты системного подменю
+     * во второй строке под SYSADMIN не только ОБЪЕКТЫ
+     * имеет вложенный класс тестирования СЭТД
      */
     @Nested
     @DisplayName("Testing SubSysadmin")
@@ -378,38 +378,38 @@ class HeadRef {
     inner class SubSysadminTest {
         @BeforeEach
         fun beforeEach() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ inner SubSysadmin BeforeEach")
-            tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+            if (DT > 7) println("Вызов inner SubSysadmin BeforeEach")
+            tools.qtipClickLast("Объекты")
             assertTrue(tools.titleContain("TDM365"))
-            assertTrue(tools.qtipPressedLast("РћР±СЉРµРєС‚С‹"))
+            assertTrue(tools.qtipPressedLast("Объекты"))
         }
 
         @AfterEach
         fun afterEach() {
-            if (DT > 7) println("Р’С‹Р·РѕРІ inner SubSysadmin AfterEach 5 СЂР°Р· closeEsc")
+            if (DT > 7) println("Вызов inner SubSysadmin AfterEach 5 раз closeEsc")
             tools.closeEsc5()
         }
 
-        // РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РѕС‚РєСЂС‹С‚РёСЏ СЃРёСЃС‚РµРјРЅРѕРіРѕ РјРµРЅСЋ SubSysadmin Рё РґР»СЏ РЎР­РўР”
+        // вспомогательная процедура открытия системного меню SubSysadmin и для СЭТД
         private fun openSubSysadmin() {
             repeat(7) {
                 ///Thread.sleep(threadSleep)
                 tools.referenceClickLast("SUB_SYSADMIN")
                 ///Thread.sleep(threadSleep)
-                if (tools.qtipLastClass("РњРµРЅСЋ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°")?.contains("x-btn-menu-active") ?: false) return
-                if (DT > 6) println("####### SUB_SYSADMIN РџРѕРІС‚РѕСЂ *##*$it  РѕС‚РєСЂС‹С‚РёСЏ С‡РµСЂРµР· $it sec #######")
+                if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
+                if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
-                tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+                tools.qtipClickLast("Объекты")
                 Thread.sleep(threadSleep * it)
             }
-            if (DT > 5) println("&&&&&&&&& РќРµ РѕС‚РєСЂС‹Р»РѕСЃСЊ SUB_SYSADMIN Р·Р° 7 РѕРїСЂРѕСЃРѕРІ  &&&&&&&&&")
-            assertTrue(tools.qtipLastClass("РњРµРЅСЋ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°")?.contains("x-btn-menu-active") ?: false)
+            if (DT > 5) println("&&&&&&&&& Не открылось SUB_SYSADMIN за 7 опросов  &&&&&&&&&")
+            assertTrue(tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false)
         }
 
         /**
-         * Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РЅР°Р¶Р°С‚РёСЏ РЅР° РїСѓРЅРєС‚С‹ СЃРёСЃС‚РµРјРЅРѕРіРѕ РјРµРЅСЋ SubSysadmin Рё РЎР­РўР”
-         * РѕР¶РёРґР°РµС‚ РѕС‚РєСЂС‹С‚РёСЏ РїРѕРїР°Рї РѕРєРЅР° СЃ Р·Р°РґР°РЅРЅС‹Рј Р·Р°РіРѕР»РѕРІРєРѕРј
-         * РІРѕРѕР±С‰Рµ РіРѕРґРёС‚СЃСЏ РґР»СЏ Р»СЋР±РѕРіРѕ РјРµРЅСЋ - РІС‹РЅРµСЃС‚Рё РІ Tools.kt
+         * Вспомогательная процедура нажатия на пункты системного меню SubSysadmin и СЭТД
+         * ожидает открытия попап окна с заданным заголовком
+         * вообще годится для любого меню - вынести в Tools.kt
          */
         private fun clickMenu(menu: String, window: String, title: String): Boolean {
             repeat(7) {
@@ -418,22 +418,22 @@ class HeadRef {
                 tools.xpathClickMenu(menu)
                 ///Thread.sleep(threadSleep)
                 if (tools.titleWait(window, title)) return true
-                if (DT > 6) println("####### РїСѓРЅРєС‚ MENU Р·Р° *##*$it РЅРµ РЅР°Р¶Р°Р»РѕСЃСЊ  $menu - РЅРµС‚  $title Р¶РґРµРј $it sec #######")
+                if (DT > 6) println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                 tools.closeEsc()
-                tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+                tools.qtipClickLast("Объекты")
                 Thread.sleep(threadSleep * it)
             }
-            if (DT > 5) println("&&&&&&&&& РќРµ РЅР°Р¶Р°Р»РѕСЃСЊ $menu Р·Р° 7 РЅР°Р¶Р°С‚РёР№ $title  &&&&&&&&&")
+            if (DT > 5) println("&&&&&&&&& Не нажалось $menu за 7 нажатий $title  &&&&&&&&&")
             assertTrue(tools.titleWait(window, title))
             return false
         }
 
         // data-reference="FORM_SYSTEM_SETTINGS"
         @RepeatedTest(NN)
-        @DisplayName("РРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЃРёСЃС‚РµРјРµ")
+        @DisplayName("Информация о системе")
         fun systemParametersTest() {
-            val systemParameters = "РРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЃРёСЃС‚РµРјРµ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $systemParameters")
+            val systemParameters = "Информация о системе"
+            if (DT > 8) println("Test нажатия на $systemParameters")
             openSubSysadmin()
             clickMenu(systemParameters, "window", systemParameters)
             //tools.referenceClickLast("CMD_SYSTEM_SETTINGS")
@@ -441,43 +441,43 @@ class HeadRef {
             //println("FORM_SYSTEM_SETTING = ${tools.referenceLast("FORM_SYSTEM_SETTINGS")?.text}")
             assertTrue(tools.referenceWaitText("FORM_SYSTEM_SETTINGS", systemParameters))
             assertTrue(tools.titleWait("window", systemParameters))
-            assertTrue(tools.referenceWaitText("T_VER_SERVER", "Р’РµСЂСЃРёСЏ СЃРµСЂРІРµСЂР°"))
-            assertTrue(tools.referenceWaitText("T_VER_TDM365", "Р’РµСЂСЃРёСЏ TDM365"))
+            assertTrue(tools.referenceWaitText("T_VER_SERVER", "Версия сервера"))
+            assertTrue(tools.referenceWaitText("T_VER_TDM365", "Версия TDM365"))
             tools.closeXLast()
         }
 
         // data-reference="FORM_ATTRS_LIST"
         @RepeatedTest(NN)
-        @DisplayName("РЎРёСЃС‚РµРјРЅС‹Рµ Р°С‚СЂРёР±СѓС‚С‹")
+        @DisplayName("Системные атрибуты")
         fun sysAttributesTest() {
-            val sysAttributes = "РЎРёСЃС‚РµРјРЅС‹Рµ Р°С‚СЂРёР±СѓС‚С‹"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $sysAttributes")
+            val sysAttributes = "Системные атрибуты"
+            if (DT > 8) println("Test нажатия на $sysAttributes")
             openSubSysadmin()
-            clickMenu(sysAttributes, "window", "РђС‚СЂРёР±СѓС‚С‹")
+            clickMenu(sysAttributes, "window", "Атрибуты")
             //println("FORM_ATTRS_LIST = ${tools.referenceLast("FORM_ATTRS_LIST")?.text}")
-            // РЎРєРёР»Р» Selenium РёР·СѓС‡Р°СЋ РїСЂРёСЃСѓС‚СЃС‚РІРёСЏ СЌР»РµРјРµРЅС‚Р° РІ DOM СЃС‚СЂР°РЅРёС†С‹
+            // Скилл Selenium изучаю присутствия элемента в DOM страницы
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_ATTRS_LIST']")) != null)
-            assertTrue(tools.referenceWaitText("FORM_ATTRS_LIST", "РђС‚СЂРёР±СѓС‚С‹"))
-            assertTrue(tools.titleWait("window", "РђС‚СЂРёР±СѓС‚С‹"))
+            assertTrue(tools.referenceWaitText("FORM_ATTRS_LIST", "Атрибуты"))
+            assertTrue(tools.titleWait("window", "Атрибуты"))
             tools.closeXLast()
         }
 
         // data-reference="FORM_TREE_OBJS"
         // data-reference="TREE"
         @RepeatedTest(NN)
-        @DisplayName("РЎС…РµРјР° РґР°РЅРЅС‹С…")
+        @DisplayName("Схема данных")
         fun dataTreeTest() {
-            val dataTree = "РЎС…РµРјР° РґР°РЅРЅС‹С…"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $dataTree")
+            val dataTree = "Схема данных"
+            if (DT > 8) println("Test нажатия на $dataTree")
             openSubSysadmin()
             clickMenu(dataTree, "window", dataTree)
             //println("FORM_TREE_OBJS = ${tools.referenceLast("FORM_TREE_OBJS")?.text}")
             //println("TREE = ${tools.referenceLast("TREE")?.text}")
-            // Р›СѓС‡С€Рµ РїСЂРѕРІРµСЂСЏС‚СЊ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ Р»Рё СЌС‚РѕС‚ СЌР»РµРјРµРЅС‚ РІ DOM presenceOfElementLocated(By locator)
+            // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_TREE_OBJS']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='TREE']")) != null)
             assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", dataTree))
-            assertTrue(tools.referenceWaitText("TREE", "РўРёРїС‹ РѕР±СЉРµРєС‚РѕРІ"))
+            assertTrue(tools.referenceWaitText("TREE", "Типы объектов"))
             assertTrue(tools.titleWait("window", dataTree))
             tools.closeXLast()
         }
@@ -486,15 +486,15 @@ class HeadRef {
         // data-reference="GRID"
         @RepeatedTest(NN)
         //@Disabled
-        @DisplayName("Р–СѓСЂРЅР°Р» СЃРѕР±С‹С‚РёР№")
+        @DisplayName("Журнал событий")
         fun eventsLogTest() {
-            val eventsLog = "Р–СѓСЂРЅР°Р» СЃРѕР±С‹С‚РёР№"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $eventsLog")
+            val eventsLog = "Журнал событий"
+            if (DT > 8) println("Test нажатия на $eventsLog")
             openSubSysadmin()
             clickMenu(eventsLog, "window", eventsLog)
             //println("FORM_EVENTS_LOG = ${tools.referenceLast("FORM_EVENTS_LOG")?.text}")
             //println("GRID = ${tools.referenceLast("GRID")?.text}")
-            // Р›СѓС‡С€Рµ РїСЂРѕРІРµСЂСЏС‚СЊ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ Р»Рё СЌС‚РѕС‚ СЌР»РµРјРµРЅС‚ РІ DOM presenceOfElementLocated(By locator)
+            // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_EVENTS_LOG']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='GRID']")) != null)
             assertTrue(tools.referenceWaitText("FORM_EVENTS_LOG", eventsLog))
@@ -507,15 +507,15 @@ class HeadRef {
         // data-reference="QUERY_SERVER_LOG"
         @RepeatedTest(NN)
         //@Disabled
-        @DisplayName("Р–СѓСЂРЅР°Р» СЃРµСЂРІРµСЂР°")
+        @DisplayName("Журнал сервера")
         fun serverLogTest() {
-            val serverLog = "Р–СѓСЂРЅР°Р» СЃРµСЂРІРµСЂР°"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $serverLog")
+            val serverLog = "Журнал сервера"
+            if (DT > 8) println("Test нажатия на $serverLog")
             openSubSysadmin()
             clickMenu(serverLog, "window", serverLog)
             //println("FORM_SERVER_LOG = ${tools.referenceLast("FORM_SERVER_LOG")?.text}")
             //println("QUERY_SERVER_LOG = ${tools.referenceLast("QUERY_SERVER_LOG")?.text}")
-            // Р›СѓС‡С€Рµ РїСЂРѕРІРµСЂСЏС‚СЊ РїСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚ Р»Рё СЌС‚РѕС‚ СЌР»РµРјРµРЅС‚ РІ DOM presenceOfElementLocated(By locator)
+            // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
             Thread.sleep(threadSleep)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_SERVER_LOG']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='QUERY_SERVER_LOG']")) != null)
@@ -526,22 +526,22 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        @DisplayName("РЈРґР°Р»РёС‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ РѕР±СЉРµРєС‚РѕРІ")
+        @DisplayName("Удалить структуру объектов")
         fun delObjectsTest() {
-            val delObjects = "РЈРґР°Р»РёС‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ РѕР±СЉРµРєС‚РѕРІ"
-            if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $delObjects")
+            val delObjects = "Удалить структуру объектов"
+            if (DT > 8) println("Test нажатия на $delObjects")
             openSubSysadmin()
-            clickMenu(delObjects, "tdmsSelectObjectDialog", "РЈРґР°Р»РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РѕР±СЉРµРєС‚РѕРІ")
-            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "РЈРґР°Р»РµРЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ РѕР±СЉРµРєС‚РѕРІ"))
+            clickMenu(delObjects, "tdmsSelectObjectDialog", "Удаление структуры объектов")
+            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Удаление структуры объектов"))
             tools.closeXLast()
         }
 
         /**
-         * РўРµСЃС‚РѕРІС‹Р№ РјРµС‚РѕРґ РЅР°Р¶Р°С‚РёСЏ РЅР° РїСѓРЅРєС‚С‹ РїРѕРґРјРµРЅСЋ РЎР­РўР”
-         * РІРѕ РІС‚РѕСЂРѕР№ СЃС‚СЂРѕРєРµ РїРѕРґ SYSADMIN Рё РРјРёС‚Р°С†РёСЏ РРЈРЎ РЎР­РўР”
-         * РІР»РѕР¶РµРЅ РІ РІРµСЂС…РЅРёР№ РєР»Р°СЃСЃ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ РјРµРЅСЋ СЃРёСЃС‚РµРјС‰РёРєР°
-         * РІР»РѕР¶РµРЅРЅС‹Р№ РєР»Р°СЃСЃ РІРѕ РІР»РѕР¶РµРЅРЅС‹Р№ РєР»Р°СЃСЃ РїСЂРѕР±СѓСЋ Рё Р»РѕРіРёС‡РµСЃРєРё СЌС‚Рѕ С‚Р°Рє Рё РµСЃС‚СЊ
-         * РњРѕР¶РЅРѕ РµРіРѕ Р·Р°РїСѓСЃРєР°С‚СЊ РѕС‚РґРµР»СЊРЅРѕ, С‚.Рє. РѕРЅ РѕС„РѕСЂРјР»РµРЅ РѕС‚РґРµР»СЊРЅС‹Рј РєР»Р°СЃСЃРѕРј
+         * Тестовый метод нажатия на пункты подменю СЭТД
+         * во второй строке под SYSADMIN и Имитация ИУС СЭТД
+         * вложен в верхний класс тестирования меню системщика
+         * вложенный класс во вложенный класс пробую и логически это так и есть
+         * Можно его запускать отдельно, т.к. он оформлен отдельным классом
          */
         @Nested
         @DisplayName("Testing CETD")
@@ -549,53 +549,53 @@ class HeadRef {
         inner class CETDTest {
             @BeforeEach
             fun beforeEach() {
-                if (DT > 7) println("Р’С‹Р·РѕРІ inner Tools BeforeEach")
-                tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+                if (DT > 7) println("Вызов inner Tools BeforeEach")
+                tools.qtipClickLast("Объекты")
                 assertTrue(tools.titleContain("TDM365"))
-                assertTrue(tools.qtipPressedLast("РћР±СЉРµРєС‚С‹"))
+                assertTrue(tools.qtipPressedLast("Объекты"))
             }
 
             @AfterEach
             fun afterEach() {
-                if (DT > 7) println("Р’С‹Р·РѕРІ inner Tools AfterEach 5 СЂР°Р· closeEsc")
+                if (DT > 7) println("Вызов inner Tools AfterEach 5 раз closeEsc")
                 tools.closeEsc5()
             }
 
-            // РРјРёС‚Р°С†РёСЏ РРЈРЎ РЎР­РўР”
+            // Имитация ИУС СЭТД
             private fun openCETD() {
                 repeat(7) {
                     openSubSysadmin()
                     Thread.sleep(threadSleep)
-                    val click = tools.xpathClickMenu("РРјРёС‚Р°С†РёСЏ РРЈРЎ РЎР­РўР”")
+                    val click = tools.xpathClickMenu("Имитация ИУС СЭТД")
                     Thread.sleep(threadSleep)
                     if (click) return
-                    if (DT > 6) println("####### РРЈРЎ РЎР­РўР” РџРѕРІС‚РѕСЂ *##*$it  РѕС‚РєСЂС‹С‚РёСЏ С‡РµСЂРµР· $it sec #######")
+                    if (DT > 6) println("####### ИУС СЭТД Повтор *##*$it  открытия через $it sec #######")
                     repeat(3) { tools.closeEsc() }
-                    tools.qtipClickLast("РћР±СЉРµРєС‚С‹")
+                    tools.qtipClickLast("Объекты")
                     Thread.sleep(threadSleep * it)
                 }
-                if (DT > 5) println("&&&&&&&&& РќРµ РѕС‚РєСЂС‹Р»РѕСЃСЊ РРЈРЎ РЎР­РўР” Р·Р° 7 РѕРїСЂРѕСЃРѕРІ  &&&&&&&&&")
-                assertTrue(tools.qtipLastClass("РЎР­РўР”")?.contains("x-btn-menu-active") ?: false)
+                if (DT > 5) println("&&&&&&&&& Не открылось ИУС СЭТД за 7 опросов  &&&&&&&&&")
+                assertTrue(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
             }
 
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє - РџСЂРѕРІРµСЂРєР° СЃРІСЏР·Рё Р±РµР· Р°РІС‚РѕСЂРёР·Р°С†РёРё")
+            @DisplayName("Поток - Проверка связи без авторизации")
             fun flow_2Test() {
-                val flow0 = "РџРѕС‚РѕРє - РџСЂРѕРІРµСЂРєР° СЃРІСЏР·Рё Р±РµР· Р°РІС‚РѕСЂРёР·Р°С†РёРё"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow0")
+                val flow0 = "Поток - Проверка связи без авторизации"
+                if (DT > 8) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
                 tools.closeEsc()
             }
-            // РћС‚РїСЂР°РІРєР° Р·Р°РїСЂРѕСЃР° РЅР° СЃРµСЂРІРµСЂ - РЅРµ РЅР°РґРѕ
-            // вњ” РЎРѕРµРґРёРЅРµРЅРёРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ (СЃ Р°РІС‚РѕСЂРёР·Р°С†РёРµР№)
+            // Отправка запроса на сервер - не надо
+            // ? Соединение установлено (с авторизацией)
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє - РџСЂРѕРІРµСЂРєР° СЃРІСЏР·Рё СЃ Р°РІС‚РѕСЂРёР·Р°С†РёРµР№")
+            @DisplayName("Поток - Проверка связи с авторизацией")
             fun flow_1Test() {
-                val flow0 = "РџРѕС‚РѕРє - РџСЂРѕРІРµСЂРєР° СЃРІСЏР·Рё СЃ Р°РІС‚РѕСЂРёР·Р°С†РёРµР№"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow0")
+                val flow0 = "Поток - Проверка связи с авторизацией"
+                if (DT > 8) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -604,19 +604,19 @@ class HeadRef {
             }
 
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє - РџСЂРѕРІРµСЂРєР° СЃС‚Р°С‚СѓСЃР° РїСЂРѕРµРєС‚Р°")
+            @DisplayName("Поток - Проверка статуса проекта")
             fun flowTest() {
-                val flow = "РџРѕС‚РѕРє - РџСЂРѕРІРµСЂРєР° СЃС‚Р°С‚СѓСЃР° РїСЂРѕРµРєС‚Р°"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow")
+                val flow = "Поток - Проверка статуса проекта"
+                if (DT > 8) println("Test нажатия на $flow")
                 openCETD()
                 //tools.xpathClickMenu(flow)
                 clickMenu(flow, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
-                //assertTrue(msgText.contains("Р”Р°")) // - Р’РІРѕРґ GUID РїСЂРѕРµРєС‚Р° РІСЂСѓС‡РЅСѓСЋ"))
-                //assertTrue(msgText.contains("РќРµС‚")) // - Р’С‹Р±РѕСЂ РїСЂРѕРµРєС‚Р° РІ СЃРёСЃС‚РµРјРµ"))
+                //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
+                //assertTrue(msgText.contains("Нет")) // - Выбор проекта в системе"))
                 tools.closeXLast()
-                assertTrue(tools.titleWait("messagebox","Р’РІРѕРґ Р·РЅР°С‡РµРЅРёСЏ"))
+                assertTrue(tools.titleWait("messagebox","Ввод значения"))
                 tools.closeXLast()
                 Thread.sleep(threadSleep)
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -624,10 +624,10 @@ class HeadRef {
             }
 
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє 0 - РћС‚РїСЂР°РІРєР° РїСЂРѕРµРєС‚Р°")
+            @DisplayName("Поток 0 - Отправка проекта")
             fun flow0Test() {
-                val flow0 = "РџРѕС‚РѕРє 0 - РћС‚РїСЂР°РІРєР° РїСЂРѕРµРєС‚Р°"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow0")
+                val flow0 = "Поток 0 - Отправка проекта"
+                if (DT > 8) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -636,14 +636,14 @@ class HeadRef {
 
             //@Disabled
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє 1 - РћС‚РїСЂР°РІРєР° РїРµСЂРµРґР°С‚РѕС‡РЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°")
+            @DisplayName("Поток 1 - Отправка передаточного документа")
             fun flow1Test() {
-                val flow1 = "РџРѕС‚РѕРє 1 - РћС‚РїСЂР°РІРєР° РїРµСЂРµРґР°С‚РѕС‡РЅРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow1")
+                val flow1 = "Поток 1 - Отправка передаточного документа"
+                if (DT > 8) println("Test нажатия на $flow1")
                 openCETD()
-                clickMenu(flow1, "window", "Р’С‹Р±РѕСЂ СЃС†РµРЅР°СЂРёСЏ")
+                clickMenu(flow1, "window", "Выбор сценария")
                 //tools.closeXLast()
-                assertTrue(tools.titleWait("window", "Р’С‹Р±РѕСЂ СЃС†РµРЅР°СЂРёСЏ"))
+                assertTrue(tools.titleWait("window", "Выбор сценария"))
                // tools.idList()
                 tools.closeXLast()
                 //assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -651,33 +651,33 @@ class HeadRef {
             }
 
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє 2.1 - РћС‚РІРµС‚ Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РїРµСЂРµРґР°С‡Рµ Р Р—")
+            @DisplayName("Поток 2.1 - Ответ о результате передаче РЗ")
             fun flow2Test() {
-                val flow2 = "РџРѕС‚РѕРє 2.1 - РћС‚РІРµС‚ Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РїРµСЂРµРґР°С‡Рµ Р Р—"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow2")
+                val flow2 = "Поток 2.1 - Ответ о результате передаче РЗ"
+                if (DT > 8) println("Test нажатия на $flow2")
                 openCETD()
                 clickMenu(flow2, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Р’С‹Р±РѕСЂ Р РµРµСЃС‚СЂР° Р·Р°РјРµС‡Р°РЅРёР№"))
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Реестра замечаний"))
                 tools.closeXLast()
                 //Thread.sleep(threadSleep)
-                //assertTrue(tools.titleWait("messagebox","TDMS")) // РЅРµС‚ РІ 1.2.18
+                //assertTrue(tools.titleWait("messagebox","TDMS")) // нет в 1.2.18
                 //tools.closeXLast()
             }
 
             @RepeatedTest(NN)
-            @DisplayName("РџРѕС‚РѕРє 3 - РћС‚РїСЂР°РІРєР° РѕС‚РІРµС‚РѕРІ РЅР° Р·Р°РјРµС‡Р°РЅРёСЏ")
+            @DisplayName("Поток 3 - Отправка ответов на замечания")
             fun flow3Test() {
-                val flow3 = "РџРѕС‚РѕРє 3 - РћС‚РїСЂР°РІРєР° РѕС‚РІРµС‚РѕРІ РЅР° Р·Р°РјРµС‡Р°РЅРёСЏ"
-                if (DT > 8) println("Test РЅР°Р¶Р°С‚РёСЏ РЅР° $flow3")
+                val flow3 = "Поток 3 - Отправка ответов на замечания"
+                if (DT > 8) println("Test нажатия на $flow3")
                 openCETD()
                 clickMenu(flow3, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 tools.closeXLast()
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Р’С‹Р±РѕСЂ Р РµРµСЃС‚СЂР° Р·Р°РјРµС‡Р°РЅРёР№"))
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор Реестра замечаний"))
                 tools.closeXLast()
             }
-        }   // РєРѕРЅРµС† РРјРёС‚Р°С†РёСЏ РРЈРЎ РЎР­РўР”
-    }  // РєРѕРЅРµС† Testing SubSysadmin
+        }   // конец Имитация ИУС СЭТД
+    }  // конец Testing SubSysadmin
 }

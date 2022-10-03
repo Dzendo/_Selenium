@@ -14,7 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@DisplayName("Pass Change Test")
+//@DisplayName("Pass Change Test")
+@DisplayName("Тест смены пароля")
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class Pass {
 
@@ -78,7 +79,8 @@ class Pass {
      *  тест создание нового пользователя Pass
      */
     @Test
-    @DisplayName("Create user Pass")
+    //@DisplayName("Create user Pass")
+    @DisplayName("Создание нового пользователя ChangePass")
     fun n01_CreateUserPass() {
         if (DT>8) println("Test нажатия на Create user Pass")
          val mainMenu = "Объекты"
@@ -155,9 +157,10 @@ class Pass {
          */
     @Test
     //@Disabled
-    @DisplayName("Enter User Pass")
+ //   @DisplayName("Enter User Pass")
+    @DisplayName("Вход по пользователем ChangePass")
     fun n02_enterUserPass() {
-            val fillingUser = "Вход под пользователем Pass"
+            val fillingUser = "Вход под пользователем ChangePass"
             if (DT > 8) println("Test нажатия на $fillingUser")
             Login(driver).loginIn("ChangePass", "tdm365")
 // Проверить, что вошли
@@ -166,7 +169,8 @@ class Pass {
 
     @Test
     //@Disabled
-    @DisplayName("Enter User Pass")
+    //@DisplayName("Enter User Pass")
+    @DisplayName("Смена пользовательского пароля ChangePass")
     fun n03_changeUserPass() {
         val fillingUser = "Смена пароля"
         if (DT > 8) println("Test нажатия на $fillingUser")
@@ -209,7 +213,8 @@ class Pass {
      *  тест удаление пользователя
      */
     @Test
-    @DisplayName("Delete user Pass")
+    //@DisplayName("Delete user Pass")
+    @DisplayName("Удаление пользователя ChangePass")
     fun n09_CreateUserPass() {
         if (DT > 8) println("Test удаление user Pass")
         Login(driver).loginIn(loginSYS, passSYS)
