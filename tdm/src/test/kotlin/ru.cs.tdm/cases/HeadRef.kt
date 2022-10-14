@@ -337,6 +337,21 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        @Disabled
+        @DisplayName("Импорт пользователей")
+        fun importUserTest() {
+            val importUser = "Импорт пользователей"
+            if (DT > 8) println("Test нажатия на $importUser")
+            tools.referenceClickLast("CMD_IMPORT_USERS")
+            //tools.qtipClickLast(importUser)
+            // Нарвался - открывается окно Windows не имеющее отношения к HTML
+            //assertTrue(tools.titleWait("window", "Редактирование групп"))
+            //assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"))
+            //tools.closeXLast()
+            tools.closeEsc()
+        }
+
+        @RepeatedTest(NN)
         @DisplayName("Создать объект разработки")
         fun createObjectTest() {
             val createObject = "Создать объект разработки"
