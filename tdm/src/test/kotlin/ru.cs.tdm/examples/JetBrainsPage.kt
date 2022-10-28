@@ -36,7 +36,9 @@ class JetBrainsPage(driver: WebDriver) {
     @FindBy(xpath ="//input[@data-test='search-input']")
     lateinit var searchPageField: WebElement
 
-    @FindBy(css = "a.wt-button_mode_primary")
+    // <a href="/products/" class="wt-link wt-link_hardness_average wt-link_theme_dark">All products</a>
+    //@FindBy(css = "a.wt-button_mode_primary")
+    @FindBy(xpath ="//a[text()='All products']")
     lateinit var seeAllToolsButton: WebElement
 
     @FindBy(xpath = "//div[@data-test='main-menu-item' and @data-test-marker = 'Developer Tools']")

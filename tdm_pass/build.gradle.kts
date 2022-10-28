@@ -36,21 +36,11 @@ tasks.withType<JavaCompile> {
 
 dependencies {
     implementation(kotlin("test"))
-    implementation("org.seleniumhq.selenium:selenium-java:4.5.0")
+    implementation("org.seleniumhq.selenium:selenium-java:4.5.3")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.0")
-    implementation("org.slf4j:slf4j-simple:2.0.3") //1.7.36")  // 2.0.0-alpha7 // 1.8.0-beta4
-
-    // https://junit.org/junit5/docs/current/user-guide/#running-tests aggregator:
-    implementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
-    //testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    //testImplementation(platform("org.junit:junit-bom:${junitVersion}"))
-    //testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
-
-    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-    //testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
-    //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
-    // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
+    { exclude ("org.bouncycastle") }
+    implementation("org.slf4j:slf4j-simple:2.0.3")
+    implementation("org.junit.jupiter:junit-jupiter:5.9.1")
     implementation("org.assertj:assertj-core:3.23.1")
 }
 

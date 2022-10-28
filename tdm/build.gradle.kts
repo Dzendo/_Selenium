@@ -32,10 +32,12 @@ tasks.withType<JavaCompile> {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.5.0")
+    //testImplementation(kotlin("test"))
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.5.3")
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
-    testImplementation("org.slf4j:slf4j-simple:2.0.3") //1.7.36")  // 2.0.0-alpha7 // 1.8.0-beta4
+    { exclude ("org.bouncycastle") }
+    testImplementation("org.slf4j:slf4j-simple:2.0.3")
+
 
     // https://junit.org/junit5/docs/current/user-guide/#running-tests aggregator:
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
