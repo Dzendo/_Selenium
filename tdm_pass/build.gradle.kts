@@ -32,8 +32,6 @@ tasks.withType<KotlinTest> {
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
-
-
 dependencies {
     implementation(kotlin("test"))
     implementation("org.seleniumhq.selenium:selenium-java:4.5.3")
@@ -44,15 +42,6 @@ dependencies {
     implementation("org.assertj:assertj-core:3.23.1")
 }
 
-/*tasks.withType<Jar>() {
-    manifest {
-        attributes["Main-Class"] = "ru.cs.tdm.RootKt"
-    }
-    //from(configurations.runtimeClasspath.get().map {if (it.isDirectory) it else zipTree(it)})
-    //configurations["compileClasspath"].forEach { file: File ->
-    //    from(zipTree(file.absoluteFile))
-    //}
-}*/
 /*
 application {
     mainClass.set("RootKt")
