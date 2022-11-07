@@ -113,7 +113,6 @@ class JetBrainsTest {
      */
     @AfterEach
     fun tearDown() {
-        println("Начало функции AfterEach")
         driver.quit()
         println("Конец функции AfterEach")
     }

@@ -30,7 +30,7 @@ class HeadRef {
         // вынесены переменные, что бы мен€ть их тольок здесь, а они помен€ютс€ там внизу в тестах
         const val threadSleep = 1000L // задержки где они есть 1сек
         const val DT: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
-        const val NN: Int = 10 // количество повторений тестов
+        const val NN: Int = 3 // количество повторений тестов
 
         // переменна€ дл€ драйвера
         lateinit var driver: WebDriver
@@ -58,7 +58,7 @@ class HeadRef {
             WebDriverManager.chromedriver().setup()
             driver = ChromeDriver()
             //окно разворачиваетс€ на полный второй экран-1500 1500 3000 2000,0
-            driver.manage().window().position = Point(4000, -1000)
+            driver.manage().window().position = Point(2000, -1000)
             driver.manage().window().maximize()
 
             // —оздаем экземпл€ры классов и присвоим ссылки на них.

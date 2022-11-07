@@ -1,5 +1,4 @@
 package ru.cs.tdm.examples
-
 /**
  * Selenium - это система управления браузером  - открыть, локация, считать, нажать, вкладки и т.д.
  * jupiter - это система тестирования чего угодно старты тестов, ассерты, отчеты, сетки, и более сложные вещи
@@ -44,7 +43,7 @@ class JetBrainsTest {
         // Это и есть самая важная вещь из пакета Selenium
         driver = ChromeDriver()
         // устанавливает координаты верхнего левого угла окна браузера
-        driver.manage().window().position = Point(4000,-1000)
+        driver.manage().window().position = Point(2000,-1000)
         // Развернуть полностью экран, но можно и указать размера
         driver.manage().window().maximize()
         // В Selenium есть три типа ожиданий, что очень важно т.к. браузер и сервер тормозят.
@@ -67,41 +66,39 @@ class JetBrainsTest {
         println("Конец функции BeforeEach")
     }
 
-//    @RepeatedTest(3)
+    //    @RepeatedTest(3)
     @Test
     fun search() {
         println("Начало функции search")
-    // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
-    // Зовем из него переменную searchButton и говорим ему клик
+        // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
+        // Зовем из него переменную searchButton и говорим ему клик
         brainsPage.searchButton.click()
-    // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
-    // Зовем из него переменную searchField и посылаем ему строку
+        // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
+        // Зовем из него переменную searchField и посылаем ему строку
         brainsPage.searchField.sendKeys("Selenium")
-    // пример явного ожидания ждем до 10 сек пока кнопка не будет Clickable
-    // Теоретически нельзя применять с включенным неявным ожиданием
-    webDriverWait.until(ExpectedConditions.elementToBeClickable(brainsPage.submitButton))
-    // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
-    // Зовем из него переменную submitButton и говорим ему клик
+        // пример явного ожидания ждем до 10 сек пока кнопка не будет Clickable
+        // Теоретически нельзя применять с включенным неявным ожиданием
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(brainsPage.submitButton))
+        // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
+        // Зовем из него переменную submitButton и говорим ему клик
         brainsPage.submitButton.click()
-    /**
-     * assertEquals - это уже Junit и никакого отношения к selenium не имеет
-     * Junit о Selenium не знает и наоборот то же
-     * Можно управлять браузером и ничего не спрашивать Junit 5 (jupiter)
-     */
-    // brainsPage.searchPageField.getAttribute("value") - берем поле и вынимаем его значени
-    if ("Selenium" == brainsPage.searchPageField.getAttribute("value")) println("тест search() пройден")
-    else println("тест search() не пройден")
-        //assertEquals("Selnium", brainsPage.searchPageField.getAttribute("value"))
+        /**
+         * assertEquals - это уже Junit и никакого отношения к selenium не имеет
+         * Junit о Selenium не знает и наоборот то же
+         * Можно управлять браузером и ничего не спрашивать Junit 5 (jupiter)
+         */
+        // brainsPage.searchPageField.getAttribute("value") - берем поле и вынимаем его значени
+        assertEquals("Selenium", brainsPage.searchPageField.getAttribute("value"))
         println("Конец функции search")
 
     }
 
     @RepeatedTest(3)
     fun toolsMenu() {
-       /* Actions(driver)
+        Actions(driver)
             .moveToElement(brainsPage.toolsMenu)
             .perform()
-        */
+
         brainsPage.toolsMenu.click()
         assertTrue(brainsPage.menuPopup.isDisplayed)
     }
@@ -117,7 +114,6 @@ class JetBrainsTest {
      */
     @AfterEach
     fun tearDown() {
-        println("Начало функции AfterEach")
         driver.quit()
         println("Конец функции AfterEach")
     }

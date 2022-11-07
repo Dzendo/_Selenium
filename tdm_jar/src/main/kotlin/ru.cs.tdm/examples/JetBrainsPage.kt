@@ -41,10 +41,10 @@ class JetBrainsPage(driver: WebDriver) {
     @FindBy(xpath ="//a[text()='All products']")
     lateinit var seeAllToolsButton: WebElement
 
-    @FindBy(xpath = "//div[@data-test='ru.cs.tdm.examples.main-menu-item' and @data-test-marker = 'Developer Tools']")
+    @FindBy(xpath = "//div[@data-test='main-menu-item' and @data-test-marker = 'Developer Tools']")
     lateinit var toolsMenu: WebElement
 
-    @FindBy(css ="div[data-test='ru.cs.tdm.examples.main-submenu']")
+    @FindBy(css ="div[data-test='main-submenu']")
     lateinit var menuPopup: WebElement
 
     //*[@id="js-site-header"]/div/div/div[2]/div[1]/div/div/div/div[1]/button

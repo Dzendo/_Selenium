@@ -90,7 +90,7 @@ class AdminUser {
 // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
     const val threadSleep = 1000L
     const val DT: Int = 9
-    const val NN:Int = 10
+    const val NN:Int = 3
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы

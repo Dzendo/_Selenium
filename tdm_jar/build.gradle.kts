@@ -43,12 +43,12 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.9.1")
     implementation("org.assertj:assertj-core:3.23.1")
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-    // testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
+    implementation("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
-    // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
+    // java -jar junit-platform-console-standalone-1.9.1.jar <Options>
 }
 
-/*
+
 application {
-    mainClass.set("RootKt")
-}*/
+    mainClass.set("TdmKt")
+}

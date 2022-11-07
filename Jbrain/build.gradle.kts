@@ -19,6 +19,8 @@ dependencies {
     { exclude ("org.bouncycastle") }
     implementation("org.slf4j:slf4j-simple:2.0.3")
     implementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    //testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
+    implementation ("org.junit.platform:junit-platform-launcher:1.9.1")
 }
 
 tasks.test {

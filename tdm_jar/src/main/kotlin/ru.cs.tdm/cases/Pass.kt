@@ -32,12 +32,12 @@ class Pass {
         @JvmStatic
         @BeforeAll
         fun beforeAll() {
-        if (DT >7) println("Вызов BeforeAll AdminUserTest")
+        if (DT >7) println("Вызов BeforeAll PassTest")
             // Создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         WebDriverManager.chromedriver().setup()
         driver = ChromeDriver()
         //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
-        driver.manage().window().position = Point(4000,-1000)
+        driver.manage().window().position = Point(2000,-1000)
         //driver.manage().window().position = Point(0,-1000)
         driver.manage().window().maximize()
 
@@ -61,7 +61,7 @@ class Pass {
         @AfterAll
         fun afterAll() {
             //tools.idList()
-            if (DT >7) println("Вызов AfterAll AdminUserTest")
+            if (DT >7) println("Вызов AfterAll PassTest")
             tools.closeEsc5()
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера

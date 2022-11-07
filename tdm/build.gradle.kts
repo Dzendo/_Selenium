@@ -32,7 +32,7 @@ tasks.withType<JavaCompile> {
 }
 
 dependencies {
-    //testImplementation(kotlin("test"))
+    testImplementation(kotlin("test"))
     testImplementation("org.seleniumhq.selenium:selenium-java:4.5.3")
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
     { exclude ("org.bouncycastle") }
