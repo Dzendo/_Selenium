@@ -1,9 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
     //java
+    //id("java")
     kotlin("jvm") version "1.7.20"
     application
 }
@@ -31,28 +33,22 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
+
 dependencies {
-    testImplementation(kotlin("test"))
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.5.3")
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
+    implementation(kotlin("test"))
+    implementation("org.seleniumhq.selenium:selenium-java:4.5.3")
+    implementation("io.github.bonigarcia:webdrivermanager:5.3.0")
     { exclude ("org.bouncycastle") }
-    testImplementation("org.slf4j:slf4j-simple:2.0.3")
-
-
-    // https://junit.org/junit5/docs/current/user-guide/#running-tests aggregator:
-    testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
-    //testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    //testImplementation(platform("org.junit:junit-bom:${junitVersion}"))
-    //testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
-
+    implementation("org.slf4j:slf4j-simple:2.0.3")
+    implementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    implementation("org.assertj:assertj-core:3.23.1")
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
+    implementation("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
-    // java -jar junit-platform-console-standalone-1.8.2.jar <Options>
-    testImplementation("org.assertj:assertj-core:3.23.1")
+    // java -jar junit-platform-console-standalone-1.9.1.jar <Options>
 }
 
+
 application {
-    mainClass.set("MainKt")
+    mainClass.set("TdmKt")
 }

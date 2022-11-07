@@ -14,13 +14,12 @@ repositories {
 
 dependencies {
     //implementation(kotlin("test"))
-    implementation("org.seleniumhq.selenium:selenium-java:4.5.3")
-    implementation("io.github.bonigarcia:webdrivermanager:5.3.0")
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.5.3")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
     { exclude ("org.bouncycastle") }
-    implementation("org.slf4j:slf4j-simple:2.0.3")
-    implementation("org.junit.jupiter:junit-jupiter:5.9.1")
-    //testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
-    implementation ("org.junit.platform:junit-platform-launcher:1.9.1")
+    testImplementation("org.slf4j:slf4j-simple:2.0.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    testImplementation ("org.junit.platform:junit-platform-launcher:1.9.1")
 }
 
 tasks.test {
@@ -28,7 +27,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 application {
