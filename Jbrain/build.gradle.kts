@@ -14,8 +14,8 @@ repositories {
 
 dependencies {
     //implementation(kotlin("test"))
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.5.3")
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.6.0")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     { exclude ("org.bouncycastle") }
     testImplementation("org.slf4j:slf4j-simple:2.0.3")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
