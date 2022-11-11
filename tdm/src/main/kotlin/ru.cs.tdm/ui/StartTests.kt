@@ -7,8 +7,10 @@ import ru.cs.tdm.cases.Pass
 import ru.cs.tdm.code.Runner
 import ru.cs.tdm.examples.JetBrainsTest
 
-fun startTests(testCase: String) {
-        when(testCase) {
+fun startTests(testCase: Set<String>) {
+    println("startTests arguments: ${testCase.joinToString()}")
+    for(test in testCase)
+        when(test) {
             "Pass" -> {
                 Runner().runTest(Pass::class.java)
             }
@@ -31,7 +33,7 @@ fun startTests(testCase: String) {
                 Runner().runTest(Filter::class.java)
             }
             else -> {
-                println("Test $testCase! Unknowns")
+                println("Test $test! Unknowns")
             }
         }
     }

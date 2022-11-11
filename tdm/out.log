@@ -1,155 +1,22 @@
+Output: double to the console and to the file out+err
 Program arguments: 
-Tests ALL!
-стартовало окно с ALL
-закрылось окно с ALL
-Good Bye ALL
+startTests arguments: Pass
 ############### Стартовал Test ru.cs.tdm.cases.Pass! ################
-Вызов BeforeAll PassTest
 Файл конфигурации src/main/resources/conf.properties присутствует
-Открытие страницы http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects
-login= SYSADMIN   password= 753951
-Test нажатия на Create user Pass
-Test нажатия на Объекты TDMS Web
-N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
-Test нажатия на Вход под пользователем ChangePass
-Test нажатия на Смена пароля
-Test удаление user Pass
-Вызов AfterAll PassTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+получение первого имени пользователя из меню пользователя ChangePass
+получение первого имени пользователя из меню пользователя ChangePass
 
-Test run finished after 48445 ms
+Test run finished after 35332 ms
 [         2 containers found      ]
 [         0 containers skipped    ]
 [         2 containers started    ]
 [         0 containers aborted    ]
-[         1 containers successful ]
-[         1 containers failed     ]
+[         2 containers successful ]
+[         0 containers failed     ]
 [         4 tests found           ]
 [         0 tests skipped         ]
 [         4 tests started         ]
 [         0 tests aborted         ]
-[         0 tests successful      ]
-[         4 tests failed          ]
-
-############### Стартовал Test ru.cs.tdm.cases.HeadRef! ################
-Вызов BeforeAll
-Открытие страницы http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects
-login= SYSADMIN   password= 753951
-Вызов BeforeAll
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-
-Test run finished after 21477 ms
-[        36 containers found      ]
-[         0 containers skipped    ]
-[         2 containers started    ]
-[         0 containers aborted    ]
-[         1 containers successful ]
-[         1 containers failed     ]
-[         0 tests found           ]
-[         0 tests skipped         ]
-[         0 tests started         ]
-[         0 tests aborted         ]
-[         0 tests successful      ]
+[         4 tests successful      ]
 [         0 tests failed          ]
-
-############### Стартовал Test ru.cs.tdm.cases.AdminUser! ################
-Вызов BeforeAll AdminUserTest
-Открытие страницы http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects
-Вызов AfterAll AdminUserTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-
-Test run finished after 6396 ms
-[         4 containers found      ]
-[         0 containers skipped    ]
-[         2 containers started    ]
-[         0 containers aborted    ]
-[         1 containers successful ]
-[         1 containers failed     ]
-[         0 tests found           ]
-[         0 tests skipped         ]
-[         0 tests started         ]
-[         0 tests aborted         ]
-[         0 tests successful      ]
-[         0 tests failed          ]
-
-############### Стартовал Test ru.cs.tdm.cases.Filter! ################
-Вызов BeforeAll AdminUserTest
-Открытие страницы http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects
-login= SYSADMIN   password= 753951
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Начало BeforeEach FilterTest
-Test нажатия на Объекты TDMS Web
-Вызов AfterEach FilterTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-Вызов AfterAll AdminUserTest
-ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
-
-Test run finished after 3519 ms
-[         8 containers found      ]
-[         1 containers skipped    ]
-[         7 containers started    ]
-[         0 containers aborted    ]
-[         6 containers successful ]
-[         1 containers failed     ]
-[        15 tests found           ]
-[         0 tests skipped         ]
-[        15 tests started         ]
-[         0 tests aborted         ]
-[         0 tests successful      ]
-[        15 tests failed          ]
 
