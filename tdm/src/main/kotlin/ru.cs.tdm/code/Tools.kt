@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.cases.AdminUser
 import java.time.Duration
 
-const val DT: Int = 3
+const val DT: Int = 9
 const val fluentInDuration = 3L
 const val pollingInDuration = 500L
 const val fluentOutDuration = 7L

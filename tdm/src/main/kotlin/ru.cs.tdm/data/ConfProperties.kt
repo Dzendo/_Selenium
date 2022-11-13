@@ -1,9 +1,29 @@
 package ru.cs.tdm.data
 
+import io.github.bonigarcia.wdm.WebDriverManager
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.edge.EdgeDriver
+import ru.cs.tdm.cases.HeadRef
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
+
+object ConstProperties {
+    const val threadSleep = 1000L // задержки где они есть 1сек
+    const val DT: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
+    const val NN: Int = 1 // количество повторений тестов
+    lateinit var driver: WebDriver
+    fun startWebDriver(): WebDriver {
+        WebDriverManager.edgedriver().setup()
+        driver = EdgeDriver()
+        return driver
+    }
+    fun closeWebDriver() = driver.quit()
+
+}
+
+
 
 /**
  * ConfProperties читает записанные в файл «conf.properties» значения

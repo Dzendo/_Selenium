@@ -18,7 +18,7 @@ class Runner {
     //val listener: TestExecutionListener = SummaryGeneratingListener()
     val listener: SummaryGeneratingListener = SummaryGeneratingListener()
     fun runTest(testClass: Class<*> ) {
-        println("############### Стартовал Test ${testClass.canonicalName}! ################")
+        println("############### РЎС‚Р°СЂС‚РѕРІР°Р» Test ${testClass.canonicalName}! ################")
         // Discover and filter tests
         val request: LauncherDiscoveryRequest = LauncherDiscoveryRequestBuilder
             .request()

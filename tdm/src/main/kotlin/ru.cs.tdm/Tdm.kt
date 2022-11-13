@@ -7,13 +7,13 @@ import javax.swing.JFrame
 import javax.swing.SwingUtilities
 
 /**
- * Если стартуют с параметром, то сразу на выполнение
- * Если стартуют без параметра, то окошко выбора
+ * Р•СЃР»Рё СЃС‚Р°СЂС‚СѓСЋС‚ СЃ РїР°СЂР°РјРµС‚СЂРѕРј, С‚Рѕ СЃСЂР°Р·Сѓ РЅР° РІС‹РїРѕР»РЅРµРЅРёРµ
+ * Р•СЃР»Рё СЃС‚Р°СЂС‚СѓСЋС‚ Р±РµР· РїР°СЂР°РјРµС‚СЂР°, С‚Рѕ РѕРєРѕС€РєРѕ РІС‹Р±РѕСЂР° РџР°СЂР°РјРµС‚СЂРѕРІ
  */
 fun main(args: Array<String>) {
     if (printDual()) println("Output: double to the console and to the file out+err")
     println("Program arguments: ${args.joinToString()}")
-    if (args.isEmpty()) SwingUtilities.invokeLater {      // этот поток называется EDT (поток диспетчеризации событий).
+    if (args.isEmpty()) SwingUtilities.invokeLater {      // СЌС‚РѕС‚ РїРѕС‚РѕРє РЅР°Р·С‹РІР°РµС‚СЃСЏ EDT (РїРѕС‚РѕРє РґРёСЃРїРµС‚С‡РµСЂРёР·Р°С†РёРё СЃРѕР±С‹С‚РёР№).
         JFrame.setDefaultLookAndFeelDecorated(true)
         val frame = StartDialog()
         frame.startDialog()

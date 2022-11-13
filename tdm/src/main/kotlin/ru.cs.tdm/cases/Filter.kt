@@ -63,7 +63,7 @@ class Filter {
 
     companion object {
     const val threadSleep = 1000L
-    const val DT: Int = 5
+    const val DT: Int = 7
     const val NN:Int = 3
     // переменная для драйвера
     lateinit var driver: WebDriver

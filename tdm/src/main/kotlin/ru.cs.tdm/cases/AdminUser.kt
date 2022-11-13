@@ -89,7 +89,7 @@ class AdminUser {
     companion object {
 // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
     const val threadSleep = 1000L
-    const val DT: Int = 5
+    const val DT: Int = 7
     const val NN:Int = 3
     // переменная для драйвера
     lateinit var driver: WebDriver

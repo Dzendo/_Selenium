@@ -21,7 +21,7 @@ class Pass {
 
     companion object {
     const val threadSleep = 2000L
-    const val DT: Int = 5
+    const val DT: Int = 9
     const val NN:Int = 1
     // переменная для драйвера
     lateinit var driver: WebDriver

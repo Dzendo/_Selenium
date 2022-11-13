@@ -1,0 +1,2 @@
+[AWT-EventQueue-0] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 107.0.5304.62 (resolved driver for Chrome 107)
+[AWT-EventQueue-0] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\CSoft\.cache\selenium\chromedriver\win32\107.0.5304.62\chromedriver.exe

@@ -1,0 +1,1575 @@
+Output: double to the console and to the file out+err
+Program arguments: 
+startTests arguments: Pass, Head
+############### Стартовал Test ru.cs.tdm.cases.Pass! ################
+Файл конфигурации src/main/resources/conf.properties присутствует
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Администрирование групп')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'STATIC1']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-reference, 'GRID_GROUPS')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@id='tdmsSystemGridView-1168']/descendant::div[text()= 'Все пользователи']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'GROUP_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='BUTTON_USER_CREATE']
+N0 xpathLast найдено 2 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 2 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_DESCRIPTION']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_LOGIN']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_TDMS_LOGIN_ENABLE']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_USER_NAME']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_USER_MIDDLE_NAME']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_USER_LAST_NAME']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_USER_PHONE']/descendant::input
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='ATTR_USER_EMAIL']/descendant::input
+N0 xpathLast найдено 2 элементов //html/body/descendant::span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a
+N0 xpathLast найдено 2 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[contains(text(), 'ChangePass')]
+N0 xpathLast найдено 3 элементов //html/body/descendant::tr[@aria-selected='true']
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Настройки')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Выйти из приложения')]
+N0 xpathLast найдено 2 элементов //html/body/descendant::span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Настройки')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Надежный пароль')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::input[@name='oldpass']
+N0 xpathLast найдено 1 элементов //html/body/descendant::input[@name='newpass']
+N0 xpathLast найдено 1 элементов //html/body/descendant::input[@name='confirm']
+N0 xpathLast найдено 2 элементов //html/body/descendant::span[text() = 'Сменить пароль']/ancestor::a
+N0 xpathLast найдено 1 элементов //html/body/descendant::a[contains(@data-qtip, 'Настройки')]
+получение первого имени пользователя из меню пользователя ChangePass
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Настройки')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Надежный пароль')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::input[@name='oldpass']
+N0 xpathLast найдено 1 элементов //html/body/descendant::input[@name='newpass']
+N0 xpathLast найдено 1 элементов //html/body/descendant::input[@name='confirm']
+N0 xpathLast найдено 2 элементов //html/body/descendant::span[text() = 'Сменить пароль']/ancestor::a
+N0 xpathLast найдено 1 элементов //html/body/descendant::a[contains(@data-qtip, 'Настройки')]
+получение первого имени пользователя из меню пользователя ChangePass
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Настройки')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Выйти из приложения')]
+N0 xpathLast найдено 2 элементов //html/body/descendant::span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Администрирование групп')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'STATIC1']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-reference, 'GRID_GROUPS')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@id='tdmsSystemGridView-1168']/descendant::div[text()= 'Все пользователи']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'GROUP_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[contains(text(), 'ChangePass')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='BUTTON_USER_DELETE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[text() = 'Да']/ancestor::a
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[text() = 'ОК']/ancestor::a
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Настройки')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Выйти из приложения')]
+N0 xpathLast найдено 4 элементов //html/body/descendant::span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a
+
+Test run finished after 41351 ms
+[         2 containers found      ]
+[         0 containers skipped    ]
+[         2 containers started    ]
+[         0 containers aborted    ]
+[         2 containers successful ]
+[         0 containers failed     ]
+[         4 tests found           ]
+[         0 tests skipped         ]
+[         4 tests started         ]
+[         0 tests aborted         ]
+[         4 tests successful      ]
+[         0 tests failed          ]
+
+############### Стартовал Test ru.cs.tdm.cases.HeadRef! ################
+Вызов BeforeAll
+Открытие страницы http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects
+login= SYSADMIN   password= 753951
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Рабочий стол
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Рабочий стол
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Рабочий стол
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Объекты
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Объекты
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Объекты
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Справка
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Справка')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Справка')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Справка
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Справка')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Справка')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Справка
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Справка')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Справка')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Искать
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Искать')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Очистить')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Искать
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Искать')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Очистить')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Искать
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Рабочий стол')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Искать')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Очистить')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Введите текст')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Почта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Почта')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Почта')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Почта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Почта')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Почта')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Почта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Почта')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Почта')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Диаграмма Ганта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Диаграмма Ганта')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Диаграмма Ганта')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Диаграмма Ганта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Диаграмма Ганта')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Диаграмма Ганта')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Диаграмма Ганта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Диаграмма Ганта')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Диаграмма Ганта')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Уведомления
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Уведомления')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Уведомления
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Уведомления')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Уведомления
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Уведомления')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Объекты TDMS Web
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Объекты TDMS Web
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Head BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Объекты TDMS Web
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Head AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Администрирование групп
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_GROUP_CHANGE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'STATIC1']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Администрирование групп
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_GROUP_CHANGE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'STATIC1']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Администрирование групп
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_GROUP_CHANGE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'STATIC1']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_NOTIFICATIONS_SETTINGS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_REGULATION_START_TIME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_NOTIFICATIONS_SETTINGS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_REGULATION_START_TIME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_NOTIFICATIONS_SETTINGS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_REGULATION_START_TIME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Создать объект разработки
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_OBJECT_STRUCTURE_CREATE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_OCC_CODE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Создать объект разработки
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_OBJECT_STRUCTURE_CREATE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_OCC_CODE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Создать объект разработки
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_OBJECT_STRUCTURE_CREATE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_OCC_CODE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Создать фильтр
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_CREATE_USER_QUERY']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_USER_QUERY_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Создать фильтр
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_CREATE_USER_QUERY']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_USER_QUERY_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Создать фильтр
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='CMD_CREATE_USER_QUERY']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsEditObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_ATTR_USER_QUERY_NAME']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Показать/скрыть панель предварительного просмотра
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Показать/скрыть панель предварительного просмотра
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Показать/скрыть панель предварительного просмотра
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть панель предварительного просмотра')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Показать/скрыть дерево
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_COMMON_SHOWTREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_COMMON_SHOWTREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Показать/скрыть дерево
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_COMMON_SHOWTREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_COMMON_SHOWTREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Показать/скрыть дерево
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_COMMON_SHOWTREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_COMMON_SHOWTREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Показать/скрыть дерево')]
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Обновить
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_UPDATE']
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Обновить
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_UPDATE']
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Обновить
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='TDMS_COMMAND_UPDATE']
+Вызов inner Tools AfterEach пять раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Схема данных
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Схема данных')]/parent::a
+ ClickMenu=Схема данных 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_TREE_OBJS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'TREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 2 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Схема данных
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Схема данных')]/parent::a
+ ClickMenu=Схема данных 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_TREE_OBJS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'TREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 3 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Схема данных
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Схема данных')]/parent::a
+ ClickMenu=Схема данных 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_TREE_OBJS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'TREE']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Удалить структуру объектов
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Удалить структуру объектов')]/parent::a
+ ClickMenu=Удалить структуру объектов 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Удалить структуру объектов
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Удалить структуру объектов')]/parent::a
+ ClickMenu=Удалить структуру объектов 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Удалить структуру объектов
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Удалить структуру объектов')]/parent::a
+ ClickMenu=Удалить структуру объектов 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Журнал событий
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Журнал событий')]/parent::a
+ ClickMenu=Журнал событий 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_EVENTS_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'GRID']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Журнал событий
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Журнал событий')]/parent::a
+ ClickMenu=Журнал событий 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_EVENTS_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'GRID']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Журнал событий
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Журнал событий')]/parent::a
+ ClickMenu=Журнал событий 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_EVENTS_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'GRID']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Журнал сервера
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Журнал сервера')]/parent::a
+ ClickMenu=Журнал сервера 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_SERVER_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'QUERY_SERVER_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Журнал сервера
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Журнал сервера')]/parent::a
+ ClickMenu=Журнал сервера 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_SERVER_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'QUERY_SERVER_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Журнал сервера
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Журнал сервера')]/parent::a
+ ClickMenu=Журнал сервера 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_SERVER_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'QUERY_SERVER_LOG']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Системные атрибуты
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Системные атрибуты')]/parent::a
+ ClickMenu=Системные атрибуты 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_ATTRS_LIST']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Системные атрибуты
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Системные атрибуты')]/parent::a
+ ClickMenu=Системные атрибуты 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_ATTRS_LIST']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Системные атрибуты
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Системные атрибуты')]/parent::a
+ ClickMenu=Системные атрибуты 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_ATTRS_LIST']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Информация о системе
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Информация о системе')]/parent::a
+ ClickMenu=Информация о системе 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_SYSTEM_SETTINGS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_VER_SERVER']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_VER_TDM365']
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Информация о системе
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Информация о системе')]/parent::a
+ ClickMenu=Информация о системе 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_SYSTEM_SETTINGS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_VER_SERVER']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_VER_TDM365']
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Информация о системе
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Информация о системе')]/parent::a
+ ClickMenu=Информация о системе 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'FORM_SYSTEM_SETTINGS']
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_VER_SERVER']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference= 'T_VER_TDM365']
+N0 xpathLast найдено 4 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 0 - Отправка проекта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 0 - Отправка проекта')]/parent::a
+ ClickMenu=Поток 0 - Отправка проекта 
+N0 xpathLast найдено 3 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 5 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 5 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 5 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 0 - Отправка проекта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 0 - Отправка проекта')]/parent::a
+ ClickMenu=Поток 0 - Отправка проекта 
+N0 xpathLast найдено 5 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 7 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 7 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 7 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 0 - Отправка проекта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 0 - Отправка проекта')]/parent::a
+ ClickMenu=Поток 0 - Отправка проекта 
+N0 xpathLast найдено 7 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 9 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 9 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 9 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 1 - Отправка передаточного документа
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 1 - Отправка передаточного документа')]/parent::a
+ ClickMenu=Поток 1 - Отправка передаточного документа 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 10 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 1 - Отправка передаточного документа
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 1 - Отправка передаточного документа')]/parent::a
+ ClickMenu=Поток 1 - Отправка передаточного документа 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 10 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 1 - Отправка передаточного документа
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 1 - Отправка передаточного документа')]/parent::a
+ ClickMenu=Поток 1 - Отправка передаточного документа 
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 10 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 2.1 - Ответ о результате передаче РЗ
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 2.1 - Ответ о результате передаче РЗ')]/parent::a
+ ClickMenu=Поток 2.1 - Ответ о результате передаче РЗ 
+N0 xpathLast найдено 9 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 10 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 10 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 10 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 11 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 2.1 - Ответ о результате передаче РЗ
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 2.1 - Ответ о результате передаче РЗ')]/parent::a
+ ClickMenu=Поток 2.1 - Ответ о результате передаче РЗ 
+N0 xpathLast найдено 10 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 11 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 11 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 11 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 12 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 2.1 - Ответ о результате передаче РЗ
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 2.1 - Ответ о результате передаче РЗ')]/parent::a
+ ClickMenu=Поток 2.1 - Ответ о результате передаче РЗ 
+N0 xpathLast найдено 11 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 12 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 12 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 12 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 13 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 3 - Отправка ответов на замечания
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 3 - Отправка ответов на замечания')]/parent::a
+ ClickMenu=Поток 3 - Отправка ответов на замечания 
+N0 xpathLast найдено 12 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 13 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 13 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 13 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 14 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 3 - Отправка ответов на замечания
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 3 - Отправка ответов на замечания')]/parent::a
+ ClickMenu=Поток 3 - Отправка ответов на замечания 
+N0 xpathLast найдено 13 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 14 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 14 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 14 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 15 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток 3 - Отправка ответов на замечания
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток 3 - Отправка ответов на замечания')]/parent::a
+ ClickMenu=Поток 3 - Отправка ответов на замечания 
+N0 xpathLast найдено 14 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 15 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 15 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 15 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::div[starts-with(@id, 'tdmsSelectObjectDialog-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 16 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка статуса проекта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка статуса проекта')]/parent::a
+ ClickMenu=Поток - Проверка статуса проекта 
+N0 xpathLast найдено 15 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 16 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 16 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 16 элементов //html/body/descendant::div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]
+N0 xpathLast найдено 16 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 16 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 17 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 17 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 19 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 19 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка статуса проекта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка статуса проекта')]/parent::a
+ ClickMenu=Поток - Проверка статуса проекта 
+N0 xpathLast найдено 19 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 20 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 20 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 20 элементов //html/body/descendant::div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]
+N0 xpathLast найдено 20 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 21 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 21 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 23 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 23 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка статуса проекта
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка статуса проекта')]/parent::a
+ ClickMenu=Поток - Проверка статуса проекта 
+N0 xpathLast найдено 23 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 24 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 24 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 24 элементов //html/body/descendant::div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]
+N0 xpathLast найдено 24 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 24 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 25 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 25 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+N0 xpathLast найдено 27 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 27 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка связи с авторизацией
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка связи с авторизацией')]/parent::a
+ ClickMenu=Поток - Проверка связи с авторизацией 
+N0 xpathLast найдено 27 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 28 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 28 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 28 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка связи с авторизацией
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N0 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N1 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N2 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+&&&&&&&&&  xpathClickMenu catch NOT ClickMenu за 3 опросов по 1 сек xpathClickMenu=Имитация ИУС СЭТД &&&&&&&&&
+####### ИУС СЭТД Повтор *##*0  открытия через 0 sec #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+####### SUB_SYSADMIN Повтор *##*0  открытия через 0 sec #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка связи с авторизацией')]/parent::a
+ ClickMenu=Поток - Проверка связи с авторизацией 
+N0 xpathLast найдено 29 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 30 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 30 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 30 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка связи с авторизацией
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N0 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N1 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N2 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+&&&&&&&&&  xpathClickMenu catch NOT ClickMenu за 3 опросов по 1 сек xpathClickMenu=Имитация ИУС СЭТД &&&&&&&&&
+####### ИУС СЭТД Повтор *##*0  открытия через 0 sec #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка связи с авторизацией')]/parent::a
+ ClickMenu=Поток - Проверка связи с авторизацией 
+N0 xpathLast найдено 31 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 32 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 32 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 32 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка связи без авторизации
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N0 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N1 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+###N2 попытка #### xpathClickMenu NOT ClickMenu click по 1 сек xpathClickMenu=Имитация ИУС СЭТД #######
+&&&&&&&&&  xpathClickMenu catch NOT ClickMenu за 3 опросов по 1 сек xpathClickMenu=Имитация ИУС СЭТД &&&&&&&&&
+####### ИУС СЭТД Повтор *##*0  открытия через 0 sec #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+###*##*N0 попытка #### qtipLastClass не найден класс  опрос по 1 сек qtipLastClass=Меню разработчика #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+####### SUB_SYSADMIN Повтор *##*0  открытия через 0 sec #######
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка связи без авторизации')]/parent::a
+ ClickMenu=Поток - Проверка связи без авторизации 
+N0 xpathLast найдено 33 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 35 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 35 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 35 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка связи без авторизации
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка связи без авторизации')]/parent::a
+ ClickMenu=Поток - Проверка связи без авторизации 
+N0 xpathLast найдено 35 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 37 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 37 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 37 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeEach верхний
+Вызов inner SubSysadmin BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Вызов inner Tools BeforeEach
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Объекты')]
+Test нажатия на Поток - Проверка связи без авторизации
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[@data-reference='SUB_SYSADMIN']
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Меню разработчика')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Имитация ИУС СЭТД')]/parent::a
+ ClickMenu=Имитация ИУС СЭТД 
+N0 xpathLast найдено 1 элементов //html/body/descendant::span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'Поток - Проверка связи без авторизации')]/parent::a
+ ClickMenu=Поток - Проверка связи без авторизации 
+N0 xpathLast найдено 37 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+###N0 попытка #### xpathGetText не взят- ждем 0 sec  xpathGetText=//div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))] #######
+N0 xpathLast найдено 39 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 39 элементов //html/body/descendant::div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]
+N0 xpathLast найдено 39 элементов //html/body/descendant::*[contains(@data-qtip, 'Закрыть диалог')]
+Вызов inner Tools AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов inner SubSysadmin AfterEach 5 раз closeEsc
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов AfterEach верхний
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+Вызов BeforeAll
+ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера 
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Настройки')]
+N0 xpathLast найдено 1 элементов //html/body/descendant::*[contains(@data-qtip, 'Выйти из приложения')]
+N0 xpathLast найдено 80 элементов //html/body/descendant::span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a
+
+Test run finished after 213329 ms
+[        36 containers found      ]
+[         2 containers skipped    ]
+[        34 containers started    ]
+[         0 containers aborted    ]
+[        34 containers successful ]
+[         0 containers failed     ]
+[        84 tests found           ]
+[         0 tests skipped         ]
+[        84 tests started         ]
+[         0 tests aborted         ]
+[        84 tests successful      ]
+[         0 tests failed          ]
+
