@@ -2,6 +2,8 @@ package ru.cs.tdm.code
 
 import ru.cs.tdm.pages.LoginPage
 import org.openqa.selenium.WebDriver
+import ru.cs.tdm.cases.Pass
+import ru.cs.tdm.ui.TestsProperties
 
 /**
  * при выходе на http://tdms-srv2a:444/client/#objects/ открывает страницу аутентификации;
@@ -12,7 +14,9 @@ import org.openqa.selenium.WebDriver
  * Тест считается успешно пройденным в случае, когда пользователю удалось выполнить все вышеперечисленные пункты.
  */
 class Login(val driver: WebDriver) {
-    val threadSleep = 1000L
+    private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
+    private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
+    //val threadSleep = 1000L
     // объявления переменных на созданные ранее классы-страницы
     private val loginPage: LoginPage = LoginPage(driver)
     private val tools: Tools = Tools(driver)
@@ -34,14 +38,14 @@ class Login(val driver: WebDriver) {
     fun loginUserName(): String {
         Thread.sleep(threadSleep)
         val userName = tools.xpathGetText("//a[contains(@data-qtip, 'Настройки')]")
-        println("получение первого имени пользователя из меню пользователя $userName")
+        if (DT >7) println("получение первого имени пользователя из меню пользователя $userName")
         return if (userName.contains(" ")) userName.split(" ").toTypedArray()[0] else userName
     }
     fun loginUserNameWait(name: String): Boolean {
         Thread.sleep(threadSleep)
         val bool = tools.xpathFluentWaitText("//a[contains(@data-qtip, 'Настройки')]",
             if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
-        println("ожидание $name пользователя из меню пользователя ")
+        if (DT >7) println("ожидание $name пользователя из меню пользователя ")
         return bool
     }
 
@@ -55,7 +59,7 @@ class Login(val driver: WebDriver) {
         Thread.sleep(threadSleep)
         val bool = tools.qtipFluentWaitText("Настройки",
             if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
-        println("ожидание $name пользователя из меню пользователя")
+        if (DT >7) println("ожидание $name пользователя из меню пользователя")
         return bool
     }
 

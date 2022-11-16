@@ -1,18 +1,14 @@
 package ru.cs.tdm.cases
 
 import org.openqa.selenium.WebDriver
-import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.*
-import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.By
-import org.openqa.selenium.Point
-import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.edge.EdgeDriver
 import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
-import ru.cs.tdm.data.ConfProperties
+import ru.cs.tdm.data.startDriver
+import ru.cs.tdm.ui.TestsProperties
 
 /**
  *
@@ -29,9 +25,10 @@ class HeadRef {
     // и естественно все переменные, которыми они пользуются
     companion object {
         // вынесены переменные, что бы менять их только здесь, а они поменяются там внизу в тестах
-        const val threadSleep = 1000L // задержки где они есть 1сек
-        const val DT: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
-        const val NN: Int = 1 // количество повторений тестов
+        private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
+        private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
+        //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
+        private const val NN:Int = 1                    // количество повторений тестов
 
         // переменная для драйвера
         lateinit var driver: WebDriver
@@ -56,26 +53,21 @@ class HeadRef {
         fun beforeAll() {
             if (DT > 7) println("Вызов BeforeAll")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
-            WebDriverManager.chromedriver().setup()
-            //WebDriverManager.edgedriver().setup()
-            driver = ChromeDriver()
-            //driver = EdgeDriver()
-            //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
-            driver.manage().window().position = Point(2000, -1000)
-            driver.manage().window().maximize()
+           driver = startDriver()
 
             // Создаем экземпляры классов и присвоим ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
 
-            val loginpage = ConfProperties.getProperty("loginpageTDM")
+            val loginpage = TestsProperties.loginpage
             if (DT > 8) println("Открытие страницы $loginpage")
-            driver.get(loginpage)
-
-            val login = ConfProperties.getProperty("loginTDM")
-            val password = ConfProperties.getProperty("passwordTDM")
+            val login = TestsProperties.login
+            val password = TestsProperties.password
             if (DT > 8) println("login= $login   password= $password")
+            driver.get(loginpage)
+            assertTrue(driver.title == "Tdms")
             Login(driver).loginIn(login, password)
+
             // Запоминаю логин и пароль для диаграммы ганта - костыль.
             loginIN = login
             passwordIN = password

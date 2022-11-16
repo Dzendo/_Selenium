@@ -1,14 +1,13 @@
 package ru.cs.tdm.cases
 
-import io.github.bonigarcia.wdm.WebDriverManager
 import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
-import org.openqa.selenium.chrome.ChromeDriver
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
-import ru.cs.tdm.data.ConfProperties
+import ru.cs.tdm.data.startDriver
+import ru.cs.tdm.ui.TestsProperties
 import java.io.File
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -87,10 +86,12 @@ PPS Можно добавить тест: не удалять созданног
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class AdminUser {
     companion object {
-// задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
-    const val threadSleep = 1000L
-    const val DT: Int = 7
-    const val NN:Int = 3
+        // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
+        private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
+        private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
+        //private val NN:Int = repeateTestsNomber                       // количество повторений тестов
+        private const val NN:Int = 1                                    // количество повторений тестов
+
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -107,25 +108,20 @@ class AdminUser {
         fun beforeAll() {
         if (DT >7) println("Вызов BeforeAll AdminUserTest")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
-        WebDriverManager.chromedriver().setup()
-        driver = ChromeDriver()
-        //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
-        driver.manage().window().position = Point(2000,-1000)
-        //driver.manage().window().position = Point(0,-1000)
-        driver.manage().window().maximize()
+        driver = startDriver()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
 
-            val loginpage = ConfProperties.getProperty("loginpageTDM")
-            if (DT >8) println("Открытие страницы $loginpage")
-            driver.get(loginpage)
-
-            val login = ConfProperties.getProperty("loginTDM")
-            val password = ConfProperties.getProperty("passwordTDM")
-            if (DT >8) println("login= $login   password= $password")
-            Login(driver).loginIn(login, password)
+        val loginpage = TestsProperties.loginpage
+        if (DT > 8) println("Открытие страницы $loginpage")
+        val login = TestsProperties.login
+        val password = TestsProperties.password
+        if (DT > 8) println("login= $login   password= $password")
+        driver.get(loginpage)
+        assertTrue(driver.title == "Tdms")
+        Login(driver).loginIn(login, password)
         }
 
         @JvmStatic

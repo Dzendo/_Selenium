@@ -6,9 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions.*
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.cases.AdminUser
+import ru.cs.tdm.ui.TestsProperties
 import java.time.Duration
 
-const val DT: Int = 9
 const val fluentInDuration = 3L
 const val pollingInDuration = 500L
 const val fluentOutDuration = 7L
@@ -17,7 +17,8 @@ const val repeateIn = 5
 const val repeateOut= 3
 
 class Tools(val driver: WebDriver) {
-
+    private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
+    private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     //private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(fluentOutDuration))// Явное ожидание
     //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(fluentDuration))      // Неявное ожидание
@@ -220,14 +221,14 @@ class Tools(val driver: WebDriver) {
         nomberString = nomberString.substring(0, minOf(nomberString.indexOf("_"),nomberString.indexOf("-")))
         if (nomberString.isEmpty()) return 0
         val nomberInt = nomberString.toIntOrNull()?:0
-        if (AdminUser.DT >8) println("Запрошено окно $nomberInt из $nomberString c $window титл $title \n id= $id")
+        if (DT >8) println("Запрошено окно $nomberInt из $nomberString c $window титл $title \n id= $id")
         return nomberInt
     }
     fun idRef(reference:String): String? {
         val element = referenceLast(reference) ?: return null
         val id: String = element.getAttribute("id")
         if (id.isEmpty()) return ""
-        if (AdminUser.DT >8) println("Запрошен элемент reference = $reference получен id= $id")
+        if (DT >8) println("Запрошен элемент reference = $reference получен id= $id")
         return id
     }
     fun dropID(id: String): String = id.substringBefore("-")
