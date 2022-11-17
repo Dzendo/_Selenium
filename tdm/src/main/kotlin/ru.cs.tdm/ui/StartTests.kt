@@ -6,13 +6,14 @@ import ru.cs.tdm.cases.HeadRef
 import ru.cs.tdm.cases.Pass
 import ru.cs.tdm.code.Runner
 import ru.cs.tdm.examples.JetBrainsTest
-import ru.cs.tdm.ui.TestsProperties.repeateCasesNomber
-import ru.cs.tdm.ui.TestsProperties.testCases
 
 fun startTests() {
-    println("startTests arguments: ${testCases.joinToString()}")
-    for (test in testCases)
-        repeat(repeateCasesNomber) {
+    println("startTests arguments: ${TestsProperties.testCases.joinToString()}")
+    if (TestsProperties.debugPrintNomber > 8) println("Открытие страницы ${TestsProperties.loginpage}")
+    if (TestsProperties.debugPrintNomber > 8) println("login= ${TestsProperties.login}   password= ${TestsProperties.password}")
+    for (test in TestsProperties.testCases)
+        repeat(TestsProperties.repeateCasesNomber) {
+            if (TestsProperties.debugPrintNomber > 1) println("//// старт $test Повтор $it  ////////")
             when (test) {
                 "Pass" -> {
                     Runner().runTest(Pass::class.java)
@@ -45,6 +46,7 @@ fun startTests() {
                     println("Test $test! Unknowns")
                 }
             }
+            if (TestsProperties.debugPrintNomber > 1) println("//// стоп $test Повтор $it  ////////")
         }
 }
 

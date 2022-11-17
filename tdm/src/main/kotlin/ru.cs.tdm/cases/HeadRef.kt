@@ -490,9 +490,13 @@ class HeadRef {
             // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_TREE_OBJS']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='TREE']")) != null)
-            assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", dataTree))
+            if (TestsProperties.loginpage.contains("442"))   //%%6.2
+            assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", "Дерево объектов"))
+            else assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", dataTree))
             assertTrue(tools.referenceWaitText("TREE", "Типы объектов"))
-            assertTrue(tools.titleWait("window", dataTree))
+            if (TestsProperties.loginpage.contains("442"))   //%%6.2
+            assertTrue(tools.titleWait("window", "Дерево объектов"))
+            else assertTrue(tools.titleWait("window", dataTree))
             tools.closeXLast()
         }
 
@@ -655,9 +659,13 @@ class HeadRef {
                 val flow1 = "Поток 1 - Отправка передаточного документа"
                 if (DT > 8) println("Test нажатия на $flow1")
                 openCETD()
-                clickMenu(flow1, "window", "Выбор сценария")
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                clickMenu(flow1, "window", "Атрибуты")
+                else clickMenu(flow1, "window", "Выбор сценария")
                 //tools.closeXLast()
-                assertTrue(tools.titleWait("window", "Выбор сценария"))
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                assertTrue(tools.titleWait("window", "Атрибуты"))
+                else assertTrue(tools.titleWait("window", "Выбор сценария"))
                // tools.idList()
                 tools.closeXLast()
                 //assertTrue(tools.titleWait("messagebox","TDMS"))

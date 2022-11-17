@@ -29,12 +29,12 @@ object TestsProperties {
 
     init {
         loginpage = ConfProperties.getProperty("loginpageTDM")
-        if (debugPrintNomber > 8) println("Открытие страницы $loginpage")
+        //if (debugPrintNomber > 8) println("Открытие страницы $loginpage")
         //driver.get(loginpage)
 
         login = ConfProperties.getProperty("loginTDM")
         password = ConfProperties.getProperty("passwordTDM")
-        if (debugPrintNomber > 8) println("login= $login   password= $password")
+        //if (debugPrintNomber > 8) println("login= $login   password= $password")
         //Login(driver).loginIn(login, password)
         // Запоминаю логин и пароль для диаграммы ганта - костыль.
     }

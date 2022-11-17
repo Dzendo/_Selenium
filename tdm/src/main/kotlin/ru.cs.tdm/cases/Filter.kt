@@ -184,6 +184,7 @@ class Filter {
 
         tools.referenceClickLast("CMD_CREATE_USER_QUERY")
         assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
+        if (TestsProperties.loginpage.contains("442").not())   //%%6.2
         tools.referenceClickLast("tabbar-FORM_USER_QUERY")
 //        assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
@@ -260,7 +261,9 @@ class Filter {
             val BUTTON_OBJDEV_SEL = {
                 tools.referenceClickLast("BUTTON_OBJDEV_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"))
-                tools.xpathLast("//div[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                tools.xpathLast("//*[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
+                else tools.xpathLast("//div[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -278,8 +281,12 @@ class Filter {
             val BUTTON_PROJECT_SEL = {
                 tools.referenceClickLast("BUTTON_PROJECT_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"))
-                tools.xpathLast("//div[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                tools.xpathLast("//*[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
                     ?.click()                   //tr  tbody  table
+                else  tools.xpathLast("//div[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
+                    ?.click()                   //tr  tbody  table
+
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -298,7 +305,9 @@ class Filter {
             val BUTTON_TYPE_DOC = {
                 tools.referenceClickLast("BUTTON_TYPE_DOC")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Типы технической документации"))
-                tools.xpathLast("//a[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                tools.xpathLast("//*[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
+                else tools.xpathLast("//a[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -314,7 +323,9 @@ class Filter {
             val BUTTON_OBJ_STR = {
                 tools.referenceClickLast("BUTTON_OBJ_STR")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Объекты структуры"))
-                tools.xpathLast("//a[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                tools.xpathLast("//*[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
+                else tools.xpathLast("//a[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -330,7 +341,9 @@ class Filter {
             val BUTTON_ORG_SEL = {
                 tools.referenceClickLast("BUTTON_ORG_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"))
-                tools.xpathLast("//a[contains(text(),'СМУ')]/ancestor::tr")?.click()
+                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                tools.xpathLast("//*[contains(text(),'СМУ')]/ancestor::tr")?.click()
+                else tools.xpathLast("//a[contains(text(),'СМУ')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
