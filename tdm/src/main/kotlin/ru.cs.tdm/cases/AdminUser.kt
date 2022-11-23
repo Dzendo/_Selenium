@@ -162,7 +162,7 @@ class AdminUser {
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
         tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
 
-        if (TestsProperties.loginpage.contains("442").not())   //%%6.2
+        if (TestsProperties.loginpage.contains("555").not())   //%%6.2
         assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers))
 
         if (DT >7) println("Конец BeforeEach AdminUserTest")

@@ -15,7 +15,7 @@ object ConfProperties {
 
     init {
         properties.setProperty("loginpageTDM","http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects")
-        //properties.setProperty("loginpageTDM","http://tdms-srv2a:442/client/#objects/")
+        //properties.setProperty("loginpageTDM","http://tdms-srv2a:555/client/#objects/")
         properties.setProperty("loginTDM","SYSADMIN")
         properties.setProperty("passwordTDM","753951")
         try {

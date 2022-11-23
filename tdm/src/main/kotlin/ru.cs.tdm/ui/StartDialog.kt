@@ -141,16 +141,16 @@ class StartDialog : JFrame("TDM365 Tests ") {
              "srv10.ru:443",
              "SRV10:443",
              "tdms2012:444",
-             "srv2a.ru:442",
-             "srv2a:442")
+             "srv2a.ru:555",
+             "srv2a:555")
          val loginPages: Array<String> = arrayOf(
              "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
              "http://tdms-srv2a:444/client/#objects/",
              "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
              "http://TDMS-SRV10:443/client/#objects/",
              "http://tdms-temp-2012:444/client/#objects/",
-             "http://tdms-srv2a.csoft-msc.ru:442/client/?classic#objects",
-             "http://tdms-srv2a:442/client/#objects/")
+             "http://tdms-srv2a.csoft-msc.ru:555/client/?classic#objects",
+             "http://tdms-srv2a:555/client/#objects/")
 
          server  = JComboBox<String>(servers)
          comboPanel.add(server)

@@ -39,7 +39,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:4.6.0")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     { exclude ("org.bouncycastle") }
-    implementation("org.slf4j:slf4j-simple:2.0.3")
+    implementation("org.slf4j:slf4j-simple:2.0.4")
     implementation("org.junit.jupiter:junit-jupiter:5.9.1")
     //implementation("org.assertj:assertj-core:3.23.1")
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher

@@ -484,17 +484,19 @@ class HeadRef {
             val dataTree = "Схема данных"
             if (DT > 8) println("Test нажатия на $dataTree")
             openSubSysadmin()
-            clickMenu(dataTree, "window", dataTree)
+            if (TestsProperties.loginpage.contains("555"))   //%%6.2
+            clickMenu(dataTree, "window", "Дерево объектов")
+            else clickMenu(dataTree, "window", dataTree)
             //println("FORM_TREE_OBJS = ${tools.referenceLast("FORM_TREE_OBJS")?.text}")
             //println("TREE = ${tools.referenceLast("TREE")?.text}")
             // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_TREE_OBJS']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='TREE']")) != null)
-            if (TestsProperties.loginpage.contains("442"))   //%%6.2
+            if (TestsProperties.loginpage.contains("555"))   //%%6.2
             assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", "Дерево объектов"))
             else assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", dataTree))
             assertTrue(tools.referenceWaitText("TREE", "Типы объектов"))
-            if (TestsProperties.loginpage.contains("442"))   //%%6.2
+            if (TestsProperties.loginpage.contains("555"))   //%%6.2
             assertTrue(tools.titleWait("window", "Дерево объектов"))
             else assertTrue(tools.titleWait("window", dataTree))
             tools.closeXLast()
@@ -659,11 +661,11 @@ class HeadRef {
                 val flow1 = "Поток 1 - Отправка передаточного документа"
                 if (DT > 8) println("Test нажатия на $flow1")
                 openCETD()
-                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                if (TestsProperties.loginpage.contains("555"))   //%%6.2
                 clickMenu(flow1, "window", "Атрибуты")
                 else clickMenu(flow1, "window", "Выбор сценария")
                 //tools.closeXLast()
-                if (TestsProperties.loginpage.contains("442"))   //%%6.2
+                if (TestsProperties.loginpage.contains("555"))   //%%6.2
                 assertTrue(tools.titleWait("window", "Атрибуты"))
                 else assertTrue(tools.titleWait("window", "Выбор сценария"))
                // tools.idList()
