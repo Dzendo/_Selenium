@@ -1,9 +1,6 @@
 package ru.cs.tdm.ui
 
-import ru.cs.tdm.cases.AdminUser
-import ru.cs.tdm.cases.Filter
-import ru.cs.tdm.cases.HeadRef
-import ru.cs.tdm.cases.Pass
+import ru.cs.tdm.cases.*
 import ru.cs.tdm.code.Runner
 import ru.cs.tdm.examples.JetBrainsTest
 
@@ -16,7 +13,7 @@ fun startTests() {
             if (TestsProperties.debugPrintNomber > 1) println("//// старт $test Повтор $it  ////////")
             when (test) {
                 "Pass" -> {
-                    Runner().runTest(Pass::class.java)
+                    Runner().runTest(ChangePass::class.java)
                 }
 
                 "Head" -> {
@@ -36,7 +33,7 @@ fun startTests() {
                 }
 
                 "ALL" -> {
-                    Runner().runTest(Pass::class.java)
+                    Runner().runTest(ChangePass::class.java)
                     Runner().runTest(HeadRef::class.java)
                     Runner().runTest(AdminUser::class.java)
                     Runner().runTest(Filter::class.java)

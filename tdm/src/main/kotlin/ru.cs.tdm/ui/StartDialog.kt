@@ -136,21 +136,27 @@ class StartDialog : JFrame("TDM365 Tests ") {
          comboPanel.add(browser)
 
          val servers: Array<String> = arrayOf(
+             "srv2a.ru:777",
+             "srv2a:777",
              "srv2a.ru:444",
              "srv2a:444",
              "srv10.ru:443",
              "SRV10:443",
              "tdms2012:444",
-             "srv2a.ru:555",
-             "srv2a:555")
+             "srv2a.ru:777",
+             "srv2a:777",
+             )
          val loginPages: Array<String> = arrayOf(
+             "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
+             "http://tdms-srv2a:777/client/#objects/",
              "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
              "http://tdms-srv2a:444/client/#objects/",
              "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
              "http://TDMS-SRV10:443/client/#objects/",
              "http://tdms-temp-2012:444/client/#objects/",
-             "http://tdms-srv2a.csoft-msc.ru:555/client/?classic#objects",
-             "http://tdms-srv2a:555/client/#objects/")
+             "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
+             "http://tdms-srv2a:777/client/#objects/",
+             )
 
          server  = JComboBox<String>(servers)
          comboPanel.add(server)

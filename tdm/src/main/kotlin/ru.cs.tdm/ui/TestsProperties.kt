@@ -23,7 +23,7 @@ object TestsProperties {
     var startIsOn: Boolean = false
     var stopIsOn: Boolean = false
 
-    var loginpage = "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects"
+    var loginpage = "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects"
     var login = "SYSADMIN"
     var password = "753951"
 

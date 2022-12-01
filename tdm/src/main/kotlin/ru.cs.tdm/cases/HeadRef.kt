@@ -188,6 +188,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        @Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
 

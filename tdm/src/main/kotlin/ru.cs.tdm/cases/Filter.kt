@@ -184,7 +184,7 @@ class Filter {
 
         tools.referenceClickLast("CMD_CREATE_USER_QUERY")
         assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
-        if (TestsProperties.loginpage.contains("555").not())   //%%6.2
+        if (TestsProperties.loginpage.contains("777").not())   //%%6.2
         tools.referenceClickLast("tabbar-FORM_USER_QUERY")
 //        assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
@@ -261,7 +261,7 @@ class Filter {
             val BUTTON_OBJDEV_SEL = {
                 tools.referenceClickLast("BUTTON_OBJDEV_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"))
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
+                if (TestsProperties.loginpage.contains("777"))   //%%6.2
                 tools.xpathLast("//*[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
                 else tools.xpathLast("//div[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
                 Thread.sleep(threadSleep)
@@ -270,6 +270,7 @@ class Filter {
             BUTTON_OBJDEV_SEL()
             Thread.sleep(threadSleep)
             val attrObjectDev = tools.xpathLast("//*[@data-reference='ATTR_OBJECT_DEV']/descendant::input")
+            val getFerma = attrObjectDev?.getAttribute("value")
             assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Ферма_омшанник")
 
             tools.referenceClickLast("BUTTON_OBJDEV_ERASE")
@@ -281,7 +282,7 @@ class Filter {
             val BUTTON_PROJECT_SEL = {
                 tools.referenceClickLast("BUTTON_PROJECT_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"))
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
+                if (TestsProperties.loginpage.contains("777"))   //%%6.2
                 tools.xpathLast("//*[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
                     ?.click()                   //tr  tbody  table
                 else  tools.xpathLast("//div[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")

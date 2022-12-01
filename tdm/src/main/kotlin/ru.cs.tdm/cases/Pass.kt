@@ -70,6 +70,56 @@ class Pass {
         copyFile(scrFile, File("./$name${sdf.format(Date())}.png"))
     }
 
+    /**
+     *  тест удаление пользователя
+     */
+    @Test
+    //@DisplayName("Delete user Pass")
+    @DisplayName("Наличие/Удаление пользователя ChangePass")
+    fun n00_changeUserPass() {
+        if (DT > 8) println("Test удаление user Pass")
+        //Login(driver).loginIn(loginSYS, passSYS)
+        Thread.sleep(threadSleep)
+        val mainMenu = "Объекты"
+        if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
+        tools.qtipClickLast(mainMenu)
+        assertTrue(tools.titleContain("TDM365"))
+        assertTrue(tools.qtipPressedLast("Объекты"))
+
+        val adminUser = "Администрирование групп"
+        if (DT > 8) println("Test нажатия на $adminUser")
+        tools.qtipClickLast(adminUser)
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
+        assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"))
+
+        // data-reference="GRID_GROUPS"
+        val headTeg = tools.idRef("GRID_GROUPS")
+        val allUsers = "Все пользователи"
+        if (DT > 8) println("Test нажатия на $allUsers")
+        // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
+        tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
+        if (TestsProperties.loginpage.contains("555").not())   //%%6.2
+            assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers))
+        if (DT > 7) println("Открыли всех пользователей")
+
+
+        assertTrue(tools.titleWait("window", "Редактирование групп"))
+
+        // Проверка, что Pass отсутствует GRID_USERS
+        Thread.sleep(threadSleep)
+        //if (TestsProperties.loginpage.contains("555").not())   //%%6.2
+        val changePassNo = driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[contains(text(),'ChangePass')]")).isEmpty()
+        //if (DT > 8) println("ChangePass отсутствует GRID_USERS")
+        if (changePassNo.not()) {
+            if (DT > 8) println("Удаление Pass")
+            tools.xpathLast("//div[contains(text(), 'ChangePass')]")?.click()
+            tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
+            tools.clickOK("Да")
+        }
+        tools.clickOK("ОК")
+
+    }
+
      /**
      *  тест создание нового пользователя Pass
      */
@@ -135,13 +185,17 @@ class Pass {
              ?.sendKeys("ya@ya")
 
          tools.clickOK()
+         Thread.sleep(threadSleep)
          // Проверить что Pass есть в списке
          assertTrue(tools.titleWait("window", "Редактирование групп"))
          if (DT > 8) println("Проверка Pass")
          tools.xpathLast("//div[contains(text(), 'ChangePass')]")?.click()
          Thread.sleep(threadSleep)
          if (TestsProperties.loginpage.contains("555").not())   //%%6.2
-         assertTrue((tools.xpathLast("//tr[@aria-selected='true']")?.text ?: "None") == "ChangePass")
+         //assertTrue((tools.xpathLast("//tr[@aria-selected='true']")?.text ?: "None") == "ChangePass")
+         // отключил в 777 - невижу выделения строки
+         // table class="... x-grid-item-selected ...
+         assertTrue((tools.xpathLast("//table[contains(@class, 'x-grid-item-selected')]")?.text ?: "None") == "ChangePass")
 
          tools.clickOK()
 
@@ -250,8 +304,8 @@ class Pass {
         tools.clickOK("Да")
         // Проверка, что Pass отсутствует GRID_USERS
         Thread.sleep(threadSleep)
-        //if (TestsProperties.loginpage.contains("555").not())   //%%6.2
-        //assertTrue (driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[text()= 'ChangePass']")).isEmpty())
+        if (TestsProperties.loginpage.contains("555").not())   //%%6.2
+        assertTrue (driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[text()= 'ChangePass']")).isEmpty())
         //if (DT > 8) println("ChangePass отсутствует GRID_USERS")
         tools.clickOK("ОК")
 
