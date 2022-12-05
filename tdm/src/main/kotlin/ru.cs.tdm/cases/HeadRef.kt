@@ -172,7 +172,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        @Disabled
+        //@Disabled
         @DisplayName("Совещания")
         fun meetingTest() {
             var meeting = "Совещания"
@@ -325,6 +325,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Администрирование групп")
         fun adminUserTest() {
             val adminUser = "Администрирование групп"
@@ -480,6 +481,7 @@ class HeadRef {
         // data-reference="FORM_TREE_OBJS"
         // data-reference="TREE"
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Схема данных")
         fun dataTreeTest() {
             val dataTree = "Схема данных"
@@ -607,6 +609,7 @@ class HeadRef {
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
+                Thread.sleep(threadSleep)
                 tools.closeXLast()
                 tools.closeEsc()
             }
@@ -620,7 +623,9 @@ class HeadRef {
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
+                Thread.sleep(threadSleep)
                 tools.closeXLast()
+                Thread.sleep(threadSleep)
                 tools.closeEsc()
             }
 
@@ -632,6 +637,7 @@ class HeadRef {
                 openCETD()
                 //tools.xpathClickMenu(flow)
                 clickMenu(flow, "messagebox", "TDMS")
+                Thread.sleep(threadSleep)
                 assertTrue(tools.titleWait("messagebox","TDMS"))
                 val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
                 //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))

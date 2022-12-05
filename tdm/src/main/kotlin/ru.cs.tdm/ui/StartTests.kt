@@ -2,7 +2,6 @@ package ru.cs.tdm.ui
 
 import ru.cs.tdm.cases.*
 import ru.cs.tdm.code.Runner
-import ru.cs.tdm.examples.JetBrainsTest
 
 fun startTests() {
     println("startTests arguments: ${TestsProperties.testCases.joinToString()}")
@@ -28,9 +27,6 @@ fun startTests() {
                     Runner().runTest(Filter::class.java)
                 }
 
-                "Example" -> {
-                    Runner().runTest(JetBrainsTest::class.java)
-                }
 
                 "ALL" -> {
                     Runner().runTest(ChangePass::class.java)

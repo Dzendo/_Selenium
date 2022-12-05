@@ -1,4 +1,4 @@
-package ru.cs.tdm.examples
+package examples
 
 fun main(args: Array<String>) {
 

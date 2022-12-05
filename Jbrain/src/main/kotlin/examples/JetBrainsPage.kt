@@ -1,4 +1,4 @@
-package ru.cs.tdm.examples
+package examples
 
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
