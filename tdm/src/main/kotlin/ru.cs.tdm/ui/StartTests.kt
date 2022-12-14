@@ -7,8 +7,9 @@ fun startTests() {
     println("startTests arguments: ${TestsProperties.testCases.joinToString()}")
     if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage}")
     if (TestsProperties.debugPrintNomber > 1) println("login= ${TestsProperties.login}   password= ${TestsProperties.password}")
-    for (test in TestsProperties.testCases)
-        repeat(TestsProperties.repeateCasesNomber) {
+
+    repeat(TestsProperties.repeateCasesNomber) {
+        for (test in TestsProperties.testCases) {
             if (TestsProperties.debugPrintNomber > 1) println("//// старт $test Повтор $it  ////////")
             when (test) {
                 "Pass" -> {
@@ -41,5 +42,6 @@ fun startTests() {
             }
             if (TestsProperties.debugPrintNomber > 1) println("//// стоп $test Повтор $it  ////////")
         }
+    }
 }
 

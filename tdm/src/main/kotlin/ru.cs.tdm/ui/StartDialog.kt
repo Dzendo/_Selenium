@@ -47,7 +47,7 @@ class StartDialog : JFrame("TDM365 Tests ") {
     private val modelRepeateCases: SpinnerModel = SpinnerNumberModel(
         3,  //initial value
         1,  //min
-        99,  //max
+        999,  //max
         1   //step
     )
     private val modelRepeateTests: SpinnerModel = SpinnerNumberModel(
