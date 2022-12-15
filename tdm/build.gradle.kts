@@ -7,7 +7,7 @@ plugins {
     //java
     //id("java")
     //kotlin("jvm") version "1.7.21"
-    kotlin("jvm") version "1.8.0-Beta"
+    kotlin("jvm") version "1.8.0-RC"
     application
 }
 group = "ru.cs.tdm"
@@ -37,10 +37,10 @@ tasks.withType<JavaCompile> {
 
 dependencies {
     implementation(kotlin("test"))
-    implementation("org.seleniumhq.selenium:selenium-java:4.6.0")
+    implementation("org.seleniumhq.selenium:selenium-java:4.7.2")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     { exclude ("org.bouncycastle") }
-    implementation("org.slf4j:slf4j-simple:2.0.5")
+    implementation("org.slf4j:slf4j-simple:2.0.6")
     implementation("org.junit.jupiter:junit-jupiter:5.9.1")
     //implementation("org.assertj:assertj-core:3.23.1")
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
