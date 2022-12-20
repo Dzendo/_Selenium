@@ -190,6 +190,7 @@ class Filter {
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
         tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
             ?.sendKeys(" $nomberFilter $localDateNow")
+
         tools.clickOK()
         // проверка что фильтр создан
         //tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
