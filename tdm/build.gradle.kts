@@ -7,7 +7,7 @@ plugins {
     //java
     //id("java")
     //kotlin("jvm") version "1.7.21"
-    kotlin("jvm") version "1.8.0-RC"
+    kotlin("jvm") version "1.8.0-RC2"
     application
 }
 group = "ru.cs.tdm"
@@ -36,7 +36,7 @@ tasks.withType<JavaCompile> {
 
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-test:1.8.0-RC")
+    implementation("org.jetbrains.kotlin:kotlin-test:1.8.0-RC2")
     implementation("org.seleniumhq.selenium:selenium-java:4.7.2")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     { exclude ("org.bouncycastle") }

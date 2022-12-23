@@ -138,12 +138,20 @@ class Filter {
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
         val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
-        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") "TDM365" else "Редактирование объекта"
+        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") "TDM365" else
+                if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
         if (DT > 8) println("Test нажатия на Фильтр $nomberFilter действие: $clickRef")
         Thread.sleep(threadSleep)
         tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
         Thread.sleep(threadSleep)
         assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $nomberFilter $localDateNow")
+
+        Thread.sleep(threadSleep)
+        if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
+            println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $nomberFilter действие: $clickRef")
+            screenShot()
+        }
+
         Thread.sleep(threadSleep)
         tools.referenceClickLast(clickRef)
         Thread.sleep(threadSleep)
@@ -161,7 +169,7 @@ class Filter {
         //screenShot()
         tools.closeEsc5()
         Thread.sleep(threadSleep)
-        //driver.navigate().refresh()
+        driver.navigate().refresh()
     }
     fun screenShot(name: String = "image") {
         val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
@@ -190,9 +198,38 @@ class Filter {
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
         tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
             ?.sendKeys(" $nomberFilter $localDateNow")
-
+        Thread.sleep(threadSleep)
+        // Проверить что в поле стоит дата, если нет, то Скрин
+        val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
+            ?.getAttribute("value") ?: "NONE"
+         if (ATTR_USER_QUERY_NAME.contains(" $nomberFilter $localDateNow").not()){
+             if (DT > 0) println("&&&&&&&&&&01&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
+             screenShot()
+         }
         tools.clickOK()
-        // проверка что фильтр создан
+    }
+    /**
+     *  тест создание нового фильтра
+     */
+    @RepeatedTest(NN)
+    @DisplayName("Посмотреть фильтр")
+    fun n02_ViewUserQuery(repetitionInfo: RepetitionInfo) {
+        val nomberFilter = "${repetitionInfo.currentRepetition}"
+        val viewUser = "Посмотреть фильтр"
+        if (DT >8) println("Test посмотреть на $viewUser")
+        // проверка что фильтр создан, если нет
+        workTable()
+        clickFilter(nomberFilter, "CMD_VIEW_ONLY")
+
+        // Проверить что в поле стоит дата, если нет, то Скрин
+        val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
+            ?.getAttribute("value") ?: "NONE"
+        if (ATTR_USER_QUERY_NAME.contains(" $nomberFilter $localDateNow").not()){
+            if (DT > 0) println("&&&&&&&&&02&&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
+            screenShot()
+        }
+
+        tools.clickOK("Закрыть")
         //tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
 
     }
@@ -201,7 +238,7 @@ class Filter {
          */
     @RepeatedTest(NN)
     @DisplayName("Заполнение текстовых полей фильтра")
-    fun n02_fillingFilterTest(repetitionInfo: RepetitionInfo) {
+    fun n03_fillingFilterTest(repetitionInfo: RepetitionInfo) {
             workTable()
             val nomberFilter = "${repetitionInfo.currentRepetition}"
             Thread.sleep(threadSleep)
