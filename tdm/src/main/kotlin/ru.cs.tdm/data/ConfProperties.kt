@@ -1,5 +1,6 @@
 package ru.cs.tdm.data
 
+import ru.cs.tdm.ui.TestsProperties
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -14,10 +15,13 @@ object ConfProperties {
     private var fileOpen: Boolean = false
 
     init {
-        properties.setProperty("loginpageTDM","http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects")
+        //properties.setProperty("loginpageTDM","http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects")
+        properties.setProperty("loginpageTDM", TestsProperties.loginpage)
         //properties.setProperty("loginpageTDM","http://tdms-srv2a:777/client/#objects/")
-        properties.setProperty("loginTDM","SYSADMIN")
-        properties.setProperty("passwordTDM","753951")
+        //properties.setProperty("loginTDM","SYSADMIN")
+        properties.setProperty("loginTDM", TestsProperties.login)
+        //properties.setProperty("passwordTDM","753951")
+        properties.setProperty("passwordTDM",TestsProperties.password)
         try {
             //указание пути до файла с настройками
             fileInputStream = FileInputStream("conf.properties")

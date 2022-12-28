@@ -3,6 +3,13 @@ package ru.cs.tdm.ui
 import ru.cs.tdm.data.ConfProperties
 
 object TestsProperties {
+    var fluentInDurationNomber = 3000L
+    var pollingInDurationNomber = 500L
+    var fluentOutDurationNomber = 7000L
+    var pollingOutDurationNomber = 1000L
+    var repeateInNomber = 5
+    var repeateOutNomber = 3
+
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
     var threadSleepNomber = 1000L // задержки где они есть 1сек

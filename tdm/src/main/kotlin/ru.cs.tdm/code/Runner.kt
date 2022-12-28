@@ -34,7 +34,7 @@ class Runner {
         launcher.registerTestExecutionListeners(listener)
         //launcher.execute(request, listener)
         launcher.execute(request)
-        println("###############  Test ${testClass.canonicalName}! ################")
+        println("=================  Test ${testClass.canonicalName}! ===================")
         val summary: TestExecutionSummary = listener.summary
         summary.printTo(PrintWriter(System.out))
     }

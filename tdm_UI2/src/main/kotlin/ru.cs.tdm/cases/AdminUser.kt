@@ -162,7 +162,6 @@ class AdminUser {
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
         tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
 
-        if (TestsProperties.loginpage.contains("555").not())   //%%6.2
         assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers))
 
         if (DT >7) println("Конец BeforeEach AdminUserTest")
@@ -191,7 +190,7 @@ class AdminUser {
     @DisplayName("Создать пользователя")
     fun n04_createUserTest(repetitionInfo: RepetitionInfo) {
         val createUser = "Создать пользователя"
-        if (DT >8) println("Test нажатия на $createUser")
+        if (DT > 6) println("Test нажатия на $createUser")
 
         // создать пользователя data-reference="BUTTON_USER_CREATE"
         tools.referenceClickLast("BUTTON_USER_CREATE")
@@ -209,7 +208,7 @@ class AdminUser {
         val nomberUser = "${repetitionInfo.currentRepetition} ${LocalDateTime.now()}"
         //val testFIO = "Тестовая Фамилия $nomberUser"
         val fillingUser = "Редактирование пользователя"
-        if (DT >8) println("Test нажатия на $fillingUser")
+        if (DT > 6) println("Test нажатия на $fillingUser")
         assertTrue(tools.titleWait("window", fillingUser))
         // //html/body/descendant::div[@data-reference]
         tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
@@ -238,7 +237,7 @@ class AdminUser {
 
         beforeEach()
         val editUser = "Редактировать пользователя"
-        if (DT >8) println("Test нажатия на $editUser")
+        if (DT > 6) println("Test нажатия на $editUser")
 
         //val testUpFIO = "Тестовая Фамилия"
 
@@ -267,7 +266,7 @@ class AdminUser {
         assertTrue(tools.titleWait("tdmsSelectObjectGridDialog","Выбор профиля"))
 
         val profileUser = "Руководитель"
-        if (DT >8) println("Test нажатия на $profileUser")
+        if (DT > 6) println("Test нажатия на $profileUser")
         //tools.idList()
         tools.xpathLast("//span[text()= '$profileUser']/ancestor::td")?.click()
         tools.clickOK()  // закрыть выбор профиля с выбором руководителя
@@ -286,7 +285,7 @@ class AdminUser {
          */
         beforeEach()
         val createGroup = "Создание новой группы"
-        if (DT >8) println("Test нажатия на $createGroup")
+        if (DT > 6) println("Test нажатия на $createGroup")
         //  Создания Группы data-reference="BUTTON_GROUP_CREATE"
         tools. referenceClickLast("BUTTON_GROUP_CREATE")
         Thread.sleep(threadSleep)
@@ -310,7 +309,7 @@ class AdminUser {
         beforeEach()
 
         val deleteGroup = "Удаление группы"
-        if (DT >8) println("Test нажатия на $deleteGroup")
+        if (DT > 6) println("Test нажатия на $deleteGroup")
         // data-reference="GRID_GROUPS"   data-reference="GRID_USERS"
         tools.xpathLast("//div[contains(text(), 'Тестовая')]")?.click()
         //  Проверить что выделенная группа Тестовая data-reference="GROUP_NAME"
@@ -336,7 +335,7 @@ class AdminUser {
 
         assertTrue(tools.titleWait("window", "Редактирование групп"))
         //val testFIO = "Тестовая Фамилия"
-        if (DT >8) println("Удаление на $nomberUser")
+        if (DT > 6) println("Test нажатия на Удаление на $nomberUser")
         tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
         tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
         tools.clickOK("Да")
@@ -350,7 +349,7 @@ class AdminUser {
         val nomberUser = "Тестовый ${repetitionInfo.currentRepetition + 7 } "
         assertTrue(tools.titleWait("window", "Редактирование групп"))
         //val testFIO = "Тестовая Фамилия"
-        if (DT >8) println("Удаление на $nomberUser")
+        if (DT > 6) println("Удаление на $nomberUser")
         tools.xpathLast("//div[contains(text(), '$nomberUser')]")?.click()
         tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
         tools.clickOK("Да")

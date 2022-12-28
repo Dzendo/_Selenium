@@ -90,10 +90,10 @@ class Filter {
             tools = Tools(driver)
 
             val loginpage = TestsProperties.loginpage
-            if (DT > 8) println("Открытие страницы $loginpage")
+            if (DT > 7) println("Открытие страницы $loginpage")
             val login = TestsProperties.login
             val password = TestsProperties.password
-            if (DT > 8) println("login= $login   password= $password")
+            if (DT > 7) println("login= $login   password= $password")
             driver.get(loginpage)
             assertTrue(driver.title == "Tdms")
             Login(driver).loginIn(login, password)
@@ -116,7 +116,7 @@ class Filter {
 
         if (DT > 7) println("Начало BeforeEach FilterTest")
         val mainMenu = "Объекты"
-        if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
+        if (DT > 7) println("Test нажатия на $mainMenu TDMS Web")
         tools.qtipClickLast(mainMenu)
 //        assertTrue(tools.titleContain("TDM365"))  // сбоит нечасто заголовок страницы на создании
         assertTrue(tools.qtipPressedLast("Объекты"))
@@ -125,7 +125,7 @@ class Filter {
     // пришлось ввести т.к. при рабочем столе два значка "создать фильтр"
     fun workTable() {
         val workTable = "Рабочий стол"
-        if (DT >8) println("Test нажатия на $workTable")
+        if (DT >7) println("Test нажатия на $workTable")
         tools.qtipClickLast(workTable)
         //Thread.sleep(threadSleep)
         tools.xpathClickLast("//span[text()= '$workTable (SYSADMIN)']") // встать в дереве на Рабочий стол (SYSADMIN)
@@ -138,12 +138,20 @@ class Filter {
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
         val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
-        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") "TDM365" else "Редактирование объекта"
-        if (DT > 8) println("Test нажатия на Фильтр $nomberFilter действие: $clickRef")
+        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") "TDM365" else
+                if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
+        if (DT > 6) println("Test нажатия на Фильтр $nomberFilter действие: $clickRef")
         Thread.sleep(threadSleep)
         tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
         Thread.sleep(threadSleep)
         assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $nomberFilter $localDateNow")
+
+        Thread.sleep(threadSleep)
+        if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
+            println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $nomberFilter действие: $clickRef")
+            screenShot()
+        }
+
         Thread.sleep(threadSleep)
         tools.referenceClickLast(clickRef)
         Thread.sleep(threadSleep)
@@ -161,7 +169,7 @@ class Filter {
         //screenShot()
         tools.closeEsc5()
         Thread.sleep(threadSleep)
-        //driver.navigate().refresh()
+        driver.navigate().refresh()
     }
     fun screenShot(name: String = "image") {
         val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
@@ -180,19 +188,48 @@ class Filter {
     fun n01_CreateUserQuery(repetitionInfo: RepetitionInfo) {
         val nomberFilter = "${repetitionInfo.currentRepetition}"
         val createUser = "Создать фильтр"
-        if (DT >8) println("Test нажатия на $createUser")
+        if (DT > 6) println("Test нажатия на $createUser")
 
         tools.referenceClickLast("CMD_CREATE_USER_QUERY")
         assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
-        if (TestsProperties.loginpage.contains("777").not())   //%%6.2
-        tools.referenceClickLast("tabbar-FORM_USER_QUERY")
-//        assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
+        //  оставить ждать Омск
+        // tools.referenceClickLast("tabbar-FORM_USER_QUERY")
+        //  assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
         tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
             ?.sendKeys(" $nomberFilter $localDateNow")
-
+        Thread.sleep(threadSleep)
+        // Проверить что в поле стоит дата, если нет, то Скрин
+        val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
+            ?.getAttribute("value") ?: "NONE"
+         if (ATTR_USER_QUERY_NAME.contains(" $nomberFilter $localDateNow").not()){
+             if (DT > 0) println("&&&&&&&&&&01&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
+             screenShot()
+         }
         tools.clickOK()
-        // проверка что фильтр создан
+    }
+    /**
+     *  тест создание нового фильтра
+     */
+    @RepeatedTest(NN)
+    @DisplayName("Посмотреть фильтр")
+    fun n02_ViewUserQuery(repetitionInfo: RepetitionInfo) {
+        val nomberFilter = "${repetitionInfo.currentRepetition}"
+        val viewUser = "Посмотреть фильтр"
+        if (DT > 6) println("Test посмотреть на $viewUser")
+        // проверка что фильтр создан, если нет
+        workTable()
+        clickFilter(nomberFilter, "CMD_VIEW_ONLY")
+
+        // Проверить что в поле стоит дата, если нет, то Скрин
+        val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
+            ?.getAttribute("value") ?: "NONE"
+        if (ATTR_USER_QUERY_NAME.contains(" $nomberFilter $localDateNow").not()){
+            if (DT > 0) println("&&&&&&&&&02&&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
+            screenShot()
+        }
+
+        tools.clickOK("Закрыть")
         //tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
 
     }
@@ -201,12 +238,12 @@ class Filter {
          */
     @RepeatedTest(NN)
     @DisplayName("Заполнение текстовых полей фильтра")
-    fun n02_fillingFilterTest(repetitionInfo: RepetitionInfo) {
+    fun n03_fillingFilterTest(repetitionInfo: RepetitionInfo) {
             workTable()
             val nomberFilter = "${repetitionInfo.currentRepetition}"
             Thread.sleep(threadSleep)
             val fillingUser = "Заполнение текстовых полей фильтра"
-            if (DT > 8) println("Test нажатия на $fillingUser")
+            if (DT > 6) println("Test нажатия на $fillingUser")
 
             clickFilter(nomberFilter)  // встать на фильтр
 
@@ -249,7 +286,7 @@ class Filter {
             workTable()
             val nomberFilter = "${repetitionInfo.currentRepetition}"
             val editFilter = "Заполнение ссылочных полей фильтра"
-        if (DT > 8) println("Test нажатия на $editFilter")
+        if (DT > 6) println("Test нажатия на $editFilter")
 
         clickFilter(nomberFilter)  // встать на фильтр
 
@@ -262,9 +299,9 @@ class Filter {
             val BUTTON_OBJDEV_SEL = {
                 tools.referenceClickLast("BUTTON_OBJDEV_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"))
-                if (TestsProperties.loginpage.contains("777"))   //%%6.2
+
                 tools.xpathLast("//*[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
-                else tools.xpathLast("//div[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
+
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -283,10 +320,8 @@ class Filter {
             val BUTTON_PROJECT_SEL = {
                 tools.referenceClickLast("BUTTON_PROJECT_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"))
-                if (TestsProperties.loginpage.contains("777"))   //%%6.2
+
                 tools.xpathLast("//*[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
-                    ?.click()                   //tr  tbody  table
-                else  tools.xpathLast("//div[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
                     ?.click()                   //tr  tbody  table
 
                 Thread.sleep(threadSleep)
@@ -307,9 +342,8 @@ class Filter {
             val BUTTON_TYPE_DOC = {
                 tools.referenceClickLast("BUTTON_TYPE_DOC")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Типы технической документации"))
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
-                tools.xpathLast("//*[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
-                else tools.xpathLast("//a[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
+
+                tools.xpathLast("//a[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -325,9 +359,8 @@ class Filter {
             val BUTTON_OBJ_STR = {
                 tools.referenceClickLast("BUTTON_OBJ_STR")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Объекты структуры"))
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
-                tools.xpathLast("//*[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
-                else tools.xpathLast("//a[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
+
+                tools.xpathLast("//a[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -343,9 +376,8 @@ class Filter {
             val BUTTON_ORG_SEL = {
                 tools.referenceClickLast("BUTTON_ORG_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"))
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
-                tools.xpathLast("//*[contains(text(),'СМУ')]/ancestor::tr")?.click()
-                else tools.xpathLast("//a[contains(text(),'СМУ')]/ancestor::tr")?.click()
+
+                tools.xpathLast("//a[contains(text(),'СМУ')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -369,7 +401,7 @@ class Filter {
         workTable()
         val nomberFilter = "${repetitionInfo.currentRepetition}"
         val editFilter = "Заполнение дат и выпадающих фильтра"
-        if (DT > 8) println("Test нажатия на $editFilter")
+        if (DT > 6) println("Test нажатия на $editFilter")
 
         clickFilter(nomberFilter)  // встать на фильтр
 
@@ -414,7 +446,7 @@ class Filter {
         workTable()
         val nomberFilter = "${repetitionInfo.currentRepetition}"
         val clearFilter = "Очистка фильтров"
-        if (DT > 8) println("Test нажатия на $clearFilter")
+        if (DT > 6) println("Test нажатия на $clearFilter")
 
         clickFilter(nomberFilter)  // встать на фильтр
     }
@@ -429,7 +461,7 @@ class Filter {
 
        val nomberFilter = "${repetitionInfo.currentRepetition}"
        val deleteFilter = "Удалить фильтр"
-       if (DT >8) println("Test нажатия на $deleteFilter")
+       if (DT > 6) println("Test нажатия на $deleteFilter")
 
         clickFilter(nomberFilter, "CMD_DELETE_USER_QUERY")  // встать на фильтр
 

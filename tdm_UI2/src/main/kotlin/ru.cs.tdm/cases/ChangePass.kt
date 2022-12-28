@@ -106,8 +106,7 @@ class ChangePass {
         if (DT > 8) println("Test нажатия на $allUsers")
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
         tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
-        if (loginpage.contains("555").not())   //%%6.2
-            assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers))
+        assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers))
         if (DT > 7) println("Открыли всех пользователей")
 
         if (DT >8) println("Test нажатия на $click")
@@ -130,13 +129,12 @@ class ChangePass {
     //@DisplayName("Delete user Pass")
     @DisplayName("0. Проверка пользователя ChangePass")
     fun n00_checkUserPass() {
-        if (DT > 8) println("Test проверка user Pass")
+        if (DT > 6) println("Test проверка user Pass")
         openAllUsers("NONE")
 
         // Проверка, что Pass отсутствует GRID_USERS
         Thread.sleep(threadSleep)
-       // if (TestsProperties.loginpage.contains("555").not())   //%%6.2
-           val changePassNo = driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[contains(text(),'ChangePass')]")).isEmpty()
+        val changePassNo = driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[contains(text(),'ChangePass')]")).isEmpty()
         //if (DT > 8) println("ChangePass отсутствует GRID_USERS")
             if (changePassNo.not()) {
                 if (DT > 8) println("Удаление Pass")
@@ -155,7 +153,7 @@ class ChangePass {
     //@DisplayName("Create user Pass")
     @DisplayName("1. Создание нового пользователя ChangePass")
     fun n01_CreateUserChangePass() {
-         if (DT > 8) println("Test нажатия на Create user Pass")
+         if (DT > 6) println("Test нажатия на Create user Pass")
          openAllUsers("BUTTON_USER_CREATE")
 
          tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
@@ -166,11 +164,9 @@ class ChangePass {
          Thread.sleep(threadSleep)
          // Проверить что Pass есть в списке
          assertTrue(tools.titleWait("window", "Редактирование групп"))
-         if (DT > 8) println("Проверка Pass")
+         if (DT > 6) println("Проверка Pass")
          tools.xpathLast("//div[contains(text(), 'ChangePass')]")?.click()
          Thread.sleep(threadSleep)
-         if (loginpage.contains("555").not())   //%%6.2
-          //   assertTrue((tools.xpathLast("//tr[@aria-selected='true']")?.text ?: "None") == "ChangePass")
          assertTrue((tools.xpathLast("//table[contains(@class, 'x-grid-item-selected')]")?.text ?: "None") == "ChangePass")
 
          tools.clickOK()
@@ -183,12 +179,12 @@ class ChangePass {
          @DisplayName("2. Заполнение нового пользователя ChangePass")
          fun n02_FillingChangePass() {
 
-             if (DT > 8) println("Test нажатия на Create user Pass")
+             if (DT > 6) println("Test нажатия на Create user Pass")
              openAllUsers("BUTTON_USER_EDIT")
 
              val description = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
          val fillingUser = "Редактирование пользователя"
-         if (DT >8) println("Test нажатия на $fillingUser")
+         if (DT >6) println("Test нажатия на $fillingUser")
          assertTrue(tools.titleWait("window", fillingUser))
 
          // //html/body/descendant::div[@data-reference]
@@ -213,11 +209,10 @@ class ChangePass {
              Thread.sleep(threadSleep)
          // Проверить что Pass есть в списке
          assertTrue(tools.titleWait("window", "Редактирование групп"))
-         if (DT > 8) println("Проверка Pass")
+         if (DT > 6) println("Проверка Pass")
          tools.xpathLast("//div[contains(text(), 'ChangePass')]")?.click()
          Thread.sleep(threadSleep)
-         if (loginpage.contains("555").not())   //%%6.2
-//         assertTrue((tools.xpathLast("//tr[@aria-selected='true']")?.text ?: "None") == "ChangePass")
+
          assertTrue((tools.xpathLast("//table[contains(@class, 'x-grid-item-selected')]")?.text ?: "None").contains("ChangePass"))
 
          tools.clickOK()
@@ -236,7 +231,7 @@ class ChangePass {
     @DisplayName("4. Смена пользовательского пароля ChangePass")
     fun n04_changeUserPass() {
         val fillingUser = "Смена пароля"
-        if (DT > 8) println("Test нажатия на $fillingUser")
+        if (DT > 6) println("Test нажатия на $fillingUser")
         tools.qtipClickLast("Настройки")
         //tools.qtipClickLast("Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи.")
         tools.qtipClickLast("Надежный пароль")
@@ -265,7 +260,7 @@ class ChangePass {
     fun n05_changeUserPass() {
         val fillingUser = "Смена пароля"
 
-        if (DT > 8) println("Test нажатия на $fillingUser")
+        if (DT > 6) println("Test нажатия на $fillingUser")
         tools.qtipClickLast("Настройки")
         //tools.qtipClickLast("Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи.")
         tools.qtipClickLast("Надежный пароль")
@@ -299,7 +294,7 @@ class ChangePass {
     //@DisplayName("Delete user Pass")
     @DisplayName("9. Удаление пользователя ChangePass")
     fun n09_deleteUserPass() {
-        if (DT > 8) println("Test удаление user Pass")
+        if (DT > 6) println("Test удаление user Pass")
         openAllUsers("BUTTON_USER_DELETE")
 
         if (DT > 8) println("Удаление Pass")
@@ -307,7 +302,7 @@ class ChangePass {
         tools.clickOK("Да")
         // Проверка, что Pass отсутствует GRID_USERS
         Thread.sleep(threadSleep)
-        if (TestsProperties.loginpage.contains("555").not())   //%%6.2
+
         assertTrue (driver.findElements(By.xpath("//div [@data-reference='GRID_USERS']/descendant::div[text()= 'ChangePass']")).isEmpty())
         //if (DT > 8) println("ChangePass отсутствует GRID_USERS")
         tools.clickOK("ОК")

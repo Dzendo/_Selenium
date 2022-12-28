@@ -4,44 +4,49 @@ import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions.*
 import org.openqa.selenium.support.ui.FluentWait
-import org.openqa.selenium.support.ui.WebDriverWait
-import ru.cs.tdm.cases.AdminUser
+//import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.ui.TestsProperties
 import java.time.Duration
-
-const val fluentInDuration = 3L
+/*
+const val fluentInDuration = 3000L
 const val pollingInDuration = 500L
-const val fluentOutDuration = 7L
+const val fluentOutDuration = 7000L //7L
 const val pollingOutDuration = 1000L
 const val repeateIn = 5
 const val repeateOut= 3
-
+*/
 class Tools(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
-    //private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(fluentOutDuration))// Явное ожидание
-    //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(fluentDuration))      // Неявное ожидание
+    private val fluentInDuration = TestsProperties.fluentInDurationNomber
+    private val pollingInDuration = TestsProperties.pollingInDurationNomber
+    private val fluentOutDuration = TestsProperties.fluentOutDurationNomber
+    private val pollingOutDuration = TestsProperties.pollingOutDurationNomber
+    private val repeateIn = TestsProperties.repeateInNomber
+    private val repeateOut= TestsProperties.repeateOutNomber
+
+    //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(fluentOutDuration))// Явное ожидание
+    //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(fluentDuration))          // Неявное ожидание
     private val fluentOutWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
-                                        .withTimeout(Duration.ofSeconds(fluentOutDuration))
+                                        .withTimeout(Duration.ofMillis(fluentOutDuration))
                                         .pollingEvery(Duration.ofMillis(pollingOutDuration))
-                                        .ignoreAll(listOf( NoSuchElementException::class.java ,
+                                        .ignoreAll(listOf( NoSuchElementException::class.java,
                                                 ElementNotInteractableException::class.java,
                                                 ElementClickInterceptedException::class.java,
                                                 StaleElementReferenceException::class.java))
     private val fluentInWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
-                                        .withTimeout(Duration.ofSeconds(fluentInDuration))
+                                        .withTimeout(Duration.ofMillis(fluentInDuration))
                                         .pollingEvery(Duration.ofMillis(pollingInDuration))
-                                        .ignoreAll(listOf( NoSuchElementException::class.java ,
+                                        .ignoreAll(listOf( NoSuchElementException::class.java,
                                                 ElementNotInteractableException::class.java,
                                                 ElementClickInterceptedException::class.java,
                                                 StaleElementReferenceException::class.java))
-
-
     fun xpathLast(xpath: String): WebElement? {
         //val xpathHtml = xpath
         val xpathHtml = "//html/body/descendant::${xpath.drop(2)}"
         repeat(repeateIn) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                 val listElements = fluentInWait.until(presenceOfAllElementsLocatedBy(By.xpath(xpathHtml))) //"//html/body${xpath.drop(1)}")))
                 if ((listElements!=null) and (listElements.size > 0)) {
@@ -60,6 +65,7 @@ class Tools(val driver: WebDriver) {
     fun xpathClickLast(xpath: String): Boolean {
 
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                 val element = fluentOutWait.until { xpathLast(xpath)?.click() }
                 if (element != null) return true
@@ -72,6 +78,7 @@ class Tools(val driver: WebDriver) {
     }
     fun qtipLast(qtip: String): WebElement? {
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                 val element = fluentOutWait.until { xpathLast("//*[contains(@data-qtip, '$qtip')]") }
                 if (element != null) return element
@@ -84,6 +91,7 @@ class Tools(val driver: WebDriver) {
     }
     fun referenceLast(reference: String): WebElement? {
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                 val element = fluentOutWait.until { xpathLast("//*[contains(@data-reference, '$reference')]") }
                 if (element != null) return element
@@ -96,6 +104,7 @@ class Tools(val driver: WebDriver) {
     }
     fun qtipLastClass(qtip: String): String? {
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                val element = fluentOutWait.until { qtipLast(qtip) }
                 if (element != null) return element.getAttribute("class")
@@ -108,8 +117,8 @@ class Tools(val driver: WebDriver) {
     }
 
     fun qtipClickLast(qtip: String): Boolean {
-
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                 val element = fluentOutWait.until { qtipLast(qtip)?.click() }
                 if (element != null) return true
@@ -138,6 +147,7 @@ class Tools(val driver: WebDriver) {
     }
     fun xpathClickMenu(menu:String): Boolean {
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
                 fluentOutWait.until{
                     xpathLast("//span[starts-with(@id, 'menuitem-') and contains(@id, '-textEl') and  contains(text(),'$menu')]/parent::a")
@@ -155,11 +165,13 @@ class Tools(val driver: WebDriver) {
 
     fun xpathGetText(xpath: String): String = fluentOutWait.until { xpathLast(xpath)?.text ?:"NULL" }
     fun xpathWaitTextTry(xpath: String, text: String): Boolean {
+        Thread.sleep(threadSleep / 10)  // нужно
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
            if (xpathGetText(xpath).contains(text)) return true
-            if (DT >5) println("###N$it попытка #### xpathGetText не взят- ждем $it sec  xpathGetText=$xpath #######")
+            if (DT >5) println("###N$it попытка #### xpathGetTextTry за $it sec не взят-$text xpath=$xpath #######")
         }
-        if (DT >4) println("&&&&&&&&& xpathWaitTextTry за $repeateOut опросов через 1 сек xpathWaitTextTry=$xpath &&&&&&&&&")
+        if (DT >4) println("&&&&&&&&& xpathWaitTextTry за $repeateOut опросов через 1 сек не взят-$text xpath=$xpath &&&&&&&&&")
         return false
     }
     fun xpathWaitText(xpath: String, text: String): Boolean =
@@ -177,11 +189,12 @@ class Tools(val driver: WebDriver) {
         xpathLast("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun titleWait(window:String, title: String): Boolean =
         xpathWaitTextTry("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
-        fun windowTitle(): String =
+    fun windowTitle(): String =
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun clickOK(OK: String = ""): Boolean {
         //41e 43a 41e 41a 4f 4b 414 430
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             val xpath: String = if (OK.isNotEmpty()) "//span[text() = '$OK']/ancestor::a"
                                 else "//span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a"
             try {
@@ -196,6 +209,7 @@ class Tools(val driver: WebDriver) {
     }
     fun clickButton(name: String): Boolean {
         repeat(repeateOut) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {  // 41e 41a  41e 43a
                 val element = fluentOutWait.until {
                     xpathLast("//span[text() = '$name']/ancestor::a")
@@ -212,6 +226,7 @@ class Tools(val driver: WebDriver) {
     // //div[starts-with(@id, 'messagebox-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost')) and contains(text(),'TDMS')]
     //div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost')) and contains(text(),"Редактирование групп")]
     fun nomberTitle(window:String, title: String): Int {
+        Thread.sleep(threadSleep / 10)  // не нужно
         val element = xpathLast(
             "//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost')) and contains(text(),'$title')]"
         ) ?: return -1
@@ -225,6 +240,7 @@ class Tools(val driver: WebDriver) {
         return nomberInt
     }
     fun idRef(reference:String): String? {
+        Thread.sleep(threadSleep / 10)  // не нужно
         val element = referenceLast(reference) ?: return null
         val id: String = element.getAttribute("id")
         if (id.isEmpty()) return ""
@@ -245,6 +261,7 @@ class Tools(val driver: WebDriver) {
 
 
     fun idList() {
+        Thread.sleep(threadSleep / 10)  // не нужно
         println("ID List...")
         var _staleElementReferenceException: Int = 0
         val elementList = driver.findElements(By.xpath("//*[contains(@id,'-') or contains(@id,'_')]"))

@@ -10,7 +10,7 @@ fun startTests() {
 
     repeat(TestsProperties.repeateCasesNomber) {
         for (test in TestsProperties.testCases) {
-            if (TestsProperties.debugPrintNomber > 1) println("//// старт $test Повтор $it  ////////")
+            if (TestsProperties.debugPrintNomber > 1) println("-------------- старт $test Повтор $it ------------")
             when (test) {
                 "Pass" -> {
                     Runner().runTest(ChangePass::class.java)
@@ -40,7 +40,7 @@ fun startTests() {
                     println("Test $test! Unknowns")
                 }
             }
-            if (TestsProperties.debugPrintNomber > 1) println("//// стоп $test Повтор $it  ////////")
+            if (TestsProperties.debugPrintNomber > 1) println("-------------- стоп $test Повтор $it  --------------")
         }
     }
 }

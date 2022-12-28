@@ -29,7 +29,8 @@ class HeadRef {
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
         private const val NN:Int = 1                    // количество повторений тестов
-
+        private val repeateIn: Int = TestsProperties.repeateInNomber
+        private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
         lateinit var driver: WebDriver
 
@@ -132,7 +133,7 @@ class HeadRef {
         @DisplayName("Объекты")
         fun mainMenuTest() {
             val mainMenu = "Объекты"
-            if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
+            if (DT > 6) println("Test нажатия на $mainMenu TDMS Web")
             // Клик на элемент с data-qtip="Объекты"
             tools.qtipClickLast(mainMenu)
             // Проверяем заголовок закладки Junit
@@ -145,7 +146,7 @@ class HeadRef {
         @DisplayName("Рабочий стол")
         fun workTableTest() {
             val workTable = "Рабочий стол"
-            if (DT > 8) println("Test нажатия на $workTable")
+            if (DT > 6) println("Test нажатия на $workTable")
             tools.qtipClickLast(workTable)
             assertTrue(tools.titleContain(workTable))
             assertTrue(tools.qtipPressedLast(workTable))
@@ -155,7 +156,7 @@ class HeadRef {
         @DisplayName("Объекты")
         fun objectsTest() {
             val objects = "Объекты"
-            if (DT > 8) println("Test нажатия на $objects")
+            if (DT > 6) println("Test нажатия на $objects")
             tools.qtipClickLast(objects)
             assertTrue(tools.titleContain("TDM365"))
             assertTrue(tools.qtipPressedLast(objects))
@@ -165,14 +166,14 @@ class HeadRef {
         @DisplayName("Почта")
         fun mailTest() {
             val mail = "Почта"
-            if (DT > 8) println("Test нажатия на $mail")
+            if (DT > 6) println("Test нажатия на $mail")
             tools.qtipClickLast(mail)
             assertTrue(tools.titleContain(mail))
             assertTrue(tools.qtipPressedLast(mail))
         }
 
         @RepeatedTest(NN)
-        //@Disabled
+        @Disabled
         @DisplayName("Совещания")
         fun meetingTest() {
             var meeting = "Совещания"
@@ -181,20 +182,20 @@ class HeadRef {
                 meeting = "Чат"
                 title = "Каналы"
             }
-            if (DT > 8) println("Test нажатия на $meeting")
+            if (DT > 6) println("Test нажатия на $meeting")
             tools.qtipClickLast(meeting)
             assertTrue(tools.titleContain(title))
             assertTrue(tools.qtipPressedLast(meeting))
         }
 
         @RepeatedTest(NN)
-        //@Disabled
+        @Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
 
             //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val ganttchart = "Диаграмма Ганта"
-            if (DT > 8) println("Test нажатия на $ganttchart")
+            if (DT > 6) println("Test нажатия на $ganttchart")
             tools.qtipClickLast(ganttchart)
             //assertTrue(tools.titleContain(ganttchart))  // Нет заголовка
             assertTrue(tools.qtipPressedLast(ganttchart))
@@ -208,7 +209,7 @@ class HeadRef {
         @DisplayName("Справка")
         fun helpTest() {
             val help = "Справка"
-            if (DT > 8) println("Test нажатия на $help")
+            if (DT > 6) println("Test нажатия на $help")
             tools.qtipClickLast(help)
             //assertFalse(tools.titleContain(help))      // Исправить!!! NOT
             assertTrue(tools.qtipPressedLast(help))
@@ -218,7 +219,7 @@ class HeadRef {
         @DisplayName("Искать")
         fun searchTest() {
             val search = "Искать"
-            if (DT > 8) println("Test нажатия на $search")
+            if (DT > 6) println("Test нажатия на $search")
             tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка !! Убрать
             tools.qtipClickLast("Объекты")
             tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
@@ -236,7 +237,7 @@ class HeadRef {
         @DisplayName("Уведомления")
         fun notificationTest() {
             val notification = "Уведомления"
-            if (DT > 8) println("Test нажатия на $notification")
+            if (DT > 6) println("Test нажатия на $notification")
             tools.qtipClickLast(notification)
             // Запрашивает заголовок открывшегося окна и проверяет, что он Окно сообщений
             assertEquals("Окно сообщений", tools.windowTitle())
@@ -275,7 +276,7 @@ class HeadRef {
             //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh() // Костыль проверить убрать
             driver.navigate().refresh()
             val open_showTree = "Показать/скрыть дерево"
-            if (DT > 8) println("Test нажатия на $open_showTree")
+            if (DT > 6) println("Test нажатия на $open_showTree")
             assertTrue(tools.qtipPressedLast(open_showTree)) // Исправить на референс
             tools.referenceClickLast("TDMS_COMMAND_COMMON_SHOWTREE")  // Скрыть дерево
             //tools.qtipClickLast(open_showTree)   // Скрыть дерево
@@ -291,7 +292,7 @@ class HeadRef {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             driver.navigate().refresh()
             val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
-            if (DT > 8) println("Test нажатия на $open_showPreviewPanel")
+            if (DT > 6) println("Test нажатия на $open_showPreviewPanel")
             assertTrue(tools.qtipPressedLast(open_showPreviewPanel))
             tools.qtipClickLast(open_showPreviewPanel)
             assertFalse(tools.qtipPressedLast(open_showPreviewPanel))
@@ -306,7 +307,7 @@ class HeadRef {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             driver.navigate().refresh()
             val filter = "Создать фильтр"
-            if (DT > 8) println("Test нажатия на $filter")
+            if (DT > 6) println("Test нажатия на $filter")
             tools.referenceClickLast("CMD_CREATE_USER_QUERY")
             //tools.qtipClickLast(filter)
             assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
@@ -319,7 +320,7 @@ class HeadRef {
         fun renewTest() {  //(repetitionInfo: RepetitionInfo) {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val renew = "Обновить"
-            if (DT > 8) println("Test нажатия на $renew")
+            if (DT > 6) println("Test нажатия на $renew")
             tools.referenceClickLast("TDMS_COMMAND_UPDATE")
             //tools.qtipClickLast(renew)
         }
@@ -329,7 +330,7 @@ class HeadRef {
         @DisplayName("Администрирование групп")
         fun adminUserTest() {
             val adminUser = "Администрирование групп"
-            if (DT > 8) println("Test нажатия на $adminUser")
+            if (DT > 6) println("Test нажатия на $adminUser")
             tools.referenceClickLast("CMD_GROUP_CHANGE")
             //tools.qtipClickLast(adminUser)
             assertTrue(tools.titleWait("window", "Редактирование групп"))
@@ -342,7 +343,7 @@ class HeadRef {
         @DisplayName("Импорт пользователей")
         fun importUserTest() {
             val importUser = "Импорт пользователей"
-            if (DT > 8) println("Test нажатия на $importUser")
+            if (DT > 6) println("Test нажатия на $importUser")
             tools.referenceClickLast("CMD_IMPORT_USERS")
             //tools.qtipClickLast(importUser)
             // Нарвался - открывается окно Windows не имеющее отношения к HTML
@@ -356,7 +357,7 @@ class HeadRef {
         @DisplayName("Создать объект разработки")
         fun createObjectTest() {
             val createObject = "Создать объект разработки"
-            if (DT > 8) println("Test нажатия на $createObject")
+            if (DT > 6) println("Test нажатия на $createObject")
             tools.referenceClickLast("CMD_OBJECT_STRUCTURE_CREATE")
             //tools.qtipClickLast(createObject)
             assertTrue(tools.titleWait("tdmsEditObjectDialog","Редактирование объекта"))
@@ -370,8 +371,8 @@ class HeadRef {
             val configuringNotification = "Настройка шаблона уведомлений"
             //val nomerTesta: Int = repetitionInfo.currentRepetition
             //if ((nomerTesta % 10 == 1)) driver.navigate().refresh()
-            //if (DT > 8) println("Test $nomerTesta нажатия на $configuringNotification")
-            Thread.sleep(threadSleep *3)
+            if (DT > 6) println("Test нажатия на $configuringNotification")
+            //Thread.sleep(threadSleep *2)
             tools.referenceClickLast("CMD_NOTIFICATIONS_SETTINGS")
             //tools.qtipClickLast(configuringNotification)
             Thread.sleep(threadSleep *2)
@@ -379,7 +380,7 @@ class HeadRef {
             assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование"))
             assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента"))
             tools.closeXLast()
-            Thread.sleep(threadSleep *2)
+            //Thread.sleep(threadSleep *2)
         }
     }  // конец inner - nested Testing Tools Box
 
@@ -408,17 +409,16 @@ class HeadRef {
 
         // вспомогательная процедура открытия системного меню SubSysadmin и для СЭТД
         private fun openSubSysadmin() {
-            repeat(7) {
-                ///Thread.sleep(threadSleep)
+            repeat(repeateOut) {
+                Thread.sleep(threadSleep * it)
                 tools.referenceClickLast("SUB_SYSADMIN")
                 ///Thread.sleep(threadSleep)
                 if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
                 tools.qtipClickLast("Объекты")
-                Thread.sleep(threadSleep * it)
             }
-            if (DT > 5) println("&&&&&&&&& Не открылось SUB_SYSADMIN за 7 опросов  &&&&&&&&&")
+            if (DT > 5) println("&&&&&&&&& Не открылось SUB_SYSADMIN за $repeateOut опросов  &&&&&&&&&")
             assertTrue(tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false)
         }
 
@@ -428,18 +428,17 @@ class HeadRef {
          * вообще годится для любого меню - вынести в Tools.kt
          */
         private fun clickMenu(menu: String, window: String, title: String): Boolean {
-            repeat(7) {
+            repeat(repeateOut) {
                 //openSubSysadmin()
-                ///Thread.sleep(threadSleep)
+                Thread.sleep(threadSleep * it)
                 tools.xpathClickMenu(menu)
                 ///Thread.sleep(threadSleep)
                 if (tools.titleWait(window, title)) return true
                 if (DT > 6) println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                 tools.closeEsc()
                 tools.qtipClickLast("Объекты")
-                Thread.sleep(threadSleep * it)
             }
-            if (DT > 5) println("&&&&&&&&& Не нажалось $menu за 7 нажатий $title  &&&&&&&&&")
+            if (DT > 5) println("&&&&&&&&& Не нажалось $menu за $repeateOut нажатий $title  &&&&&&&&&")
             assertTrue(tools.titleWait(window, title))
             return false
         }
@@ -449,7 +448,7 @@ class HeadRef {
         @DisplayName("Информация о системе")
         fun systemParametersTest() {
             val systemParameters = "Информация о системе"
-            if (DT > 8) println("Test нажатия на $systemParameters")
+            if (DT > 6) println("Test нажатия на $systemParameters")
             openSubSysadmin()
             clickMenu(systemParameters, "window", systemParameters)
             //tools.referenceClickLast("CMD_SYSTEM_SETTINGS")
@@ -467,7 +466,7 @@ class HeadRef {
         @DisplayName("Системные атрибуты")
         fun sysAttributesTest() {
             val sysAttributes = "Системные атрибуты"
-            if (DT > 8) println("Test нажатия на $sysAttributes")
+            if (DT > 6) println("Test нажатия на $sysAttributes")
             openSubSysadmin()
             clickMenu(sysAttributes, "window", "Атрибуты")
             //println("FORM_ATTRS_LIST = ${tools.referenceLast("FORM_ATTRS_LIST")?.text}")
@@ -485,23 +484,20 @@ class HeadRef {
         @DisplayName("Схема данных")
         fun dataTreeTest() {
             val dataTree = "Схема данных"
-            if (DT > 8) println("Test нажатия на $dataTree")
+            if (DT > 6) println("Test нажатия на $dataTree")
             openSubSysadmin()
-            if (TestsProperties.loginpage.contains("555"))   //%%6.2
-            clickMenu(dataTree, "window", "Дерево объектов")
-            else clickMenu(dataTree, "window", dataTree)
+
+            clickMenu(dataTree, "window", dataTree)
             //println("FORM_TREE_OBJS = ${tools.referenceLast("FORM_TREE_OBJS")?.text}")
             //println("TREE = ${tools.referenceLast("TREE")?.text}")
             // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_TREE_OBJS']")) != null)
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='TREE']")) != null)
-            if (TestsProperties.loginpage.contains("555"))   //%%6.2
-            assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", "Дерево объектов"))
-            else assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", dataTree))
+
+            assertTrue(tools.referenceWaitText("FORM_TREE_OBJS", dataTree))
             assertTrue(tools.referenceWaitText("TREE", "Типы объектов"))
-            if (TestsProperties.loginpage.contains("555"))   //%%6.2
-            assertTrue(tools.titleWait("window", "Дерево объектов"))
-            else assertTrue(tools.titleWait("window", dataTree))
+
+            assertTrue(tools.titleWait("window", dataTree))
             tools.closeXLast()
         }
 
@@ -512,7 +508,7 @@ class HeadRef {
         @DisplayName("Журнал событий")
         fun eventsLogTest() {
             val eventsLog = "Журнал событий"
-            if (DT > 8) println("Test нажатия на $eventsLog")
+            if (DT > 6) println("Test нажатия на $eventsLog")
             openSubSysadmin()
             clickMenu(eventsLog, "window", eventsLog)
             //println("FORM_EVENTS_LOG = ${tools.referenceLast("FORM_EVENTS_LOG")?.text}")
@@ -533,7 +529,7 @@ class HeadRef {
         @DisplayName("Журнал сервера")
         fun serverLogTest() {
             val serverLog = "Журнал сервера"
-            if (DT > 8) println("Test нажатия на $serverLog")
+            if (DT > 6) println("Test нажатия на $serverLog")
             openSubSysadmin()
             clickMenu(serverLog, "window", serverLog)
             //println("FORM_SERVER_LOG = ${tools.referenceLast("FORM_SERVER_LOG")?.text}")
@@ -552,7 +548,7 @@ class HeadRef {
         @DisplayName("Удалить структуру объектов")
         fun delObjectsTest() {
             val delObjects = "Удалить структуру объектов"
-            if (DT > 8) println("Test нажатия на $delObjects")
+            if (DT > 6) println("Test нажатия на $delObjects")
             openSubSysadmin()
             clickMenu(delObjects, "tdmsSelectObjectDialog", "Удаление структуры объектов")
             assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Удаление структуры объектов"))
@@ -586,18 +582,17 @@ class HeadRef {
 
             // Имитация ИУС СЭТД
             private fun openCETD() {
-                repeat(7) {
+                repeat(repeateOut) {
                     openSubSysadmin()
-                    Thread.sleep(threadSleep)
+                    Thread.sleep(threadSleep * it)
                     val click = tools.xpathClickMenu("Имитация ИУС СЭТД")
-                    Thread.sleep(threadSleep)
+                    //Thread.sleep(threadSleep)
                     if (click) return
                     if (DT > 6) println("####### ИУС СЭТД Повтор *##*$it  открытия через $it sec #######")
                     repeat(3) { tools.closeEsc() }
                     tools.qtipClickLast("Объекты")
-                    Thread.sleep(threadSleep * it)
                 }
-                if (DT > 5) println("&&&&&&&&& Не открылось ИУС СЭТД за 7 опросов  &&&&&&&&&")
+                if (DT > 5) println("&&&&&&&&& Не открылось ИУС СЭТД за $repeateOut опросов  &&&&&&&&&")
                 assertTrue(tools.qtipLastClass("СЭТД")?.contains("x-btn-menu-active") ?: false)
             }
 
@@ -605,7 +600,7 @@ class HeadRef {
             @DisplayName("Поток - Проверка связи без авторизации")
             fun flow_2Test() {
                 val flow0 = "Поток - Проверка связи без авторизации"
-                if (DT > 8) println("Test нажатия на $flow0")
+                if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -619,7 +614,7 @@ class HeadRef {
             @DisplayName("Поток - Проверка связи с авторизацией")
             fun flow_1Test() {
                 val flow0 = "Поток - Проверка связи с авторизацией"
-                if (DT > 8) println("Test нажатия на $flow0")
+                if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -633,7 +628,7 @@ class HeadRef {
             @DisplayName("Поток - Проверка статуса проекта")
             fun flowTest() {
                 val flow = "Поток - Проверка статуса проекта"
-                if (DT > 8) println("Test нажатия на $flow")
+                if (DT > 6) println("Test нажатия на $flow")
                 openCETD()
                 //tools.xpathClickMenu(flow)
                 clickMenu(flow, "messagebox", "TDMS")
@@ -654,7 +649,7 @@ class HeadRef {
             @DisplayName("Поток 0 - Отправка проекта")
             fun flow0Test() {
                 val flow0 = "Поток 0 - Отправка проекта"
-                if (DT > 8) println("Test нажатия на $flow0")
+                if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -666,15 +661,12 @@ class HeadRef {
             @DisplayName("Поток 1 - Отправка передаточного документа")
             fun flow1Test() {
                 val flow1 = "Поток 1 - Отправка передаточного документа"
-                if (DT > 8) println("Test нажатия на $flow1")
+                if (DT > 6) println("Test нажатия на $flow1")
                 openCETD()
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
-                clickMenu(flow1, "window", "Атрибуты")
-                else clickMenu(flow1, "window", "Выбор сценария")
-                //tools.closeXLast()
-                if (TestsProperties.loginpage.contains("555"))   //%%6.2
-                assertTrue(tools.titleWait("window", "Атрибуты"))
-                else assertTrue(tools.titleWait("window", "Выбор сценария"))
+
+                clickMenu(flow1, "window", "Выбор сценария")
+
+                assertTrue(tools.titleWait("window", "Выбор сценария"))
                // tools.idList()
                 tools.closeXLast()
                 //assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -685,7 +677,7 @@ class HeadRef {
             @DisplayName("Поток 2.1 - Ответ о результате передаче РЗ")
             fun flow2Test() {
                 val flow2 = "Поток 2.1 - Ответ о результате передаче РЗ"
-                if (DT > 8) println("Test нажатия на $flow2")
+                if (DT > 6) println("Test нажатия на $flow2")
                 openCETD()
                 clickMenu(flow2, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))
@@ -701,7 +693,7 @@ class HeadRef {
             @DisplayName("Поток 3 - Отправка ответов на замечания")
             fun flow3Test() {
                 val flow3 = "Поток 3 - Отправка ответов на замечания"
-                if (DT > 8) println("Test нажатия на $flow3")
+                if (DT > 6) println("Test нажатия на $flow3")
                 openCETD()
                 clickMenu(flow3, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"))

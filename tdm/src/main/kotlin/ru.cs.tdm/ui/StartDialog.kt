@@ -51,14 +51,14 @@ class StartDialog : JFrame("TDM365 Tests ") {
         1   //step
     )
     private val modelRepeateTests: SpinnerModel = SpinnerNumberModel(
-        3,  //initial value
+        1,  //initial value
         1,  //min
         99,  //max
         1   //step
     )
     private val modelThreadSleep: SpinnerModel = SpinnerNumberModel(
         1,  //initial value
-        1,  //min
+        0,  //min
         99,  //max
         1   //step
     )
