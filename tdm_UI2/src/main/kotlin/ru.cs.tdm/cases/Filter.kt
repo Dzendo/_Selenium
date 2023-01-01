@@ -74,7 +74,7 @@ class Filter {
         @JvmStatic
         @BeforeAll
         fun beforeAll() {
-        if (DT >7) println("Вызов BeforeAll AdminUserTest")
+        if (DT >7) println("Вызов BeforeAll FilterTest")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             driver = startDriver()
             /*
@@ -103,7 +103,7 @@ class Filter {
         @AfterAll
         fun afterAll() {
             //tools.idList()
-            if (DT >7) println("Вызов AfterAll AdminUserTest")
+            if (DT >7) println("Вызов AfterAll FilterTest")
             tools.closeEsc5()
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера

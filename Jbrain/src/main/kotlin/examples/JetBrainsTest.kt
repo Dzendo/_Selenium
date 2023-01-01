@@ -88,7 +88,7 @@ class JetBrainsTest {
          * Можно управлять браузером и ничего не спрашивать Junit 5 (jupiter)
          */
         // brainsPage.searchPageField.getAttribute("value") - берем поле и вынимаем его значени
-        assertEquals("Selenium", brainsPage.searchPageField.getAttribute("value"))
+        assertEquals("Seleium", brainsPage.searchPageField.getAttribute("value"), "++Seleium++")
         println("Конец функции search")
 
     }

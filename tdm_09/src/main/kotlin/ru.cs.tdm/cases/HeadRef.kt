@@ -173,7 +173,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        @Disabled
+        //@Disabled
         @DisplayName("Совещания")
         fun meetingTest() {
             var meeting = "Совещания"
@@ -189,7 +189,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        @Disabled
+        //@Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
 
