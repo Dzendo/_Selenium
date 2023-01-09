@@ -207,6 +207,7 @@ class Filter {
              screenShot()
          }
         tools.clickOK()
+        if (DT > 6) println("Конец Test нажатия на $createUser")
     }
     /**
      *  тест создание нового фильтра
@@ -231,6 +232,7 @@ class Filter {
 
         tools.clickOK("Закрыть")
         //tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
+        if (DT > 6) println("Конец Test посмотреть на $viewUser")
 
     }
         /**
@@ -274,6 +276,7 @@ class Filter {
             Thread.sleep(threadSleep)
 
             tools.clickOK()
+            if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
 
     /**
@@ -392,6 +395,7 @@ class Filter {
             BUTTON_ORG_SEL()  // Всавляем еще раз
 
             tools.clickOK()
+        if (DT > 6) println("Конец Test нажатия на $editFilter")
         }
 
     @RepeatedTest(NN)
@@ -438,6 +442,7 @@ class Filter {
             tools.clickOK("Ок")
 
             tools.clickOK()
+        if (DT > 6) println("Конец Test нажатия на $editFilter")
     }
     @RepeatedTest(NN)
     @Disabled
@@ -467,6 +472,7 @@ class Filter {
 
        // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
        tools.clickOK("Да")
+        if (DT > 6) println("Конец Test нажатия на $deleteFilter")
 
    }
 }

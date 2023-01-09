@@ -34,8 +34,10 @@ class Runner {
         launcher.registerTestExecutionListeners(listener)
         //launcher.execute(request, listener)
         launcher.execute(request)
-        println("=================  Test ${testClass.canonicalName}! ===================")
+        println("======= runTest ==========  Test ${testClass.canonicalName}! ===================")
+        // Этот оператор берет от слушателя потока теста итоговые результаты (launcher Junit)
         val summary: TestExecutionSummary = listener.summary
         summary.printTo(PrintWriter(System.out))
+        // полученные результаты на печать - дает перечень результатов
     }
 }

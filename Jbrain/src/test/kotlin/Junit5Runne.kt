@@ -31,6 +31,6 @@ class Junit5Runner {
   //  companion object {
        // @JvmStatic
         fun main() {
-           Junit5Runner().runOne(JetBrainsTest::class.java)
+           Junit5Runner().runOne(JetBrainsTest0::class.java)
         }
   //  }

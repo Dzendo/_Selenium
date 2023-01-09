@@ -1,17 +1,17 @@
 
 fun main() {
-    val jetBrainsTest = JetBrainsTest()
+    val jetBrainsTest0 = JetBrainsTest0()
     println("Hello World!")
 
-    jetBrainsTest.setUp()
-    jetBrainsTest.search()
-    jetBrainsTest.tearDown()
-    jetBrainsTest.setUp()
-    jetBrainsTest.toolsMenu()
-    jetBrainsTest.tearDown()
-    jetBrainsTest.setUp()
-    jetBrainsTest.navigationToAllTools()
-    jetBrainsTest.tearDown()
+    jetBrainsTest0.setUp()
+    jetBrainsTest0.search()
+    jetBrainsTest0.tearDown()
+    jetBrainsTest0.setUp()
+    jetBrainsTest0.toolsMenu()
+    jetBrainsTest0.tearDown()
+    jetBrainsTest0.setUp()
+    jetBrainsTest0.navigationToAllTools()
+    jetBrainsTest0.tearDown()
 
     println("Good bye World!")
 }

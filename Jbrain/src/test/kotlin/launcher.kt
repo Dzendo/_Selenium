@@ -6,6 +6,6 @@ import org.junit.platform.launcher.core.LauncherFactory
 
 fun main() {
     LauncherFactory.create().execute(
-    LauncherDiscoveryRequestBuilder.request().selectors(selectClass(JetBrainsTest::class.java)).build()
+    LauncherDiscoveryRequestBuilder.request().selectors(selectClass(JetBrainsTest0::class.java)).build()
     )
 }

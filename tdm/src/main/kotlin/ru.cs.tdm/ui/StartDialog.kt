@@ -210,6 +210,7 @@ class StartDialog : JFrame("TDM365 Tests ") {
               * String selectedValue = myComboBox.getSelectedValue().toString();
               */
             TestsProperties.startIsOn = true
+             // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
              startTests()
              TestsProperties.startIsOn = false
          }

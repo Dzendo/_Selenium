@@ -3,7 +3,7 @@ package examples
 fun main(args: Array<String>) {
 
     println("Program arguments: ${args.joinToString()}")
-    val jetBrainsTest = JetBrainsTest()
+    val jetBrainsTest = JetBrainsTest2()
     if (args.isNotEmpty()) println("Test ${args[0]}!")
 
     jetBrainsTest.setUp()

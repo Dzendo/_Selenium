@@ -1,4 +1,5 @@
-package examples//https://www.javacodemonk.com/junit-5-platform-launcher-api-7dddb7ab
+package examples
+//https://www.javacodemonk.com/junit-5-platform-launcher-api-7dddb7ab
 
 import org.junit.platform.engine.discovery.DiscoverySelectors.selectClass
 import org.junit.platform.launcher.Launcher
@@ -31,6 +32,6 @@ class Junit5Runner {
   //  companion object {
        // @JvmStatic
         fun main() {
-           Junit5Runner().runOne(JetBrainsTest::class.java)
+           Junit5Runner().runOne(JetBrainsTest2::class.java)
         }
   //  }
