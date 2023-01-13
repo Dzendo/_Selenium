@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("test"))
+    implementation("org.jetbrains.kotlin:kotlin-test:1.7.22")
     implementation("org.seleniumhq.selenium:selenium-java:4.7.2")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     { exclude ("org.bouncycastle") }
@@ -32,6 +32,8 @@ dependencies {
     testImplementation("org.slf4j:slf4j-simple:2.0.6")
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
     testImplementation ("org.junit.platform:junit-platform-launcher:1.9.1")
+    testImplementation("org.junit.platform:junit-platform-console-standalone:1.9.1")
+    // java -jar junit-platform-console-standalone-1.9.1.jar <Options>
 }
 
 tasks.test {

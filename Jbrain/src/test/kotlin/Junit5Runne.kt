@@ -5,6 +5,7 @@ import org.junit.platform.launcher.Launcher
 import org.junit.platform.launcher.LauncherDiscoveryRequest
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder
 import org.junit.platform.launcher.core.LauncherFactory
+import org.junit.platform.launcher.listeners.LoggingListener
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener
 import org.junit.platform.launcher.listeners.TestExecutionSummary
 import java.io.PrintWriter
@@ -12,6 +13,11 @@ import java.io.PrintWriter
 
 class Junit5Runner {
     private val listener: SummaryGeneratingListener = SummaryGeneratingListener()
+    //private val listenerLog : LoggingListener = LoggingListener()
+    private val listenerLog : LoggingListener
+        get() {
+            TODO()
+        }
 
     fun runOne(testClass: Class<*> ) {
         val request: LauncherDiscoveryRequest = LauncherDiscoveryRequestBuilder.request()
@@ -25,7 +31,14 @@ class Junit5Runner {
         launcher.registerTestExecutionListeners(listener)
         launcher.execute(request)
         val summary: TestExecutionSummary = listener.summary
+        //val sumsum = listener.
         summary.printTo(PrintWriter(System.out))
+        //println(summary)
+        println("testsSucceededCount = ${summary.testsSucceededCount}")
+        println("testsFailedCount = ${listener.summary.testsFailedCount}")
+        println("failures = ${listener.summary.failures[0].toString()}  size =${listener.summary.failures.size} ")
+        summary.printFailuresTo(PrintWriter(System.out))
+
     }
 }
   //  companion object {

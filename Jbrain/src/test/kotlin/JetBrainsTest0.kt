@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.WebDriverWait
 import java.time.Duration
+import java.util.logging.Level
+
 /**
  * Классический пример теста переданный JB и подшаманенный, т.к. был не рабочий
  */
@@ -63,6 +65,19 @@ class JetBrainsTest0 {
         // а класс этот лежит в модуле рядышком в этом же пакете
         // Ссылку эту мы будем использовать в тестах по правилам Котлина
         brainsPage = JetBrainsPage(driver)
+
+
+           //     logging.  .getLogger('WDM').setLevel(logging.NOTSET)
+            //os.environ['WDM_LOG'] = "false"
+        //logging.getBundle("VDM").set
+        //java.util.logging.Logger.getLogger("org.apache.hc").setLevel(Level.SEVERE);
+        //java.util.logging.Logger.getLogger("org.apache.http").setLevel(Level.SEVERE);
+        java.util.logging.Logger.getLogger("WDM").level = Level.SEVERE;
+        java.util.logging.Level.SEVERE
+        java.util.logging.Logger.getLogger("WDM").level = Level.SEVERE
+        //java.util.logging.Logger.getLogger("org.apache.http").setLevel(Level.SEVERE);
+
+
         println("Конец функции BeforeEach")
     }
 
@@ -94,7 +109,7 @@ class JetBrainsTest0 {
 
     }
 
-    @RepeatedTest(3)
+    @RepeatedTest(2)
     fun toolsMenu() {
         Actions(driver)
             .moveToElement(brainsPage.toolsMenu)
@@ -103,11 +118,11 @@ class JetBrainsTest0 {
         assertTrue(brainsPage.menuPopup.isDisplayed)
     }
 
-    @RepeatedTest(3)
+    @RepeatedTest(2)
     fun navigationToAllTools() {
         brainsPage.seeAllToolsButton.click()
         assertTrue(brainsPage.productsList.isDisplayed)
-        assertEquals("All Developer Tools and Products by JetBrains", driver.title)
+        assertEquals("All DeveloperA Tools and Products by JetBrains", driver.title)
     }
     /**
      * Функция которая выполняется после каждого теста, в т.ч. после повторного
