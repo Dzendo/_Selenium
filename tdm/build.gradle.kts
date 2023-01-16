@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
-
+// 16.01.2023 rev 1.0.0
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
