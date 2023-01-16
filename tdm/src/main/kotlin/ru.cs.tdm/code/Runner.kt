@@ -19,7 +19,7 @@ class Runner(private val povtor : Int) {
     //val listener: TestExecutionListener = SummaryGeneratingListener()
     val listener: SummaryGeneratingListener = SummaryGeneratingListener()
     val DT = debugPrintNomber
-    fun runTest(testClass: Class<*> ) {
+    fun runTest(testClass: Class<*> ) : Long {
 
         // Discover and filter tests
         val request: LauncherDiscoveryRequest = LauncherDiscoveryRequestBuilder
@@ -32,17 +32,19 @@ class Runner(private val povtor : Int) {
         //val plan: TestPlan = launcher.discover(request)
 
         // Executing tests
-        if (DT > 4) println("======= runTest ========  Test ${testClass.canonicalName}! ====== $povtor =============")
+        if (DT > 4) println("======= run $povtor Test ========  Test ${testClass.canonicalName}! ===================")
         launcher.registerTestExecutionListeners(listener)
         //launcher.execute(request, listener)
         launcher.execute(request)
 
         // Этот оператор берет от слушателя потока теста итоговые результаты (launcher Junit)
         val summary: TestExecutionSummary = listener.summary
-        if (DT > 5) summary.printTo(PrintWriter(System.out))
-        if (summary.testsFailedCount >0) summary.printFailuresTo(PrintWriter(System.out))
+        val failed: Long = summary.testsFailedCount
+        if ((DT > 5) or (failed > 0L)) summary.printTo(PrintWriter(System.out))
+        if (failed >0) summary.printFailuresTo(PrintWriter(System.out))
 
         // полученные результаты на печать - дает перечень результатов
-        if (DT > 4) println("======= endTest ==========  Test ${testClass.canonicalName}! ====== $povtor =============")
+        if (DT > 4) println("======= end $povtor Test ========  Test ${testClass.canonicalName}! ====== Errors $failed =============")
+        return failed
     }
 }

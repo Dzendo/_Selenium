@@ -76,7 +76,8 @@ class LoginTest {
         //assertEquals(loginTDM, user)
         //assertTrue(login.loginUserNameWait(loginTDM))
         // assertTrue проверяет труе или фалс возвращает функция qtipLoginUserNameWait из класса login
-        assertTrue(loginClass.qtipLoginUserNameWait(login))
+        assertTrue(loginClass.qtipLoginUserNameWait(login),
+            "@@@@ Не вошли под пользователем $login @@")
     }
     // После теста зовет login.loginOut(), а тот используя мой тулс через qtip нажимает на что надо, что бы выйти из логина
     // Потом закрывает окно драйвера

@@ -19,6 +19,7 @@ import kotlin.system.exitProcess
  */
 
 class StartDialog : JFrame("TDM365 Tests ") {
+    var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()
     private val contents = JPanel()
     private val startButton = JButton("START")
@@ -211,11 +212,15 @@ class StartDialog : JFrame("TDM365 Tests ") {
               */
             TestsProperties.startIsOn = true
              // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-             startTests()
+             summuryOfErrors = startTests()
+             println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
              TestsProperties.startIsOn = false
          }
          buttonPanel.add(stopButton)
-         stopButton.addActionListener { exitProcess(0) }
+         stopButton.addActionListener {
+           println("@@@@@ allSummuryOfErrors = $summuryOfErrors  @@@")
+             exitProcess(0)
+         }
 
 
         // Определение размера и открытие окна

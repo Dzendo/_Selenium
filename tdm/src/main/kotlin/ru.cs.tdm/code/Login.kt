@@ -2,7 +2,6 @@ package ru.cs.tdm.code
 
 import ru.cs.tdm.pages.LoginPage
 import org.openqa.selenium.WebDriver
-import ru.cs.tdm.cases.Pass
 import ru.cs.tdm.ui.TestsProperties
 
 /**

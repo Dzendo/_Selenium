@@ -57,7 +57,7 @@ import kotlin.test.assertContains
 @DisplayName("Filter Test")
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class Filter {
-    var formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
     val localDateNow = LocalDate.now().format(formatter)  //LocalDateTime.now()
 
     companion object {
@@ -95,7 +95,7 @@ class Filter {
             val password = TestsProperties.password
             if (DT > 7) println("login= $login   password= $password")
             driver.get(loginpage)
-            assertTrue(driver.title == "Tdms")
+            assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница ${loginpage} - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
         }
 
@@ -118,8 +118,8 @@ class Filter {
         val mainMenu = "Объекты"
         if (DT > 7) println("Test нажатия на $mainMenu TDMS Web")
         tools.qtipClickLast(mainMenu)
-//        assertTrue(tools.titleContain("TDM365"))  // сбоит нечасто заголовок страницы на создании
-        assertTrue(tools.qtipPressedLast("Объекты"))
+        assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")  // сбоит нечасто заголовок страницы на создании
+        assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
         if (DT >7) println("Конец BeforeEach FilterTest")
     }
     // пришлось ввести т.к. при рабочем столе два значка "создать фильтр"
@@ -129,8 +129,8 @@ class Filter {
         tools.qtipClickLast(workTable)
         //Thread.sleep(threadSleep)
         tools.xpathClickLast("//span[text()= '$workTable (SYSADMIN)']") // встать в дереве на Рабочий стол (SYSADMIN)
-//        assertTrue(tools.titleContain(workTable))  // сбоит 1 раз на 100
-        assertTrue(tools.qtipPressedLast(workTable))
+        assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")  // сбоит 1 раз на 100
+        assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
         // Здесь проверка дерева и отображения
         tools.xpathClickLast("//span[contains(text(), 'Фильтры')]")
@@ -144,7 +144,8 @@ class Filter {
         Thread.sleep(threadSleep)
         tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
         Thread.sleep(threadSleep)
-        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $nomberFilter $localDateNow")
+        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $nomberFilter $localDateNow",false,
+            "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
         Thread.sleep(threadSleep)
         if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
@@ -155,13 +156,15 @@ class Filter {
         Thread.sleep(threadSleep)
         tools.referenceClickLast(clickRef)
         Thread.sleep(threadSleep)
-        assertTrue(tools.titleWait(tipWindow, titleWindow))
+        assertTrue(tools.titleWait(tipWindow, titleWindow),
+            "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $tipWindow @@")
         Thread.sleep(threadSleep)
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
                 tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
             else
                 tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE"
-         assertContains(filterText, "Фильтр $nomberFilter $localDateNow")
+         assertContains(filterText, "Фильтр $nomberFilter $localDateNow", false,
+             "@@@@ Нет правильного текста Фильтр $nomberFilter $localDateNow на всплывающем окне $filterText @@")
     }
     @AfterEach
     fun afterEach(){
@@ -191,11 +194,13 @@ class Filter {
         if (DT > 6) println("Test нажатия на $createUser")
 
         tools.referenceClickLast("CMD_CREATE_USER_QUERY")
-        assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"))
+        assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),
+            "@@@@ После нажатия $createUser - нет окна с заголовком Редактирование объекта @@")
         //  оставить ждать Омск
         // tools.referenceClickLast("tabbar-FORM_USER_QUERY")
         //  assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
-        assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"))
+        assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"),
+            "@@@@ На форме фильтра при $createUser - не нашлось текста Наименование фильтра @@")
         tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
             ?.sendKeys(" $nomberFilter $localDateNow")
         Thread.sleep(threadSleep)
@@ -251,28 +256,33 @@ class Filter {
 
             val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")
             ATTR_USER_QUERY_NAME?.sendKeys(" #")  // Наименование фильтра
-            assertContains(ATTR_USER_QUERY_NAME?.getAttribute("value") ?: "NONE", "#")
+            assertContains(ATTR_USER_QUERY_NAME?.getAttribute("value") ?: "NONE", "#",false,
+                "@@@@ В Наименовании фильтра не прописалось # при редактировании @@")
 
             Thread.sleep(threadSleep)
             val ATTR_QUERY_TechDoc_Num = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_Num']/descendant::input")
             ATTR_QUERY_TechDoc_Num?.sendKeys("Обозначение $nomberFilter $localDateNow")  // Обозначение
             Thread.sleep(threadSleep)
-            assertContains(ATTR_QUERY_TechDoc_Num?.getAttribute("value") ?: "NONE", "Обозначение")
+            assertContains(ATTR_QUERY_TechDoc_Num?.getAttribute("value") ?: "NONE", "Обозначение", false,
+                "@@@@ В Обозначение фильтра не прописалось Обозначение при редактировании @@")
 
             Thread.sleep(threadSleep)
             val ATTR_QUERY_TechDoc_RevNum = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_RevNum']/descendant::input")
             ATTR_QUERY_TechDoc_RevNum ?.sendKeys("77") // Изм. №
-            assertContains(ATTR_QUERY_TechDoc_RevNum?.getAttribute("value") ?: "NONE", "77")
+            assertContains(ATTR_QUERY_TechDoc_RevNum?.getAttribute("value") ?: "NONE", "77", false,
+                "@@@@ В Изм. № фильтра не прописалось 77 при редактировании @@")
 
             Thread.sleep(threadSleep)
             val ATTR_QUERY_TechDoc_Name = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_Name']/descendant::input")
             ATTR_QUERY_TechDoc_Name?.sendKeys("Наименование $nomberFilter $localDateNow")  // Наименование
-            assertContains(ATTR_QUERY_TechDoc_Name?.getAttribute("value") ?: "NONE", "Наименование")
+            assertContains(ATTR_QUERY_TechDoc_Name?.getAttribute("value") ?: "NONE", "Наименование", false,
+                "@@@@ В Наименование фильтра не прописалось Наименование при редактировании @@")
 
             Thread.sleep(threadSleep)
             val ATTR_DESCRIPTION = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::textarea")
             ATTR_DESCRIPTION ?.sendKeys("Описание $nomberFilter $localDateNow") // Описание
-            assertContains(ATTR_DESCRIPTION?.getAttribute("value") ?: "NONE", "Описание")
+            assertContains(ATTR_DESCRIPTION?.getAttribute("value") ?: "NONE", "Описание", false,
+                "@@@@ В Описание фильтра не прописалось Описание при редактировании @@")
             Thread.sleep(threadSleep)
 
             tools.clickOK()
@@ -295,13 +305,16 @@ class Filter {
 
             val description =
                 tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Описание
-            assertTrue(description?.getAttribute("value")!!.contains("Фильтр $nomberFilter $localDateNow"))
+            assertTrue(description?.getAttribute("value")!!.contains("Фильтр $nomberFilter $localDateNow"),
+                "@@@@ В Название фильтра нет названия Фильтр $nomberFilter $localDateNow @@")
             description.sendKeys(" @")
-            assertTrue(description.getAttribute("value").contains("@"))
+            assertTrue(description.getAttribute("value").contains("@"),
+                "@@@@ В Наименовании фильтра не прописалось @ при редактировании @@")
 
             val BUTTON_OBJDEV_SEL = {
                 tools.referenceClickLast("BUTTON_OBJDEV_SEL")
-                assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"))
+                assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"),
+                    "@@@@ карандашик BUTTON_OBJDEV_SEL на поле Объект разработки : нет справочника с заголовком Выбор объекта структуры @@")
 
                 tools.xpathLast("//*[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
 
@@ -312,17 +325,20 @@ class Filter {
             Thread.sleep(threadSleep)
             val attrObjectDev = tools.xpathLast("//*[@data-reference='ATTR_OBJECT_DEV']/descendant::input")
             val getFerma = attrObjectDev?.getAttribute("value")
-            assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Ферма_омшанник")
+            assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Ферма_омшанник",
+                false, "@@@@ карандашик BUTTON_OBJDEV_SEL : После выбора в поле фильтра объекта разработки из справочника в поле фильтра Объект разработки - пусто, а должно стоять Ферма_омшанник @@")
 
             tools.referenceClickLast("BUTTON_OBJDEV_ERASE")
             Thread.sleep(threadSleep)
-            assertTrue(((attrObjectDev?.getAttribute("value") ?: "NONE").length) == 0)
+            assertTrue(((attrObjectDev?.getAttribute("value") ?: "NONE").length) == 0,
+                "@@@@ крестик BUTTON_OBJDEV_ERASE(объекта разработки) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
 
             BUTTON_OBJDEV_SEL()  // Всавляем еще раз омшанник
 
             val BUTTON_PROJECT_SEL = {
                 tools.referenceClickLast("BUTTON_PROJECT_SEL")
-                assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"))
+                assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"),
+                    "@@@@ карандашик BUTTON_PROJECT_SEL на поле Проект : нет справочника с заголовком Выбор проекта @@")
 
                 tools.xpathLast("//*[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
                     ?.click()                   //tr  tbody  table
@@ -335,16 +351,19 @@ class Filter {
             val ATTR_RefToProject = tools.xpathLast("//*[@data-reference='ATTR_RefToProject']/descendant::input")
             assertContains(
                 ATTR_RefToProject?.getAttribute("value") ?: "NONE",
-                "Разработка проекта электроснабжения Омшанника"
+                "Разработка проекта электроснабжения Омшанника", false,
+                "@@@@ карандашик BUTTON_PROJECT_SEL : После выбора в поле Проекта разработки из справочника в поле фильтра Проект - пусто, а должно стоять Разработка проекта электроснабжения Омшанника @@"
             )
             tools.referenceClickLast("BUTTON_ERASE_PROJECT")
             Thread.sleep(threadSleep)
-            assertTrue(((ATTR_RefToProject?.getAttribute("value") ?: "NONE").length) == 0)
+            assertTrue(((ATTR_RefToProject?.getAttribute("value") ?: "NONE").length) == 0,
+                "@@@@ крестик BUTTON_ERASE_PROJECT(Проект) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_PROJECT_SEL()  // Всавляем еще раз
 
             val BUTTON_TYPE_DOC = {
                 tools.referenceClickLast("BUTTON_TYPE_DOC")
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Типы технической документации"))
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Типы технической документации"),
+                    "@@@@ карандашик BUTTON_TYPE_DOC на поле Тип документации : нет справочника с заголовком Типы технической документации @@")
 
                 tools.xpathLast("//a[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
@@ -353,15 +372,18 @@ class Filter {
             BUTTON_TYPE_DOC()
             Thread.sleep(threadSleep)
             val ATTR_TechDoc_Sort = tools.xpathLast("//*[@data-reference='ATTR_TechDoc_Sort']/descendant::input")
-            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "Документация на коммуникации")
+            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "Документация на коммуникации",false,
+                "@@@@ поле фильтра Тип документации не содержит значение Документация на коммуникации после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_TTD")
             Thread.sleep(threadSleep)
-            assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0)
+            assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
+                "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_TYPE_DOC()  // Всавляем еще раз
 
             val BUTTON_OBJ_STR = {
                 tools.referenceClickLast("BUTTON_OBJ_STR")
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Объекты структуры"))
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Объекты структуры"),
+                    "@@@@ карандашик BUTTON_OBJ_STR на поле Объект структуры : нет справочника с заголовком Объекты структуры @@")
 
                 tools.xpathLast("//a[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
@@ -370,15 +392,18 @@ class Filter {
             BUTTON_OBJ_STR()
             Thread.sleep(threadSleep)
             val ATTR_OCC = tools.xpathLast("//*[@data-reference='ATTR_OCC']/descendant::input")
-            assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Проект сооружения омшанника")
+            assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Проект сооружения омшанника",false,
+                "@@@@ поле фильтра Объект структуры не содержит значение Проект сооружения омшанника после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_OS")
             Thread.sleep(threadSleep)
-            assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0)
+            assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
+                "@@@@ крестик BUTTON_ERASE_OS(Объект структуры) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_OBJ_STR()  // Всавляем еще раз
 
             val BUTTON_ORG_SEL = {
                 tools.referenceClickLast("BUTTON_ORG_SEL")
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"))
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"),
+                    "@@@@ карандашик BUTTON_ORG_SEL на поле Организация/Подразд. : нет справочника с заголовком Организации/Подразделения @@")
 
                 tools.xpathLast("//a[contains(text(),'СМУ')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
@@ -388,10 +413,12 @@ class Filter {
             Thread.sleep(threadSleep *3)
             val ATTR_ORGANIZATION_LINK =
                 tools.xpathLast("//*[@data-reference='ATTR_ORGANIZATION_LINK']/descendant::input")
-            assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "СМУ")
+            assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "СМУ",false,
+                "@@@@ поле фильтра Организация/Подразд. не содержит значение СМУ после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_ORG")
             Thread.sleep(threadSleep)
-            assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0)
+            assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0,
+                "@@@@ крестик BUTTON_ERASE_ORG(Организация/Подразд.) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_ORG_SEL()  // Всавляем еще раз
 
             tools.clickOK()
@@ -411,9 +438,12 @@ class Filter {
 
         val description =
             tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Описание
-        assertTrue(description?.getAttribute("value")!!.contains("Фильтр $nomberFilter $localDateNow"))
+        assertTrue(description?.getAttribute("value")!!.contains("Фильтр $nomberFilter $localDateNow"),
+            "@@@@ Нет в списке фильтра с именем Фильтр $nomberFilter $localDateNow @@")
         description.sendKeys(" @@")
-        assertTrue(description.getAttribute("value").contains("@@"))
+        assertTrue(description.getAttribute("value").contains("@@"),
+            "@@@@ В Наименовании фильтра не прописалось @@ при редактировании @@")
+
 
 
             tools.xpathLast("// *[@data-reference='ATTR_DATE_START']/descendant::input")
@@ -426,17 +456,18 @@ class Filter {
             tools.xpathLast("//span[text()='Сегодня']")?.click()
             Thread.sleep(threadSleep)
             val ATTR_DATE_RELEASE_DOCUMENT = tools.xpathLast("//*[@data-reference='ATTR_DATE_RELEASE_DOCUMENT']/descendant::input")
-            assertEquals(ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value") ?:"NONE", localDateNow)
-
+            assertEquals(ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value") ?:"NONE", localDateNow,
+                "@@@@ В Дата не стоит сегодняшняя дата после занесения из выбора Сегодня @@")
 
             tools.xpathLast("// *[@data-reference='ATTR_USER_QUERY_STATUS']/descendant::input")
                 ?.sendKeys("В разработке")
             tools.xpathLast("// *[@data-reference='ATTR_DOC_AUTHOR']/descendant::input")
                 ?.sendKeys("SYSADMIN")
 
-            //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ
+            //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ Ответственный
             tools. qtipClickLast("Выбрать объект")
-            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"))
+            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
+                "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
             tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
             Thread.sleep(threadSleep)
             tools.clickOK("Ок")
