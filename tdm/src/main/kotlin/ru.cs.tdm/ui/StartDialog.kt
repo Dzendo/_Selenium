@@ -212,7 +212,7 @@ class StartDialog : JFrame("TDM365 Tests ") {
               */
             TestsProperties.startIsOn = true
              // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-             summuryOfErrors = startTests()
+             summuryOfErrors = startTests()  // СТАРТ циклов тестов
              println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
              TestsProperties.startIsOn = false
          }

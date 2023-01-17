@@ -11,6 +11,7 @@ import ru.cs.tdm.ui.TestsProperties
 import java.io.File
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.test.assertContains
@@ -58,14 +59,16 @@ import kotlin.test.assertContains
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class Filter {
     val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-    val localDateNow = LocalDate.now().format(formatter)  //LocalDateTime.now()
+    //val localDateNow = LocalDate.now().format(formatter)  //LocalDateTime.now()
+    //private val localDateNow = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm").format(LocalDateTime.now())
+   // private val localDateNow = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(LocalDateTime.now())
 
     companion object {
         private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber       // количество повторений тестов
         private const val NN:Int = 1                                    // количество повторений тестов
-
+        private val localDateNow = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss").format(LocalDateTime.now())
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
@@ -140,16 +143,16 @@ class Filter {
         val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
         val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") "TDM365" else
                 if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
-        if (DT > 6) println("Test нажатия на Фильтр $nomberFilter действие: $clickRef")
+        if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
         Thread.sleep(threadSleep)
-        tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
+        tools.xpathClickLast("//*[contains(text(), 'Фильтр $localDateNow')]")
         Thread.sleep(threadSleep)
-        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $nomberFilter $localDateNow",false,
+        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $localDateNow",false,
             "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
         Thread.sleep(threadSleep)
         if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
-            println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $nomberFilter действие: $clickRef")
+            println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие: $clickRef")
             screenShot()
         }
 
@@ -163,8 +166,8 @@ class Filter {
                 tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
             else
                 tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE"
-         assertContains(filterText, "Фильтр $nomberFilter $localDateNow", false,
-             "@@@@ Нет правильного текста Фильтр $nomberFilter $localDateNow на всплывающем окне $filterText @@")
+         assertContains(filterText, "Фильтр $localDateNow", false,
+             "@@@@ Нет правильного текста Фильтр $localDateNow на всплывающем окне $filterText @@")
     }
     @AfterEach
     fun afterEach(){
@@ -202,12 +205,12 @@ class Filter {
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"),
             "@@@@ На форме фильтра при $createUser - не нашлось текста Наименование фильтра @@")
         tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
-            ?.sendKeys(" $nomberFilter $localDateNow")
+            ?.sendKeys(" $localDateNow")
         Thread.sleep(threadSleep)
         // Проверить что в поле стоит дата, если нет, то Скрин
         val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
-         if (ATTR_USER_QUERY_NAME.contains(" $nomberFilter $localDateNow").not()){
+         if (ATTR_USER_QUERY_NAME.contains(" $localDateNow").not()){
              if (DT > 0) println("&&&&&&&&&&01&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
              screenShot()
          }
@@ -230,13 +233,13 @@ class Filter {
         // Проверить что в поле стоит дата, если нет, то Скрин
         val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
-        if (ATTR_USER_QUERY_NAME.contains(" $nomberFilter $localDateNow").not()){
+        if (ATTR_USER_QUERY_NAME.contains(" $localDateNow").not()){
             if (DT > 0) println("&&&&&&&&&02&&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
             screenShot()
         }
 
         tools.clickOK("Закрыть")
-        //tools.xpathClickLast("//*[contains(text(), 'Фильтр $nomberFilter $localDateNow')]")
+        //tools.xpathClickLast("//*[contains(text(), 'Фильтр $localDateNow')]")
         if (DT > 6) println("Конец Test посмотреть на $viewUser")
 
     }
@@ -261,7 +264,7 @@ class Filter {
 
             Thread.sleep(threadSleep)
             val ATTR_QUERY_TechDoc_Num = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_Num']/descendant::input")
-            ATTR_QUERY_TechDoc_Num?.sendKeys("Обозначение $nomberFilter $localDateNow")  // Обозначение
+            ATTR_QUERY_TechDoc_Num?.sendKeys("Обозначение $localDateNow")  // Обозначение
             Thread.sleep(threadSleep)
             assertContains(ATTR_QUERY_TechDoc_Num?.getAttribute("value") ?: "NONE", "Обозначение", false,
                 "@@@@ В Обозначение фильтра не прописалось Обозначение при редактировании @@")
@@ -274,13 +277,13 @@ class Filter {
 
             Thread.sleep(threadSleep)
             val ATTR_QUERY_TechDoc_Name = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_Name']/descendant::input")
-            ATTR_QUERY_TechDoc_Name?.sendKeys("Наименование $nomberFilter $localDateNow")  // Наименование
+            ATTR_QUERY_TechDoc_Name?.sendKeys("Наименование $localDateNow")  // Наименование
             assertContains(ATTR_QUERY_TechDoc_Name?.getAttribute("value") ?: "NONE", "Наименование", false,
                 "@@@@ В Наименование фильтра не прописалось Наименование при редактировании @@")
 
             Thread.sleep(threadSleep)
             val ATTR_DESCRIPTION = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::textarea")
-            ATTR_DESCRIPTION ?.sendKeys("Описание $nomberFilter $localDateNow") // Описание
+            ATTR_DESCRIPTION ?.sendKeys("Описание $localDateNow") // Описание
             assertContains(ATTR_DESCRIPTION?.getAttribute("value") ?: "NONE", "Описание", false,
                 "@@@@ В Описание фильтра не прописалось Описание при редактировании @@")
             Thread.sleep(threadSleep)
@@ -305,8 +308,8 @@ class Filter {
 
             val description =
                 tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Описание
-            assertTrue(description?.getAttribute("value")!!.contains("Фильтр $nomberFilter $localDateNow"),
-                "@@@@ В Название фильтра нет названия Фильтр $nomberFilter $localDateNow @@")
+            assertTrue(description?.getAttribute("value")!!.contains("Фильтр $localDateNow"),
+                "@@@@ В Название фильтра нет названия Фильтр $localDateNow @@")
             description.sendKeys(" @")
             assertTrue(description.getAttribute("value").contains("@"),
                 "@@@@ В Наименовании фильтра не прописалось @ при редактировании @@")
@@ -438,8 +441,8 @@ class Filter {
 
         val description =
             tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Описание
-        assertTrue(description?.getAttribute("value")!!.contains("Фильтр $nomberFilter $localDateNow"),
-            "@@@@ Нет в списке фильтра с именем Фильтр $nomberFilter $localDateNow @@")
+        assertTrue(description?.getAttribute("value")!!.contains("Фильтр $localDateNow"),
+            "@@@@ Нет в списке фильтра с именем Фильтр $localDateNow @@")
         description.sendKeys(" @@")
         assertTrue(description.getAttribute("value").contains("@@"),
             "@@@@ В Наименовании фильтра не прописалось @@ при редактировании @@")
@@ -456,8 +459,10 @@ class Filter {
             tools.xpathLast("//span[text()='Сегодня']")?.click()
             Thread.sleep(threadSleep)
             val ATTR_DATE_RELEASE_DOCUMENT = tools.xpathLast("//*[@data-reference='ATTR_DATE_RELEASE_DOCUMENT']/descendant::input")
-            assertEquals(ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value") ?:"NONE", localDateNow,
-                "@@@@ В Дата не стоит сегодняшняя дата после занесения из выбора Сегодня @@")
+            val ATTR_DATE = ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value")
+            assertEquals(ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value") ?:"NONE",
+                DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDate.now()),
+                "@@@@ В Дата не стоит сегодняшняя дата после занесения из выбора Сегодня $ATTR_DATE @@")
 
             tools.xpathLast("// *[@data-reference='ATTR_USER_QUERY_STATUS']/descendant::input")
                 ?.sendKeys("В разработке")

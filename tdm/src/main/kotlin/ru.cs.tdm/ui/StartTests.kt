@@ -2,9 +2,10 @@ package ru.cs.tdm.ui
 
 import ru.cs.tdm.cases.*
 import ru.cs.tdm.code.Runner
+import java.time.LocalDateTime
 
 fun startTests() :Long {
-    println("startTests arguments: ${TestsProperties.testCases.joinToString()}")
+    println("startTests ${LocalDateTime.now().withNano(0)} arguments: ${TestsProperties.testCases.joinToString()}")
     if (TestsProperties.debugPrintNomber > 1) println("Повторов ${TestsProperties.repeateCasesNomber} Задержка ${TestsProperties.threadSleepNomber} Печать ${TestsProperties.debugPrintNomber}")
     if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage}")
     if (TestsProperties.debugPrintNomber > 1) println("login= ${TestsProperties.login}   password= ${TestsProperties.password}")
@@ -47,7 +48,7 @@ fun startTests() :Long {
             if (TestsProperties.debugPrintNomber > 7) println("-------------- стоп $test Повтор $it  --------------")
             repeateSumErrors += caseErrors
         }
-        if (repeateSumErrors > 0)  println("@@@@@ repeateSumErrors = $repeateSumErrors  @@@")
+        if (repeateSumErrors > 0)  println("@@@@@ $it repeateSumErrors = $repeateSumErrors  @@@")
         allSumErrors += repeateSumErrors
     }
     if (allSumErrors > 0)  println("@@@@@ allSumErrors = $allSumErrors  @@@")

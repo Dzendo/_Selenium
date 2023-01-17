@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
-// 16.01.2023 rev 1.0.0
+// 17.01.2023 rev 1.0.1
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
@@ -39,10 +39,10 @@ dependencies {
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.6")
-    implementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    implementation("org.junit.jupiter:junit-jupiter:5.9.2")
     //implementation("org.assertj:assertj-core:3.23.1")
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-    implementation("org.junit.platform:junit-platform-launcher:1.9.1") // 1.8.2")
+    implementation("org.junit.platform:junit-platform-launcher:1.9.2") // 1.8.2")
     //{ because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions") }
     // java -jar junit-platform-console-standalone-1.9.1.jar <Options>
 }

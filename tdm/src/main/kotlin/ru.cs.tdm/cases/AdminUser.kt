@@ -95,13 +95,12 @@ class AdminUser {
         //private val NN:Int = repeateTestsNomber                       // количество повторений тестов
         private const val NN:Int = 1                                    // количество повторений тестов
 
+        private val localDateNow: String = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss").format(LocalDateTime.now())
+
     // переменная для драйвера
     lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
     lateinit var tools: Tools
-
-    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-    val localDateNow: String  = LocalDate.now().format(formatter)  //LocalDateTime.now()
 
     /**
      * осуществление первоначальной настройки
@@ -114,8 +113,6 @@ class AdminUser {
         @BeforeAll
         fun beforeAll() {
         if (DT >7) println("Вызов BeforeAll AdminUserTest")
-        //formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
-        //localDateNow = LocalDate.now().format(formatter)  //LocalDateTime.now()
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         driver = startDriver()
 
@@ -192,8 +189,8 @@ class AdminUser {
     }
     fun screenShot(name: String = "image") {
         val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
-        val sdf = SimpleDateFormat("ddMMyyyyhhmmss")
-        copyFile(scrFile, File("./$name${sdf.format(Date())}.png"))
+        val localDateNow = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm").format(LocalDateTime.now())
+        copyFile(scrFile, File("./$name$localDateNow.png"))
         if (DT >5) println("Скрин сохранен ")
     }
     private fun openAllUsers(click: String) {
@@ -204,8 +201,6 @@ class AdminUser {
         tools.qtipClickLast(mainMenu)
         assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
-
-
         if (DT > 8) println("Test нажатия на $adminUser")
         tools.qtipClickLast(adminUser)
         */
@@ -325,8 +320,6 @@ class AdminUser {
 
         val editUser = "Редактировать пользователя"
         if (DT > 6) println("Test нажатия на $editUser")
-
-        //val testUpFIO = "Тестовая Фамилия"
 
         if (DT > 8) println("Редактирование $localDateNow")
         //tools.xpathLast("//div[contains(text(), '$localDateNow')]")?.click()
