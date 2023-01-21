@@ -1,5 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
-// 17.01.2023 rev 1.0.1
+// https://habr.com/ru/post/305974/
+// 21.01.2023 UI2 rev 1.0.2
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 

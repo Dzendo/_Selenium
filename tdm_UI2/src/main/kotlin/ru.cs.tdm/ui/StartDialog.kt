@@ -10,6 +10,9 @@ import ru.cs.tdm.ui.TestsProperties.passwordIndex
 import ru.cs.tdm.ui.TestsProperties.repeateTestsNomber
 import ru.cs.tdm.ui.TestsProperties.testCases
 import java.awt.BorderLayout
+import java.awt.GridLayout
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
 import javax.swing.*
 import kotlin.system.exitProcess
 
@@ -18,7 +21,8 @@ import kotlin.system.exitProcess
  * https://java-online.ru/swing-layout.xhtml
  */
 
-class StartDialog : JFrame("TDM365 Tests ") {
+class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
+
     var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()
     private val contents = JPanel()
@@ -74,12 +78,28 @@ class StartDialog : JFrame("TDM365 Tests ") {
     private val spinThreadSleep =JSpinner(modelThreadSleep)
     private val spinDebugPrint =JSpinner(modelDebugPrint)
 
-     fun startDialog() {
+    private val loginPages: Array<String> = arrayOf(
+        "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
+        "http://tdms-srv2a:777/client/#objects/",
+        "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
+        "http://tdms-srv2a:444/client/#objects/",
+        "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
+        "http://TDMS-SRV10:443/client/#objects/",
+        "http://tdms-temp-2012:444/client/#objects/",
+        "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
+        "http://tdms-srv2a:777/client/#objects/",
+    )
+    private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
+    private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")
+
+
+    fun startDialog() {
 
         // Выход из программы при закрытии
         defaultCloseOperation = EXIT_ON_CLOSE
 
         // Создание панели содержимого с размещением кнопок
+        contents.layout = GridLayout(5,5,1,1)
         contentPane = contents
        // Кнопки для создания диалоговых окон
          testsPanel.alignmentX = JComponent.LEFT_ALIGNMENT
@@ -147,26 +167,15 @@ class StartDialog : JFrame("TDM365 Tests ") {
              "srv2a.ru:777",
              "srv2a:777",
              )
-         val loginPages: Array<String> = arrayOf(
-             "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
-             "http://tdms-srv2a:777/client/#objects/",
-             "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
-             "http://tdms-srv2a:444/client/#objects/",
-             "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
-             "http://TDMS-SRV10:443/client/#objects/",
-             "http://tdms-temp-2012:444/client/#objects/",
-             "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
-             "http://tdms-srv2a:777/client/#objects/",
-             )
 
          server  = JComboBox<String>(servers)
          comboPanel.add(server)
 
-         val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
+
          login  = JComboBox<String>(logins)
          comboPanel.add(login)
 
-         val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")
+
          password = JComboBox<String>(passwords)
          comboPanel.add(password)
 
@@ -177,50 +186,12 @@ class StartDialog : JFrame("TDM365 Tests ") {
 
 
          buttonPanel.add(startButton)
-         startButton.addActionListener {
-             repeateCasesNomber = spinRepeateCases.value.toString().toInt()
-             repeateTestsNomber = spinRepeateTests.value.toString().toInt()
-             threadSleepNomber = spinThreadSleep.value.toString().toLong()*1000L
-             debugPrintNomber = spinDebugPrint.value.toString().toInt()
+         startButton.addActionListener(this)
 
-             browserIndex = browser.selectedIndex
-             pageIndex = server.selectedIndex
-             //TestsProperties.loginpage = server.selectedItem.toString()
-             TestsProperties.loginpage = loginPages[pageIndex]
-             loginIndex = login.selectedIndex
-             //TestsProperties.login = login.selectedItem.toString()
-             TestsProperties.login = logins[loginIndex]
-             passwordIndex = password.selectedIndex
-             //TestsProperties.password = password.selectedItem.toString()
-             TestsProperties.password = passwords[passwordIndex]
 
-             testCases.clear()
-             if (passBox.isSelected) testCases.add("Pass")
-             if (headBox.isSelected) testCases.add("Head")
-             if (userBox.isSelected) testCases.add("User")
-             if (filterBox.isSelected) testCases.add("Filter")
-
-             TestsProperties.fileOutCheck = outBox.isSelected
-             TestsProperties.consOutCheck = consBox.isSelected
-             TestsProperties.uiOutCheck = uiBox.isSelected
-             TestsProperties.assertOutCheck = errBox.isSelected
-
-             /**
-              * int selectedIndex = myComboBox.getSelectedIndex();
-              * Object selectedObject = myComboBox.getSelectedItem();
-              * String selectedValue = myComboBox.getSelectedValue().toString();
-              */
-            TestsProperties.startIsOn = true
-             // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-             summuryOfErrors = startTests()  // СТАРТ циклов тестов
-             println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
-             TestsProperties.startIsOn = false
-         }
          buttonPanel.add(stopButton)
-         stopButton.addActionListener {
-           println("@@@@@ allSummuryOfErrors = $summuryOfErrors  @@@")
-             exitProcess(0)
-         }
+         stopButton.addActionListener(this)
+
 
 
         // Определение размера и открытие окна
@@ -239,6 +210,54 @@ class StartDialog : JFrame("TDM365 Tests ") {
         dialog.defaultCloseOperation = DISPOSE_ON_CLOSE
         dialog.setSize(180, 90)
         return dialog
+    }
+
+    override fun actionPerformed(e: ActionEvent?) {
+        // можно переписать в When
+        if (e!!.source == startButton)
+    {
+            repeateCasesNomber = spinRepeateCases.value.toString().toInt()
+            repeateTestsNomber = spinRepeateTests.value.toString().toInt()
+            threadSleepNomber = spinThreadSleep.value.toString().toLong()*1000L
+            debugPrintNomber = spinDebugPrint.value.toString().toInt()
+
+            browserIndex = browser.selectedIndex
+            pageIndex = server.selectedIndex
+            //TestsProperties.loginpage = server.selectedItem.toString()
+            TestsProperties.loginpage = loginPages[pageIndex]
+            loginIndex = login.selectedIndex
+            //TestsProperties.login = login.selectedItem.toString()
+            TestsProperties.login = logins[loginIndex]
+            passwordIndex = password.selectedIndex
+            //TestsProperties.password = password.selectedItem.toString()
+            TestsProperties.password = passwords[passwordIndex]
+
+            testCases.clear()
+            if (passBox.isSelected) testCases.add("Pass")
+            if (headBox.isSelected) testCases.add("Head")
+            if (userBox.isSelected) testCases.add("User")
+            if (filterBox.isSelected) testCases.add("Filter")
+
+            TestsProperties.fileOutCheck = outBox.isSelected
+            TestsProperties.consOutCheck = consBox.isSelected
+            TestsProperties.uiOutCheck = uiBox.isSelected
+            TestsProperties.assertOutCheck = errBox.isSelected
+
+            /**
+             * int selectedIndex = myComboBox.getSelectedIndex();
+             * Object selectedObject = myComboBox.getSelectedItem();
+             * String selectedValue = myComboBox.getSelectedValue().toString();
+             */
+            TestsProperties.startIsOn = true
+            // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
+            summuryOfErrors = startTests()  // СТАРТ циклов тестов
+            println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
+            TestsProperties.startIsOn = false
+        } else  // stopButton
+        {
+            println("@@@@@ allSummuryOfErrors = $summuryOfErrors  @@@")
+            exitProcess(0)
+        }
     }
 }
 

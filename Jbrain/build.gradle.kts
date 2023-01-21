@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-test:1.7.22")
+    implementation("org.jetbrains.kotlin:kotlin-test:1.8.0")
     implementation("org.seleniumhq.selenium:selenium-java:4.7.2")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     { exclude ("org.bouncycastle") }
