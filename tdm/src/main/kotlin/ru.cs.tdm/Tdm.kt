@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
         frame.startDialog()
         frame.pack()
         frame.setLocationRelativeTo(null)  // Эта строка используется для центрирования окна на экране.
-        frame.setSize(550, 300)
+        frame.setSize(540, 240)
         frame.isVisible = true
     }
     else {
