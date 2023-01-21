@@ -9,7 +9,7 @@ import ru.cs.tdm.ui.TestsProperties.pageIndex
 import ru.cs.tdm.ui.TestsProperties.passwordIndex
 import ru.cs.tdm.ui.TestsProperties.repeateTestsNomber
 import ru.cs.tdm.ui.TestsProperties.testCases
-import java.awt.BorderLayout
+import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -23,16 +23,13 @@ import kotlin.system.exitProcess
 
 class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
 
-    var summuryOfErrors : Long = 0L
+    private var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()
     private val contents = JPanel()
     private val startButton = JButton("START")
+    private val pauseButton = JButton("PAUSE")
     private val stopButton = JButton("STOP")
-    private val testsPanel = JPanel()
-    private val spinPanel = JPanel()
-    private val comboPanel = JPanel()
-    private val buttonPanel = JPanel()
-    private val printPanel = JPanel()
+    private val exitButton = JButton("EXIT")
 
     private val passBox = JCheckBox("Change Password", true)
     private val headBox = JCheckBox("Test Head TDM", true)
@@ -78,6 +75,9 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     private val spinThreadSleep =JSpinner(modelThreadSleep)
     private val spinDebugPrint =JSpinner(modelDebugPrint)
 
+    private val browsers: Array<String> = arrayOf(
+        "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
+
     private val loginPages: Array<String> = arrayOf(
         "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
         "http://tdms-srv2a:777/client/#objects/",
@@ -89,9 +89,20 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
         "http://tdms-srv2a:777/client/#objects/",
     )
+
+    private val servers: Array<String> = arrayOf(
+        "srv2a.ru:777",
+        "srv2a:777",
+        "srv2a.ru:444",
+        "srv2a:444",
+        "srv10.ru:443",
+        "SRV10:443",
+        "tdms2012:444",
+        "srv2a.ru:777",
+        "srv2a:777",
+    )
     private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")
-
 
     fun startDialog() {
 
@@ -99,164 +110,118 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         defaultCloseOperation = EXIT_ON_CLOSE
 
         // Создание панели содержимого с размещением кнопок
-        contents.layout = GridLayout(5,5,1,1)
+        contents.layout = GridLayout(0,4,5,5)
         contentPane = contents
        // Кнопки для создания диалоговых окон
-         testsPanel.alignmentX = JComponent.LEFT_ALIGNMENT
-         testsPanel.add(JLabel("Тесты:"))
-         testsPanel.layout = BoxLayout(testsPanel, BoxLayout.Y_AXIS)
-         contents.add(testsPanel) //, BorderLayout.SOUTH)
+         contents.alignmentX = JComponent.LEFT_ALIGNMENT
+         contents.add(JLabel("Тесты:"))
+         contents.add(JLabel("Повтор:"))
+         contents.add(JLabel("Сервер:"))
+         contents.add(JLabel("Печать:"))
 
-         spinPanel.alignmentX = JComponent.LEFT_ALIGNMENT
-         val label = JLabel("Повтор:")
-         label.alignmentX = JComponent.LEFT_ALIGNMENT
-         spinPanel.add(label)
-         contents.add(spinPanel)
-         spinPanel.layout = BoxLayout(spinPanel, BoxLayout.Y_AXIS)
-
-         comboPanel.alignmentX = JComponent.LEFT_ALIGNMENT
-         comboPanel.add(JLabel("Сервер:"))
-         contents.add(comboPanel)
-         comboPanel.layout = BoxLayout(comboPanel, BoxLayout.Y_AXIS)
-
-         printPanel.alignmentX = JComponent.LEFT_ALIGNMENT
-         printPanel.add(JLabel("Печать:"))
-         contents.add(printPanel)
-         printPanel.layout = BoxLayout(printPanel, BoxLayout.Y_AXIS)
-
-         contents.add(buttonPanel)
-
-         testsPanel.add(passBox)
-         testsPanel.add(headBox)
-         testsPanel.add(userBox)
-         testsPanel.add(filterBox)
-
-         val spinRepeateC = JPanel()
+         contents.add(passBox)
+         val spinRepeateC = JPanel(FlowLayout(FlowLayout.LEFT))
          spinRepeateC.add(spinRepeateCases)
-         spinRepeateC.add(JLabel("Повтор Case:"))
-         spinPanel.add(spinRepeateC)
+         spinRepeateC.add(JLabel("Case:"))
+         contents.add(spinRepeateC)
 
-         val spinRepeateT = JPanel()
+        browser  = JComboBox<String>(browsers)
+        contents.add(browser)
+        contents.add(outBox)
+
+        contents.add(headBox)
+         val spinRepeateT = JPanel(FlowLayout(FlowLayout.LEFT))
          spinRepeateT.add(spinRepeateTests)
-         spinRepeateT.add(JLabel("Повтор Test:"))
-         spinPanel.add(spinRepeateT)
+         spinRepeateT.add(JLabel("Test:"))
+         contents.add(spinRepeateT)
 
-         val spinThread = JPanel()
+        server  = JComboBox<String>(servers)
+        contents.add(server)
+        contents.add(consBox)
+
+        contents.add(userBox)
+         val spinThread = JPanel(FlowLayout(FlowLayout.LEFT))
          spinThread.add(spinThreadSleep)
          spinThread.add(JLabel("Задержка:"))
-         spinPanel.add(spinThread)
+         contents.add(spinThread)
 
-         val spinDebug = JPanel()
+        login  = JComboBox<String>(logins)
+        contents.add(login)
+        contents.add(uiBox)
+
+        contents.add(filterBox)
+        val spinDebug = JPanel(FlowLayout(FlowLayout.LEFT))
+
          spinDebug.add(spinDebugPrint)
          spinDebug.add(JLabel("Печать:"))
-         spinPanel.add(spinDebug)
-
-         val browsers: Array<String> = arrayOf(
-             "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
-         browser  = JComboBox<String>(browsers)
-         comboPanel.add(browser)
-
-         val servers: Array<String> = arrayOf(
-             "srv2a.ru:777",
-             "srv2a:777",
-             "srv2a.ru:444",
-             "srv2a:444",
-             "srv10.ru:443",
-             "SRV10:443",
-             "tdms2012:444",
-             "srv2a.ru:777",
-             "srv2a:777",
-             )
-
-         server  = JComboBox<String>(servers)
-         comboPanel.add(server)
-
-
-         login  = JComboBox<String>(logins)
-         comboPanel.add(login)
-
+         contents.add(spinDebug)
 
          password = JComboBox<String>(passwords)
-         comboPanel.add(password)
+         contents.add(password)
 
-         printPanel.add(outBox)
-         printPanel.add(consBox)
-         printPanel.add(uiBox)
-         printPanel.add(errBox)
+         contents.add(errBox)
 
-
-         buttonPanel.add(startButton)
+         contents.add(startButton)
          startButton.addActionListener(this)
-
-
-         buttonPanel.add(stopButton)
+        contents.add(pauseButton)
+        pauseButton.addActionListener(this)
+         contents.add(stopButton)
          stopButton.addActionListener(this)
-
-
-
-        // Определение размера и открытие окна
-        // setLocationRelativeTo(null)  // Эта строка используется для центрирования окна на экране.
-        //setLocation(300, 200)
-        //setSize(550, 300)
-        //isVisible = true
-    }
-
-    /** Функция создания диалогового окна.
-     * @param title - заголовок окна
-     * @param modal - флаг модальности
-     */
-    private fun createDialog(title: String, modal: Boolean): JDialog {
-        val dialog = JDialog(this, title, modal)
-        dialog.defaultCloseOperation = DISPOSE_ON_CLOSE
-        dialog.setSize(180, 90)
-        return dialog
+        contents.add(exitButton)
+        exitButton.addActionListener(this)
     }
 
     override fun actionPerformed(e: ActionEvent?) {
-        // можно переписать в When
-        if (e!!.source == startButton)
-    {
-            repeateCasesNomber = spinRepeateCases.value.toString().toInt()
-            repeateTestsNomber = spinRepeateTests.value.toString().toInt()
-            threadSleepNomber = spinThreadSleep.value.toString().toLong()*1000L
-            debugPrintNomber = spinDebugPrint.value.toString().toInt()
+        if (e == null) return
+        when (e.source) {
+            startButton -> {
+                repeateCasesNomber = spinRepeateCases.value.toString().toInt()
+                repeateTestsNomber = spinRepeateTests.value.toString().toInt()
+                threadSleepNomber = spinThreadSleep.value.toString().toLong() * 1000L
+                debugPrintNomber = spinDebugPrint.value.toString().toInt()
 
-            browserIndex = browser.selectedIndex
-            pageIndex = server.selectedIndex
-            //TestsProperties.loginpage = server.selectedItem.toString()
-            TestsProperties.loginpage = loginPages[pageIndex]
-            loginIndex = login.selectedIndex
-            //TestsProperties.login = login.selectedItem.toString()
-            TestsProperties.login = logins[loginIndex]
-            passwordIndex = password.selectedIndex
-            //TestsProperties.password = password.selectedItem.toString()
-            TestsProperties.password = passwords[passwordIndex]
+                browserIndex = browser.selectedIndex
+                pageIndex = server.selectedIndex
+                //TestsProperties.loginpage = server.selectedItem.toString()
+                TestsProperties.loginpage = loginPages[pageIndex]
+                loginIndex = login.selectedIndex
+                //TestsProperties.login = login.selectedItem.toString()
+                TestsProperties.login = logins[loginIndex]
+                passwordIndex = password.selectedIndex
+                //TestsProperties.password = password.selectedItem.toString()
+                TestsProperties.password = passwords[passwordIndex]
 
-            testCases.clear()
-            if (passBox.isSelected) testCases.add("Pass")
-            if (headBox.isSelected) testCases.add("Head")
-            if (userBox.isSelected) testCases.add("User")
-            if (filterBox.isSelected) testCases.add("Filter")
+                testCases.clear()
+                if (passBox.isSelected) testCases.add("Pass")
+                if (headBox.isSelected) testCases.add("Head")
+                if (userBox.isSelected) testCases.add("User")
+                if (filterBox.isSelected) testCases.add("Filter")
 
-            TestsProperties.fileOutCheck = outBox.isSelected
-            TestsProperties.consOutCheck = consBox.isSelected
-            TestsProperties.uiOutCheck = uiBox.isSelected
-            TestsProperties.assertOutCheck = errBox.isSelected
+                TestsProperties.fileOutCheck = outBox.isSelected
+                TestsProperties.consOutCheck = consBox.isSelected
+                TestsProperties.uiOutCheck = uiBox.isSelected
+                TestsProperties.assertOutCheck = errBox.isSelected
 
-            /**
-             * int selectedIndex = myComboBox.getSelectedIndex();
-             * Object selectedObject = myComboBox.getSelectedItem();
-             * String selectedValue = myComboBox.getSelectedValue().toString();
-             */
-            TestsProperties.startIsOn = true
-            // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-            summuryOfErrors = startTests()  // СТАРТ циклов тестов
-            println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
-            TestsProperties.startIsOn = false
-        } else  // stopButton
-        {
-            println("@@@@@ allSummuryOfErrors = $summuryOfErrors  @@@")
-            exitProcess(0)
+                /**
+                 * int selectedIndex = myComboBox.getSelectedIndex();
+                 * Object selectedObject = myComboBox.getSelectedItem();
+                 * String selectedValue = myComboBox.getSelectedValue().toString();
+                 */
+                TestsProperties.startIsOn = true
+                // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
+                summuryOfErrors = startTests()  // СТАРТ циклов тестов
+                println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
+                TestsProperties.startIsOn = false
+            }
+
+            pauseButton -> {}
+            stopButton -> {}
+            exitButton -> {
+                println("@@@@@ allSummuryOfErrors = $summuryOfErrors  @@@")
+                exitProcess(0)
+            }
+
+            else -> {}
         }
     }
 }
@@ -268,8 +233,19 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
                 frame.startDialog()
                 frame.pack()
                 frame.setLocationRelativeTo(null)
-                frame.setSize(800, 300)
+                frame.setSize(540, 240)
                 frame.isVisible = true
             }
         }
+/** Функция создания диалогового окна.
+ * @param title - заголовок окна
+ * @param modal - флаг модальности
+ */
+
+/*private fun createDialog(title: String, modal: Boolean): JDialog {
+    val dialog = JDialog(this, title, modal)
+    dialog.defaultCloseOperation = DISPOSE_ON_CLOSE
+    dialog.setSize(180, 90)
+    return dialog
+}*/
 
