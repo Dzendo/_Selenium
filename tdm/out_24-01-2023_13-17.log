@@ -1,0 +1,8 @@
+Output: double to the console and to the file out+err
+Program arguments: 
+Файл конфигурации src/main/resources/conf.properties присутствует
+startTests 2023-01-24T13:17:58 arguments: Pass, Head, User, Filter
+Повторов 3 Задержка 1000 Печать 5
+Открытие страницы http://tdms-srv2a:444/client/#objects/
+login= SYSADMIN   password= 753951
+======= run 0 Test ru.cs.tdm.cases.ChangePass! ======= 2023-01-24T13:17:58 ============

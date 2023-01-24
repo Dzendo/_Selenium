@@ -104,6 +104,10 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")
 
+    private val actionRepeate: JLabel = JLabel("-1")
+    private val actionCase : JLabel = JLabel("NULL")
+    private val allErrors : JLabel = JLabel("-1")
+
     fun startDialog() {
 
         // Выход из программы при закрытии
@@ -169,6 +173,35 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         stopButton.addActionListener(this)
         contents.add(exitButton)
         exitButton.addActionListener(this)
+
+
+        contents.add(JLabel("allErrors:"))
+        contents.add(allErrors)
+        contents.add(JLabel(":"))
+        contents.add(JLabel(":"))
+        contents.add(JLabel("Repeat:"))
+        contents.add(actionRepeate)
+        contents.add(JLabel(":"))
+        contents.add(JLabel(":"))
+        contents.add(JLabel("Case:"))
+        contents.add(actionCase)
+        contents.add(JLabel(":"))
+        contents.add(JLabel(":"))
+
+    }
+
+    /**
+     * Должна высвечивать ход выполнения, но не обновляет UI - не работает
+     */
+    fun showActionCase(actionRepeate : Int, actionCase : String ) {
+        this.actionRepeate.text = actionRepeate.toString()
+        this.actionCase.text = actionCase
+        this.actionRepeate.isVisible = true
+        this.actionCase.isVisible = true
+        this.actionRepeate.revalidate()
+        this.actionCase.revalidate()
+        this.actionRepeate.repaint()
+        this.actionCase.repaint()
     }
 
     override fun actionPerformed(e: ActionEvent?) {
@@ -208,8 +241,16 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
                  * String selectedValue = myComboBox.getSelectedValue().toString();
                  */
                 TestsProperties.startIsOn = true
+                actionCase.text = "LUNN"
+                actionCase.isVisible
+                actionCase.revalidate()
+                actionCase.repaint()
+                //println("@@@@@ actionCase.text = ${actionCase.text}  @@@")
                 // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-                summuryOfErrors = startTests()  // СТАРТ циклов тестов
+                val classStart = StartTests(this)
+                classStart.execute()  // СТАРТ циклов тестов
+                //summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
+
                 println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
                 TestsProperties.startIsOn = false
             }

@@ -104,6 +104,10 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")
 
+    private val actionRepeate: JLabel = JLabel("-1")
+    private val actionCase : JLabel = JLabel("NULL")
+    private val allErrors : JLabel = JLabel("-1")
+
     fun startDialog() {
 
         // Выход из программы при закрытии
@@ -112,38 +116,38 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         // Создание панели содержимого с размещением кнопок
         contents.layout = GridLayout(0,4,5,5)
         contentPane = contents
-       // Кнопки для создания диалоговых окон
-         contents.alignmentX = JComponent.LEFT_ALIGNMENT
-         contents.add(JLabel("Тесты:"))
-         contents.add(JLabel("Повтор:"))
-         contents.add(JLabel("Сервер:"))
-         contents.add(JLabel("Печать:"))
+        // Кнопки для создания диалоговых окон
+        contents.alignmentX = JComponent.LEFT_ALIGNMENT
+        contents.add(JLabel("Тесты:"))
+        contents.add(JLabel("Повтор:"))
+        contents.add(JLabel("Сервер:"))
+        contents.add(JLabel("Печать:"))
 
-         contents.add(passBox)
-         val spinRepeateC = JPanel(FlowLayout(FlowLayout.LEFT))
-         spinRepeateC.add(spinRepeateCases)
-         spinRepeateC.add(JLabel("Case:"))
-         contents.add(spinRepeateC)
+        contents.add(passBox)
+        val spinRepeateC = JPanel(FlowLayout(FlowLayout.LEFT))
+        spinRepeateC.add(spinRepeateCases)
+        spinRepeateC.add(JLabel("Case:"))
+        contents.add(spinRepeateC)
 
         browser  = JComboBox<String>(browsers)
         contents.add(browser)
         contents.add(outBox)
 
         contents.add(headBox)
-         val spinRepeateT = JPanel(FlowLayout(FlowLayout.LEFT))
-         spinRepeateT.add(spinRepeateTests)
-         spinRepeateT.add(JLabel("Test:"))
-         contents.add(spinRepeateT)
+        val spinRepeateT = JPanel(FlowLayout(FlowLayout.LEFT))
+        spinRepeateT.add(spinRepeateTests)
+        spinRepeateT.add(JLabel("Test:"))
+        contents.add(spinRepeateT)
 
         server  = JComboBox<String>(servers)
         contents.add(server)
         contents.add(consBox)
 
         contents.add(userBox)
-         val spinThread = JPanel(FlowLayout(FlowLayout.LEFT))
-         spinThread.add(spinThreadSleep)
-         spinThread.add(JLabel("Задержка:"))
-         contents.add(spinThread)
+        val spinThread = JPanel(FlowLayout(FlowLayout.LEFT))
+        spinThread.add(spinThreadSleep)
+        spinThread.add(JLabel("Задержка:"))
+        contents.add(spinThread)
 
         login  = JComboBox<String>(logins)
         contents.add(login)
@@ -152,23 +156,52 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         contents.add(filterBox)
         val spinDebug = JPanel(FlowLayout(FlowLayout.LEFT))
 
-         spinDebug.add(spinDebugPrint)
-         spinDebug.add(JLabel("Печать:"))
-         contents.add(spinDebug)
+        spinDebug.add(spinDebugPrint)
+        spinDebug.add(JLabel("Печать:"))
+        contents.add(spinDebug)
 
-         password = JComboBox<String>(passwords)
-         contents.add(password)
+        password = JComboBox<String>(passwords)
+        contents.add(password)
 
-         contents.add(errBox)
+        contents.add(errBox)
 
-         contents.add(startButton)
-         startButton.addActionListener(this)
+        contents.add(startButton)
+        startButton.addActionListener(this)
         contents.add(pauseButton)
         pauseButton.addActionListener(this)
-         contents.add(stopButton)
-         stopButton.addActionListener(this)
+        contents.add(stopButton)
+        stopButton.addActionListener(this)
         contents.add(exitButton)
         exitButton.addActionListener(this)
+
+
+        contents.add(JLabel("allErrors:"))
+        contents.add(allErrors)
+        contents.add(JLabel(":"))
+        contents.add(JLabel(":"))
+        contents.add(JLabel("Repeat:"))
+        contents.add(actionRepeate)
+        contents.add(JLabel(":"))
+        contents.add(JLabel(":"))
+        contents.add(JLabel("Case:"))
+        contents.add(actionCase)
+        contents.add(JLabel(":"))
+        contents.add(JLabel(":"))
+
+    }
+
+    /**
+     * Должна высвечивать ход выполнения, но не обновляет UI - не работает
+     */
+    fun showActionCase(actionRepeate : Int, actionCase : String ) {
+        this.actionRepeate.text = actionRepeate.toString()
+        this.actionCase.text = actionCase
+        this.actionRepeate.isVisible = true
+        this.actionCase.isVisible = true
+        this.actionRepeate.revalidate()
+        this.actionCase.revalidate()
+        this.actionRepeate.repaint()
+        this.actionCase.repaint()
     }
 
     override fun actionPerformed(e: ActionEvent?) {
@@ -208,8 +241,16 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
                  * String selectedValue = myComboBox.getSelectedValue().toString();
                  */
                 TestsProperties.startIsOn = true
+                actionCase.text = "LUNN"
+                actionCase.isVisible
+                actionCase.revalidate()
+                actionCase.repaint()
+                //println("@@@@@ actionCase.text = ${actionCase.text}  @@@")
                 // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-                summuryOfErrors = startTests()  // СТАРТ циклов тестов
+                val classStart = StartTests(this)
+                    classStart.execute()  // СТАРТ циклов тестов
+                //summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
+
                 println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
                 TestsProperties.startIsOn = false
             }
@@ -226,17 +267,17 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     }
 }
 
-        fun main() {
-            SwingUtilities.invokeLater {      // этот поток называется EDT (поток диспетчеризации событий).
-                JFrame.setDefaultLookAndFeelDecorated(true)
-                val frame = StartDialog()
-                frame.startDialog()
-                frame.pack()
-                frame.setLocationRelativeTo(null)
-                frame.setSize(540, 240)
-                frame.isVisible = true
-            }
-        }
+fun main() {
+    SwingUtilities.invokeLater {      // этот поток называется EDT (поток диспетчеризации событий).
+        JFrame.setDefaultLookAndFeelDecorated(true)
+        val frame = StartDialog()
+        frame.startDialog()
+        frame.pack()
+        frame.setLocationRelativeTo(null)
+        frame.setSize(540, 240)
+        frame.isVisible = true
+    }
+}
 /** Функция создания диалогового окна.
  * @param title - заголовок окна
  * @param modal - флаг модальности

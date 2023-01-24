@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-// 22.01.2023 rev 1.0.2
+// 24.01.2023 rev 1.0.3
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
@@ -10,7 +10,7 @@ plugins {
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.9.1"
+val junitVersion = "5.9.2"
 
 repositories {
     mavenCentral()

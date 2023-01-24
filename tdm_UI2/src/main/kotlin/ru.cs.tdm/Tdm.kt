@@ -2,8 +2,8 @@ package ru.cs.tdm
 
 import ru.cs.tdm.code.printDual
 import ru.cs.tdm.ui.StartDialog
+import ru.cs.tdm.ui.StartTests
 import ru.cs.tdm.ui.TestsProperties
-import ru.cs.tdm.ui.startTests
 import javax.swing.JFrame
 import javax.swing.SwingUtilities
 
@@ -21,12 +21,16 @@ fun main(args: Array<String>) {
         frame.startDialog()
         frame.pack()
         frame.setLocationRelativeTo(null)  // Эта строка используется для центрирования окна на экране.
-        frame.setSize(540, 240)
+        frame.setSize(540, 300)
         frame.isVisible = true
     }
     else {
         TestsProperties.testCases.clear()
         TestsProperties.testCases.addAll(args.toSet())
-        startTests()
+        //StartTests().execute()
+        val classStart = StartTests()
+        classStart.execute()  // СТАРТ циклов тестов
+        val summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
+        println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
     }
 }
