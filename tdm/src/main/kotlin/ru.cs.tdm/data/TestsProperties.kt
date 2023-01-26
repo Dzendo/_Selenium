@@ -1,6 +1,4 @@
-package ru.cs.tdm.ui
-
-import ru.cs.tdm.data.ConfProperties
+package ru.cs.tdm.data
 
 object TestsProperties {
     var fluentInDurationNomber = 3000L

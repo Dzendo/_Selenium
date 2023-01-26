@@ -1,6 +1,5 @@
 package ru.cs.tdm.data
 
-import ru.cs.tdm.ui.TestsProperties
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -21,7 +20,7 @@ object ConfProperties {
         //properties.setProperty("loginTDM","SYSADMIN")
         properties.setProperty("loginTDM", TestsProperties.login)
         //properties.setProperty("passwordTDM","753951")
-        properties.setProperty("passwordTDM",TestsProperties.password)
+        properties.setProperty("passwordTDM", TestsProperties.password)
         try {
             //указание пути до файла с настройками
             fileInputStream = FileInputStream("conf.properties")

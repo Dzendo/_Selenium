@@ -2,11 +2,28 @@ package ru.cs.tdm.ui
 
 import ru.cs.tdm.cases.*
 import ru.cs.tdm.code.Runner
+import ru.cs.tdm.data.TestsProperties
 import java.time.LocalDateTime
 import javax.swing.SwingWorker
-
+/**
+ * Computes a result, or throws an exception if unable to do so.
+ * Вычисляет результат или выдает исключение, если это невозможно сделать.
+ *
+ *
+ * Note that this method is executed only once.
+ * Обратите внимание, что этот метод выполняется только один раз.
+ *
+ *
+ * Note: this method is executed in a background thread.
+ * Примечание: этот метод выполняется в фоновом потоке.
+ *
+ * @return the computed result
+ * @throws Exception if unable to compute a result
+ */
 class StartTests(val startDialog: StartDialog? = null) : SwingWorker<Long, Int>() {
-    fun startTests(startDialog: StartDialog? = null): Long {
+
+
+    override fun doInBackground(): Long {
         println("startTests ${LocalDateTime.now().withNano(0)} arguments: ${TestsProperties.testCases.joinToString()}")
         if (TestsProperties.debugPrintNomber > 1) println("Повторов ${TestsProperties.repeateCasesNomber} Задержка ${TestsProperties.threadSleepNomber} Печать ${TestsProperties.debugPrintNomber}")
         if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage}")
@@ -57,29 +74,6 @@ class StartTests(val startDialog: StartDialog? = null) : SwingWorker<Long, Int>(
         }
         if (allSumErrors > 0) println("@@@@@ allSumErrors = $allSumErrors  @@@")
         return allSumErrors
-    }
-
-    /**
-     * Computes a result, or throws an exception if unable to do so.
-     * Вычисляет результат или выдает исключение, если это невозможно сделать.
-     *
-     *
-     * Note that this method is executed only once.
-     * Обратите внимание, что этот метод выполняется только один раз.
-     *
-     *
-     * Note: this method is executed in a background thread.
-     * Примечание: этот метод выполняется в фоновом потоке.
-     *
-     * @return the computed result
-     * @throws Exception if unable to compute a result
-     */
-    override fun doInBackground(): Long {
-        val aaa = 1111
-        val bbb = aaa
-        val ret = startTests(startDialog)
-        return ret
-    }
-
+    }  // end doInBackground()
 }
 

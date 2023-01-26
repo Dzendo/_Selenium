@@ -1,14 +1,15 @@
 package ru.cs.tdm.ui
 
-import ru.cs.tdm.ui.TestsProperties.browserIndex
-import ru.cs.tdm.ui.TestsProperties.repeateCasesNomber
-import ru.cs.tdm.ui.TestsProperties.threadSleepNomber
-import ru.cs.tdm.ui.TestsProperties.debugPrintNomber
-import ru.cs.tdm.ui.TestsProperties.loginIndex
-import ru.cs.tdm.ui.TestsProperties.pageIndex
-import ru.cs.tdm.ui.TestsProperties.passwordIndex
-import ru.cs.tdm.ui.TestsProperties.repeateTestsNomber
-import ru.cs.tdm.ui.TestsProperties.testCases
+import ru.cs.tdm.data.TestsProperties
+import ru.cs.tdm.data.TestsProperties.browserIndex
+import ru.cs.tdm.data.TestsProperties.repeateCasesNomber
+import ru.cs.tdm.data.TestsProperties.threadSleepNomber
+import ru.cs.tdm.data.TestsProperties.debugPrintNomber
+import ru.cs.tdm.data.TestsProperties.loginIndex
+import ru.cs.tdm.data.TestsProperties.pageIndex
+import ru.cs.tdm.data.TestsProperties.passwordIndex
+import ru.cs.tdm.data.TestsProperties.repeateTestsNomber
+import ru.cs.tdm.data.TestsProperties.testCases
 import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.awt.event.ActionEvent
@@ -86,8 +87,9 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
         "http://TDMS-SRV10:443/client/#objects/",
         "http://tdms-temp-2012:444/client/#objects/",
-        "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
-        "http://tdms-srv2a:777/client/#objects/",
+        "http://tdms-srv1a:777/client/#objects",
+        "http://tdms-srv1:777/client/#objects",
+
     )
 
     private val servers: Array<String> = arrayOf(
@@ -98,8 +100,8 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "srv10.ru:443",
         "SRV10:443",
         "tdms2012:444",
-        "srv2a.ru:777",
-        "srv2a:777",
+        "srv1a:777 Server",
+        "srv1:777 Web"
     )
     private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")

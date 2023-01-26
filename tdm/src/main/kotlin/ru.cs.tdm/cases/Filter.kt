@@ -7,7 +7,7 @@ import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.startDriver
-import ru.cs.tdm.ui.TestsProperties
+import ru.cs.tdm.data.TestsProperties
 import java.io.File
 import java.text.SimpleDateFormat
 import java.time.LocalDate

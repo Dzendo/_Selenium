@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocate
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.startDriver
-import ru.cs.tdm.ui.TestsProperties
+import ru.cs.tdm.data.TestsProperties
 
 /**
  *

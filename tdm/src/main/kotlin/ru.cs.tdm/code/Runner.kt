@@ -3,12 +3,11 @@ package ru.cs.tdm.code
 import org.junit.platform.engine.discovery.DiscoverySelectors
 import org.junit.platform.launcher.Launcher
 import org.junit.platform.launcher.LauncherDiscoveryRequest
-import org.junit.platform.launcher.TestPlan
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder
 import org.junit.platform.launcher.core.LauncherFactory
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener
 import org.junit.platform.launcher.listeners.TestExecutionSummary
-import ru.cs.tdm.ui.TestsProperties.debugPrintNomber
+import ru.cs.tdm.data.TestsProperties.debugPrintNomber
 import java.io.PrintWriter
 import java.time.LocalDateTime
 

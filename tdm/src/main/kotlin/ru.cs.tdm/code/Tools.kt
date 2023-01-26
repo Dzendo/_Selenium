@@ -5,7 +5,7 @@ import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions.*
 import org.openqa.selenium.support.ui.FluentWait
 //import org.openqa.selenium.support.ui.WebDriverWait
-import ru.cs.tdm.ui.TestsProperties
+import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
 /*
 const val fluentInDuration = 3000L

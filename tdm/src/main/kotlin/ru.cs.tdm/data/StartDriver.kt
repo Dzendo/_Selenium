@@ -5,9 +5,7 @@ import org.openqa.selenium.Point
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.chromium.ChromiumDriver
-import org.openqa.selenium.chromium.ChromiumOptions
-import ru.cs.tdm.ui.TestsProperties.browserIndex
+import ru.cs.tdm.data.TestsProperties.browserIndex
 
 fun startDriver(): WebDriver {
     lateinit var driver: WebDriver

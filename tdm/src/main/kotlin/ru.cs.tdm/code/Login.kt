@@ -2,7 +2,7 @@ package ru.cs.tdm.code
 
 import ru.cs.tdm.pages.LoginPage
 import org.openqa.selenium.WebDriver
-import ru.cs.tdm.ui.TestsProperties
+import ru.cs.tdm.data.TestsProperties
 
 /**
  * при выходе на http://tdms-srv2a:444/client/#objects/ открывает страницу аутентификации;

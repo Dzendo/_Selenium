@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.data.startDriver
-import ru.cs.tdm.ui.TestsProperties
+import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
 
 /**

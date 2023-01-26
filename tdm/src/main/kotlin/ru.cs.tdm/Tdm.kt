@@ -3,7 +3,7 @@ package ru.cs.tdm
 import ru.cs.tdm.code.printDual
 import ru.cs.tdm.ui.StartDialog
 import ru.cs.tdm.ui.StartTests
-import ru.cs.tdm.ui.TestsProperties
+import ru.cs.tdm.data.TestsProperties
 import javax.swing.JFrame
 import javax.swing.SwingUtilities
 

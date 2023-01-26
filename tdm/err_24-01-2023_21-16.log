@@ -1,8 +1,0 @@
-[SwingWorker-pool-1-thread-1] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 109.0.5414.74 (resolved driver for Chrome 109)
-[SwingWorker-pool-1-thread-1] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\CSoft\.cache\selenium\chromedriver\win32\109.0.5414.74\chromedriver.exe
-янв. 24, 2023 9:17:17 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find an exact match for CDP version 109, so returning the closest version found: 108
-[SwingWorker-pool-1-thread-1] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 109.0.5414.74 (resolved driver for Chrome 109)
-[SwingWorker-pool-1-thread-1] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\CSoft\.cache\selenium\chromedriver\win32\109.0.5414.74\chromedriver.exe
-янв. 24, 2023 9:18:02 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-WARNING: Unable to find an exact match for CDP version 109, so returning the closest version found: 108
