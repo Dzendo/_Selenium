@@ -89,6 +89,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "http://tdms-temp-2012:444/client/#objects/",
         "http://tdms-srv1a:777/client/#objects",
         "http://tdms-srv1:777/client/#objects",
+        "http://tdms-srv1.csoft-msc.ru:777/client/?classic#objects"
 
     )
 
@@ -101,7 +102,8 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "SRV10:443",
         "tdms2012:444",
         "srv1a:777 Server",
-        "srv1:777 Web"
+        "srv1:777 Web",
+        "srv1.ru:777"
     )
     private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")

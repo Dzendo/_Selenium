@@ -450,9 +450,11 @@ class Filter {
 
 
             tools.xpathLast("// *[@data-reference='ATTR_DATE_START']/descendant::input")
-                ?.sendKeys(localDateNow)
+               // ?.sendKeys(localDateNow)
+                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
             tools.xpathLast("// *[@data-reference='ATTR_DATE_END']/descendant::input")
-                ?.sendKeys(localDateNow)
+                //?.sendKeys(localDateNow)
+                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
 
             tools.xpathLast("// *[@data-reference='ATTR_DATE_RELEASE_DOCUMENT']/descendant::div[contains(@id, 'picker')]")?.click()
             Thread.sleep(threadSleep)

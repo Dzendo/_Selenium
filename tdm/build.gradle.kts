@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-// 28.01.2023 rev 1.0.3 EAP 2
+// 30.01.2023 rev 1.0.3 EAP 2 srv2a -> srv1(0)
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
