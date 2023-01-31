@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-// 30.01.2023 rev 1.0.3 EAP 2 srv2a -> srv1(0)
+// 01.02.2023 rev 1.0.4 EAP 2 srv10(1a) -> srv2a
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
@@ -21,10 +21,10 @@ tasks.test {
     testLogging { events("passed", "skipped", "failed") }
 }
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
 tasks.withType<KotlinTest> {
     //kotlinOptions.jvmTarget = "11"
@@ -35,8 +35,8 @@ tasks.withType<JavaCompile> {
 }
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-test:1.8.0")
-    implementation("org.seleniumhq.selenium:selenium-java:4.7.2")
-    implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
+    implementation("org.seleniumhq.selenium:selenium-java:4.8.0")
+    implementation("io.github.bonigarcia:webdrivermanager:5.3.2")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.6")

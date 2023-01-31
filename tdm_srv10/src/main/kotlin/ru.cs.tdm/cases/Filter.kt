@@ -221,6 +221,7 @@ class Filter {
      *  тест создание нового фильтра
      */
     @RepeatedTest(NN)
+    //@Disabled
     @DisplayName("Посмотреть фильтр")
     fun n02_ViewUserQuery(repetitionInfo: RepetitionInfo) {
         val nomberFilter = "${repetitionInfo.currentRepetition}"
@@ -247,6 +248,7 @@ class Filter {
          *  тест заполнение и сохранение фильтра
          */
     @RepeatedTest(NN)
+    //@Disabled
     @DisplayName("Заполнение текстовых полей фильтра")
     fun n03_fillingFilterTest(repetitionInfo: RepetitionInfo) {
             workTable()
@@ -314,12 +316,13 @@ class Filter {
             assertTrue(description.getAttribute("value").contains("@"),
                 "@@@@ В Наименовании фильтра не прописалось @ при редактировании @@")
 
-            val BUTTON_OBJDEV_SEL = {
+            val BUTTON_OBJDEV_SEL = {   // Объект разработки
                 tools.referenceClickLast("BUTTON_OBJDEV_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"),
                     "@@@@ карандашик BUTTON_OBJDEV_SEL на поле Объект разработки : нет справочника с заголовком Выбор объекта структуры @@")
 
-                tools.xpathLast("//*[contains(text(),'Ферма_омшанник')]/ancestor::td")?.click()
+                // 0203 / 051-1007345 Расширение ЕСГ для обеспечения подачи газа в газопровод «Южный поток».1-й этап (Западный коридор), для обеспечения подачи газа в объеме 31,5 млрд. м3/
+                tools.xpathLast("//*[contains(text(),'Расширение ЕСГ')]/ancestor::td")?.click()
 
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
@@ -328,7 +331,7 @@ class Filter {
             Thread.sleep(threadSleep)
             val attrObjectDev = tools.xpathLast("//*[@data-reference='ATTR_OBJECT_DEV']/descendant::input")
             val getFerma = attrObjectDev?.getAttribute("value")
-            assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Ферма_омшанник",
+            assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",
                 false, "@@@@ карандашик BUTTON_OBJDEV_SEL : После выбора в поле фильтра объекта разработки из справочника в поле фильтра Объект разработки - пусто, а должно стоять Ферма_омшанник @@")
 
             tools.referenceClickLast("BUTTON_OBJDEV_ERASE")
@@ -338,12 +341,12 @@ class Filter {
 
             BUTTON_OBJDEV_SEL()  // Всавляем еще раз омшанник
 
-            val BUTTON_PROJECT_SEL = {
+            val BUTTON_PROJECT_SEL = {      // Проект
                 tools.referenceClickLast("BUTTON_PROJECT_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"),
                     "@@@@ карандашик BUTTON_PROJECT_SEL на поле Проект : нет справочника с заголовком Выбор проекта @@")
-
-                tools.xpathLast("//*[contains(text(),'Разработка проекта электроснабжения Омшанника')]/ancestor::td")
+        // 0203.001.001 / 0203.001.001 1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР), ДЛЯ ОБЕСПЕЧЕНИЯ ПОДАЧИ ГАЗА В ОБЪЕМЕ ДО 63 МЛРД.М3/ГОД Этап 2.1. Линейная часть. Участок «Починки-Анапа», км 0 –км 347,5 (км 0 – км 181, км 181 – км 295,7, км 295,7 – км 347,5)
+                tools.xpathLast("//*[contains(text(),'1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР)')]/ancestor::td")
                     ?.click()                   //tr  tbody  table
 
                 Thread.sleep(threadSleep)
@@ -354,8 +357,8 @@ class Filter {
             val ATTR_RefToProject = tools.xpathLast("//*[@data-reference='ATTR_RefToProject']/descendant::input")
             assertContains(
                 ATTR_RefToProject?.getAttribute("value") ?: "NONE",
-                "Разработка проекта электроснабжения Омшанника", false,
-                "@@@@ карандашик BUTTON_PROJECT_SEL : После выбора в поле Проекта разработки из справочника в поле фильтра Проект - пусто, а должно стоять Разработка проекта электроснабжения Омшанника @@"
+                "1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР)", false,
+                "@@@@ карандашик BUTTON_PROJECT_SEL : После выбора в поле Проекта разработки из справочника в поле фильтра Проект - пусто, а должно стоять Название проекта из справочника @@"
             )
             tools.referenceClickLast("BUTTON_ERASE_PROJECT")
             Thread.sleep(threadSleep)
@@ -363,52 +366,63 @@ class Filter {
                 "@@@@ крестик BUTTON_ERASE_PROJECT(Проект) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_PROJECT_SEL()  // Всавляем еще раз
 
-            val BUTTON_TYPE_DOC = {
+            val BUTTON_TYPE_DOC = {     // Тип документации из справочника Типы технической документации
                 tools.referenceClickLast("BUTTON_TYPE_DOC")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Типы технической документации"),
                     "@@@@ карандашик BUTTON_TYPE_DOC на поле Тип документации : нет справочника с заголовком Типы технической документации @@")
+                //   Разделы документации / Марки РД - ни один нельзя присвоить надо раскрывать слева дерево до последнего
+                // Только SRV1: слева Марки РД - Справа АР Архитектурные решения (галочку) и ОК
 
-                tools.xpathLast("//a[contains(text(),'Документация на коммуникации')]/ancestor::tr")?.click()
+               // tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+                // table body tdr td div div+div(>)+img+span
+                tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+                Thread.sleep(threadSleep)
+                tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
+
             BUTTON_TYPE_DOC()
             Thread.sleep(threadSleep)
             val ATTR_TechDoc_Sort = tools.xpathLast("//*[@data-reference='ATTR_TechDoc_Sort']/descendant::input")
-            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "Документация на коммуникации",false,
-                "@@@@ поле фильтра Тип документации не содержит значение Документация на коммуникации после выбора @@")
+
+            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
+                "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_TTD")
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_TYPE_DOC()  // Всавляем еще раз
 
-            val BUTTON_OBJ_STR = {
+            val BUTTON_OBJ_STR = {      // Объект структуры
                 tools.referenceClickLast("BUTTON_OBJ_STR")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Объекты структуры"),
                     "@@@@ карандашик BUTTON_OBJ_STR на поле Объект структуры : нет справочника с заголовком Объекты структуры @@")
-
-                tools.xpathLast("//a[contains(text(),'Проект сооружения омшанника')]/ancestor::tr")?.click()
+                // Для всех 0203 / 051-1007345 Структура объекта "Расширение ЕСГ для обеспечения подачи газа в газопровод «Южный поток».1-й этап (Западный коридор), для обеспечения подачи газа в объеме 31,5 млрд. м3/"
+                //  Слева 051-1007345 Структура объекта "Расшир..." тогда 0203.КТО.001 Комплекс термического обезвреживания отходов  (справа)
+                //  или слева тогда 0203.КТО.001.4701- 4799.007 Линии электропередач воздушные и электротехнические коммуникации
+                //tools.xpathLast("//a[contains(text(),'Структура объекта')]/ancestor::tr")?.click()
+                tools.xpathLast("//span[contains(text(),'Структура объекта')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
             BUTTON_OBJ_STR()
             Thread.sleep(threadSleep)
             val ATTR_OCC = tools.xpathLast("//*[@data-reference='ATTR_OCC']/descendant::input")
-            assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Проект сооружения омшанника",false,
-                "@@@@ поле фильтра Объект структуры не содержит значение Проект сооружения омшанника после выбора @@")
+            assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Структура объекта",false,
+                "@@@@ поле фильтра Объект структуры не содержит значение Структура объекта @@")
             tools.referenceClickLast("BUTTON_ERASE_OS")
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_OS(Объект структуры) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_OBJ_STR()  // Всавляем еще раз
 
-            val BUTTON_ORG_SEL = {
+            val BUTTON_ORG_SEL = {      // Организация  ГПП  Газпромпроектирование для всех
                 tools.referenceClickLast("BUTTON_ORG_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"),
                     "@@@@ карандашик BUTTON_ORG_SEL на поле Организация/Подразд. : нет справочника с заголовком Организации/Подразделения @@")
-
-                tools.xpathLast("//a[contains(text(),'СМУ')]/ancestor::tr")?.click()
+                //
+                tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -416,8 +430,8 @@ class Filter {
             Thread.sleep(threadSleep *3)
             val ATTR_ORGANIZATION_LINK =
                 tools.xpathLast("//*[@data-reference='ATTR_ORGANIZATION_LINK']/descendant::input")
-            assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "СМУ",false,
-                "@@@@ поле фильтра Организация/Подразд. не содержит значение СМУ после выбора @@")
+            assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "Газпромпроектирование",false,
+                "@@@@ поле фильтра Организация/Подразд. не содержит значение Газпромпроектирование после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_ORG")
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0,
@@ -471,13 +485,20 @@ class Filter {
             tools.xpathLast("// *[@data-reference='ATTR_DOC_AUTHOR']/descendant::input")
                 ?.sendKeys("SYSADMIN")
 
+            // Только на SRV1 после выкачки-закачки схемы
             //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ Ответственный
+            //tools.xpathLast("// *[@data-reference='ATTR_RESPONSIBLE_USER']/descendant::input")
+            //    ?.sendKeys("SYSADMIN")
+            // Можно очистить BUTTON_ERASE_RESP_USER ??
+
             tools. qtipClickLast("Выбрать объект")
             assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
                 "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
             tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
             Thread.sleep(threadSleep)
             tools.clickOK("Ок")
+
+        // Надо поставить проверку всех заполненных полей
 
             tools.clickOK()
         if (DT > 6) println("Конец Test нажатия на $editFilter")

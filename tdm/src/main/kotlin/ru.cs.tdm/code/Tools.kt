@@ -42,7 +42,7 @@ class Tools(val driver: WebDriver) {
                                                 ElementNotInteractableException::class.java,
                                                 ElementClickInterceptedException::class.java,
                                                 StaleElementReferenceException::class.java))
-    fun xpathLast(xpath: String): WebElement? {
+    fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath
         val xpathHtml = "//html/body/descendant::${xpath.drop(2)}"
         repeat(repeateIn) {
@@ -51,7 +51,8 @@ class Tools(val driver: WebDriver) {
                 val listElements = fluentInWait.until(presenceOfAllElementsLocatedBy(By.xpath(xpathHtml))) //"//html/body${xpath.drop(1)}")))
                 if ((listElements!=null) and (listElements.size > 0)) {
                     if (DT >7) println("N$it xpathLast найдено ${listElements.size} элементов $xpathHtml")
-                    return listElements.lastOrNull()
+                    return if (last) listElements.lastOrNull()
+                            else listElements.firstOrNull()
                 }
                 if (DT >6) println("**N$it НЕ найдено элементов $xpathHtml")
                // return null
@@ -62,6 +63,7 @@ class Tools(val driver: WebDriver) {
         if (DT >4) println("&&&&&&&&&xpathLast catch TIME OUT за $repeateIn опросов по 1 сек xpathLast=$xpathHtml &&&&&&&&&")
         return null
     }
+
     fun xpathClickLast(xpath: String): Boolean {
 
         repeat(repeateOut) {

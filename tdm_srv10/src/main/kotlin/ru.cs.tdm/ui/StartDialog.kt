@@ -80,6 +80,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
 
     private val loginPages: Array<String> = arrayOf(
+        "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects",
         "http://tdms-srv2a:777/client/#objects/",
         "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
@@ -89,11 +90,12 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "http://tdms-temp-2012:444/client/#objects/",
         "http://tdms-srv1a:777/client/#objects",
         "http://tdms-srv1:777/client/#objects",
-        "http://tdms-srv1.csoft-msc.ru:777/client/?classic#objects"
+
 
     )
 
     private val servers: Array<String> = arrayOf(
+        "srv1.ru:443",
         "srv2a.ru:777",
         "srv2a:777",
         "srv2a.ru:444",
@@ -103,10 +105,10 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         "tdms2012:444",
         "srv1a:777 Server",
         "srv1:777 Web",
-        "srv1.ru:777"
+
     )
     private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
-    private val passwords: Array<String> = arrayOf("753951", "Cons123", "tdm365")
+    private val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
 
     private val actionRepeate: JLabel = JLabel("-1")
     private val actionCase : JLabel = JLabel("NULL")

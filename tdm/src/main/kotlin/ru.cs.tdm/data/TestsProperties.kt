@@ -28,9 +28,9 @@ object TestsProperties {
     var startIsOn: Boolean = false
     var stopIsOn: Boolean = false
 
-    var loginpage = "http://tdms-srv2a.csoft-msc.ru:777/client/?classic#objects"
+    var loginpage = "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects"
     var login = "SYSADMIN"
-    var password = "753951"
+    var password = "Cons123"
 
     init {
         loginpage = ConfProperties.getProperty("loginpageTDM")
