@@ -377,7 +377,11 @@ class Filter {
                 // table body tdr td div div+div(>)+img+span
                 tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
-                tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
+                // Ошибка Firefox
+                // Element: [[FirefoDriver: firefo on WINDOWS (1f8f6504-78cc-4d5e-9c4e-1642e0a2cf62)] -> xpath: //html/body/descendant::a[contains(text(),'АР Архитектурные решения')]/ancestor::tr]
+                // org.openqa.selenium.ElementNotInteractableException: Element <tr class="  x-grid-row"> could not be scrolled into view
+                //tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
+                tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -402,15 +406,17 @@ class Filter {
                 //  Слева 051-1007345 Структура объекта "Расшир..." тогда 0203.КТО.001 Комплекс термического обезвреживания отходов  (справа)
                 //  или слева тогда 0203.КТО.001.4701- 4799.007 Линии электропередач воздушные и электротехнические коммуникации
                 //tools.xpathLast("//a[contains(text(),'Структура объекта')]/ancestor::tr")?.click()
-                tools.xpathLast("//span[contains(text(),'Структура объекта')]/ancestor::tr")?.click()
+                // Firefox сбоит Element <tr class="x-grid-tree-node-expanded  x-grid-row"> could not be scrolled into view
+                //tools.xpathLast("//span[contains(text(),'Расширение ЕСГ')]/ancestor::tr")?.click()
+                tools.xpathLast("//span[contains(text(),'Расширение ЕСГ')]/preceding-sibling::img")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
             BUTTON_OBJ_STR()
             Thread.sleep(threadSleep)
             val ATTR_OCC = tools.xpathLast("//*[@data-reference='ATTR_OCC']/descendant::input")
-            assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Структура объекта",false,
-                "@@@@ поле фильтра Объект структуры не содержит значение Структура объекта @@")
+            assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",false,
+                "@@@@ поле фильтра Объект структуры не содержит значение Расширение ЕСГ @@")
             tools.referenceClickLast("BUTTON_ERASE_OS")
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
@@ -421,8 +427,9 @@ class Filter {
                 tools.referenceClickLast("BUTTON_ORG_SEL")
                 assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"),
                     "@@@@ карандашик BUTTON_ORG_SEL на поле Организация/Подразд. : нет справочника с заголовком Организации/Подразделения @@")
-                //
-                tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::tr")?.click()
+                //FireFox не работает Element <tr class="  x-grid-row"> could not be scrolled into view  td входит в ссылку
+                //tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::tr")?.click()
+                tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::td/preceding-sibling::td")?.click()  // на квадратик слева
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -494,7 +501,9 @@ class Filter {
             tools. qtipClickLast("Выбрать объект")
             assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
                 "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
-            tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
+        // Ошибка Firefox  Element <tr class="  x-grid-row"> could not be scrolled into view
+            //tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
+            tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td")?.click()
             Thread.sleep(threadSleep)
             tools.clickOK("Ок")
 

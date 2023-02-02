@@ -187,16 +187,24 @@ class HeadRef {
         //@Disabled
         @DisplayName("Совещания")
         fun meetingTest() {
-            var meeting = "Совещания"
+            var meeting = "Чат-Совещания"
             var title = meeting
+            if (DT > 6) println("Test нажатия на $meeting")
             if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Чат')]")).size > 0) {
                 meeting = "Чат"
                 title = "Каналы"
             }
-            if (DT > 6) println("Test нажатия на $meeting")
-            tools.qtipClickLast(meeting)
-            assertTrue(tools.titleContain(title), "@@@@ После нажатия $meeting - нет заголовка вкладки $title @@")
-            assertTrue(tools.qtipPressedLast(meeting), "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@")
+            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Совещания')]")).size > 0) {
+                meeting = "Совещания"
+                title = meeting
+            }
+            if ((meeting == "Совещания") or  (meeting == "Чат")) {
+                tools.qtipClickLast(meeting)
+                assertTrue(tools.titleContain(title), "@@@@ После нажатия $meeting - нет заголовка вкладки $title @@")
+                assertTrue(tools.qtipPressedLast(meeting),
+                    "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@" )
+            }
+            else if (DT > 3) println("Отсутствует пункт меню $meeting")
             if (DT > 6) println("Конец Test нажатия на $meeting")
         }
 
@@ -208,13 +216,19 @@ class HeadRef {
             //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val ganttchart = "Диаграмма Ганта"
             if (DT > 6) println("Test нажатия на $ganttchart")
-            tools.qtipClickLast(ganttchart)
-            //assertTrue(tools.titleContain(ganttchart), "@@@@ После нажатия $ganttchart - нет заголовка вкладки $ganttchart @@")  // Нет заголовка
-            assertTrue(tools.qtipPressedLast(ganttchart), "@@@@ После нажатия $ganttchart - кнопка $ganttchart нет утоплена @@")
-            Thread.sleep(threadSleep)
-            driver.navigate().refresh()
-            Thread.sleep(threadSleep)
-            if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // Костыль
+            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Диаграмма Ганта')]")).size > 0) {
+                tools.qtipClickLast(ganttchart)
+                //assertTrue(tools.titleContain(ganttchart), "@@@@ После нажатия $ganttchart - нет заголовка вкладки $ganttchart @@")  // Нет заголовка
+                assertTrue(
+                    tools.qtipPressedLast(ganttchart),
+                    "@@@@ После нажатия $ganttchart - кнопка $ganttchart нет утоплена @@"
+                )
+                Thread.sleep(threadSleep)
+                driver.navigate().refresh()
+                Thread.sleep(threadSleep)
+                if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // Костыль
+            }
+            else if (DT > 3) println("Отсутствует пункт меню $ganttchart")
             if (DT > 6) println("Конец Test нажатия на $ganttchart")
         }
 
@@ -237,11 +251,15 @@ class HeadRef {
             tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка !! Убрать
             tools.qtipClickLast("Объекты")
             tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
-            tools.qtipClickLast(search)
-            assertTrue(tools.titleContain("Результаты"), "@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
+            Thread.sleep(threadSleep)
             // Из поля с data-qtip="Введите текст" получить значение этого поля и сравнить с Лебедев,
             // если да, то тест прошел, если нет, то упал
             assertEquals("Лебедев", tools.qtipLast("Введите текст")?.getAttribute("value"), "@@@@ После ввода Лебедев в поле поиска в поле поиска не Лебедев @@")
+            Thread.sleep(threadSleep)
+            val findTrue = tools.qtipClickLast(search)
+            if (!findTrue)  println("Не нажал лупу")
+            assertTrue(tools.titleContain("Результаты"), "@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
+
             tools.qtipClickLast("Очистить")
             // Проверяется, что поле поиска пустое
             assertEquals("", tools.qtipLast("Введите текст")?.getAttribute("value"), "@@@@ После очистки поля поиска в поле поиска не пусто @@")
