@@ -21,7 +21,7 @@ import java.time.Duration
  * descendant - потомок = дети и их внуки и правнуки и т.д.
  */
 class LoginPage(driver: WebDriver) {
-    val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(20))
+    private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(20))
     /**
      * конструктор класса, занимающийся инициализацией полей класса
      */
@@ -88,7 +88,7 @@ class LoginPage(driver: WebDriver) {
     /**
      * метод для осуществления нажатия кнопки входа в аккаунт
      */
-    // Мы получаем веб элемент и даем ему команду. нажать
+    // Мы получаем веб элемент и даем ему команду нажать
     fun clickLoginBtn() = webDriverWait.until(elementToBeClickable(loginBtn)).click()
 
     /**

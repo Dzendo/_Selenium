@@ -36,9 +36,9 @@ class HeadRef {
 
         // объявления переменных на созданные ранее классы-страницы
         lateinit var tools: Tools
-        // костыль для диаграммы ганта повторного ввода пароля
-        lateinit var loginIN: String
-        lateinit var passwordIN: String
+        // костыль для диаграммы Ганта повторного ввода пароля
+        lateinit var loginGantt: String
+        lateinit var passwordGantt: String
 
         /**
          * Осуществление первоначальной настройки
@@ -69,9 +69,9 @@ class HeadRef {
             assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
 
-            // Запоминаю логин и пароль для диаграммы ганта - костыль.
-            loginIN = login
-            passwordIN = password
+            // Запоминаю логин и пароль для диаграммы Ганта - костыль.
+            loginGantt = login
+            passwordGantt = password
             if (DT > 7) println("Конец Вызов BeforeAll")
         }
 
@@ -226,7 +226,7 @@ class HeadRef {
                 Thread.sleep(threadSleep)
                 driver.navigate().refresh()
                 Thread.sleep(threadSleep)
-                if (driver.title == "Tdms") Login(driver).loginIn(loginIN, passwordIN) // Костыль
+                if (driver.title == "Tdms") Login(driver).loginIn(loginGantt, passwordGantt) // Костыль
             }
             else if (DT > 3) println("Отсутствует пункт меню $ganttchart")
             if (DT > 6) println("Конец Test нажатия на $ganttchart")
