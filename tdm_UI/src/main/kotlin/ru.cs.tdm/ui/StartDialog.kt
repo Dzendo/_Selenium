@@ -33,27 +33,10 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     private val uiBox = JCheckBox("Window", true)
     private val errBox = JCheckBox("Errors", true)
 
-    private val browsers: Array<String> = arrayOf(
-        "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
-
-    private val servers: Array<String> = arrayOf(
-        "srv1.ru:443",
-        "srv2a.ru:443",
-        "srv2a.ru:444",
-        "srv10.ru:443",
-        "tdms2012:444",
-        "srv2a:443",
-        "srv2a:444",
-        "SRV10:443",
-    )
-
-    private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
-    private val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
-
-    private val browserBox: JComboBox<String> = JComboBox<String>(browsers)
-    private val serverBox: JComboBox<String> = JComboBox<String>(servers)
-    private val loginBox: JComboBox<String> = JComboBox<String>(logins)
-    private val passwordBox: JComboBox<String> = JComboBox<String>(passwords)
+    private val browserBox: JComboBox<String> = JComboBox<String>(TestsProperties.browsers)
+    private val serverBox: JComboBox<String> = JComboBox<String>(TestsProperties.servers)
+    private val loginBox: JComboBox<String> = JComboBox<String>(TestsProperties.logins)
+    private val passwordBox: JComboBox<String> = JComboBox<String>(TestsProperties.passwords)
 
     private val spinRepeateCases =JSpinner( SpinnerNumberModel(
             3,  //initial value
@@ -80,19 +63,8 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         1   //step
     ))
 
-    private val loginPages: Array<String> = arrayOf(
-        "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
-        "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-temp-2012:444/client/#objects/",
-        "http://tdms-srv2a:443/client/#objects/",
-        "http://tdms-srv2a:444/client/#objects/",
-        "http://TDMS-SRV10:443/client/#objects/",
-    )
-
     private val actionRepeate: JLabel = JLabel("-1")
-    private val actionCase : JLabel = JLabel("NULL")
+    private val actionCase : JLabel = JLabel("NONE")
     private val allErrors : JLabel = JLabel("-1")
 
     //fun startDialog()
@@ -102,83 +74,76 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         // Создание панели содержимого с размещением кнопок
         val gridLayout = GridLayout(0,4,5,5)
         contents.layout = gridLayout
+        val gcontent : Array<Array<JPanel>> =  Array(9) { Array(4) { JPanel(FlowLayout(FlowLayout.LEFT)) } }    //arrayOf(arrayOf(JPanel()))
+        for (i in 0..8)
+            for (j in 0..3)
+                contents.add(gcontent[i][j])
 
         contentPane = contents
-        contents.alignmentX = JComponent.LEFT_ALIGNMENT
 
-        contents.add(JLabel("Тесты:"),)
-        contents.add(JLabel("Повтор:"))
-        contents.add(JLabel("Сервер:"))
-        contents.add(JLabel("Печать:"))
+        gcontent[0][0].add(JLabel("Тесты:"),)
+        gcontent[0][1].add(JLabel("Повтор:"))
+        gcontent[0][2].add(JLabel("Печать:"))
+        gcontent[0][3].add(JLabel("Сервер:"))
 
-        contents.add(passBox)
-        //contents.add("Case:", spinRepeateCases)
-        val spinRepeateC = JPanel(FlowLayout(FlowLayout.LEFT))
-        spinRepeateC.add(spinRepeateCases)
-        spinRepeateC.add(JLabel("Case:"))
-        contents.add(spinRepeateC)
 
-        contents.add(browserBox)
-        contents.add(outBox)
+        gcontent[1][0].add(passBox)
+        gcontent[2][0].add(headBox)
+        gcontent[3][0].add(userBox)
+        gcontent[4][0].add(filterBox)
 
-        contents.add(headBox)
-        val spinRepeateT = JPanel(FlowLayout(FlowLayout.LEFT))
-        spinRepeateT.add(spinRepeateTests)
-        spinRepeateT.add(JLabel("Test:"))
-        contents.add(spinRepeateT)
+        gcontent[1][1].add(spinRepeateCases)
+        gcontent[1][1].add(JLabel("Case:"))
 
-        contents.add(serverBox)
-        contents.add(consBox)
+        gcontent[2][1].add(spinRepeateTests)
+        gcontent[2][1].add(JLabel("Test:"))
 
-        contents.add(userBox)
-        val spinThread = JPanel(FlowLayout(FlowLayout.LEFT))
-        spinThread.add(spinThreadSleep)
-        spinThread.add(JLabel("Задержка:"))
-        contents.add(spinThread)
+        gcontent[3][1].add(spinThreadSleep)
+        gcontent[3][1].add(JLabel("Задержка:"))
 
-        contents.add(loginBox)
-        contents.add(uiBox)
+        gcontent[4][1].add(spinDebugPrint)
+        gcontent[4][1].add(JLabel("    Печать:"))
 
-        contents.add(filterBox)
-        val spinDebug = JPanel(FlowLayout(FlowLayout.LEFT))
+        gcontent[1][2].add(outBox)
+        gcontent[2][2].add(consBox)
+        gcontent[3][2].add(uiBox)
+        gcontent[4][2].add(errBox)
 
-        spinDebug.add(spinDebugPrint)
-        spinDebug.add(JLabel("Печать:"))
-        contents.add(spinDebug)
-
-        contents.add(passwordBox)
-        contents.add(errBox)
+        gcontent[1][3].add(browserBox)
+        gcontent[2][3].add(serverBox)
+        gcontent[3][3].add(loginBox)
+        gcontent[4][3].add(passwordBox)
 
         // Кнопки для создания диалоговых окон
-        contents.add(buttonStartStop)
+        gcontent[5][0].add(buttonStartStop)
         buttonStartStop.addActionListener(this)
-        contents.add(buttonPauseResume)
+        gcontent[5][1].add(buttonPauseResume)
         buttonPauseResume.addActionListener(this)
-        contents.add(buttonLog)
+        gcontent[5][2].add(buttonLog)
         buttonLog.addActionListener(this)
-        contents.add(buttonExit)
+        gcontent[5][3].add(buttonExit)
         buttonExit.addActionListener(this)
 
 
-        contents.add(JLabel("allErrors:"))
-        contents.add(allErrors)
-        contents.add(JLabel(":"))
-        contents.add(JLabel(":"))
-        contents.add(JLabel("Repeat:"))
-        contents.add(actionRepeate)
-        contents.add(JLabel(":"))
-        contents.add(JLabel(":"))
-        contents.add(JLabel("Case:"))
-        contents.add(actionCase)
-        contents.add(JLabel(":"))
-        contents.add(JLabel(":"))
+        gcontent[6][0].add(JLabel("allErrors:"))
+        gcontent[6][1].add(allErrors)
+        gcontent[6][2].add(JLabel(":"))
+        gcontent[6][3].add(JLabel(":"))
+        gcontent[7][0].add(JLabel("Repeat:"))
+        gcontent[7][1].add(actionRepeate)
+        gcontent[7][2].add(JLabel(":"))
+        gcontent[7][3].add(JLabel(":"))
+        gcontent[8][0].add(JLabel("Case:"))
+        gcontent[8][1].add(actionCase)
+        gcontent[8][2].add(JLabel(":"))
+        gcontent[8][3].add(JLabel(":"))
 
         showButtons()
 
        setDefaultLookAndFeelDecorated(true)
        pack()
        setLocationRelativeTo(null)
-       setSize(540, 300)
+       setSize(550, 350)
        isVisible = true
 
 

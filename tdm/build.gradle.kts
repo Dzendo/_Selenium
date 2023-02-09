@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-// 02.02.2023 rev 1.0.5 EAP 2 srv10(1a) = srv2a
+// 08.02.2023 rev 1.0.5 EAP 2 TDM -> TDM_UI
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
