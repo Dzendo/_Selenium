@@ -70,9 +70,9 @@ class Filter {
         private const val NN:Int = 1                                    // количество повторений тестов
         private val localDateNow = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss").format(LocalDateTime.now())
     // переменная для драйвера
-    lateinit var driver: WebDriver
+    private lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
-    lateinit var tools: Tools
+    private lateinit var tools: Tools
 
         @JvmStatic
         @BeforeAll
@@ -80,14 +80,7 @@ class Filter {
         if (DT >7) println("Вызов BeforeAll FilterTest")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             driver = startDriver()
-            /*
-        WebDriverManager.chromedriver().setup()
-        driver = ChromeDriver()
-        //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
-        driver.manage().window().position = Point(2000,-1000)
-        //driver.manage().window().position = Point(0,-1000)
-        driver.manage().window().maximize()
-            */
+
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
@@ -98,7 +91,7 @@ class Filter {
             val password = TestsProperties.password
             if (DT > 7) println("login= $login   password= $password")
             driver.get(loginpage)
-            assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница ${loginpage} - нет заголовка вкладки Tdms @@")
+            assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
         }
 

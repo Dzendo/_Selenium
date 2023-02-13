@@ -23,24 +23,52 @@ object TestsProperties {
     var uiOutCheck: Boolean = true
     var assertOutCheck: Boolean = true
 
+    val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
+    val servers: Array<String> = arrayOf(
+        "srv1.ru:443",
+        "srv2a.ru:443",
+        "srv2a.ru:444",
+        "srv10.ru:443",
+        "tdms2012:444",
+        "srv2a:443",
+        "srv2a:444",
+        "SRV10:443",
+    )
+
+    val loginPages: Array<String> = arrayOf(
+        "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
+        "http://tdms-srv2a.csoft-msc.ru:443/client/?classic#objects",
+        "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
+        "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
+        "http://tdms-temp-2012:444/client/#objects/",
+        "http://tdms-srv2a:443/client/#objects/",
+        "http://tdms-srv2a:444/client/#objects/",
+        "http://TDMS-SRV10:443/client/#objects/",
+    )
+    val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
+    val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
+
     val testCases: MutableSet<String> = mutableSetOf("Pass", "Head", "User", "Filter")
 
-    var startIsOn: Boolean = false
-    var stopIsOn: Boolean = false
+    // -2 - Start; нажали start: -1
+    // -1 - Starting...; команда стартовать тесты и ждем пока стартуют; стартовали тесты: 1
+    //  0 - резервное состояние - Ошибка
+    //  1 - STOP и тесты работают, пока не нажмут STOP: 2
+    //  2 - STOPping... останавливаем тесты: когда остановили -2
+    var isStartStop: Int = -2
+    var isPaused: Boolean = false  // false - светим Pause и не тормозим  true - светим Resume и стоим на паузе
+    var isLog: Boolean =false
+    var isExit: Boolean =false
 
     var loginpage = "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects"
     var login = "SYSADMIN"
     var password = "Cons123"
 
+    var summuryOfErrors = 0L
+
     init {
         loginpage = ConfProperties.getProperty("loginpageTDM")
-        //if (debugPrintNomber > 8) println("Открытие страницы $loginpage")
-        //driver.get(loginpage)
-
         login = ConfProperties.getProperty("loginTDM")
         password = ConfProperties.getProperty("passwordTDM")
-        //if (debugPrintNomber > 8) println("login= $login   password= $password")
-        //Login(driver).loginIn(login, password)
-        // Запоминаю логин и пароль для диаграммы ганта - костыль.
     }
 }

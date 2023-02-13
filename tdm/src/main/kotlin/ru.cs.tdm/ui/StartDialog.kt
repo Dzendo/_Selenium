@@ -1,15 +1,6 @@
 package ru.cs.tdm.ui
 
 import ru.cs.tdm.data.TestsProperties
-import ru.cs.tdm.data.TestsProperties.browserIndex
-import ru.cs.tdm.data.TestsProperties.repeateCasesNomber
-import ru.cs.tdm.data.TestsProperties.threadSleepNomber
-import ru.cs.tdm.data.TestsProperties.debugPrintNomber
-import ru.cs.tdm.data.TestsProperties.loginIndex
-import ru.cs.tdm.data.TestsProperties.pageIndex
-import ru.cs.tdm.data.TestsProperties.passwordIndex
-import ru.cs.tdm.data.TestsProperties.repeateTestsNomber
-import ru.cs.tdm.data.TestsProperties.testCases
 import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.awt.event.ActionEvent
@@ -23,14 +14,14 @@ import kotlin.system.exitProcess
  */
 
 class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
-
-    private var summuryOfErrors : Long = 0L
+    //private val classStart = StartTests(this)  // перенес вниз чтобы был повторный старт
+    //private var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()
     private val contents = JPanel()
-    private val startButton = JButton("START")
-    private val pauseButton = JButton("PAUSE")
-    private val stopButton = JButton("STOP")
-    private val exitButton = JButton("EXIT")
+    private val buttonStartStop = JButton("START")
+    private val buttonPauseResume = JButton("PAUSE")
+    private val buttonLog = JButton("LOG")
+    private val buttonExit = JButton("EXIT")
 
     private val passBox = JCheckBox("Change Password", true)
     private val headBox = JCheckBox("Test Head TDM", true)
@@ -42,222 +33,231 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     private val uiBox = JCheckBox("Window", true)
     private val errBox = JCheckBox("Errors", true)
 
-    private lateinit var browser: JComboBox<String>
-    private lateinit var server: JComboBox<String>
-    private lateinit var login: JComboBox<String>
-    private lateinit var password: JComboBox<String>
+    private val browserBox: JComboBox<String> = JComboBox<String>(TestsProperties.browsers)
+    private val serverBox: JComboBox<String> = JComboBox<String>(TestsProperties.servers)
+    private val loginBox: JComboBox<String> = JComboBox<String>(TestsProperties.logins)
+    private val passwordBox: JComboBox<String> = JComboBox<String>(TestsProperties.passwords)
 
-    private val modelRepeateCases: SpinnerModel = SpinnerNumberModel(
-        3,  //initial value
-        1,  //min
-        999,  //max
-        1   //step
-    )
-    private val modelRepeateTests: SpinnerModel = SpinnerNumberModel(
+    private val spinRepeateCases =JSpinner( SpinnerNumberModel(
+            3,  //initial value
+            1,  //min
+            999,  //max
+            1   //step
+        ))
+    private val spinRepeateTests =JSpinner( SpinnerNumberModel(
         1,  //initial value
         1,  //min
         99,  //max
         1   //step
-    )
-    private val modelThreadSleep: SpinnerModel = SpinnerNumberModel(
+    ))
+    private val spinThreadSleep =JSpinner(SpinnerNumberModel(
         1,  //initial value
         0,  //min
         99,  //max
         1   //step
-    )
-    private val modelDebugPrint: SpinnerModel = SpinnerNumberModel(
+    ))
+    private val spinDebugPrint =JSpinner(SpinnerNumberModel(
         5,  //initial value
         1,  //min
         9,  //max
         1   //step
-    )
-    private val spinRepeateCases =JSpinner(modelRepeateCases)
-    private val spinRepeateTests =JSpinner(modelRepeateTests)
-    private val spinThreadSleep =JSpinner(modelThreadSleep)
-    private val spinDebugPrint =JSpinner(modelDebugPrint)
-
-    private val browsers: Array<String> = arrayOf(
-        "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
-
-    private val loginPages: Array<String> = arrayOf(
-        "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
-        "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-temp-2012:444/client/#objects/",
-        "http://tdms-srv2a:443/client/#objects/",
-        "http://tdms-srv2a:444/client/#objects/",
-        "http://TDMS-SRV10:443/client/#objects/",
-    )
-
-    private val servers: Array<String> = arrayOf(
-        "srv1.ru:443",
-        "srv2a.ru:443",
-        "srv2a.ru:444",
-        "srv10.ru:443",
-        "tdms2012:444",
-        "srv2a:443",
-        "srv2a:444",
-        "SRV10:443",
-   )
-    private val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
-    private val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
+    ))
 
     private val actionRepeate: JLabel = JLabel("-1")
-    private val actionCase : JLabel = JLabel("NULL")
+    private val actionCase : JLabel = JLabel("NONE")
     private val allErrors : JLabel = JLabel("-1")
 
-    fun startDialog() {
-
+    //fun startDialog()
+    init  {
         // Выход из программы при закрытии
         defaultCloseOperation = EXIT_ON_CLOSE
-
         // Создание панели содержимого с размещением кнопок
-        contents.layout = GridLayout(0,4,5,5)
+        val gridLayout = GridLayout(0,4,5,5)
+        contents.layout = gridLayout
+        val gcontent : Array<Array<JPanel>> =  Array(9) { Array(4) { JPanel(FlowLayout(FlowLayout.LEFT)) } }    //arrayOf(arrayOf(JPanel()))
+        for (i in 0..8)
+            for (j in 0..3)
+                contents.add(gcontent[i][j])
+
         contentPane = contents
+
+        gcontent[0][0].add(JLabel("Тесты:"),)
+        gcontent[0][1].add(JLabel("Повтор:"))
+        gcontent[0][2].add(JLabel("Печать:"))
+        gcontent[0][3].add(JLabel("Сервер:"))
+
+
+        gcontent[1][0].add(passBox)
+        gcontent[2][0].add(headBox)
+        gcontent[3][0].add(userBox)
+        gcontent[4][0].add(filterBox)
+
+        gcontent[1][1].add(spinRepeateCases)
+        gcontent[1][1].add(JLabel("Case:"))
+
+        gcontent[2][1].add(spinRepeateTests)
+        gcontent[2][1].add(JLabel("Test:"))
+
+        gcontent[3][1].add(spinThreadSleep)
+        gcontent[3][1].add(JLabel("Задержка:"))
+
+        gcontent[4][1].add(spinDebugPrint)
+        gcontent[4][1].add(JLabel("    Печать:"))
+
+        gcontent[1][2].add(outBox)
+        gcontent[2][2].add(consBox)
+        gcontent[3][2].add(uiBox)
+        gcontent[4][2].add(errBox)
+
+        gcontent[1][3].add(browserBox)
+        gcontent[2][3].add(serverBox)
+        gcontent[3][3].add(loginBox)
+        gcontent[4][3].add(passwordBox)
+
         // Кнопки для создания диалоговых окон
-        contents.alignmentX = JComponent.LEFT_ALIGNMENT
-        contents.add(JLabel("Тесты:"))
-        contents.add(JLabel("Повтор:"))
-        contents.add(JLabel("Сервер:"))
-        contents.add(JLabel("Печать:"))
-
-        contents.add(passBox)
-        val spinRepeateC = JPanel(FlowLayout(FlowLayout.LEFT))
-        spinRepeateC.add(spinRepeateCases)
-        spinRepeateC.add(JLabel("Case:"))
-        contents.add(spinRepeateC)
-
-        browser  = JComboBox<String>(browsers)
-        contents.add(browser)
-        contents.add(outBox)
-
-        contents.add(headBox)
-        val spinRepeateT = JPanel(FlowLayout(FlowLayout.LEFT))
-        spinRepeateT.add(spinRepeateTests)
-        spinRepeateT.add(JLabel("Test:"))
-        contents.add(spinRepeateT)
-
-        server  = JComboBox<String>(servers)
-        contents.add(server)
-        contents.add(consBox)
-
-        contents.add(userBox)
-        val spinThread = JPanel(FlowLayout(FlowLayout.LEFT))
-        spinThread.add(spinThreadSleep)
-        spinThread.add(JLabel("Задержка:"))
-        contents.add(spinThread)
-
-        login  = JComboBox<String>(logins)
-        contents.add(login)
-        contents.add(uiBox)
-
-        contents.add(filterBox)
-        val spinDebug = JPanel(FlowLayout(FlowLayout.LEFT))
-
-        spinDebug.add(spinDebugPrint)
-        spinDebug.add(JLabel("Печать:"))
-        contents.add(spinDebug)
-
-        password = JComboBox<String>(passwords)
-        contents.add(password)
-
-        contents.add(errBox)
-
-        contents.add(startButton)
-        startButton.addActionListener(this)
-        contents.add(pauseButton)
-        pauseButton.addActionListener(this)
-        contents.add(stopButton)
-        stopButton.addActionListener(this)
-        contents.add(exitButton)
-        exitButton.addActionListener(this)
+        gcontent[5][0].add(buttonStartStop)
+        buttonStartStop.addActionListener(this)
+        gcontent[5][1].add(buttonPauseResume)
+        buttonPauseResume.addActionListener(this)
+        gcontent[5][2].add(buttonLog)
+        buttonLog.addActionListener(this)
+        gcontent[5][3].add(buttonExit)
+        buttonExit.addActionListener(this)
 
 
-        contents.add(JLabel("allErrors:"))
-        contents.add(allErrors)
-        contents.add(JLabel(":"))
-        contents.add(JLabel(":"))
-        contents.add(JLabel("Repeat:"))
-        contents.add(actionRepeate)
-        contents.add(JLabel(":"))
-        contents.add(JLabel(":"))
-        contents.add(JLabel("Case:"))
-        contents.add(actionCase)
-        contents.add(JLabel(":"))
-        contents.add(JLabel(":"))
+        gcontent[6][0].add(JLabel("allErrors:"))
+        gcontent[6][1].add(allErrors)
+        gcontent[6][2].add(JLabel(":"))
+        gcontent[6][3].add(JLabel(":"))
+        gcontent[7][0].add(JLabel("Repeat:"))
+        gcontent[7][1].add(actionRepeate)
+        gcontent[7][2].add(JLabel(":"))
+        gcontent[7][3].add(JLabel(":"))
+        gcontent[8][0].add(JLabel("Case:"))
+        gcontent[8][1].add(actionCase)
+        gcontent[8][2].add(JLabel(":"))
+        gcontent[8][3].add(JLabel(":"))
+
+        showButtons()
+
+       setDefaultLookAndFeelDecorated(true)
+       pack()
+       setLocationRelativeTo(null)
+       setSize(550, 350)
+       isVisible = true
+
 
     }
 
     /**
      * Должна высвечивать ход выполнения, но не обновляет UI - не работает
      */
-    fun showActionCase(actionRepeate : Int, actionCase : String ) {
+    fun showActionCase(actionRepeate : Int, actionCase : String, allErrors: Long ) {
+
         this.actionRepeate.text = actionRepeate.toString()
-        this.actionCase.text = actionCase
         this.actionRepeate.isVisible = true
-        this.actionCase.isVisible = true
         this.actionRepeate.revalidate()
-        this.actionCase.revalidate()
         this.actionRepeate.repaint()
+
+        this.actionCase.text = actionCase
+        this.actionCase.isVisible = true
+        this.actionCase.revalidate()
         this.actionCase.repaint()
+
+        this.allErrors.text = allErrors.toString()
+        this.allErrors.isVisible = true
+        this.allErrors.revalidate()
+        this.allErrors.repaint()
     }
+    fun showButtons() {
+        when (TestsProperties.isStartStop) {
+            -2 -> buttonStartStop.text = "START"
+            -1 -> buttonStartStop.text = "Starting.."
+             1 -> buttonStartStop.text = "STOP"
+             2 -> buttonStartStop.text = "Stopping"
+            else -> buttonStartStop.text = "ELSE"
+        }
+        buttonStartStop.isVisible = true
+        this.buttonStartStop.revalidate()
+        this.buttonStartStop.repaint()
+
+        buttonPauseResume.text = if (TestsProperties.isPaused) "Resume" else "PAUSE"
+        this.buttonPauseResume.revalidate()
+        this.buttonPauseResume.repaint()
+    }
+
 
     override fun actionPerformed(e: ActionEvent?) {
         if (e == null) return
         when (e.source) {
-            startButton -> {
-                repeateCasesNomber = spinRepeateCases.value.toString().toInt()
-                repeateTestsNomber = spinRepeateTests.value.toString().toInt()
-                threadSleepNomber = spinThreadSleep.value.toString().toLong() * 1000L
-                debugPrintNomber = spinDebugPrint.value.toString().toInt()
+            buttonStartStop -> {
+                    when (TestsProperties.isStartStop) {
+                        -2 -> {     // START
+                            TestsProperties.isStartStop = -1
+                            showButtons()
+                            with(TestsProperties) {
+                                repeateCasesNomber = spinRepeateCases.value.toString().toInt()
+                                repeateTestsNomber = spinRepeateTests.value.toString().toInt()
+                                threadSleepNomber = spinThreadSleep.value.toString().toLong() * 1000L
+                                debugPrintNomber = spinDebugPrint.value.toString().toInt()
 
-                browserIndex = browser.selectedIndex
-                pageIndex = server.selectedIndex
-                //TestsProperties.loginpage = server.selectedItem.toString()
-                TestsProperties.loginpage = loginPages[pageIndex]
-                loginIndex = login.selectedIndex
-                //TestsProperties.login = login.selectedItem.toString()
-                TestsProperties.login = logins[loginIndex]
-                passwordIndex = password.selectedIndex
-                //TestsProperties.password = password.selectedItem.toString()
-                TestsProperties.password = passwords[passwordIndex]
+                                browserIndex = browserBox.selectedIndex
+                                pageIndex = serverBox.selectedIndex
+                                //loginpage = server.selectedItem.toString()
+                                loginpage = loginPages[pageIndex]
+                                loginIndex = loginBox.selectedIndex
+                                //login = login.selectedItem.toString()
+                                login = logins[loginIndex]
+                                passwordIndex = passwordBox.selectedIndex
+                                //password = password.selectedItem.toString()
+                                password = passwords[passwordIndex]
 
-                testCases.clear()
-                if (passBox.isSelected) testCases.add("Pass")
-                if (headBox.isSelected) testCases.add("Head")
-                if (userBox.isSelected) testCases.add("User")
-                if (filterBox.isSelected) testCases.add("Filter")
+                                testCases.clear()
+                                if (passBox.isSelected) testCases.add("Pass")
+                                if (headBox.isSelected) testCases.add("Head")
+                                if (userBox.isSelected) testCases.add("User")
+                                if (filterBox.isSelected) testCases.add("Filter")
 
-                TestsProperties.fileOutCheck = outBox.isSelected
-                TestsProperties.consOutCheck = consBox.isSelected
-                TestsProperties.uiOutCheck = uiBox.isSelected
-                TestsProperties.assertOutCheck = errBox.isSelected
+                                fileOutCheck = outBox.isSelected
+                                consOutCheck = consBox.isSelected
+                                uiOutCheck = uiBox.isSelected
+                                assertOutCheck = errBox.isSelected
 
-                /**
-                 * int selectedIndex = myComboBox.getSelectedIndex();
-                 * Object selectedObject = myComboBox.getSelectedItem();
-                 * String selectedValue = myComboBox.getSelectedValue().toString();
-                 */
-                TestsProperties.startIsOn = true
-                actionCase.text = "LUNN"
-                actionCase.isVisible
-                actionCase.revalidate()
-                actionCase.repaint()
-                //println("@@@@@ actionCase.text = ${actionCase.text}  @@@")
-                // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-                val classStart = StartTests(this)
-                classStart.execute()  // СТАРТ циклов тестов
-                //summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
+                            }
+                            //println("@@@@@ actionCase.text = ${actionCase.text}  @@@")
+                            // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
+                            // #################################################################################################
+                            val classStart = StartTests(this)
+                            val executeStart = classStart.execute()  // СТАРТ циклов тестов
+                            // #################################################################################################
+                            with(TestsProperties) {
+                                isStartStop = 1
+                                // summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
+                                showButtons()
+                                println("@@@@@ START summuryOfErrors = ${summuryOfErrors}  @@@")
+                            }
+                        }
 
-                println("@@@@@ summuryOfErrors = $summuryOfErrors  @@@")
-                TestsProperties.startIsOn = false
+                        1 -> {   // STOP
+                            // НЕ РАБОТАЕТ переделать в флажки
+                            //classStart.cancel(true)
+                            TestsProperties.isStartStop = 2
+                            showButtons()
+                            println("@@@@@ STOP summuryOfErrors = ${TestsProperties.summuryOfErrors}  @@@")
+                        }
+
+                        else -> println("ELSE Нельзя нажимать на ing... ${TestsProperties.isStartStop}")
+                    }
+
             }
 
-            pauseButton -> {}
-            stopButton -> {}
-            exitButton -> {
-                println("@@@@@ allSummuryOfErrors = $summuryOfErrors  @@@")
+            buttonPauseResume -> {
+                TestsProperties.isPaused = !TestsProperties.isPaused
+                showButtons()
+            }
+            buttonLog -> {}
+            buttonExit -> {
+                println("@@@@@ EXIT allSummuryOfErrors = ${TestsProperties.summuryOfErrors}  @@@")
                 exitProcess(0)
             }
 
@@ -267,15 +267,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
 }
 
 fun main() {
-    SwingUtilities.invokeLater {      // этот поток называется EDT (поток диспетчеризации событий).
-        JFrame.setDefaultLookAndFeelDecorated(true)
-        val frame = StartDialog()
-        frame.startDialog()
-        frame.pack()
-        frame.setLocationRelativeTo(null)
-        frame.setSize(540, 240)
-        frame.isVisible = true
-    }
+    SwingUtilities.invokeLater { StartDialog() }  // этот поток называется EDT (поток диспетчеризации событий).
 }
 /** Функция создания диалогового окна.
  * @param title - заголовок окна

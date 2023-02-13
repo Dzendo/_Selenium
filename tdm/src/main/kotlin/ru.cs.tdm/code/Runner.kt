@@ -17,8 +17,8 @@ import java.time.LocalDateTime
 //@JvmStatic
 class Runner(private val povtor : Int) {
     //val listener: TestExecutionListener = SummaryGeneratingListener()
-    val listener: SummaryGeneratingListener = SummaryGeneratingListener()
-    val DT = debugPrintNomber
+    private val listener: SummaryGeneratingListener = SummaryGeneratingListener()
+    private val DT = debugPrintNomber
     fun runTest(testClass: Class<*> ) : Long {
 
         // Discover and filter tests

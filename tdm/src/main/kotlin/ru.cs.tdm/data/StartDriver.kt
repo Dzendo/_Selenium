@@ -5,13 +5,13 @@ import org.openqa.selenium.Point
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
-import ru.cs.tdm.data.TestsProperties.browserIndex
 
-fun startDriver(): WebDriver {
+//окно разворачивается на полный второй экран-1500 1500 3000 2000,0
+fun startDriver(indexBrowser: Int = TestsProperties.browserIndex, xPoint:Int = 2000, yPoint: Int = -1000): WebDriver {
     lateinit var driver: WebDriver
     //      0        1        2         3         4        5         6           7        8
     //  "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari"
-    when(browserIndex) {
+    when(indexBrowser) {
         0 -> {
             driver = WebDriverManager.chromedriver().create()
             //WebDriverManager.chromedriver().setup()
@@ -51,8 +51,8 @@ fun startDriver(): WebDriver {
         }
         else -> {}
     }
-    //окно разворачивается на полный второй экран-1500 1500 3000 2000,0
-    driver.manage().window().position = Point(2000, -1000)
+
+    driver.manage().window().position = Point(xPoint, yPoint)
     driver.manage().window().maximize()
     return driver
 }

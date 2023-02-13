@@ -1,11 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-// 08.02.2023 rev 1.0.5 EAP 2 TDM -> TDM_UI
+// 13.02.2023 rev 1.0.8 EAP 2 TDM_UI --> tdm
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.8.10"
     application
 }
 group = "ru.cs.tdm"
@@ -34,7 +34,7 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-test:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-test:1.8.10")
     implementation("org.seleniumhq.selenium:selenium-java:4.8.0")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.2")
     { exclude ("org.bouncycastle") }

@@ -4,7 +4,6 @@ import ru.cs.tdm.code.printDual
 import ru.cs.tdm.ui.StartDialog
 import ru.cs.tdm.ui.StartTests
 import ru.cs.tdm.data.TestsProperties
-import javax.swing.JFrame
 import javax.swing.SwingUtilities
 
 /**
@@ -15,21 +14,13 @@ fun main(args: Array<String>) {
     if (printDual()) println("Output: double to the console and to the file out+err")
     println("Program arguments: ${args.joinToString()}")
     // метод помещает приложение в очередь событий Swing
-    if (args.isEmpty()) SwingUtilities.invokeLater {      // этот поток называется EDT (поток диспетчеризации событий).
-        JFrame.setDefaultLookAndFeelDecorated(true)
-        val frame = StartDialog()
-        frame.startDialog()
-        frame.pack()
-        frame.setLocationRelativeTo(null)  // Эта строка используется для центрирования окна на экране.
-        frame.setSize(540, 300)
-        frame.isVisible = true
-    }
+    if (args.isEmpty()) SwingUtilities.invokeLater {  StartDialog() }   // этот поток называется EDT (поток диспетчеризации событий).
     else {
         TestsProperties.testCases.clear()
         TestsProperties.testCases.addAll(args.toSet())
         val classStart = StartTests()
         classStart.execute()  // СТАРТ циклов тестов
         val tdmSummuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
-        println("@@@@@ summuryOfErrors = $tdmSummuryOfErrors  @@@")
+        println("@@@@@ TDMsummuryOfErrors = $tdmSummuryOfErrors  @@@")
     }
 }
