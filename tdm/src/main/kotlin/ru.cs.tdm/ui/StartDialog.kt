@@ -1,5 +1,7 @@
 package ru.cs.tdm.ui
 
+//import com.intellij.openapi.ui.ComboBox
+//import com.intellij.ui.components.JBCheckBox
 import ru.cs.tdm.data.TestsProperties
 import java.awt.FlowLayout
 import java.awt.GridLayout
@@ -37,7 +39,15 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     private val serverBox: JComboBox<String> = JComboBox<String>(TestsProperties.servers)
     private val loginBox: JComboBox<String> = JComboBox<String>(TestsProperties.logins)
     private val passwordBox: JComboBox<String> = JComboBox<String>(TestsProperties.passwords)
+    // https://jetbrains.design/intellij/
 
+    /*
+    private val browserBox: ComboBox<String> = ComboBox<String>(TestsProperties.browsers)
+    private val serverBox: ComboBox<String> = ComboBox<String>(TestsProperties.servers)
+    private val loginBox: ComboBox<String> = ComboBox<String>(TestsProperties.logins)
+    private val passwordBox: ComboBox<String> = ComboBox<String>(TestsProperties.passwords)
+    // https://jetbrains.design/intellij/
+    */
     private val spinRepeateCases =JSpinner( SpinnerNumberModel(
             3,  //initial value
             1,  //min
@@ -64,16 +74,24 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     ))
 
     private val actionRepeate: JLabel = JLabel("-1")
+    private val testRepeate: JLabel = JLabel("1")
     private val actionCase : JLabel = JLabel("NONE")
+    private val actionTestStart : JLabel = JLabel("NONE")
+    private val actionTestEnd : JLabel = JLabel("NONE")
     private val allErrors : JLabel = JLabel("-1")
+    private val testErrors : JLabel = JLabel("-1")
 
     //fun startDialog()
     init  {
+        TestsProperties.startDialog = this
         // Выход из программы при закрытии
         defaultCloseOperation = EXIT_ON_CLOSE
         // Создание панели содержимого с размещением кнопок
         val gridLayout = GridLayout(0,4,5,5)
         contents.layout = gridLayout
+        //layoutParams.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 2f);
+        // https://java-online.ru/swt-layout.xhtml#GridLayout
+
         val gcontent : Array<Array<JPanel>> =  Array(9) { Array(4) { JPanel(FlowLayout(FlowLayout.LEFT)) } }    //arrayOf(arrayOf(JPanel()))
         for (i in 0..8)
             for (j in 0..3)
@@ -127,16 +145,16 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
 
         gcontent[6][0].add(JLabel("allErrors:"))
         gcontent[6][1].add(allErrors)
-        gcontent[6][2].add(JLabel(":"))
+        gcontent[6][2].add(testErrors)
         gcontent[6][3].add(JLabel(":"))
         gcontent[7][0].add(JLabel("Repeat:"))
         gcontent[7][1].add(actionRepeate)
-        gcontent[7][2].add(JLabel(":"))
+        gcontent[7][2].add(testRepeate)
         gcontent[7][3].add(JLabel(":"))
         gcontent[8][0].add(JLabel("Case:"))
         gcontent[8][1].add(actionCase)
-        gcontent[8][2].add(JLabel(":"))
-        gcontent[8][3].add(JLabel(":"))
+        gcontent[8][2].add(actionTestStart)
+        gcontent[8][3].add(actionTestEnd)
 
         showButtons()
 
@@ -150,7 +168,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
     }
 
     /**
-     * Должна высвечивать ход выполнения, но не обновляет UI - не работает
+     * Должна высвечивать ход выполнения
      */
     fun showActionCase(actionRepeate : Int, actionCase : String, allErrors: Long ) {
 
@@ -169,6 +187,34 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         this.allErrors.revalidate()
         this.allErrors.repaint()
     }
+    fun showActionTests(displayName: String,  testStatus: String = "Start" ) {
+
+        if (displayName.startsWith("repetition")) {
+            this.testRepeate.text = displayName.drop(11)
+            this.testRepeate.isVisible = true
+            this.testRepeate.revalidate()
+            this.testRepeate.repaint()
+        }
+        else {
+            this.actionTestStart.text = displayName.substring(0,20)
+            this.actionTestStart.isVisible = true
+            this.actionTestStart.revalidate()
+            this.actionTestStart.repaint()
+
+            this.actionTestEnd.text = displayName.substring(20)
+            this.actionTestEnd.isVisible = true
+            this.actionTestEnd.revalidate()
+            this.actionTestEnd.repaint()
+        }
+
+        if (testStatus == "Start" ) return
+
+        this.testErrors.text = testStatus
+        this.allErrors.isVisible = true
+        this.allErrors.revalidate()
+        this.allErrors.repaint()
+    }
+
     fun showButtons() {
         when (TestsProperties.isStartStop) {
             -2 -> buttonStartStop.text = "START"
@@ -229,6 +275,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
                             // #################################################################################################
                             val classStart = StartTests(this)
                             val executeStart = classStart.execute()  // СТАРТ циклов тестов
+                            //classStart.cancel(true) - не срабатывает
                             // #################################################################################################
                             with(TestsProperties) {
                                 isStartStop = 1

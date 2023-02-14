@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 /**
  * Классический пример теста переданный JB и подшаманенный, т.к. был не рабочий
  */
-@DisplayName("Пример для проверки JetBrainsTest")
+@DisplayName("Class JetBrainsTest")
 @TestMethodOrder(MethodOrderer.MethodName::class)
 class JetBrainsTest {
 
@@ -31,7 +31,7 @@ class JetBrainsTest {
         private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = repeateTestsNomber                       // количество повторений тестов
-        private const val NN:Int = 2                                    // количество повторений тестов
+        private const val NN:Int = 3                                    // количество повторений тестов
 
         // Для разных типов ожиданий; см Wait
         private lateinit var webDriverWait: WebDriverWait
@@ -45,7 +45,7 @@ class JetBrainsTest {
         @JvmStatic
         @BeforeAll
         fun beforeAll() {
-            if (DT >7) println("Вызов BeforeAll JetBrainsTest")
+            if (DT >7) println("Начало BeforeAll JetBrainsTest")
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             driver = startDriver()
             brainsPage = JetBrainsPage(driver)
@@ -73,7 +73,7 @@ class JetBrainsTest {
             if (DT >7) println("Вызов AfterAll JetBrainsTest")
             //Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
-
+            if (DT >7) println("Конец AfterAll JetBrainsTest")
         }
     }   // конец companion object
     /**
@@ -81,18 +81,26 @@ class JetBrainsTest {
      */
     @BeforeEach
     fun setUp() {
-        println("Начало функции BeforeEach JetBrainsTest")
+        if (DT >7) println("Начало BeforeEach JetBrainsTest")
 
         // Через драйвер=ChromeDriver() мы говорим браузеру Открой эту страницу
         driver.get("https://www.jetbrains.com/")
-        println("Конец функции BeforeEach JetBrainsTest")
+        if (DT >7) println("Конец BeforeEach JetBrainsTest")
     }
-
+    /**
+     * Функция которая выполняется после каждого теста, в т.ч. после повторного
+     */
+    @AfterEach
+    fun tearDown() {
+        if (DT >7) println("Начало AfterEach JetBrainsTest")
+        // driver.quit()
+        if (DT >7) println("Конец AfterEach JetBrainsTest")
+    }
     //    @RepeatedTest(3)
     @Test
-    @DisplayName("JetBrainsTest поиск ++Seleium++")
-    fun search() {
-        println("Начало функции search")
+    @DisplayName("--Seleium--")
+    fun t01_search() {
+        if (DT >7) println("Начало теста поиск ++Seleium++")
         // Мы обращаемся к классу brainsPage = JetBrainsPage(driver)
         // Зовем из него переменную searchButton и говорим ему клик
         brainsPage.searchButton.click()
@@ -111,35 +119,31 @@ class JetBrainsTest {
          * Можно управлять браузером и ничего не спрашивать Junit 5 (jupiter)
          */
         // brainsPage.searchPageField.getAttribute("value") - берем поле и вынимаем его значени
-        assertEquals("Selenium", brainsPage.searchPageField.getAttribute("value"), "++Seleium++")
-        println("Конец функции search")
+        assertEquals("Seleniumm", brainsPage.searchPageField.getAttribute("value"), "++Seleium++")
+        if (DT >7) println("Конец теста поиск ++Seleium++")
 
     }
 
     @RepeatedTest(NN)
-    @DisplayName("JetBrainsTest нажатие toolsMenu")
-    fun toolsMenu() {
+    @DisplayName("toolsMenu")
+    fun t02_toolsMenu() {
+        if (DT >7) println("Начало теста нажатие toolsMenu")
         Actions(driver)
             .moveToElement(brainsPage.toolsMenu)
             .perform()
 
         brainsPage.toolsMenu.click()
         assertTrue(brainsPage.menuPopup.isDisplayed, "Не выскочило Попап Меню")
+        if (DT >7) println("Конец теста нажатие toolsMenu")
     }
 
     @RepeatedTest(NN)
-    @DisplayName("JetBrainsTest открытие All Developer Tools")
-    fun navigationToAllTools() {
+    @DisplayName("All Developer Tools")
+    fun t03_navigationToAllTools() {
+        if (DT >7) println("Начало теста открытие All Developer Tools")
         brainsPage.seeAllToolsButton.click()
         assertTrue(brainsPage.productsList.isDisplayed, "Не открылся Продакт Лист")
-        assertEquals("Al Developer Tools and Products by JetBrains", driver.title, "ALL Developer")
-    }
-    /**
-     * Функция которая выполняется после каждого теста, в т.ч. после повторного
-     */
-    @AfterEach
-    fun tearDown() {
-       // driver.quit()
-        println("Конец функции AfterEach JetBrainsTest")
+        assertEquals("All Developer Tools and Products by JetBrains", driver.title, "ALL Developer")
+        if (DT >7) println("Конец теста открытие All Developer Tools")
     }
 }

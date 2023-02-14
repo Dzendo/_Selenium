@@ -1,5 +1,7 @@
 package ru.cs.tdm.data
 
+import ru.cs.tdm.ui.StartDialog
+
 object TestsProperties {
     var fluentInDurationNomber = 3000L
     var pollingInDurationNomber = 500L
@@ -65,6 +67,8 @@ object TestsProperties {
     var password = "Cons123"
 
     var summuryOfErrors = 0L
+
+    var startDialog: StartDialog? = null
 
     init {
         loginpage = ConfProperties.getProperty("loginpageTDM")
