@@ -47,8 +47,13 @@ class LoginPage(driver: WebDriver) {
     // отобрать среди потомков и их внуков элемент с тегом input (Должне быть один, иначе будет массив)
     // "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//descendant::input")
 
+    // Пользователь:
+    // <span class="ActionContainer_fieldLable__0c8wo">Пользователь:</span>
     //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//input")
+    // client
     @FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//descendant::input")
+    // React
+    //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label//descendant::input")
     //@FindBy(xpath = "//input[contains(@data-errorqtip, 'Это поле обязательно для заполнения')]")
     private lateinit var  loginField: WebElement
 
@@ -69,6 +74,10 @@ class LoginPage(driver: WebDriver) {
     //@FindBy(xpath = "//span [contains(@id,'button-1060-btnInnerEl')]/ancestor::a")
     //@FindBy(xpath = "//span [contains(text(), 'Войти')]/../../..")
     // Ищем спан с текстом Войти и его первого предка с тегом а
+    // React
+    //<button class="Authorization_button__o5Hi7">Войти</button>
+    //@FindBy(xpath = "//button [contains(text(), 'Войти')]")
+    // Client
     @FindBy(xpath = "//span [contains(text(), 'Войти')]/ancestor::a")
     private lateinit var loginBtn: WebElement
 
