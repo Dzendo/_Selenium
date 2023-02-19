@@ -99,7 +99,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
 
         contentPane = contents
 
-        gcontent[0][0].add(JLabel("Тесты:"),)
+        gcontent[0][0].add(JLabel("Тесты:"))
         gcontent[0][1].add(JLabel("Повтор:"))
         gcontent[0][2].add(JLabel("Печать:"))
         gcontent[0][3].add(JLabel("Сервер:"))

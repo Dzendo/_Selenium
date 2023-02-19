@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-test:1.8.10")
-    implementation("org.seleniumhq.selenium:selenium-java:4.8.0")
+    implementation("org.seleniumhq.selenium:selenium-java:4.8.1")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.2")
     { exclude ("org.bouncycastle") }
     implementation("org.slf4j:slf4j-simple:2.0.6")
@@ -26,7 +26,7 @@ dependencies {
     // java -jar junit-platform-console-standalone-1.9.1.jar <Options>
 
     //implementation(kotlin("test"))
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.8.0")
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.8.1")
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
     { exclude ("org.bouncycastle") }
     testImplementation("org.slf4j:slf4j-simple:2.0.6")

@@ -12,8 +12,8 @@ import java.io.PrintWriter
 
 
 class Junit5Runner {
-    private val listener: SummaryGeneratingListener = SummaryGeneratingListener()
-
+    private val summaryListener: SummaryGeneratingListener = SummaryGeneratingListener()
+    var executionListener = CustomTestExecutionListener()
     fun runOne(testClass: Class<*> ) {
         val request: LauncherDiscoveryRequest = LauncherDiscoveryRequestBuilder.request()
             .selectors(selectClass(testClass))
@@ -23,15 +23,14 @@ class Junit5Runner {
             .build()
         val launcher: Launcher = LauncherFactory.create()
         //val testPlan: TestPlan = launcher.discover(request)
-        launcher.registerTestExecutionListeners(listener)
+        launcher.registerTestExecutionListeners(summaryListener)
+        launcher.registerTestExecutionListeners( executionListener)
         launcher.execute(request)
-        val summary: TestExecutionSummary = listener.summary
+        val summary: TestExecutionSummary = summaryListener.summary
         summary.printTo(PrintWriter(System.out))
     }
 }
-  //  companion object {
-       // @JvmStatic
+
         fun main() {
            Junit5Runner().runOne(JetBrainsTest2::class.java)
         }
-  //  }
