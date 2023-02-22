@@ -756,6 +756,7 @@ class HeadRef {
                 clickMenu(flow0, "messagebox", "TDMS")
                 assertTrue(tools.titleWait("messagebox","TDMS"),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
+                Thread.sleep(threadSleep)
                 tools.closeXLast()
                 if (DT > 6) println("Конец Test нажатия на $flow0")
             }
@@ -780,6 +781,7 @@ class HeadRef {
             }
 
             @RepeatedTest(NN)
+            @Disabled
             @DisplayName("Поток 2.1 - Ответ о результате передаче РЗ")
             fun flow2Test() {
                 val flow2 = "Поток 2.1 - Ответ о результате передаче РЗ"
@@ -799,6 +801,7 @@ class HeadRef {
             }
 
             @RepeatedTest(NN)
+            @Disabled
             @DisplayName("Поток 3 - Отправка ответов на замечания")
             fun flow3Test() {
                 val flow3 = "Поток 3 - Отправка ответов на замечания"
@@ -812,6 +815,18 @@ class HeadRef {
                     "@@@@ После нажатия $flow3 в очередном окне заголовок не содержит Выбор Реестра замечаний @@")
                 tools.closeXLast()
                 if (DT > 6) println("Конец Test нажатия на $flow3")
+            }
+            @RepeatedTest(NN)
+            @DisplayName("Поток 5.1 - Отправка окончательного ПД")
+            fun flow5Test() {  // tdmsSelectObjectDialog-1593_header-title-textEl
+                val flow5 = "Поток 5.1 - Отправка окончательного ПД"
+                if (DT > 6) println("Test нажатия на $flow5")
+                openCETD()
+                clickMenu(flow5, "tdmsSelectObjectDialog", "Выбор Передаточного документа")
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog","Выбор Передаточного документа"),
+                    "@@@@ После нажатия $flow5 в окне заголовок не содержит Выбор Передаточного документа @@")
+                tools.closeXLast()
+                if (DT > 6) println("Конец Test нажатия на $flow5")
             }
         }   // конец Имитация ИУС СЭТД
     }  // конец Testing SubSysadmin

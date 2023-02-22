@@ -27,6 +27,7 @@ object TestsProperties {
 
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
+        "tdms2012:443",
         "srv1.ru:443",
         "srv2a.ru:443",
         "srv2a.ru:444",
@@ -38,6 +39,7 @@ object TestsProperties {
     )
 
     val loginPages: Array<String> = arrayOf(
+        "http://tdms-temp-2012:443/client/#objects",
         "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv2a.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
@@ -62,7 +64,7 @@ object TestsProperties {
     var isLog: Boolean =false
     var isExit: Boolean =false
 
-    var loginpage = "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects"
+    var loginpage = "http://tdms-temp-2012:443/client/#objects"
     var login = "SYSADMIN"
     var password = "Cons123"
 
