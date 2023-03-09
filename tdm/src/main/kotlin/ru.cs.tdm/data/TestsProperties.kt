@@ -15,7 +15,7 @@ object TestsProperties {
     var threadSleepNomber = 1000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
-    var browserIndex = 0  // Chrome
+    var browserIndex = 1  // Chrome
     var pageIndex = 0    // 2A
     var loginIndex = 0 //"SYSADMIN"
     var passwordIndex = 0 //"753951"

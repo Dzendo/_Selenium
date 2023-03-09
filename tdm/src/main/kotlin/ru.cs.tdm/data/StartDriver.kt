@@ -13,7 +13,9 @@ fun startDriver(indexBrowser: Int = TestsProperties.browserIndex, xPoint:Int = 2
     //  "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari"
     when(indexBrowser) {
         0 -> {
-            driver = WebDriverManager.chromedriver().create()
+            driver = WebDriverManager
+                .chromedriver()
+                .create()
             //WebDriverManager.chromedriver().setup()
             //driver = ChromeDriver()
         }

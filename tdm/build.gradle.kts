@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-// 05.03.2023 rev 1.1.1 Betta 2023.1 3 8.0.1
-// 1.4.38_7.0.17
+// 05.03.2023 rev 1.1.1 Betta 2022.3.3  8.0.2
+// 1.4.39_7.0.18
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
