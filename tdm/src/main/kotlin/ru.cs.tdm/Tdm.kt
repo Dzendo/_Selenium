@@ -13,6 +13,8 @@ import javax.swing.SwingUtilities
 fun main(args: Array<String>) {
     if (printDual()) println("Output: double to the console and to the file out+err")
     println("Program arguments: ${args.joinToString()}")
+    // отключился Chrome 111 - костыль 1 из 2: второй в StartDriver "--remote-allow-origins=*" (достаточно одного)
+    System.setProperty("webdriver.http.factory", "jdk-http-client")
     // метод помещает приложение в очередь событий Swing
     if (args.isEmpty()) SwingUtilities.invokeLater {  StartDialog() }   // этот поток называется EDT (поток диспетчеризации событий).
     else {

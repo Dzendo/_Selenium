@@ -44,6 +44,7 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.9.2")
     //implementation("org.assertj:assertj-core:3.23.1")
     implementation("org.junit.platform:junit-platform-launcher:1.9.2")
+    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.8.1")
 
 }
 application {

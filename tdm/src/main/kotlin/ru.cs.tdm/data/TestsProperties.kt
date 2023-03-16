@@ -15,7 +15,7 @@ object TestsProperties {
     var threadSleepNomber = 1000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
-    var browserIndex = 1  // Chrome
+    var browserIndex = 0  // Chrome
     var pageIndex = 0    // 2A
     var loginIndex = 0 //"SYSADMIN"
     var passwordIndex = 0 //"753951"
@@ -25,17 +25,17 @@ object TestsProperties {
     var uiOutCheck: Boolean = true
     var assertOutCheck: Boolean = true
 
-    val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari")
+    val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
         "tdms2012:443",
         "srv1.ru:443",
         "srv2a.ru:443",
         "srv2a.ru:444",
-        "srv10.ru:443",
+        "srv10.ru:80",
         "tdms2012:444",
         "srv2a:443",
         "srv2a:444",
-        "SRV10:443",
+        "SRV10:80",
     )
 
     val loginPages: Array<String> = arrayOf(
@@ -43,11 +43,11 @@ object TestsProperties {
         "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv2a.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
-        "http://tdms-srv10.csoft-msc.ru:443/client/?classic#objects",
+        "http://tdms-srv10.csoft-msc.ru:80/client/?classic#objects",
         "http://tdms-temp-2012:444/client/#objects/",
         "http://tdms-srv2a:443/client/#objects/",
         "http://tdms-srv2a:444/client/#objects/",
-        "http://TDMS-SRV10:443/client/#objects/",
+        "http://TDMS-SRV10:80/client/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")

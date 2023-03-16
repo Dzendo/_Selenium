@@ -10,11 +10,13 @@ import org.openqa.selenium.chrome.ChromeOptions
 fun startDriver(indexBrowser: Int = TestsProperties.browserIndex, xPoint:Int = 2000, yPoint: Int = -1000): WebDriver {
     lateinit var driver: WebDriver
     //      0        1        2         3         4        5         6           7        8
-    //  "Chrome", "Edge", "Firefox", "Opera", "Yandex", "Brave", "CCleaner", "IntExp", "Safari"
+    //  "Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari"
     when(indexBrowser) {
         0 -> {
             driver = WebDriverManager
                 .chromedriver()
+                // отключился Chrome 111 - костыль 2 из 2: первый в Tdm System.setProperty("webdriver.http.factory", "jdk-http-client") (достаточно одного)
+                .capabilities(ChromeOptions().addArguments("--remote-allow-origins=*"))
                 .create()
             //WebDriverManager.chromedriver().setup()
             //driver = ChromeDriver()
@@ -27,21 +29,34 @@ fun startDriver(indexBrowser: Int = TestsProperties.browserIndex, xPoint:Int = 2
             driver = WebDriverManager.firefoxdriver().create()
             //driver = FirefoxDriver()
         }
-        3 -> {
+        3 -> {  // дает лишнюю ошибку на JBrains
             driver = WebDriverManager.operadriver().create()
             //driver = OperaD FirefoxDriver()
         }
         4 -> {
-            driver = WebDriverManager.chromiumdriver().create()
-        }
-        5 -> {
             val option: ChromeOptions  = ChromeOptions()
-                option.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe")
+            option.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe")
             WebDriverManager.chromiumdriver().setup()
             driver = ChromeDriver(option)
         }
-        6 -> {
-            driver = WebDriverManager.chromiumdriver().create()
+        5 -> {   // не работает стартует
+            // C:\Users\ASDze\AppData\Local\Yandex\YandexBrowser\Application\browser.exe
+            val option: ChromeOptions  = ChromeOptions()
+            option.setBinary("C:\\Users\\ASDze\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe")
+            WebDriverManager.chromiumdriver().setup()
+            driver = ChromeDriver(option)
+        }
+        6 -> {  // не работает - стартует и не открывается
+            // "C:\Program Files (x86)\CCleaner Browser\Application\CCleanerBrowser.exe" --check-run=src=desktop
+            val option: ChromeOptions  = ChromeOptions()
+            option.setBinary("C:\\Program Files (x86)\\CCleaner Browser\\Application\\CCleanerBrowser.exe")
+            option.addArguments("--check-run=src=desktop")
+            WebDriverManager
+                .chromiumdriver()
+                //.capabilities(ChromeOptions().addArguments("--check-run=src=desktop"))
+                .setup()
+            driver = ChromeDriver(option)
+
         }
         7 -> {
             driver = WebDriverManager.iedriver().create()
