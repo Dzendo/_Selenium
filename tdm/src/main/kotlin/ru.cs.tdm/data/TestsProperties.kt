@@ -27,26 +27,20 @@ object TestsProperties {
 
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
-        "tdms2012:443",
+        "srv2b.ru:443",
         "srv1.ru:443",
-        "srv2a.ru:443",
-        "srv2a.ru:444",
+        "tdms2012:443",
         "srv10.ru:80",
-        "tdms2012:444",
-        "srv2a:443",
-        "srv2a:444",
+        "srv2b:443",
         "SRV10:80",
     )
 
     val loginPages: Array<String> = arrayOf(
-        "http://tdms-temp-2012:443/client/#objects",
+        "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv1.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2a.csoft-msc.ru:444/client/?classic#objects",
+        "http://tdms-temp-2012:443/client/#objects",
         "http://tdms-srv10.csoft-msc.ru:80/client/?classic#objects",
-        "http://tdms-temp-2012:444/client/#objects/",
-        "http://tdms-srv2a:443/client/#objects/",
-        "http://tdms-srv2a:444/client/#objects/",
+        "http://tdms-srv2b:443/client/#objects/",
         "http://TDMS-SRV10:80/client/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
@@ -64,7 +58,7 @@ object TestsProperties {
     var isLog: Boolean =false
     var isExit: Boolean =false
 
-    var loginpage = "http://tdms-temp-2012:443/client/#objects"
+    var loginpage = "http://tdms-temp-2012:443/client/#objects/"
     var login = "SYSADMIN"
     var password = "Cons123"
 
