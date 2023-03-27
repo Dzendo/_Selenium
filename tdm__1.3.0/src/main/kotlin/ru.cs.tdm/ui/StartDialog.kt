@@ -15,7 +15,7 @@ import kotlin.system.exitProcess
  * https://java-online.ru/swing-layout.xhtml
  */
 
-class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.3"), ActionListener  {
+class StartDialog : JFrame("TDM365 Tests from Elena V."), ActionListener  {
     //private val classStart = StartTests(this)  // перенес вниз чтобы был повторный старт
     //private var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()
@@ -146,7 +146,7 @@ class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.3"), ActionListener  {
         gcontent[6][0].add(JLabel("allErrors:"))
         gcontent[6][1].add(allErrors)
         gcontent[6][2].add(testErrors)
-        gcontent[6][3].add(JLabel(""))
+        gcontent[6][3].add(JLabel("ver 1.3"))  // Версия
         gcontent[7][0].add(JLabel("Repeat:"))
         gcontent[7][1].add(actionRepeate)
         gcontent[7][2].add(testRepeate)

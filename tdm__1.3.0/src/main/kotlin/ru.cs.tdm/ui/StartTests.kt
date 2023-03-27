@@ -31,7 +31,7 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
         println("startTests ${LocalDateTime.now().withNano(0)} arguments: ${TestsProperties.testCases.joinToString()}")
         if (TestsProperties.debugPrintNomber > 1) println("Повторов ${TestsProperties.repeateCasesNomber} Задержка ${TestsProperties.threadSleepNomber} Печать ${TestsProperties.debugPrintNomber}")
         if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage}")
-        if (TestsProperties.debugPrintNomber > 1) println("Браузер = ${TestsProperties.browsers[TestsProperties.browserIndex]} login= ${TestsProperties.login}   password= ${TestsProperties.password}")
+        if (TestsProperties.debugPrintNomber > 1) println("Браузер = ${TestsProperties.browserIndex} login= ${TestsProperties.login}   password= ${TestsProperties.password}")
 
         var allSumErrors: Long = 0L     // сумма ошибок для всех тестов для всех повторов
         for (repeat in 1..TestsProperties.repeateCasesNomber) {
