@@ -61,7 +61,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         1   //step
     ))
     private val spinThreadSleep =JSpinner(SpinnerNumberModel(
-        1,  //initial value
+        3,  //initial value
         0,  //min
         99,  //max
         1   //step
@@ -146,7 +146,7 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
         gcontent[6][0].add(JLabel("allErrors:"))
         gcontent[6][1].add(allErrors)
         gcontent[6][2].add(testErrors)
-        gcontent[6][3].add(JLabel(":"))
+        gcontent[6][3].add(JLabel("ver 1.3"))  // Версия
         gcontent[7][0].add(JLabel("Repeat:"))
         gcontent[7][1].add(actionRepeate)
         gcontent[7][2].add(testRepeate)
@@ -196,12 +196,14 @@ class StartDialog : JFrame("TDM365 Tests "), ActionListener  {
             this.testRepeate.repaint()
         }
         else {
-            this.actionTestStart.text = displayName.substring(0,20)
+            val cat = displayName.lastIndex
+            val displayCat = if (cat < 20 ) displayName.substring(0, cat) else  displayName.substring(0, 20)
+            this.actionTestStart.text = displayCat
             this.actionTestStart.isVisible = true
             this.actionTestStart.revalidate()
             this.actionTestStart.repaint()
 
-            this.actionTestEnd.text = displayName.substring(20)
+            this.actionTestEnd.text = if (cat < 20 ) "" else displayName.substring(20)
             this.actionTestEnd.isVisible = true
             this.actionTestEnd.revalidate()
             this.actionTestEnd.repaint()
