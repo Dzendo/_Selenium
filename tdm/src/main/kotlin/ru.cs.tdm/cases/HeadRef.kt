@@ -340,6 +340,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        @Disabled
         @DisplayName("Создать фильтр")
         fun filterTest(){ //(repetitionInfo: RepetitionInfo) {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
@@ -469,7 +470,8 @@ class HeadRef {
                 Thread.sleep(threadSleep * it)
                 tools.referenceClickLast("SUB_SYSADMIN")
                 ///Thread.sleep(threadSleep)
-                if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
+               // if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
+                if (tools.referenceLast("SUB_SYSADMIN")?.getAttribute("class")?.contains("x-btn-menu-active") ?: false) return
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
                 tools.qtipClickLast("Объекты")

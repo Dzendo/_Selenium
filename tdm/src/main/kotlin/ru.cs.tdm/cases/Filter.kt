@@ -117,6 +117,7 @@ class Filter {
         assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")  // сбоит нечасто заголовок страницы на создании
         assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
         if (DT >7) println("Конец BeforeEach FilterTest")
+
     }
     // пришлось ввести т.к. при рабочем столе два значка "создать фильтр"
     fun workTable() {
@@ -188,6 +189,11 @@ class Filter {
         val nomberFilter = "${repetitionInfo.currentRepetition}"
         val createUser = "Создать фильтр"
         if (DT > 6) println("Test нажатия на $createUser")
+
+        // Выбрать рабочий стол
+        workTable()
+        // выбрать из дерева фильтры
+
 
         tools.referenceClickLast("CMD_CREATE_USER_QUERY")
         assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),

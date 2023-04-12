@@ -29,19 +29,19 @@ object TestsProperties {
     val servers: Array<String> = arrayOf(
         "srv2b.ru:443",
         "srv1a.ru:443",
-        "srv10.ru:80",
+        "srv10a.ru:443",
         "tdms2012:443",
         "srv2b:443",
-        "SRV10:80",
+        "SRV10a:443",
     )
 
     val loginPages: Array<String> = arrayOf(
         "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv1a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv10.csoft-msc.ru:80/client/?classic#objects",
+        "http://tdms-srv10a.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-temp-2012:443/client/#objects",
         "http://tdms-srv2b:443/client/#objects/",
-        "http://TDMS-SRV10:80/client/#objects/",
+        "http://TDMS-SRV10a:443/client/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
