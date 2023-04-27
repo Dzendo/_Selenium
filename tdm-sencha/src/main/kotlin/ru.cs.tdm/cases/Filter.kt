@@ -531,6 +531,7 @@ class Filter {
    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         workTable()
 
+      // val nomberFilter = "${repetitionInfo.currentRepetition}"
        val nomberFilter = "${repetitionInfo.currentRepetition}"
        val deleteFilter = "Удалить фильтр"
        if (DT > 6) println("Test нажатия на $deleteFilter")
@@ -542,5 +543,47 @@ class Filter {
         if (DT > 6) println("Конец Test нажатия на $deleteFilter")
 
    }
+    @Disabled
+    @RepeatedTest(30)
+    @DisplayName("Удаление фильтров")
+    fun n12_DeleteUserQuerys(repetitionInfo: RepetitionInfo) {
+        workTable()
+
+        // val nomberFilter = "${repetitionInfo.currentRepetition}"
+        val nomberFilter = "${repetitionInfo.currentRepetition}"
+        val deleteFilter = "Удалить фильтр"
+        if (DT > 6) println("Test нажатия на $deleteFilter")
+
+
+        val clickRef = "CMD_DELETE_USER_QUERY"
+        val tipWindow =  "messagebox"
+        val titleWindow =  "TDM365"
+
+        if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
+       // Thread.sleep(threadSleep)
+        tools.xpathClickLast("//*[contains(text(), 'Фильтр 20-04-2023')]")
+        //Thread.sleep(threadSleep)
+        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр 20-04-2023",false,
+            "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
+
+        //Thread.sleep(threadSleep)
+        if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
+            println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие: $clickRef")
+            screenShot()
+        }
+
+        //Thread.sleep(threadSleep)
+        tools.referenceClickLast(clickRef)
+        //Thread.sleep(threadSleep)
+        assertTrue(tools.titleWait(tipWindow, titleWindow),
+            "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $tipWindow @@")
+        //Thread.sleep(threadSleep)
+        val filterText = tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+
+        assertContains(filterText, "Фильтр 20-04-2023", false,
+            "@@@@ Нет правильного текста Фильтр $localDateNow на всплывающем окне $filterText @@")
+    }
+
+
 }
 

@@ -51,7 +51,8 @@ class LoginPage(driver: WebDriver) {
     // <span class="ActionContainer_fieldLable__0c8wo">Пользователь:</span>
     //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//input")
     // client
-    @FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//descendant::input")
+    //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label/following-sibling::div//descendant::input")
+    @FindBy(xpath = "//span[contains(text(),'Пользователь:')]/following-sibling::div//descendant::input")
     // React
     //@FindBy(xpath = "//span[contains(text(),'Пользователь:')]/ancestor::label//descendant::input")
     //@FindBy(xpath = "//input[contains(@data-errorqtip, 'Это поле обязательно для заполнения')]")
@@ -70,6 +71,7 @@ class LoginPage(driver: WebDriver) {
     /**
      * определение кнопки входа
      */
+
     //@FindBy(xpath = "//*[@id="button-1060"]")
     //@FindBy(xpath = "//span [contains(@id,'button-1060-btnInnerEl')]/ancestor::a")
     //@FindBy(xpath = "//span [contains(text(), 'Войти')]/../../..")
@@ -78,11 +80,23 @@ class LoginPage(driver: WebDriver) {
     //<button class="Authorization_button__o5Hi7">Войти</button>
     //@FindBy(xpath = "//button [contains(text(), 'Войти')]")
     // Client
-    @FindBy(xpath = "//span [contains(text(), 'Войти')]/ancestor::a")
+    //@FindBy(xpath = "//span [contains(text(), 'Войти')]/ancestor::a")
+    @FindBy(xpath = "//button [text()='Войти']")
     private lateinit var loginBtn: WebElement
 
     @FindBy(xpath ="//span[text()='Да']/ancestor::a")
     private lateinit var yesBtn: WebElement
+
+    // нажать на пользователя:
+    @FindBy(xpath = "//div[@title='Настройки']")
+    private lateinit var outUser: WebElement
+
+    // нажать на пользователя:
+    @FindBy(xpath = "//div[@title='Настройки']")
+    private lateinit var outExit: WebElement
+
+
+
 
     /**
      * метод для ввода логина
@@ -104,4 +118,10 @@ class LoginPage(driver: WebDriver) {
      * метод для осуществления нажатия кнопки подтверждения выхода из TDMS
      */
     fun ClickYesBtn() = webDriverWait.until(elementToBeClickable(yesBtn)).click()
+
+    fun outUser() = webDriverWait.until(elementToBeClickable(outUser)).click()
+
+    fun outExit() = webDriverWait.until(elementToBeClickable(outExit)).click()
+
+    fun titleLoginUserName(title: String): String = outExit.text
 }

@@ -212,7 +212,7 @@ class AdminUser {
         // data-reference="GRID_GROUPS"
         val headTeg = tools.idRef("GRID_GROUPS")
         val allUsers = "Все пользователи"
-        if (DT > 8) println("Test нажатия на $allUsers")
+        if (DT > 8) println("Test нажатия на $allUsers $headTeg")
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
         tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
         assertTrue(
@@ -398,13 +398,13 @@ class AdminUser {
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
             inputGpoup?.sendKeys("Тестовая $localDateNow")
             tools.clickOK("OK")  // создать Тестовая
-            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("messagebox", "TDMS")}")
+            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("messagebox", "TDM365")}")
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
-                "@@@@ При $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
+            assertTrue(tools.titleWait("messagebox", "TDM365"),
+                "@@@@ При $createGroup - нет окна сообщения с заголовком TDM365 (группа создана) @@")
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
-                "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
+            assertTrue(tools.titleWait("messagebox", "TDM365"),
+                "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDM365 (группа создана) @@")
             tools.clickOK("OK")  // создана тестовая
             tools.clickOK("ОК")     // закрыть адимин
             if (DT > 6) println("Конец Test нажатия на $createGroup")
@@ -423,14 +423,14 @@ class AdminUser {
             //  Проверить что выделенная группа Тестовая data-reference="GROUP_NAME"
             tools.referenceClickLast("BUTTON_GROUP_DELETE")
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
-                "@@@@ При $deleteGroup - нет окна сообщения с заголовком TDMS (удалить группу) @@")
+            assertTrue(tools.titleWait("messagebox", "TDM365"),
+                "@@@@ При $deleteGroup - нет окна сообщения с заголовком TDM365 (удалить группу) @@")
             //val msgGpoup = tools.xpathLast("//div[text() = 'Удалить группу \"Тестовая\"?']")
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
-            val nomberMessage = tools.nomberTitle("messagebox", "TDMS")
+            val nomberMessage = tools.nomberTitle("messagebox", "TDM365")
             // id="messagebox-1329-msg"
             assertContains(tools.byID("messagebox-$nomberMessage-msg")?.text?: "None", "Удалить группу",false,
-                "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDMS Удалить группу @@")
+                "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDM365 Удалить группу @@")
             tools.clickOK("Да")  // удалить тестовая
             tools.clickOK("ОК")     // закрыть адимин
             if (DT > 6) println("Test нажатия на $deleteGroup")
@@ -447,11 +447,11 @@ class AdminUser {
             //assertTrue(tools.titleWait("window", "Редактирование групп"))
         //val testFIO = "Тестовая Фамилия"
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
+            assertTrue(tools.titleWait("messagebox", "TDM365"),
                 "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
         //tools.xpathLast("//div[contains(text(), '$localDateNow')]")?.click()
         //tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
-            val nomberMessage = tools.nomberTitle("messagebox", "TDMS")
+            val nomberMessage = tools.nomberTitle("messagebox", "TDM365")
             // id="messagebox-1329-msg"
             assertContains(tools.byID("messagebox-$nomberMessage-msg")?.text?: "None", "Удалить пользователя",false,
                 "@@@@ При BUTTON_USER_DELETE - нет в окне подтверждения с заголовком TDMS Удалить группу @@")

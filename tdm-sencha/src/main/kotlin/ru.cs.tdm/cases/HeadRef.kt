@@ -698,9 +698,9 @@ class HeadRef {
                 val flow0 = "Поток - Проверка связи без авторизации"
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
-                clickMenu(flow0, "messagebox", "TDMS")
-                assertTrue(tools.titleWait("messagebox","TDMS"),
-                    "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
+                clickMenu(flow0, "messagebox", "TDM365")
+                assertTrue(tools.titleWait("messagebox","TDM365"),
+                    "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 Thread.sleep(threadSleep)
                 tools.closeXLast()
                 tools.closeEsc()
@@ -714,9 +714,9 @@ class HeadRef {
                 val flow0 = "Поток - Проверка связи с авторизацией"
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
-                clickMenu(flow0, "messagebox", "TDMS")
-                assertTrue(tools.titleWait("messagebox","TDMS"),
-                    "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
+                clickMenu(flow0, "messagebox", "TDM365")
+                assertTrue(tools.titleWait("messagebox","TDM365"),
+                    "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 Thread.sleep(threadSleep)
                 tools.closeXLast()
                 Thread.sleep(threadSleep)
@@ -731,10 +731,10 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow")
                 openCETD()
                 //tools.xpathClickMenu(flow)
-                clickMenu(flow, "messagebox", "TDMS")
+                clickMenu(flow, "messagebox", "TDM365")
                 Thread.sleep(threadSleep)
-                assertTrue(tools.titleWait("messagebox","TDMS"),
-                    "@@@@ После нажатия $flow в окне заголовок не содержит TDMS @@")
+                assertTrue(tools.titleWait("messagebox","TDM365"),
+                    "@@@@ После нажатия $flow в окне заголовок не содержит TDM365 @@")
                 //val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
                 //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
                 //assertTrue(msgText.contains("Нет")) // - Выбор проекта в системе"))
@@ -743,7 +743,7 @@ class HeadRef {
                     "@@@@ После следующего нажатия $flow в окне заголовок не содержит Ввод значения @@")
                 tools.closeXLast()
                 Thread.sleep(threadSleep)
-                assertTrue(tools.titleWait("messagebox","TDMS"),
+                assertTrue(tools.titleWait("messagebox","TDM365"),
                     "@@@@ После последнего нажатия $flow в окне заголовок не содержит Ввод значения @@")
                 tools.closeXLast()
                 if (DT > 6) println("Конец Test нажатия на $flow")
@@ -755,8 +755,8 @@ class HeadRef {
                 val flow0 = "Поток 0 - Отправка проекта"
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
-                clickMenu(flow0, "messagebox", "TDMS")
-                assertTrue(tools.titleWait("messagebox","TDMS"),
+                clickMenu(flow0, "messagebox", "TDM365")
+                assertTrue(tools.titleWait("messagebox","TDM365"),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
                 Thread.sleep(threadSleep)
                 tools.closeXLast()

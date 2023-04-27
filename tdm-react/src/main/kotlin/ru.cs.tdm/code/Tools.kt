@@ -42,6 +42,8 @@ class Tools(val driver: WebDriver) {
                                                 ElementNotInteractableException::class.java,
                                                 ElementClickInterceptedException::class.java,
                                                 StaleElementReferenceException::class.java))
+
+
     fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath
         val xpathHtml = "//html/body/descendant::${xpath.drop(2)}"
@@ -82,7 +84,7 @@ class Tools(val driver: WebDriver) {
         repeat(repeateOut) {
             Thread.sleep(threadSleep / 10 * it)  // не нужно
             try {
-                val element = fluentOutWait.until { xpathLast("//*[contains(@data-qtip, '$qtip')]") }
+                val element = fluentOutWait.until { xpathLast("//*[contains(@title, '$qtip')]") }
                 if (element != null) return element
             } catch (_: TimeoutException) {}
             catch (_: StaleElementReferenceException) {}
@@ -134,8 +136,11 @@ class Tools(val driver: WebDriver) {
     fun referenceClickLast(data_reference: String): Boolean =
         fluentOutWait.until { xpathLast("//*[@data-reference='$data_reference']")?.click()} != null
 
-    fun qtipPressedLast(qtip: String): Boolean = qtipLast(qtip)?.getAttribute("aria-pressed") =="true"
-
+    fun qtipPressedLast(qtip: String): Boolean {
+        val rezult1 = qtipLast(qtip)?.getAttribute("class")
+        val rezult2 = rezult1?.contains("_pressed_") ?: false
+        return rezult2
+    }
     fun closeXLast() = qtipClickLast("Закрыть диалог")
 
     fun closeEsc(): Boolean {
@@ -191,14 +196,17 @@ class Tools(val driver: WebDriver) {
         xpathLast("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun titleWait(window:String, title: String): Boolean =
         xpathWaitTextTry("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
+
+    fun headerWait(head:String, title: String): Boolean =
+        xpathWaitTextTry("//span[starts-with(@class, 'Header_headerTitle_$head')]",title)
     fun windowTitle(): String =
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun clickOK(OK: String = ""): Boolean {
-        //41e 43a 41e 41a 4f 4b 414 430
+        //41e 43a 41e 41a 4f 4b 414 430 OK - 79 75
         repeat(repeateOut) {
             Thread.sleep(threadSleep / 10 * it)  // не нужно
-            val xpath: String = if (OK.isNotEmpty()) "//span[text() = '$OK']/ancestor::a"
-                                else "//span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a"
+            val xpath: String = if (OK.isNotEmpty()) "//span[text() = '$OK']/ancestor::button"
+                                else "//span[text() = 'OK' or text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::button"
             try {
                 val element = fluentOutWait.until { xpathLast(xpath)?.click() }
                 if (element != null) return true
@@ -260,6 +268,7 @@ class Tools(val driver: WebDriver) {
 
 
     fun byID(id: String) :WebElement? = driver.findElement(By.id(id))
+    fun byIDPressed(id: String) :Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
 
 
     fun idList() {

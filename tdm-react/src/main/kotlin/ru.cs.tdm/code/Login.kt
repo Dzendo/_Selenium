@@ -36,13 +36,13 @@ class Login(val driver: WebDriver) {
 
     fun loginUserName(): String {
         Thread.sleep(threadSleep)
-        val userName = tools.xpathGetText("//a[contains(@data-qtip, 'Настройки')]")
+        val userName = tools.xpathGetText("//a[contains(@title, 'Настройки')]")
         if (DT >7) println("получение первого имени пользователя из меню пользователя $userName")
         return if (userName.contains(" ")) userName.split(" ").toTypedArray()[0] else userName
     }
     fun loginUserNameWait(name: String): Boolean {
         Thread.sleep(threadSleep)
-        val bool = tools.xpathFluentWaitText("//a[contains(@data-qtip, 'Настройки')]",
+        val bool = tools.xpathFluentWaitText("//a[contains(@title, 'Настройки')]",
             if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
         if (DT >7) println("ожидание $name пользователя из меню пользователя ")
         return bool
@@ -62,9 +62,26 @@ class Login(val driver: WebDriver) {
         return bool
     }
 
+    fun titleLoginUserNameWait(name: String): String {
+        Thread.sleep(threadSleep)
+        val name = loginPage.titleLoginUserName("Настройки")
+       //val bool = tools.qtipFluentWaitText("Настройки",
+       //     if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
+        if (DT >7) println("ожидание $name пользователя из меню пользователя")
+        return name
+    }
+
     fun loginOut() {
-        tools.qtipClickLast("Настройки")
-        tools.qtipClickLast("Выйти из приложения")
+        //получение доступа к методам класса LoginPage для взаимодействия с элементами страницы
+        //вводим логин  ХАЛТУРА - только тема 1
+        loginPage.outUser()
+        //вводим пароль
+        loginPage.outExit()
+        //нажимаем кнопку входа
+        //loginPage.clickLoginBtn()
+
+        //tools.qtipClickLast("Настройки")
+        //tools.qtipClickLast("Выйти из приложения")
         //tools.closeXLast()
         tools.clickOK()
         //loginPage.ClickYesBtn()

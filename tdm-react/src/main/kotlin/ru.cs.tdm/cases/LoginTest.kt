@@ -69,21 +69,23 @@ class LoginTest {
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
         loginClass.loginIn(login, password)
-
+        println(" Вошли под login= $login   password= $password")
         //получаем отображаемый логин
         //val user = login.loginUserName()
         //и сравниваем его с логином из файла настроек
         //assertEquals(loginTDM, user)
         //assertTrue(login.loginUserNameWait(loginTDM))
         // assertTrue проверяет труе или фалс возвращает функция qtipLoginUserNameWait из класса login
-        assertTrue(loginClass.qtipLoginUserNameWait(login),
+        //assertTrue(loginClass.qtipLoginUserNameWait(login),
+        assertTrue(loginClass.titleLoginUserNameWait("Настройки")=="SYSADMIN",
             "@@@@ Не вошли под пользователем $login @@")
+        println(" Проверили под login= $login   password= $password")
     }
     // После теста зовет login.loginOut(), а тот используя мой тулс через qtip нажимает на что надо, что бы выйти из логина
     // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
-            loginClass.loginOut()
+           // loginClass.loginOut()
             driver.quit() //  закрытия окна браузера
         }
 }

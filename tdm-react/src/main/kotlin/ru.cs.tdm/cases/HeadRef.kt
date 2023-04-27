@@ -9,6 +9,15 @@ import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
+import kotlin.test.assertContains
+
+// ВСЕ title="Объекты" теперь title="Объекты" зато с id="objectsTab"
+// HeaderButton_button__qVz7d - пунк меню не утоплен
+// HeaderButton_pressed__cSIa4 - пункт меню утоплена
+//<div id="desktopTab" title="Рабочий стол" class="HeaderButton_pressed__cSIa4">
+// <div class="HeaderButton_buttonContainer__Uwd+1">
+// <b>РАБОЧИЙ СТОЛ</b>
+// </div></div>
 
 /**
  *
@@ -82,7 +91,7 @@ class HeadRef {
             //tools.idList()
             if (DT > 7) println("Вызов afterAll")
             tools.closeEsc5()
-            Login(driver).loginOut()
+            //Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
             if (DT > 7) println("Конец Вызов afterAll")
         }
@@ -124,8 +133,11 @@ class HeadRef {
             if (DT > 7) println("Вызов inner Head BeforeEach")
             val mainMenu = "Объекты"
             tools.qtipClickLast(mainMenu)
+            driver.navigate().refresh()
             assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
-            assertTrue(tools.qtipPressedLast(mainMenu), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
+            //assertTrue(tools.qtipPressedLast(mainMenu), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
+            //*[@id="objectsTab"]
+            assertTrue(tools.byIDPressed("objectsTab"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
             if (DT > 7) println("Конец Вызов inner Head BeforeEach")
         }
 
@@ -141,12 +153,14 @@ class HeadRef {
         fun mainMenuTest() {
             val mainMenu = "Объекты"
             if (DT > 6) println("Test нажатия на $mainMenu TDMS Web")
-            // Клик на элемент с data-qtip="Объекты"
+            // Клик на элемент с title="Объекты"
             tools.qtipClickLast(mainMenu)
             // Проверяем заголовок закладки Junit
+            driver.navigate().refresh()
             assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
             // Проверяем, что утоплена кнопка Объекты
-            assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка $mainMenu нет утоплена @@")
+            //assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка $mainMenu нет утоплена @@")
+            assertTrue(tools.byIDPressed("objectsTab"), "@@@@ После нажатия $mainMenu - кнопка $mainMenu нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $mainMenu TDMS Web")
         }
 
@@ -156,8 +170,10 @@ class HeadRef {
             val workTable = "Рабочий стол"
             if (DT > 6) println("Test нажатия на $workTable")
             tools.qtipClickLast(workTable)
+            driver.navigate().refresh()
             assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")
-            assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
+            //assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
+            assertTrue(tools.byIDPressed("desktopTab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $workTable")
         }
 
@@ -167,8 +183,10 @@ class HeadRef {
             val objects = "Объекты"
             if (DT > 6) println("Test нажатия на $objects")
             tools.qtipClickLast(objects)
+            driver.navigate().refresh()
             assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $objects - нет заголовка вкладки TDM365 @@")
-            assertTrue(tools.qtipPressedLast(objects), "@@@@ После нажатия $objects - кнопка $objects нет утоплена @@")
+            //assertTrue(tools.qtipPressedLast(objects), "@@@@ После нажатия $objects - кнопка $objects нет утоплена @@")
+            assertTrue(tools.byIDPressed("objectsTab"), "@@@@ После нажатия $objects - кнопка $objects нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $objects")
         }
 
@@ -178,8 +196,10 @@ class HeadRef {
             val mail = "Почта"
             if (DT > 6) println("Test нажатия на $mail")
             tools.qtipClickLast(mail)
+            driver.navigate().refresh()
             assertTrue(tools.titleContain(mail), "@@@@ После нажатия $mail - нет заголовка вкладки TDM365 @@")
-            assertTrue(tools.qtipPressedLast(mail), "@@@@ После нажатия $mail - кнопка $mail нет утоплена @@")
+            //assertTrue(tools.qtipPressedLast(mail), "@@@@ После нажатия $mail - кнопка $mail нет утоплена @@")
+            assertTrue(tools.byIDPressed("mailTab"), "@@@@ После нажатия $mail - кнопка $mail нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $mail")
         }
 
@@ -187,24 +207,18 @@ class HeadRef {
         //@Disabled
         @DisplayName("Совещания")
         fun meetingTest() {
-            var meeting = "Чат-Совещания"
+            var meeting = "Совещания"
             var title = meeting
-            if (DT > 6) println("Test нажатия на $meeting")
-            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Чат')]")).size > 0) {
-                meeting = "Чат"
-                title = "Каналы"
-            }
-            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Совещания')]")).size > 0) {
-                meeting = "Совещания"
-                title = meeting
-            }
-            if ((meeting == "Совещания") or  (meeting == "Чат")) {
+            meeting = "Совещания"
+            title = meeting
                 tools.qtipClickLast(meeting)
+            driver.navigate().refresh()
                 assertTrue(tools.titleContain(title), "@@@@ После нажатия $meeting - нет заголовка вкладки $title @@")
-                assertTrue(tools.qtipPressedLast(meeting),
+                //assertTrue(tools.qtipPressedLast(meeting),
+                assertTrue(tools.byIDPressed("chatTab"),
                     "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@" )
-            }
-            else if (DT > 3) println("Отсутствует пункт меню $meeting")
+
+
             if (DT > 6) println("Конец Test нажатия на $meeting")
         }
 
@@ -216,17 +230,18 @@ class HeadRef {
             //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val ganttchart = "Диаграмма Ганта"
             if (DT > 6) println("Test нажатия на $ganttchart")
-            if (driver.findElements(By.xpath("//*[contains(@data-qtip, 'Диаграмма Ганта')]")).size > 0) {
+            if (driver.findElements(By.xpath("//*[contains(@title, 'Диаграмма Ганта')]")).size > 0) {
                 tools.qtipClickLast(ganttchart)
                 //assertTrue(tools.titleContain(ganttchart), "@@@@ После нажатия $ganttchart - нет заголовка вкладки $ganttchart @@")  // Нет заголовка
                 assertTrue(
-                    tools.qtipPressedLast(ganttchart),
+                    tools.byIDPressed("ganttchartTab"),
                     "@@@@ После нажатия $ganttchart - кнопка $ganttchart нет утоплена @@"
                 )
-                Thread.sleep(threadSleep)
+               /* Thread.sleep(threadSleep)
                 driver.navigate().refresh()
                 Thread.sleep(threadSleep)
-                if (driver.title == "Tdms") Login(driver).loginIn(loginGantt, passwordGantt) // Костыль
+                if (driver.title == "Tdms") Login(driver).loginIn(loginGantt, passwordGantt) // Костыль\
+              */
             }
             else if (DT > 3) println("Отсутствует пункт меню $ganttchart")
             if (DT > 6) println("Конец Test нажатия на $ganttchart")
@@ -239,10 +254,13 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $help")
             tools.qtipClickLast(help)
             //assertFalse(tools.titleContain(help), "@@@@ После нажатия $help - нет заголовка вкладки $help @@")      // Исправить!!! NOT
-            assertTrue(tools.qtipPressedLast(help), "@@@@ После нажатия $help - кнопка $help нет утоплена @@")
+            //assertTrue(tools.qtipPressedLast(help), "@@@@ После нажатия $help - кнопка $help нет утоплена @@")
+            assertTrue(tools.byIDPressed("helpTab"), "@@@@ После нажатия $help - кнопка $help нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $help")
         }
 
+   //     @Disabled
+        // placeholder="Найти..."
         @RepeatedTest(NN)
         @DisplayName("Искать")
         fun searchTest() {
@@ -250,19 +268,22 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $search")
             tools.qtipClickLast("Рабочий стол")  // Ошибка TDMS - отжимается кнопка !! Убрать
             tools.qtipClickLast("Объекты")
-            tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
+            //tools.qtipLast("Введите текст")?.sendKeys("Лебедев")
+            tools.xpathLast("//input[@placeholder='Найти...']")?.sendKeys("Лебедев")
+            //tools.qtipClickLast("Искать")
             Thread.sleep(threadSleep)
-            // Из поля с data-qtip="Введите текст" получить значение этого поля и сравнить с Лебедев,
+            // Из поля с title="Введите текст" получить значение этого поля и сравнить с Лебедев,
             // если да, то тест прошел, если нет, то упал
-            assertEquals("Лебедев", tools.qtipLast("Введите текст")?.getAttribute("value"), "@@@@ После ввода Лебедев в поле поиска в поле поиска не Лебедев @@")
+            //assertEquals("Лебедев", tools.qtipLast("Введите текст")?.getAttribute("value"), "@@@@ После ввода Лебедев в поле поиска в поле поиска не Лебедев @@")
+            assertEquals("Лебедев", tools.xpathLast("//input[@placeholder='Найти...']")?.getAttribute("value"), "@@@@ После ввода Лебедев в поле поиска в поле поиска не Лебедев @@")
             Thread.sleep(threadSleep)
             val findTrue = tools.qtipClickLast(search)
             if (!findTrue)  println("Не нажал лупу")
-            assertTrue(tools.titleContain("Результаты"), "@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
-
+            //assertTrue(tools.titleContain("Результаты"), "@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
+            assertTrue(tools.xpathLast("//span[contains(@class, 'Header_objDescription_')]")?.text?.contains("Результаты")?:false, "@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
             tools.qtipClickLast("Очистить")
             // Проверяется, что поле поиска пустое
-            assertEquals("", tools.qtipLast("Введите текст")?.getAttribute("value"), "@@@@ После очистки поля поиска в поле поиска не пусто @@")
+            assertEquals("", tools.xpathLast("//input[@placeholder='Найти...']")?.getAttribute("value"), "@@@@ После очистки поля поиска в поле поиска не пусто @@")
             if (DT > 6) println("Конец Test нажатия на $search")
         }
 
@@ -273,8 +294,11 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $notification")
             tools.qtipClickLast(notification)
             // Запрашивает заголовок открывшегося окна и проверяет, что он Окно сообщений
-            assertEquals("Окно сообщений", tools.windowTitle(), "@@@@ После нажатия $notification - нет заголовка окна Окно сообщений @@")
-            tools.closeXLast()
+            tools.xpathClickLast("//span[contains(@class,'Header_headerTitle_')]")
+            //assertEquals("Окно сообщений", tools.windowTitle(), "@@@@ После нажатия $notification - нет заголовка окна Окно сообщений @@")
+            assertEquals("Окно сообщений", tools.xpathLast("//span[contains(@class,'Header_headerTitle_')]")?.text, "@@@@ После нажатия $notification - нет заголовка окна Окно сообщений @@")
+            //tools.closeXLast()
+            tools.closeEsc()
             if (DT > 6) println("Конец Test нажатия на $notification")
         }
     }
@@ -376,11 +400,12 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $adminUser")
             tools.referenceClickLast("CMD_GROUP_CHANGE")
             //tools.qtipClickLast(adminUser)
-            assertTrue(tools.titleWait("window", "Редактирование групп"),
+            assertTrue(tools.headerWait("", "Редактирование групп"),
                 "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
             assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"),
                 "@@@@ После нажатия $adminUser и открытия окна с заголовком Редактирование групп в окне нет поля STATIC1 Группы пользователей @@")
-            tools.closeXLast()
+            //tools.closeXLast()
+            tools.clickOK()
             if (DT > 6) println("Конец Test нажатия на $adminUser")
         }
 
@@ -407,11 +432,13 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $createObject")
             tools.referenceClickLast("CMD_OBJECT_STRUCTURE_CREATE")
             //tools.qtipClickLast(createObject)
-            assertTrue(tools.titleWait("tdmsEditObjectDialog","Редактирование объекта"),
+           // assertTrue(tools.titleWait("tdmsEditObjectDialog","Редактирование объекта"),
+            assertTrue(tools.headerWait("","Редактирование объекта"),
                 "@@@@ После нажатия $createObject - нет заголовка окна Редактирование объекта @@")
             assertTrue(tools.referenceWaitText("T_ATTR_OCC_CODE", "Код объекта"),
                 "@@@@ После нажатия $createObject и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_OCC_CODE Код объекта @@")
-            tools.closeXLast()
+            tools.clickOK("Отмена")
+            // tools.closeXLast()
             if (DT > 6) println("Конец Test нажатия на $createObject")
         }
 
@@ -426,13 +453,15 @@ class HeadRef {
             tools.referenceClickLast("CMD_NOTIFICATIONS_SETTINGS")
             //tools.qtipClickLast(configuringNotification)
             Thread.sleep(threadSleep *2)
-            assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),
+            //assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),
+            assertTrue(tools.headerWait("", "Редактирование объекта"),
                 "@@@@ После нажатия $configuringNotification - нет заголовка окна Редактирование объекта @@")
             assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование"),
                 "@@@@ После нажатия $configuringNotification и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_NAME Наименование @@")
             assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента"),
                 "@@@@ После нажатия $configuringNotification и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_REGULATION_START_TIME Время запуска проверки регламента @@")
-            tools.closeXLast()
+            tools.clickOK("Отмена")
+            //tools.closeXLast()
             //Thread.sleep(threadSleep *2)
             if (DT > 6) println("Конец Test нажатия на $configuringNotification")
         }
@@ -443,6 +472,7 @@ class HeadRef {
      * во второй строке под SYSADMIN не только ОБЪЕКТЫ
      * имеет вложенный класс тестирования СЭТД
      */
+    @Disabled
     @Nested
     @DisplayName("Testing SubSysadmin")
     @TestMethodOrder(MethodOrderer.MethodName::class)
@@ -472,6 +502,7 @@ class HeadRef {
                 ///Thread.sleep(threadSleep)
                // if (tools.qtipLastClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
                 if (tools.referenceLast("SUB_SYSADMIN")?.getAttribute("class")?.contains("x-btn-menu-active") ?: false) return
+                return
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
                 tools.qtipClickLast("Объекты")

@@ -134,7 +134,7 @@ class AdminUser {
         fun afterAll() {
             if (DT >7) println("Вызов AfterAll AdminUserTest")
             tools.closeEsc5()
-            Login(driver).loginOut()
+            //Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
         }
@@ -156,18 +156,21 @@ class AdminUser {
         val adminUser = "Администрирование групп"
         if (DT >8) println("Test нажатия на $adminUser")
         tools.qtipClickLast(adminUser)
-        val nomberWindowAdminUser = tools.nomberTitle("window", "Редактирование групп")
-        assertTrue(tools.titleWait("window", "Редактирование групп"),
+        println(" Hажатия на $adminUser")
+       // val nomberWindowAdminUser = tools.nomberTitle("window", "Редактирование групп")
+        assertTrue(tools.headerWait("", "Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
+        println(" проверили заголовок на $adminUser")
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"),
             "@@@@ В окне Редактирование групп нет обязательного заголовка списка Группы пользователей @@")
 
        // data-reference="GRID_GROUPS"
-        val headTeg = tools.idRef("GRID_GROUPS")
+        //val headTeg = tools.idRef("GRID_GROUPS")
         val allUsers = "Все пользователи"
-        if (DT >8) println("Test нажатия на $allUsers")
+        if (DT >8) println("Test нажатия на $allUsers ")
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
-        tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
+        //tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
+        tools.xpathLast("//*[@data-reference='GRID_GROUPS']/descendant::span[text()= '$allUsers']")?.click()
 
         assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers),
             "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")
@@ -203,18 +206,18 @@ class AdminUser {
         tools.qtipClickLast(adminUser)
         */
         assertTrue(
-            tools.titleWait("window", "Редактирование групп"),
+            tools.headerWait("", "Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         assertTrue(
             tools.referenceWaitText("STATIC1", "Группы пользователей"),
             "@@@@ В окне Редактирование групп нет обязательного заголовка списка Группы пользователей @@")
 
         // data-reference="GRID_GROUPS"
-        val headTeg = tools.idRef("GRID_GROUPS")
+        //val headTeg = tools.idRef("GRID_GROUPS")
         val allUsers = "Все пользователи"
         if (DT > 8) println("Test нажатия на $allUsers")
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
-        tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
+        tools.xpathLast("//*[@data-reference='GRID_GROUPS']/descendant::span[text()= '$allUsers']")?.click()
         assertTrue(
             tools.referenceWaitText("GROUP_NAME", allUsers),
             "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")
@@ -231,7 +234,7 @@ class AdminUser {
         Thread.sleep(threadSleep)
         if ((click == "BUTTON_USER_CREATE") or (click == "BUTTON_USER_EDIT"))
             assertTrue(
-                tools.titleWait("window", "Редактирование пользователя"),
+                tools.headerWait("", "Редактирование пользователя"),
                 "@@@@ После нажатия $click - нет заголовка окна Редактирование пользователя @@")
         if (DT > 8) println("Конец Test openAllUsers")
     }
@@ -250,12 +253,12 @@ class AdminUser {
         openAllUsers("BUTTON_USER_CREATE")
 
         Thread.sleep(threadSleep)
-        if (DT >8) println("Ура заработало = ${tools.nomberTitle("window", "Редактирование пользователя")}")
-        assertTrue(tools.titleWait("window", "Редактирование пользователя"),
+        //if (DT >8) println("Ура заработало = ${tools.nomberTitle("window", "Редактирование пользователя")}")
+        assertTrue(tools.headerWait("", "Редактирование пользователя"),
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
-        tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
+        tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/div/textarea")  // Описание
             ?.sendKeys("Тестовый $localDateNow")
-        tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/descendant::input")  // Логин
+        tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/div/textarea")  // Логин
             ?.sendKeys("Логин $localDateNow")
 
         tools.clickOK()
