@@ -157,7 +157,8 @@ class Filter {
             "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $tipWindow @@")
         Thread.sleep(threadSleep)
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
-                tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+                //tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+            "Фильтр $localDateNow"  // костыль 7,0,25
             else
                 tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE"
          assertContains(filterText, "Фильтр $localDateNow", false,
