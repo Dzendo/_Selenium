@@ -27,7 +27,7 @@ class Tools(val driver: WebDriver) {
     private val repeateOut= TestsProperties.repeateOutNomber
 
     //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(fluentOutDuration))// Явное ожидание
-    //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(fluentDuration))          // Неявное ожидание
+    init {driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000L))   }       // Неявное ожидание
     private val fluentOutWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
                                         .withTimeout(Duration.ofMillis(fluentOutDuration))
                                         .pollingEvery(Duration.ofMillis(pollingOutDuration))
@@ -141,7 +141,7 @@ class Tools(val driver: WebDriver) {
         val rezult2 = rezult1?.contains("_pressed_") ?: false
         return rezult2
     }
-    fun closeXLast() = qtipClickLast("Закрыть диалог")
+    fun closeXLast() = qtipClickLast("Закрыть")
 
     fun closeEsc(): Boolean {
         Actions(driver).sendKeys(Keys.ESCAPE).perform()
@@ -268,6 +268,7 @@ class Tools(val driver: WebDriver) {
 
 
     fun byID(id: String) :WebElement? = driver.findElement(By.id(id))
+    fun byIDClicked(id: String)  = byID(id)?.click()
     fun byIDPressed(id: String) :Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
 
 

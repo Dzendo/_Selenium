@@ -34,11 +34,13 @@ class LoginTest {
      */
     @BeforeEach
     fun setup() {
-        // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
+        // Создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         driver = startDriver()
-
         // задержка на выполнение теста = 10 сек.
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
+        // Берем ссылку на класс Логин, которую будем использовать ниже в тестах.
+        loginClass = Login(driver)
+
         //получение ссылки на страницу входа из файла настроек
         val loginpageTDM = ConfProperties.getProperty("loginpageTDM")
         // Драйверу командуем открыть эту страницу
@@ -48,19 +50,15 @@ class LoginTest {
         //val login = TestsProperties.login
         //val password = TestsProperties.password
         driver.get(loginpage)
-        assertTrue(driver.title == "Tdms")
-        //Login(driver).loginIn(login, password)
-        // Берем ссылку на класс Логин, которую будем использовать ниже в тестах.
-        loginClass = Login(driver)
+        assertTrue(driver.title == "Tdms", "Браузер не имеет вкладку с заголовком Tdms ")
+
     }
 
     /**
-     * тестовый метод для осуществления аутентификации
+     * Тестовый метод для осуществления аутентификации
      */
    // Аннтотация Junit5 -Объявляем функцию тестом и повторяемым 3-раза.
     @RepeatedTest(NN)
-    // Аннтотация Junit5 - Отображать человеческое имя вместо имени функции
-    // С рускими именами есть проблема  в настройках JB и наверное будет проблема дальше
     @DisplayName("Checking the input-output Login - Password")
     fun loginTest() {
 
@@ -70,24 +68,17 @@ class LoginTest {
         if (DT > 8) println("login= $login   password= $password")
         loginClass.loginIn(login, password)
         println(" Вошли под login= $login   password= $password")
-        //получаем отображаемый логин
-        //val user = login.loginUserName()
-        //и сравниваем его с логином из файла настроек
-        //assertEquals(loginTDM, user)
-        //assertTrue(login.loginUserNameWait(loginTDM))
-        // assertTrue проверяет труе или фалс возвращает функция qtipLoginUserNameWait из класса login
-        //assertTrue(loginClass.qtipLoginUserNameWait(login),
-        assertTrue(loginClass.titleLoginUserNameWait("Настройки")=="SYSADMIN",
+
+        //получаем отображаемый логин и сравниваем его с логином из файла настроек
+        assertTrue(loginClass  .titleLoginUserNameWait()=="SYSADMIN",
             "@@@@ Не вошли под пользователем $login @@")
         println(" Проверили под login= $login   password= $password")
     }
-    // После теста зовет login.loginOut(), а тот используя мой тулс через qtip нажимает на что надо, что бы выйти из логина
+    // После теста зовет login.loginOut(), а тот нажимает на что надо, что бы выйти из логина
     // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
-           // loginClass.loginOut()
+            loginClass.loginOut()
             driver.quit() //  закрытия окна браузера
         }
 }
-// Мы перскачили в LoginPage через явное ожидание webDriverWait - следующий урок
-// Перескачили как срабатывает мой тулс и его ожидания FluentWait упомянуты в JB test
