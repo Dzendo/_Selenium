@@ -158,7 +158,7 @@ class AdminUser {
         tools.qtipClickLast(adminUser)
         println(" Hажатия на $adminUser")
        // val nomberWindowAdminUser = tools.nomberTitle("window", "Редактирование групп")
-        assertTrue(tools.headerWait("", "Редактирование групп"),
+        assertTrue(tools.headerWait("Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         println(" проверили заголовок на $adminUser")
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"),
@@ -206,7 +206,7 @@ class AdminUser {
         tools.qtipClickLast(adminUser)
         */
         assertTrue(
-            tools.headerWait("", "Редактирование групп"),
+            tools.headerWait( "Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         assertTrue(
             tools.referenceWaitText("STATIC1", "Группы пользователей"),
@@ -234,7 +234,7 @@ class AdminUser {
         Thread.sleep(threadSleep)
         if ((click == "BUTTON_USER_CREATE") or (click == "BUTTON_USER_EDIT"))
             assertTrue(
-                tools.headerWait("", "Редактирование пользователя"),
+                tools.headerWait("Редактирование пользователя"),
                 "@@@@ После нажатия $click - нет заголовка окна Редактирование пользователя @@")
         if (DT > 8) println("Конец Test openAllUsers")
     }
@@ -254,7 +254,7 @@ class AdminUser {
 
         Thread.sleep(threadSleep)
         //if (DT >8) println("Ура заработало = ${tools.nomberTitle("window", "Редактирование пользователя")}")
-        assertTrue(tools.headerWait("", "Редактирование пользователя"),
+        assertTrue(tools.headerWait("Редактирование пользователя"),
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
         tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/div/textarea")  // Описание
             ?.sendKeys("Тестовый $localDateNow")

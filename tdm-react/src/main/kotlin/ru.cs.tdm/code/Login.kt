@@ -25,6 +25,7 @@ class Login(val driver: WebDriver) {
      */
 
     fun loginIn(login: String, password: String) {
+        driver.navigate().refresh()  // Костыль из-за заголовка браузера
         assertEquals(driver.title,"Tdms","Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
         assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
         //получение доступа к методам класса LoginPage для взаимодействия с элементами страницы
@@ -43,16 +44,15 @@ class Login(val driver: WebDriver) {
      *
      */
 
-    fun titleLoginUserNameWait(): String {
-        val name = loginPage.currentUserName()
-       //     if (name.contains(" ")) name.split(" ").toTypedArray()[0] else name)
-        if (DT >7) println("ожидание $name пользователя из меню пользователя")
-        return name
-    }
+    fun titleLoginUserNameWait(): String = loginPage.currentUserName().trim().split(" ")[0]
+        .also {if (DT >7) println("ожидание $it пользователя из меню пользователя")}
 
     fun loginOut() {
         loginPage.clickCurrentUser()
         loginPage.clickUserLogout()
         loginPage.clickYesBtn()
+        //driver.navigate().refresh()  // Костыль из-за заголовка браузера
+      //  assertEquals(driver.title,"Tdms","Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
+        assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
     }
 }

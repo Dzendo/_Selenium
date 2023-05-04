@@ -3,9 +3,9 @@ package ru.cs.tdm.data
 import ru.cs.tdm.ui.StartDialog
 
 object TestsProperties {
-    var fluentInDurationNomber = 3000L
+    var fluentInDurationNomber = 7000L
     var pollingInDurationNomber = 500L
-    var fluentOutDurationNomber = 7000L
+    var fluentOutDurationNomber = 13000L
     var pollingOutDurationNomber = 1000L
     var repeateInNomber = 5
     var repeateOutNomber = 3

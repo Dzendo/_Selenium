@@ -67,6 +67,8 @@ class LoginTest {
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
         loginClass.loginIn(login, password)
+       // loginClass.loginOut()  Ошибка Title - жду исправления
+       // loginClass.loginIn(login, password)
         println(" Вошли под login= $login   password= $password")
 
         //получаем отображаемый логин и сравниваем его с логином из файла настроек

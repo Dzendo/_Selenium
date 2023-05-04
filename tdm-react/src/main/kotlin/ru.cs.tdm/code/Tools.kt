@@ -2,8 +2,10 @@ package ru.cs.tdm.code
 
 import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.ExpectedConditions.*
 import org.openqa.selenium.support.ui.FluentWait
+import org.openqa.selenium.support.ui.WebDriverWait
 //import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
@@ -17,53 +19,88 @@ const val repeateOut= 3
 */
 class Tools(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
-    private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
+    private val DT: Int =
+        TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     private val fluentInDuration = TestsProperties.fluentInDurationNomber
     private val pollingInDuration = TestsProperties.pollingInDurationNomber
     private val fluentOutDuration = TestsProperties.fluentOutDurationNomber
     private val pollingOutDuration = TestsProperties.pollingOutDurationNomber
     private val repeateIn = TestsProperties.repeateInNomber
-    private val repeateOut= TestsProperties.repeateOutNomber
+    private val repeateOut = TestsProperties.repeateOutNomber
 
     //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(fluentOutDuration))// Явное ожидание
-    init {driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000L))   }       // Неявное ожидание
-    private val fluentOutWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
-                                        .withTimeout(Duration.ofMillis(fluentOutDuration))
-                                        .pollingEvery(Duration.ofMillis(pollingOutDuration))
-                                        .ignoreAll(listOf( NoSuchElementException::class.java,
-                                                ElementNotInteractableException::class.java,
-                                                ElementClickInterceptedException::class.java,
-                                                StaleElementReferenceException::class.java))
-    private val fluentInWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
-                                        .withTimeout(Duration.ofMillis(fluentInDuration))
-                                        .pollingEvery(Duration.ofMillis(pollingInDuration))
-                                        .ignoreAll(listOf( NoSuchElementException::class.java,
-                                                ElementNotInteractableException::class.java,
-                                                ElementClickInterceptedException::class.java,
-                                                StaleElementReferenceException::class.java))
-    fun xpath(xpath: String, prefix: String = ""): WebElement? = driver.findElement(By.xpath("/html/body$prefix$xpath"))
-        /*
-        {
-        val xpathHtml = "/html/body$prefix$xpath"
-        repeat(repeateIn) {
-            Thread.sleep(threadSleep / 10 * it)  // не нужно
-            try {
-                val listElements = fluentInWait.until(presenceOfAllElementsLocatedBy(By.xpath(xpathHtml))) //"//html/body${xpath.drop(1)}")))
-                if ((listElements!=null) and (listElements.size > 0)) {
-                    if (DT >7) println("N$it xpathLast найдено ${listElements.size} элементов $xpathHtml")
-                    return  listElements.lastOrNull()
+    init {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000L))  // Неявное ожидание
+    }
 
-                }
-                if (DT >6) println("**N$it НЕ найдено элементов $xpathHtml")
-                // return null
-            } catch (_: TimeoutException) {}
-            catch (_: StaleElementReferenceException) {}
-            if (DT >5) println("###*##*N$it попытка ####xpathLast не нашлось  поле xpathLast=$xpathHtml #######")
-        }
-        if (DT >4) println("&&&&&&&&&xpathLast catch TIME OUT за $repeateIn опросов по 1 сек xpathLast=$xpathHtml &&&&&&&&&")
-        return null
-    }*/
+    private val fluentOutWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
+        .withTimeout(Duration.ofMillis(fluentOutDuration))
+        .pollingEvery(Duration.ofMillis(pollingOutDuration))
+        .ignoreAll(
+            listOf(
+                NoSuchElementException::class.java,
+                ElementNotInteractableException::class.java,
+                ElementClickInterceptedException::class.java,
+                StaleElementReferenceException::class.java
+            )
+        )
+    private val fluentInWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
+        .withTimeout(Duration.ofMillis(fluentInDuration))
+        .pollingEvery(Duration.ofMillis(pollingInDuration))
+        .ignoreAll(
+            listOf(
+                NoSuchElementException::class.java,
+                ElementNotInteractableException::class.java,
+                ElementClickInterceptedException::class.java,
+                StaleElementReferenceException::class.java
+            )
+        )
+
+    fun byID(id: String): WebElement? = driver.findElement(By.id(id))
+    fun byIDs(id: String): Boolean = driver.findElements(By.id(id)).isNotEmpty()
+    fun byIDClick(id: String) = byID(id)?.click()
+    fun byIDPressed(id: String): Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
+    fun byXpath(xpath: String): WebElement? = driver.findElement(By.xpath(xpath))
+
+    fun xpath(xpath: String, prefix: String = ""): WebElement? = driver.findElement(By.xpath("/html/body$prefix$xpath"))
+    //fun xpathClick(xpath: String, prefix: String = "") = driver.findElement(By.xpath("/html/body$prefix$xpath")).click()
+    fun xpathClick(xpath: String, prefix: String = "") = fluentOutWait.until { driver.findElement(By.xpath("/html/body$prefix$xpath")).click() }
+
+    fun reference(data_reference: String): WebElement? =
+        xpath(
+            "//*[@data-reference='$data_reference']",
+            "//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]"
+        )
+
+    fun referenceClick(data_reference: String): Boolean = reference(data_reference)?.click() != null
+    fun referenceWaitText(reference: String, text: String): Boolean =
+        fluentOutWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']"), text))
+
+    fun qtip(qtip: String): WebElement? = xpath(
+        "//*[contains(@title, '$qtip')]",
+        "//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]"
+    )
+
+    fun qtipPressed(qtip: String): Boolean {
+        val rezult1 = qtip(qtip)?.getAttribute("class")
+        val rezult2 = rezult1?.contains("_pressed_") ?: false
+        return rezult2
+    }
+
+    fun qtipClick(qtip: String): Boolean = qtip(qtip)?.click() != null
+
+    fun headerWait(title: String): Boolean =
+        fluentOutWait.until (textToBePresentInElementLocated(By.xpath("//span[starts-with(@class, 'Header_headerTitle_')]"), title))
+    //*[@id="modalRoot"]  ExpectedConditions.elementToBeClickable
+   // fun closeX() = xpathClick("//button[contains(@title, 'Закрыть')]","//*[@id='modalRoot']")
+   // fun closeX() = fluentOutWait.until { it.findElement(By.xpath("/html/body//*[@id='modalRoot']//button[contains(@title, 'Закрыть')]")).click() }
+   // fun closeX() = fluentOutWait.until(elementToBeClickable(By.xpath("/html/body//*[@id='modalRoot']//button[contains(@title, 'Закрыть')]"))).click()
+    fun closeX() = WebDriverWait(driver, Duration.ofSeconds(13))
+        .until(elementToBeClickable(By.xpath("/html/body//*[@id='modalRoot']//button[contains(@title, 'Закрыть')]")))
+        .click()
+
+    //div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]//*[contains(@title, 'TDM365')]
 
     fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath
@@ -208,8 +245,7 @@ class Tools(val driver: WebDriver) {
     }
     fun xpathWaitText(xpath: String, text: String): Boolean =
         fluentOutWait.until (textToBePresentInElement(xpathLast(xpath), text)) //{ xpathLast(xpath)?.text ?:"" }
-    fun referenceWaitText(reference: String, text: String): Boolean =
-        fluentOutWait.until (textToBePresentInElement(xpathLast("//*[@data-reference= '$reference']"), text))
+
     fun xpathFluentWaitText(xpath: String, text: String): Boolean =
         fluentOutWait.until (textToBePresentInElement(xpathLast(xpath), text))
     fun qtipFluentWaitText(qtip: String, text: String): Boolean =
@@ -223,8 +259,7 @@ class Tools(val driver: WebDriver) {
     fun titleWait(window:String, title: String): Boolean =
         xpathWaitTextTry("//span[starts-with(@class, 'Header_headerTitle_')]",title)
 
-    fun headerWait(head:String, title: String): Boolean =
-        xpathWaitTextTry("//span[starts-with(@class, 'Header_headerTitle_$head')]",title)
+
     fun windowTitle(): String =
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun clickOK(OK: String = ""): Boolean {
@@ -291,13 +326,6 @@ class Tools(val driver: WebDriver) {
         val nomber = nomberID(id)
         return "$drop-$nomber"
     }
-
-
-    fun byID(id: String) :WebElement? = driver.findElement(By.id(id))
-    fun byIDs(id: String) :Boolean = driver.findElements(By.id(id)).isNotEmpty()
-    fun byIDClicked(id: String)  = byID(id)?.click()
-    fun byIDPressed(id: String) :Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
-    fun byXpath(xpath: String) :WebElement? = driver.findElement(By.xpath(xpath))
 
 
     fun idList() {
