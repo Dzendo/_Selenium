@@ -36,12 +36,12 @@ object TestsProperties {
     )
 
     val loginPages: Array<String> = arrayOf(
-        "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv1a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv10a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-temp-2012:443/client/#objects",
-        "http://tdms-srv2b:443/client/#objects/",
-        "http://TDMS-SRV10a:443/client/#objects/",
+        "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
+        "http://tdms-srv1a.csoft-msc.ru:443/tdms/?classic#objects",
+        "http://tdms-srv10a.csoft-msc.ru:443/tdms/?classic#objects",
+        "http://tdms-temp-2012:443/tdms/#objects",
+        "http://tdms-srv2b:443/tdms/#objects/",
+        "http://TDMS-SRV10a:443/tdms/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")

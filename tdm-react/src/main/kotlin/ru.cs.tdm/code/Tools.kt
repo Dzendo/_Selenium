@@ -42,7 +42,28 @@ class Tools(val driver: WebDriver) {
                                                 ElementNotInteractableException::class.java,
                                                 ElementClickInterceptedException::class.java,
                                                 StaleElementReferenceException::class.java))
+    fun xpath(xpath: String, prefix: String = ""): WebElement? = driver.findElement(By.xpath("/html/body$prefix$xpath"))
+        /*
+        {
+        val xpathHtml = "/html/body$prefix$xpath"
+        repeat(repeateIn) {
+            Thread.sleep(threadSleep / 10 * it)  // не нужно
+            try {
+                val listElements = fluentInWait.until(presenceOfAllElementsLocatedBy(By.xpath(xpathHtml))) //"//html/body${xpath.drop(1)}")))
+                if ((listElements!=null) and (listElements.size > 0)) {
+                    if (DT >7) println("N$it xpathLast найдено ${listElements.size} элементов $xpathHtml")
+                    return  listElements.lastOrNull()
 
+                }
+                if (DT >6) println("**N$it НЕ найдено элементов $xpathHtml")
+                // return null
+            } catch (_: TimeoutException) {}
+            catch (_: StaleElementReferenceException) {}
+            if (DT >5) println("###*##*N$it попытка ####xpathLast не нашлось  поле xpathLast=$xpathHtml #######")
+        }
+        if (DT >4) println("&&&&&&&&&xpathLast catch TIME OUT за $repeateIn опросов по 1 сек xpathLast=$xpathHtml &&&&&&&&&")
+        return null
+    }*/
 
     fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath
@@ -136,6 +157,10 @@ class Tools(val driver: WebDriver) {
     fun referenceClickLast(data_reference: String): Boolean =
         fluentOutWait.until { xpathLast("//*[@data-reference='$data_reference']")?.click()} != null
 
+    // class="tdms-toolbar-button"
+    fun referencebuttonClickLast(data_reference: String): Boolean =
+        fluentOutWait.until { xpathLast("//*[@data-reference='$data_reference' and contains(@class,'tdms-toolbar-button')]")?.click()} != null
+
     fun qtipPressedLast(qtip: String): Boolean {
         val rezult1 = qtipLast(qtip)?.getAttribute("class")
         val rezult2 = rezult1?.contains("_pressed_") ?: false
@@ -194,8 +219,9 @@ class Tools(val driver: WebDriver) {
 
     fun title(window:String): String =
         xpathLast("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
+    //Header_headerTitle__1PFLZ
     fun titleWait(window:String, title: String): Boolean =
-        xpathWaitTextTry("//div[starts-with(@id, '$window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]",title)
+        xpathWaitTextTry("//span[starts-with(@class, 'Header_headerTitle_')]",title)
 
     fun headerWait(head:String, title: String): Boolean =
         xpathWaitTextTry("//span[starts-with(@class, 'Header_headerTitle_$head')]",title)
@@ -268,8 +294,10 @@ class Tools(val driver: WebDriver) {
 
 
     fun byID(id: String) :WebElement? = driver.findElement(By.id(id))
+    fun byIDs(id: String) :Boolean = driver.findElements(By.id(id)).isNotEmpty()
     fun byIDClicked(id: String)  = byID(id)?.click()
     fun byIDPressed(id: String) :Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
+    fun byXpath(xpath: String) :WebElement? = driver.findElement(By.xpath(xpath))
 
 
     fun idList() {
