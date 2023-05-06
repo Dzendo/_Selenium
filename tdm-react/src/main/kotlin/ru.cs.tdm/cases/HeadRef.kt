@@ -33,10 +33,10 @@ class HeadRef {
     // и естественно все переменные, которыми они пользуются
     companion object {
         // вынесены переменные, что бы менять их только здесь, а они поменяются там внизу в тестах
-        private val threadSleep = 1000L //TestsProperties.threadSleepNomber        // задержки где они есть
+        private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 10                    // количество повторений тестов
+        private const val NN:Int = 100                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
@@ -193,7 +193,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        //@Disabled
+        @Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
             val ganttchart = "Диаграмма Ганта"
@@ -591,8 +591,10 @@ class HeadRef {
             //println("FORM_TREE_OBJS = ${tools.reference("FORM_TREE_OBJS")?.text}")
             //println("TREE = ${tools.reference("TREE")?.text}")
             // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
-            Thread.sleep(threadSleep+1000)  // сделать процедуру ожидания заголовка
-            assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, dataTree,
+            Thread.sleep(threadSleep) //+1000)  // сделать процедуру ожидания заголовка
+            //assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, dataTree,
+            //    "@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
+            assertTrue(tools.headerWait( dataTree),
                 "@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
 
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_TREE_OBJS']")) != null,

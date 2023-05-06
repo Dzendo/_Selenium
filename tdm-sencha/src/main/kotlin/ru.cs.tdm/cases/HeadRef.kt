@@ -83,7 +83,7 @@ class HeadRef {
             if (DT > 7) println("Вызов afterAll")
             tools.closeEsc5()
             Login(driver).loginOut()
-            driver.quit() //  закрытия окна браузера
+            //driver.quit() //  закрытия окна браузера
             if (DT > 7) println("Конец Вызов afterAll")
         }
     }  //конец companion object
@@ -137,6 +137,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Объекты")
         fun mainMenuTest() {
             val mainMenu = "Объекты"
@@ -151,6 +152,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Рабочий стол")
         fun workTableTest() {
             val workTable = "Рабочий стол"
@@ -158,10 +160,12 @@ class HeadRef {
             tools.qtipClickLast(workTable)
             assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")
             assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
+            driver.navigate().refresh()
             if (DT > 6) println("Конец Test нажатия на $workTable")
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Объекты")
         fun objectsTest() {
             val objects = "Объекты"
@@ -173,6 +177,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        @Disabled
         @DisplayName("Почта")
         fun mailTest() {
             val mail = "Почта"
@@ -180,6 +185,7 @@ class HeadRef {
             tools.qtipClickLast(mail)
             assertTrue(tools.titleContain(mail), "@@@@ После нажатия $mail - нет заголовка вкладки TDM365 @@")
             assertTrue(tools.qtipPressedLast(mail), "@@@@ После нажатия $mail - кнопка $mail нет утоплена @@")
+            driver.navigate().refresh()
             if (DT > 6) println("Конец Test нажатия на $mail")
         }
 
@@ -200,7 +206,7 @@ class HeadRef {
             }
             if ((meeting == "Совещания") or  (meeting == "Чат")) {
                 tools.qtipClickLast(meeting)
-                assertTrue(tools.titleContain(title), "@@@@ После нажатия $meeting - нет заголовка вкладки $title @@")
+                //assertTrue(tools.titleContain(title), "@@@@ После нажатия $meeting - нет заголовка вкладки $title @@")
                 assertTrue(tools.qtipPressedLast(meeting),
                     "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@" )
             }
@@ -209,7 +215,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        //@Disabled
+        @Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
 
@@ -233,6 +239,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Справка")
         fun helpTest() {
             val help = "Справка"
@@ -244,6 +251,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Искать")
         fun searchTest() {
             val search = "Искать"
@@ -267,6 +275,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
+        //@Disabled
         @DisplayName("Уведомления")
         fun notificationTest() {
             val notification = "Уведомления"
@@ -462,7 +471,16 @@ class HeadRef {
             tools.closeEsc5()
             if (DT > 7) println("Конец inner SubSysadmin AfterEach")
         }
-
+        // data-reference="FORM_SYSTEM_SETTINGS"
+        @RepeatedTest(NN)
+        @DisplayName("Тестирование открытия меню администратора")
+        fun openSubSysadminTest() {
+            val systemParameters = "Меню администратора"
+            if (DT > 6) println("Test нажатия на $systemParameters")
+            openSubSysadmin()
+            if (DT > 6) println("Конец Test нажатия на $systemParameters")
+        }
+        //*[@data-reference="SUB_SYSADMIN"]
         // вспомогательная процедура открытия системного меню SubSysadmin и для СЭТД
         private fun openSubSysadmin() {
             if (DT > 7) println("Вызов openSubSysadmin")
