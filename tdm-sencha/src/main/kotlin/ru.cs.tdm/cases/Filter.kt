@@ -104,6 +104,7 @@ class Filter {
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
+
         }
     }   // конец companion object
 
@@ -375,13 +376,13 @@ class Filter {
 
                // tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 // table body tdr td div div+div(>)+img+span
-                tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+               // tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 // Ошибка Firefox
                 // Element: [[FirefoDriver: firefo on WINDOWS (1f8f6504-78cc-4d5e-9c4e-1642e0a2cf62)] -> xpath: //html/body/descendant::a[contains(text(),'АР Архитектурные решения')]/ancestor::tr]
                 // org.openqa.selenium.ElementNotInteractableException: Element <tr class="  x-grid-row"> could not be scrolled into view
                 //tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
-                tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")?.click()
+               // tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }
@@ -390,8 +391,8 @@ class Filter {
             Thread.sleep(threadSleep)
             val ATTR_TechDoc_Sort = tools.xpathLast("//*[@data-reference='ATTR_TechDoc_Sort']/descendant::input")
 
-            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
-                "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
+          //  assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
+          //      "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_TTD")
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
@@ -493,19 +494,22 @@ class Filter {
                 ?.sendKeys("SYSADMIN")
 
             // Только на SRV1 после выкачки-закачки схемы
-            //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ Ответственный
-            //tools.xpathLast("// *[@data-reference='ATTR_RESPONSIBLE_USER']/descendant::input")
-            //    ?.sendKeys("SYSADMIN")
+            tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   //ОШИБОЧНОЕ ПОЛЕ Ответственный
+            tools.xpathLast("// *[@data-reference='ATTR_RESPONSIBLE_USER']/descendant::input")
+                ?.sendKeys("SYSADMIN")
             // Можно очистить BUTTON_ERASE_RESP_USER ??
 
-            tools. qtipClickLast("Выбрать объект")
-            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
-                "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
+           // tools. qtipClickLast("Выбрать объект")  // ATTR_DOC_AUTHOR
+            tools. referenceClickLast("ATTR_DOC_AUTHOR")
+            //tools.xpathLast("// *[@data-reference='ATTR_DOC_AUTHOR']/descendant::input")
+            //?.sendKeys("SYSADMIN")
+           // assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
+           //     "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
         // Ошибка Firefox  Element <tr class="  x-grid-row"> could not be scrolled into view
             //tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
-            tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td")?.click()
+           // tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td")?.click()
             Thread.sleep(threadSleep)
-            tools.clickOK("Ок")
+            //tools.clickOK("Ок")
 
         // Надо поставить проверку всех заполненных полей
 

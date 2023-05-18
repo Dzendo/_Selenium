@@ -137,6 +137,7 @@ class AdminUser {
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
+
         }
     }   // конец companion object
 

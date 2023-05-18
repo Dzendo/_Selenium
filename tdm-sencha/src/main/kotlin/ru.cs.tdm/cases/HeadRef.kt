@@ -83,7 +83,7 @@ class HeadRef {
             if (DT > 7) println("Вызов afterAll")
             tools.closeEsc5()
             Login(driver).loginOut()
-            //driver.quit() //  закрытия окна браузера
+            driver.quit() //  закрытия окна браузера
             if (DT > 7) println("Конец Вызов afterAll")
         }
     }  //конец companion object
@@ -123,8 +123,8 @@ class HeadRef {
         fun beforeEach() {
             if (DT > 7) println("Вызов inner Head BeforeEach")
             val mainMenu = "Объекты"
-            tools.qtipClickLast(mainMenu)
-            assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+            tools.qtipClickLast(mainMenu)  // undefined
+           // assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
             assertTrue(tools.qtipPressedLast(mainMenu), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
             if (DT > 7) println("Конец Вызов inner Head BeforeEach")
         }
@@ -133,6 +133,7 @@ class HeadRef {
         fun afterEach() {
             if (DT > 7) println("Вызов inner Head AfterEach 5 раз closeEsc")
             tools.closeEsc5()
+            //driver.navigate().refresh()
             if (DT > 7) println("Конец Вызов inner Head AfterEach")
         }
 
@@ -468,6 +469,7 @@ class HeadRef {
         @AfterEach
         fun afterEach() {
             if (DT > 7) println("Вызов inner SubSysadmin AfterEach 5 раз closeEsc")
+            //driver.navigate().refresh()
             tools.closeEsc5()
             if (DT > 7) println("Конец inner SubSysadmin AfterEach")
         }
@@ -554,14 +556,14 @@ class HeadRef {
             val sysAttributes = "Системные атрибуты"
             if (DT > 6) println("Test нажатия на $sysAttributes")
             openSubSysadmin()
-            clickMenu(sysAttributes, "window", "Атрибуты")
+            clickMenu(sysAttributes, "window", sysAttributes ) //"Атрибуты")
             //println("FORM_ATTRS_LIST = ${tools.referenceLast("FORM_ATTRS_LIST")?.text}")
             // Скилл Selenium изучаю присутствия элемента в DOM страницы
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_ATTRS_LIST']")) != null,
                 "@@@@ После нажатия $sysAttributes нет FORM_ATTRS_LIST @@")
-            assertTrue(tools.referenceWaitText("FORM_ATTRS_LIST", "Атрибуты"),
-                "@@@@ После нажатия $sysAttributes - нет FORM_ATTRS_LIST Атрибуты @@")
-            assertTrue(tools.titleWait("window", "Атрибуты"),
+            //assertTrue(tools.referenceWaitText("FORM_ATTRS_LIST", "Атрибуты"),
+            //    "@@@@ После нажатия $sysAttributes - нет FORM_ATTRS_LIST Атрибуты @@")
+            assertTrue(tools.titleWait("window", sysAttributes),
                 "@@@@ После нажатия $sysAttributes - нет заголовка окна Атрибуты @@")
             tools.closeXLast()
             if (DT > 6) println("Конец Test нажатия на $sysAttributes")

@@ -61,6 +61,7 @@ class ChangePass {
             if (DT >7) println("Вызов AfterAll PassTest")
             tools.closeEsc5()
             driver.quit() //  закрытия окна браузера
+
             if (DT >7) println("Конец Вызов AfterAll PassTest")
         }
     }   // конец companion object
@@ -262,7 +263,7 @@ class ChangePass {
         tools.xpathLast("//input[@name='confirm']")  // Подтверждение
             ?.sendKeys("Tdm365")
         Thread.sleep(threadSleep)
-        tools.clickOK("Сменить пароль")
+        tools.clickOK("Сменить пароль")  // Сменить пароль
         login = "ChangePass"
         password = "Tdm365"
         Login(driver).loginIn(login, password)

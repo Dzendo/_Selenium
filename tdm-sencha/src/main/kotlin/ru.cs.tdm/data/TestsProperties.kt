@@ -44,7 +44,7 @@ object TestsProperties {
         "http://TDMS-SRV10a:443/client/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
-    val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
+    val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")
 
     val testCases: MutableSet<String> = mutableSetOf("Pass", "Head", "User", "Filter")
 
