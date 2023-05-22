@@ -21,8 +21,9 @@ import java.time.Duration
  * following-sibling - следующий брат-сестра
  * descendant - потомок = дети и их внуки и правнуки и т.д.
  */
-class LoginPage(driver: WebDriver) {
+class LoginPage(val driver: WebDriver) {
     private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(10))
+
     /**
      * Конструктор класса, занимающийся инициализацией полей класса
      */
@@ -30,6 +31,7 @@ class LoginPage(driver: WebDriver) {
         PageFactory.initElements(driver, this)
         //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000L))  // Неявное ожидание
     }
+
 
     // <span class="Authorization_headerName__Ge1zs">Войти в TDMS</span>
     @FindBy(xpath = "//div[@id='root']//div[@data-reference='title-authorization']//span[starts-with(@class, 'Authorization_headerName_')]")
@@ -93,9 +95,11 @@ class LoginPage(driver: WebDriver) {
     private lateinit var userLogout: WebElement
 
     /**
-     * Определение локаторов попап окна подтаерждения выхода
+     * Определение локаторов ЗАГОЛОВКА текущего окна попап окна подтаерждения выхода
+     * //div[@id="modalRoot"]/div[@data-modal-window='current']
      */
     // <span class="Header_headerTitle__1PFLZ">Подтверждение</span>
+    // //div[@id="modalRoot"]/div[@data-modal-window='current']//span [starts-with(@class, 'Header_headerTitle')]
     @FindBy(xpath = "//span [starts-with(@class, 'Header_headerTitle')]")
     private lateinit var headerConfirmation: WebElement
 
@@ -119,23 +123,23 @@ class LoginPage(driver: WebDriver) {
     fun authorizationHeaderName(): String = authorizationHeaderName.text
 
     /**
-     * метод для ввода логина
+     * Метод для ввода логина
      */
     fun inputLogin(login: String) = webDriverWait.until(elementToBeClickable(loginAuthorization)).sendKeys(login)
 
     /**
-     * метод для ввода пароля
+     * Метод для ввода пароля
      */
     fun inputPasswd(passwd: String) = webDriverWait.until(elementToBeClickable(passwordAuthorization)).sendKeys(passwd)
 
     /**
-     * метод для осуществления нажатия кнопки входа в аккаунт
+     * Метод для осуществления нажатия кнопки входа в аккаунт
      */
     // Мы получаем веб элемент и даем ему команду нажать
     fun clickAuthorizationButton() = webDriverWait.until(elementToBeClickable(authorizationButton)).click()
 
     /**
-     * метод для осуществления выхода из TDMS
+     * Метод для осуществления выхода из TDMS
      */
 
     fun clickCurrentUser() = webDriverWait.until(elementToBeClickable(currentUser)).click()
@@ -145,7 +149,7 @@ class LoginPage(driver: WebDriver) {
     fun currentUserName(): String = currentUserName.text
 
     /**
-     * метод для осуществления нажатия кнопки подтверждения выхода из TDMS
+     * Метод для осуществления нажатия кнопки подтверждения выхода из TDMS
      */
     fun clickYesBtn() = webDriverWait.until(elementToBeClickable(acceptLogoutBtn)).click()
 
@@ -154,9 +158,9 @@ class LoginPage(driver: WebDriver) {
      * Процедура, которая получает имя пользователя, обращается в tools оттуда получает имя пользователя
      * Потом сравнивает имена, если равно - то труе, если не равно - фалсе.
      * И возвращает что определила.
-     *
      */
     fun titleLoginUserNameWait(): String = currentUserName().trim().split(" ")[0]
         .also { println("ожидание $it пользователя из меню пользователя")}
+    fun getBrowserUrl(): String = driver.currentUrl
 
 }

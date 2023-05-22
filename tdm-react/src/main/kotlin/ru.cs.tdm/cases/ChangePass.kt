@@ -67,6 +67,9 @@ class ChangePass {
         }
     }   // конец companion object
 
+    /**
+     * screenShot
+     */
         fun screenShot(name: String = "image") {
         val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
         val sdf = SimpleDateFormat("ddMMyyyyhhmmss")
@@ -97,7 +100,8 @@ class ChangePass {
     private fun openAllUsers(click: String) {
         val mainMenu = "Объекты"
         if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
-        tools.qtipClickLast(mainMenu)
+        HeadRef.tools.byIDClick("objects-tab")
+        //tools.qtipClickLast(mainMenu)
         assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
 

@@ -17,6 +17,12 @@ const val pollingOutDuration = 1000L
 const val repeateIn = 5
 const val repeateOut= 3
 */
+// class="TdmsView_content__Q666y"
+// Рабочее поле экрана
+//div[@id="root"]//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]
+//div[@id="modalRoot"]//div[@data-modal-window='current']                   //span [starts-with(@class, 'Header_headerTitle')]
+
+
 class Tools(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
     private val DT: Int =

@@ -51,8 +51,9 @@ class LoginTest {
         //val login = TestsProperties.login
         //val password = TestsProperties.password
         driver.get(loginpage)
-        assertTrue(driver.title == Tdms, "Браузер не имеет вкладку с заголовком Tdms ")
 
+        loginClass.checkBrowser(loginpage)
+        //assertTrue(driver.title == Tdms, "Браузер не имеет вкладку с заголовком Tdms ")
     }
 
     /**
@@ -74,8 +75,10 @@ class LoginTest {
     // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
+        val loginpage = TestsProperties.loginpage
             loginClass.loginOut()
         if (DT >7) println(" Вышли из-под пароля")
+        loginClass.checkBrowser(loginpage)
             driver.quit() //  закрытия окна браузера
         }
 }
