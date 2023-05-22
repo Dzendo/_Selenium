@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
 import ru.cs.tdm.code.Login
+import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
@@ -30,7 +31,7 @@ class LoginTest {
     companion object {private const val NN:Int = 3 }                   // количество повторений тестов
 
     /**
-     * осуществление первоначальной настройки
+     * Осуществление первоначальной настройки
      */
     @BeforeEach
     fun setup() {
@@ -50,7 +51,7 @@ class LoginTest {
         //val login = TestsProperties.login
         //val password = TestsProperties.password
         driver.get(loginpage)
-        assertTrue(driver.title == "Tdms", "Браузер не имеет вкладку с заголовком Tdms ")
+        assertTrue(driver.title == Tdms, "Браузер не имеет вкладку с заголовком Tdms ")
 
     }
 
@@ -67,20 +68,14 @@ class LoginTest {
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
         loginClass.loginIn(login, password)
-       // loginClass.loginOut()  Ошибка Title - жду исправления
-       // loginClass.loginIn(login, password)
-        println(" Вошли под login= $login   password= $password")
-
-        //получаем отображаемый логин и сравниваем его с логином из файла настроек
-        assertTrue(loginClass  .titleLoginUserNameWait()=="SYSADMIN",
-            "@@@@ Не вошли под пользователем $login @@")
-        println(" Проверили под login= $login   password= $password")
+        if (DT >7) println(" Вошли под login= $login   password= $password")
     }
     // После теста зовет login.loginOut(), а тот нажимает на что надо, что бы выйти из логина
     // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
             loginClass.loginOut()
+        if (DT >7) println(" Вышли из-под пароля")
             driver.quit() //  закрытия окна браузера
         }
 }

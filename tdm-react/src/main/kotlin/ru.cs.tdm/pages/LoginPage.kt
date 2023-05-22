@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.PageFactory
+import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable
 import org.openqa.selenium.support.ui.WebDriverWait
 import java.time.Duration
@@ -27,10 +28,11 @@ class LoginPage(driver: WebDriver) {
      */
     init {
         PageFactory.initElements(driver, this)
+        //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000L))  // Неявное ожидание
     }
 
     // <span class="Authorization_headerName__Ge1zs">Войти в TDMS</span>
-    @FindBy(xpath = "//span[starts-with(@class, 'Authorization_headerName_')]")
+    @FindBy(xpath = "//div[@id='root']//div[@data-reference='title-authorization']//span[starts-with(@class, 'Authorization_headerName_')]")
     private lateinit var  authorizationHeaderName: WebElement
     /**
      * Определение локатора поля ввода логина
@@ -146,5 +148,15 @@ class LoginPage(driver: WebDriver) {
      * метод для осуществления нажатия кнопки подтверждения выхода из TDMS
      */
     fun clickYesBtn() = webDriverWait.until(elementToBeClickable(acceptLogoutBtn)).click()
+
+    fun titleContain(title: String): Boolean = webDriverWait.until(ExpectedConditions.titleContains(title))
+    /**
+     * Процедура, которая получает имя пользователя, обращается в tools оттуда получает имя пользователя
+     * Потом сравнивает имена, если равно - то труе, если не равно - фалсе.
+     * И возвращает что определила.
+     *
+     */
+    fun titleLoginUserNameWait(): String = currentUserName().trim().split(" ")[0]
+        .also { println("ожидание $it пользователя из меню пользователя")}
 
 }

@@ -7,6 +7,8 @@ import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
+import ru.cs.tdm.data.TDM365
+import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 
@@ -74,7 +76,7 @@ class HeadRef {
             val password = TestsProperties.password
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
-            assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
+            assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
 
             // Запоминаю логин и пароль для диаграммы Ганта - костыль.
@@ -133,7 +135,7 @@ class HeadRef {
             val mainMenu = "Объекты"
             tools.byIDClick("objects-tab")
 
-            assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+            assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия $mainMenu - кнопка Объекты не утоплена @@")
             if (DT > 7) println("Конец Вызов inner Head BeforeEach")
         }
@@ -153,7 +155,7 @@ class HeadRef {
             // Клик на элемент с title="Объекты"
             tools.byIDClick("objects-tab")
             // Проверяем заголовок закладки Junit
-            assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+            assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
             // Проверяем, что утоплена кнопка Объекты
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия $mainMenu - кнопка $mainMenu нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $mainMenu TDMS Web")
@@ -240,8 +242,8 @@ class HeadRef {
                 "@@@@ После очистки поля поиска в поле поиска не пусто @@")
 
             //div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]//*[contains(@title, 'TDM365')]
-            tools.qtipClick("TDM365")  // костыл
-            assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия - нет заголовка вкладки TDM365 @@")
+            tools.qtipClick(TDM365)  // костыл
+            assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия - нет заголовка вкладки TDM365 @@")
             // Проверяем, что утоплена кнопка Объекты
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия  - кнопка нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $search")
@@ -276,7 +278,7 @@ class HeadRef {
         fun beforeEach() {
             if (DT > 7) println("Вызов inner Tools BeforeEach")
             tools.byIDClick("objects-tab")
-            assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
+            assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
             if (DT > 7) println("Конец inner Tools BeforeEach")
         }
@@ -462,7 +464,7 @@ class HeadRef {
             tools.byIDClick("objects-tab")
             // tools.qtipClick("Объекты")
            // driver.navigate().refresh()   // Костыль
-            assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
+            assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
             if (DT > 7) println("Конец inner SubSysadmin BeforeEach")
         }
@@ -686,7 +688,7 @@ class HeadRef {
             fun beforeEach() {
                 if (DT > 7) println("Вызов inner CETD BeforeEach")
                 tools.byIDClick("objects-tab")
-                assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
+                assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
                 assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты не утоплена @@")
                 if (DT > 7) println("Конец inner CETD BeforeEach")
             }
@@ -730,7 +732,7 @@ class HeadRef {
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_CHECK_CONNECT_NO_AUTHORIZE")
 
-                assertTrue(tools.headerWait("TDM365"),
+                assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 Thread.sleep(threadSleep)
                 tools.closeX()
@@ -747,7 +749,7 @@ class HeadRef {
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_CHECK_CONNECT_WITH_AUTHORIZE")
                 Thread.sleep(threadSleep)
-                assertTrue(tools.headerWait("TDM365"),
+                assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
                 Thread.sleep(threadSleep)
                 tools.closeX()
@@ -765,7 +767,7 @@ class HeadRef {
                 //tools.xpathClickMenu(flow)
                 tools.byIDClick("CMD_TEST_STREAM_PROJECT_CHECK")
                 Thread.sleep(threadSleep)
-                assertTrue(tools.headerWait("TDM365"),
+                assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow в окне заголовок не содержит TDMS @@")
                 //val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
                 //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
@@ -775,7 +777,7 @@ class HeadRef {
                     "@@@@ После следующего нажатия $flow в окне заголовок не содержит Ввод значения @@")
                 tools.closeX()
                 Thread.sleep(threadSleep)
-                assertTrue(tools.headerWait("TDM365"),
+                assertTrue(tools.headerWait(TDM365),
                     "@@@@ После последнего нажатия $flow в окне заголовок не содержит TDM365 @@")
                 tools.closeX()
                 if (DT > 6) println("Конец Test нажатия на $flow")
@@ -789,7 +791,7 @@ class HeadRef {
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_0")
                 Thread.sleep(threadSleep)  // почему-то необходимо
-                assertTrue(tools.headerWait("TDM365"),
+                assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 Thread.sleep(threadSleep)
                 tools.closeX()
@@ -810,7 +812,7 @@ class HeadRef {
                     "@@@@ После нажатия $flow1 в окне заголовок не содержит Выбор сценария @@")
                // tools.idList()
                 tools.closeX()
-                //assertTrue(tools.headerWait("TDMS"), "@@@@ После нажатия $flow1 в окне заголовок не содержит TDMS @@")
+                //assertTrue(tools.headerWait(Tdms), "@@@@ После нажатия $flow1 в окне заголовок не содержит TDMS @@")
                 //tools.closeX()
                 if (DT > 6) println("Конец Test нажатия на $flow1")
             }

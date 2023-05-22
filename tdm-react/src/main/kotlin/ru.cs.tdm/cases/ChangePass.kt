@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
+import ru.cs.tdm.data.TDM365
+import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.io.File
@@ -48,7 +50,7 @@ class ChangePass {
             loginSYS = TestsProperties.login
             passwordSYS = TestsProperties.password
             driver.get(loginpage)
-            assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
+            assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             login = loginSYS
             password = passwordSYS
             if (DT >7) println("Конец Вызов BeforeAll PassTest")
@@ -78,7 +80,7 @@ class ChangePass {
         if (DT > 7) println("Вызов BeforeEach ChangePass")
         //driver.navigate().refresh()
        if (DT > 8) println("login= $login   password= $password")
-//     assertTrue(driver.title == "Tdms", "@@@@ нет заголовка вкладки Tdms @@")
+//     assertTrue(driver.title == Tdms, "@@@@ нет заголовка вкладки Tdms @@")
         Login(driver).loginIn(login, password)
         if (DT > 7) println("Конец Вызов BeforeEach ChangePass")
     }
@@ -96,7 +98,7 @@ class ChangePass {
         val mainMenu = "Объекты"
         if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
         tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
 
         val adminUser = "Администрирование групп"
@@ -113,7 +115,7 @@ class ChangePass {
         if (DT > 8) println("Test нажатия на $allUsers")
         // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
         tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
-        assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers),
+        assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers),  // xpath: /html/body//*[@data-reference= 'GROUP_NAME']]
             "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")
         if (DT > 7) println("Открыли всех пользователей")
 

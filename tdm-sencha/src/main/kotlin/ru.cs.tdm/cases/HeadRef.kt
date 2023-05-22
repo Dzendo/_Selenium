@@ -125,6 +125,8 @@ class HeadRef {
             val mainMenu = "Объекты"
             tools.qtipClickLast(mainMenu)  // undefined
            // assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+            // 27 ошибок на сервере
+            Thread.sleep(threadSleep)
             assertTrue(tools.qtipPressedLast(mainMenu), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
             if (DT > 7) println("Конец Вызов inner Head BeforeEach")
         }

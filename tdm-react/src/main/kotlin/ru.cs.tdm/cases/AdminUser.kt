@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
+import ru.cs.tdm.data.TDM365
+import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.io.File
@@ -124,7 +126,7 @@ class AdminUser {
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
         driver.get(loginpage)
-        assertTrue(driver.title == "Tdms","@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
+        assertTrue(driver.title == Tdms,"@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
         Login(driver).loginIn(login, password)
         if (DT >7) println("Конец Вызов BeforeAll AdminUserTest")
         }
@@ -150,7 +152,7 @@ class AdminUser {
         val mainMenu = "Объекты"
         if (DT >8) println("Test нажатия на $mainMenu TDMS Web")
         tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain("TDM365"), "@@@@ Нажали на $mainMenu - нет заголовка вкладки TDM365 @@")
+        assertTrue(tools.titleContain(TDM365), "@@@@ Нажали на $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(tools.qtipPressedLast("Объекты"),"@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
 
         val adminUser = "Администрирование групп"
@@ -200,7 +202,7 @@ class AdminUser {
         if (DT > 8) println("Test openAllUsers")
         /*
         tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
         if (DT > 8) println("Test нажатия на $adminUser")
         tools.qtipClickLast(adminUser)
@@ -401,12 +403,12 @@ class AdminUser {
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
             inputGpoup?.sendKeys("Тестовая $localDateNow")
             tools.clickOK("OK")  // создать Тестовая
-            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("messagebox", "TDMS")}")
+            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("messagebox", Tdms)}")
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
+            assertTrue(tools.titleWait("messagebox", Tdms),
                 "@@@@ При $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
+            assertTrue(tools.titleWait("messagebox", Tdms),
                 "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
             tools.clickOK("OK")  // создана тестовая
             tools.clickOK("ОК")     // закрыть адимин
@@ -426,11 +428,11 @@ class AdminUser {
             //  Проверить что выделенная группа Тестовая data-reference="GROUP_NAME"
             tools.referenceClickLast("BUTTON_GROUP_DELETE")
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
+            assertTrue(tools.titleWait("messagebox", Tdms),
                 "@@@@ При $deleteGroup - нет окна сообщения с заголовком TDMS (удалить группу) @@")
             //val msgGpoup = tools.xpathLast("//div[text() = 'Удалить группу \"Тестовая\"?']")
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
-            val nomberMessage = tools.nomberTitle("messagebox", "TDMS")
+            val nomberMessage = tools.nomberTitle("messagebox", Tdms)
             // id="messagebox-1329-msg"
             assertContains(tools.byID("messagebox-$nomberMessage-msg")?.text?: "None", "Удалить группу",false,
                 "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDMS Удалить группу @@")
@@ -450,11 +452,11 @@ class AdminUser {
             //assertTrue(tools.titleWait("window", "Редактирование групп"))
         //val testFIO = "Тестовая Фамилия"
             Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", "TDMS"),
+            assertTrue(tools.titleWait("messagebox", Tdms),
                 "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
         //tools.xpathLast("//div[contains(text(), '$localDateNow')]")?.click()
         //tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
-            val nomberMessage = tools.nomberTitle("messagebox", "TDMS")
+            val nomberMessage = tools.nomberTitle("messagebox", Tdms)
             // id="messagebox-1329-msg"
             assertContains(tools.byID("messagebox-$nomberMessage-msg")?.text?: "None", "Удалить пользователя",false,
                 "@@@@ При BUTTON_USER_DELETE - нет в окне подтверждения с заголовком TDMS Удалить группу @@")

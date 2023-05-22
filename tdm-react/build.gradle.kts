@@ -11,7 +11,7 @@ plugins {
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.9.2"
+val junitVersion = "5.9.3"
 
 repositories {
     mavenCentral()
@@ -36,15 +36,15 @@ tasks.withType<JavaCompile> {
 }
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-test:1.8.21")  // 1.8.20-RC2
-    implementation("org.seleniumhq.selenium:selenium-java:4.9.0")
-    implementation("io.github.bonigarcia:webdrivermanager:5.3.2")
+    implementation("org.seleniumhq.selenium:selenium-java:4.9.1")
+    implementation("io.github.bonigarcia:webdrivermanager:5.3.3")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.7")
     implementation("org.junit.jupiter:junit-jupiter:5.9.3")
     //implementation("org.assertj:assertj-core:3.23.1")
     implementation("org.junit.platform:junit-platform-launcher:1.9.3")
-    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.9.0")
+    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.9.1")
 
 }
 application {

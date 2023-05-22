@@ -1,8 +1,11 @@
 package ru.cs.tdm.data
 
 import ru.cs.tdm.ui.StartDialog
-
+const val Tdms = "Tdms"
+const val TDMS = "TDMS"
+const val TDM365 = "TDM365"
 object TestsProperties {
+
     var fluentInDurationNomber = 7000L
     var pollingInDurationNomber = 500L
     var fluentOutDurationNomber = 13000L

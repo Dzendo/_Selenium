@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
+import ru.cs.tdm.data.TDM365
+import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.io.File
@@ -91,7 +93,7 @@ class Filter {
             val password = TestsProperties.password
             if (DT > 7) println("login= $login   password= $password")
             driver.get(loginpage)
-            assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
+            assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
         }
 
@@ -114,7 +116,7 @@ class Filter {
         val mainMenu = "Объекты"
         if (DT > 7) println("Test нажатия на $mainMenu TDMS Web")
         tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain("TDM365"), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")  // сбоит нечасто заголовок страницы на создании
+        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")  // сбоит нечасто заголовок страницы на создании
         assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
         if (DT >7) println("Конец BeforeEach FilterTest")
 
@@ -135,7 +137,7 @@ class Filter {
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
         val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
-        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") "TDM365" else
+        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") TDM365 else
                 if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
         if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
         Thread.sleep(threadSleep)
