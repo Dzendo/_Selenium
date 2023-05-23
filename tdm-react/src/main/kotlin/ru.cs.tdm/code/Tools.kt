@@ -2,7 +2,7 @@ package ru.cs.tdm.code
 
 import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.support.ui.ExpectedConditions.*
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.WebDriverWait
@@ -28,8 +28,8 @@ class Tools(val driver: WebDriver) {
     private val DT: Int =
         TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
-    private val fluentInDuration = TestsProperties.fluentInDurationNomber
-    private val pollingInDuration = TestsProperties.pollingInDurationNomber
+    private val fluentInDuration = 50000L //TestsProperties.fluentInDurationNomber
+    private val pollingInDuration = 100L//TestsProperties.pollingInDurationNomber
     private val fluentOutDuration = TestsProperties.fluentOutDurationNomber
     private val pollingOutDuration = TestsProperties.pollingOutDurationNomber
     private val repeateIn = TestsProperties.repeateInNomber
@@ -39,6 +39,7 @@ class Tools(val driver: WebDriver) {
     init {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000L))  // Неявное ожидание
     }
+    private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(7))
 
     private val fluentOutWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
         .withTimeout(Duration.ofMillis(fluentOutDuration))
@@ -63,50 +64,71 @@ class Tools(val driver: WebDriver) {
             )
         )
 
+    fun xpath(xpath: String, prefix: String = "ROOT", suffix: String = ""): WebElement? {
+
+        val xpathHtml: String = when (prefix) {
+            "ROOT" -> "/html/body//div[@id='root']$xpath$suffix"
+            "ROOT666" -> "/html/body//div[@id='root']//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]$xpath$suffix"
+            "MODAL" -> "/html/body//div[@id='modalRoot']//div[@data-modal-window='current']$xpath$suffix"
+            else -> "/html/body$prefix$xpath$suffix".also { println("xpath пришел неизвестный prefix = $prefix") }
+        }
+        if (DT >8) println("xpath будет произведен поиск элемента $xpathHtml")
+        return try {  // fluentOutWait.until
+            val element = driver.findElement(By.xpath(xpathHtml))
+            if (element == null)  println("xpath не найден элемент $xpathHtml")
+                    else if (DT >7) println("xpath найден элемент $xpathHtml")
+            element
+        } catch (e: Exception) {
+            println("&&&&&&&&&xpath catch TIME OUT за $repeateIn опросов по 1 сек xpathHtml=$xpathHtml \n ${e.stackTrace}&&&&&&&&&")
+            null
+        }
+    }
     fun byID(id: String): WebElement? = driver.findElement(By.id(id))
     fun byIDs(id: String): Boolean = driver.findElements(By.id(id)).isNotEmpty()
     fun byIDClick(id: String) = byID(id)?.click()
     fun byIDPressed(id: String): Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
     fun byXpath(xpath: String): WebElement? = driver.findElement(By.xpath(xpath))
 
-    fun xpath(xpath: String, prefix: String = ""): WebElement? = driver.findElement(By.xpath("/html/body$prefix$xpath"))
     //fun xpathClick(xpath: String, prefix: String = "") = driver.findElement(By.xpath("/html/body$prefix$xpath")).click()
-    fun xpathClick(xpath: String, prefix: String = "") = fluentOutWait.until { driver.findElement(By.xpath("/html/body$prefix$xpath")).click() }
+    fun xpathClick(xpath: String, prefix: String = "", suffix:String = "") = fluentOutWait.until {
+        xpath(xpath, prefix, suffix)?.click()
+    }
 
-    fun reference(data_reference: String): WebElement? =
-        xpath(
-            "//*[@data-reference='$data_reference']",
-            "//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]"
-        )
+    fun reference(data_reference: String, prefix: String = "ROOT", suffix:String = ""): WebElement? =
+        xpath("//*[@data-reference='$data_reference']", prefix, suffix )
 
-    fun referenceClick(data_reference: String): Boolean = reference(data_reference)?.click() != null
-    fun referenceWaitText(reference: String, text: String): Boolean =
-        fluentOutWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']"), text))
+    fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix:String = ""): Boolean =
+        reference(data_reference, prefix, suffix)?.click() != null
 
-    fun qtip(qtip: String): WebElement? = xpath(
-        "//*[contains(@title, '$qtip')]",
-        "//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]"
-    )
+    fun referencePressed(data_reference: String, prefix: String = "ROOT", suffix:String = ""): Boolean {
+        val rezult1 = reference(data_reference, prefix, suffix)?.getAttribute("class")
+        val rezult2 = rezult1?.contains("_pressed_") ?: false
+        return rezult2
+    }
+    fun referenceWaitText(reference: String, text: String,  prefix: String = "ROOT", suffix:String = ""): Boolean =
+        fluentOutWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']",  prefix, suffix), text))
 
-    fun qtipPressed(qtip: String): Boolean {
-        val rezult1 = qtip(qtip)?.getAttribute("class")
+    fun qtip(qtip: String, prefix: String = "ROOT", suffix:String = ""): WebElement? = xpath(
+        "//*[contains(@title, '$qtip')]", prefix, suffix)
+
+    fun qtipPressed(qtip: String, prefix: String = "ROOT", suffix:String = ""): Boolean {
+        val rezult1 = qtip(qtip, prefix, suffix)?.getAttribute("class")
         val rezult2 = rezult1?.contains("_pressed_") ?: false
         return rezult2
     }
 
-    fun qtipClick(qtip: String): Boolean = qtip(qtip)?.click() != null
+    fun qtipClick(qtip: String, prefix: String = "ROOT666", suffix:String = ""): Boolean = qtip(qtip, prefix, suffix)?.click() != null
 
-    fun headerWait(title: String): Boolean =
-        fluentOutWait.until (textToBePresentInElementLocated(By.xpath("//span[starts-with(@class, 'Header_headerTitle_')]"), title))
-    //*[@id="modalRoot"]  ExpectedConditions.elementToBeClickable
-   // fun closeX() = xpathClick("//button[contains(@title, 'Закрыть')]","//*[@id='modalRoot']")
-   // fun closeX() = fluentOutWait.until { it.findElement(By.xpath("/html/body//*[@id='modalRoot']//button[contains(@title, 'Закрыть')]")).click() }
-   // fun closeX() = fluentOutWait.until(elementToBeClickable(By.xpath("/html/body//*[@id='modalRoot']//button[contains(@title, 'Закрыть')]"))).click()
+    fun headerWait(title: String): Boolean = fluentInWait.until(
+                    textToBePresentInElementLocated(
+                By.xpath("/html/body//div[@id='modalRoot']//div[@data-modal-window='current']//span[starts-with(@class, 'Header_headerTitle_')]"),
+                title
+            )
+        )
+
     fun closeX() = WebDriverWait(driver, Duration.ofSeconds(13))
-        .until(elementToBeClickable(By.xpath("/html/body//*[@id='modalRoot']//button[contains(@title, 'Закрыть')]")))
+        .until(elementToBeClickable(xpath("//button[@data-reference='modal-window-close-button']","MODAL")))
         .click()
-
-    //div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]//*[contains(@title, 'TDM365')]
 
     fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath

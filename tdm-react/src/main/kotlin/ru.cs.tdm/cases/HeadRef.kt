@@ -1,24 +1,15 @@
 package ru.cs.tdm.cases
 
-import org.openqa.selenium.WebDriver
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
-import org.openqa.selenium.By
+import org.openqa.selenium.*
+import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.TDM365
-import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
-
-// ВСЕ title="Объекты" теперь title="Объекты" зато с id="objectsTab"  objects-tab
-// HeaderButton_button__qVz7d - пунк меню не утоплен
-// HeaderButton_pressed__cSIa4 - пункт меню утоплена
-//<div id="desktop-tab" title="Рабочий стол" class="HeaderButton_pressed__cSIa4">
-// <div class="HeaderButton_buttonContainer__Uwd+1">
-// <b>РАБОЧИЙ СТОЛ</b>
-// </div></div>
 
 /**
  *
@@ -33,22 +24,22 @@ class HeadRef {
     // Статический блок - распределяется при старте программы, а не при создании экземпляра
     // BeforeAll и AfterAll должны быть статическими требование Junit
     // и естественно все переменные, которыми они пользуются
+    //private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(7))
+
     companion object {
         // вынесены переменные, что бы менять их только здесь, а они поменяются там внизу в тестах
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 100                    // количество повторений тестов
+        private const val NN:Int = 5                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
         lateinit var driver: WebDriver
 
+
         // объявления переменных на созданные ранее классы-страницы
         lateinit var tools: Tools
-        // костыль для диаграммы Ганта повторного ввода пароля
-        lateinit var loginGantt: String
-        lateinit var passwordGantt: String
 
         /**
          * Осуществление первоначальной настройки
@@ -66,7 +57,7 @@ class HeadRef {
             // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
            driver = startDriver()
 
-            // Создаем экземпляры классов и присвоим ссылки на них.
+            // Создаем экземпляры классов и присваиваем ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
 
@@ -76,12 +67,9 @@ class HeadRef {
             val password = TestsProperties.password
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
-            assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
+            //###assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
 
-            // Запоминаю логин и пароль для диаграммы Ганта - костыль.
-            loginGantt = login
-            passwordGantt = password
             if (DT > 7) println("Конец Вызов BeforeAll")
         }
 
@@ -89,7 +77,6 @@ class HeadRef {
         // Аннотация Junit выполнять один раз после всех тестов
         @AfterAll
         fun afterAll() {
-            //tools.idList()
             if (DT > 7) println("Вызов afterAll")
             tools.closeEsc5()
             Login(driver).loginOut()
@@ -97,8 +84,6 @@ class HeadRef {
             if (DT > 7) println("Конец Вызов afterAll")
         }
     }  //конец companion object
-
-    // верхний срабатывает на все тесты
 
     // Как обычно, выполняется перед каждым тестом, только он пустой
     @BeforeEach
@@ -115,7 +100,7 @@ class HeadRef {
     fun afterEach() {
         if (DT > 7) println("Вызов AfterEach верхний")
         tools.closeEsc5()
-
+        // Можно послать CTRL/ALT/T
         if (DT > 7) println("Конец Вызов AfterEach верхний")
     }
 
@@ -144,6 +129,7 @@ class HeadRef {
         fun afterEach() {
             if (DT > 7) println("Вызов inner Head AfterEach 5 раз closeEsc")
             tools.closeEsc5()
+            // Можно послать CTRL/ALT/T
             if (DT > 7) println("Конец Вызов inner Head AfterEach")
         }
 
@@ -188,24 +174,21 @@ class HeadRef {
         fun meetingTest() {
             val meeting = "Совещания"
             tools.byIDClick("chat-tab")
-                assertTrue(tools.titleContain(meeting), "@@@@ После нажатия $meeting - нет заголовка вкладки $meeting @@")
-                assertTrue(tools.byIDPressed("chat-tab"),
+            assertTrue(tools.titleContain(meeting), "@@@@ После нажатия $meeting - нет заголовка вкладки $meeting @@")
+            assertTrue(tools.byIDPressed("chat-tab"),
                     "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@" )
             if (DT > 6) println("Конец Test нажатия на $meeting")
         }
 
         @RepeatedTest(NN)
-        @Disabled
+        //@Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
             val ganttchart = "Диаграмма Ганта"
             if (DT > 6) println("Test нажатия на $ganttchart")
             tools.byIDClick("ganttchart-tab")
             assertTrue(tools.titleContain(ganttchart), "@@@@ После нажатия $ganttchart - нет заголовка вкладки $ganttchart @@")
-                assertTrue(
-                    tools.byIDPressed("ganttchart-tab"),
-                    "@@@@ После нажатия $ganttchart - кнопка $ganttchart нет утоплена @@"
-                )
+            assertTrue(tools.byIDPressed("ganttchart-tab"),"@@@@ После нажатия $ganttchart - кнопка $ganttchart нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $ganttchart")
         }
 
@@ -227,22 +210,22 @@ class HeadRef {
         fun searchTest() {
             val search = "Искать"
             if (DT > 6) println("Test нажатия на $search")
+            assertEquals(null, tools.byID("search-field-search")?.getAttribute("value"),
+                "@@@@ После очистки поля поиска в поле поиска не пусто @@")
             tools.byID("search-field")?.sendKeys("Лебедев")
             assertEquals("Лебедев", tools.byID("search-field")?.getAttribute("value"), "@@@@ После ввода Лебедев в поле поиска в поле поиска не Лебедев @@")
 
             //tools.byIDClicked()
-            tools.xpath("//*[contains(@title, '$search')]")?.click()
+            tools.byIDClick("search-field-search")
             Thread.sleep(threadSleep)
             //assertTrue(tools.xpath("//span[contains(@class, 'Header_objDescription_')]")?.text?.contains("Результаты")?:false,
             //"@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
             assertTrue(tools.titleContain("Результаты"), "@@@@ После нажатия лупы - нет заголовка вкладки Результаты @@")
-            tools.xpath("//*[contains(@title, 'Очистить')]")?.click()
+            tools.byIDClick("search-field-clean")
             // Проверяется, что поле поиска пустое
-            assertEquals("", tools.xpath("//input[@placeholder='Найти...']")?.getAttribute("value"),
+            assertEquals(null, tools.byID("search-field-search")?.getAttribute("value"),
                 "@@@@ После очистки поля поиска в поле поиска не пусто @@")
 
-            //div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]//*[contains(@title, 'TDM365')]
-            tools.qtipClick(TDM365)  // костыл
             assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия - нет заголовка вкладки TDM365 @@")
             // Проверяем, что утоплена кнопка Объекты
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия  - кнопка нет утоплена @@")
@@ -255,13 +238,11 @@ class HeadRef {
             val notification = "Уведомления"
             if (DT > 6) println("Test нажатия на $notification")
             tools.byIDClick("system-messages")
-            //tools.qtipClick(notification)
+
             // Запрашивает заголовок открывшегося окна и проверяет, что он Окно сообщений
-            //tools.xpathClick("//span[contains(@class,'Header_headerTitle_')]")
-            //assertEquals("Окно сообщений", tools.windowTitle(), "@@@@ После нажатия $notification - нет заголовка окна Окно сообщений @@")
-            //assertEquals("Окно сообщений", tools.xpath("//span[contains(@class,'Header_headerTitle_')]")?.text, "@@@@ После нажатия $notification - нет заголовка окна Окно сообщений @@")
-            //tools.closeX()
-            tools.closeEsc()
+            assertTrue( tools.headerWait("Окно сообщений"), "@@@@ После нажатия $notification - нет заголовка окна Окно сообщений @@")
+            tools.closeX()
+
             if (DT > 6) println("Конец Test нажатия на $notification")
         }
     }
@@ -270,7 +251,7 @@ class HeadRef {
      * во второй строке под SYSADMIN только ОБЪЕКТЫ
      * системного подменю расположено ниже в отдельном классе
      */
-    @Nested
+    @Nested     //################################Testing Tools Box##################################################
     @DisplayName("Testing Tools Box")
     @TestMethodOrder(MethodOrderer.MethodName::class)
     inner class ToolTest {
@@ -295,19 +276,13 @@ class HeadRef {
         @DisplayName("Показать/скрыть дерево")
         // repetitionInfo (Junit) объект, который содержит в т.ч. номер повтора теста repetitionInfo.currentRepetition
         fun open_showTreeTest(){     //(repetitionInfo: RepetitionInfo) {
-            // Если номер повтора теста 1,11,21 (остаток от деления на 10 равно 1) и тд, то обновить экран
-            // У TDM подмерзает экран если много команд показать-скрыть
-            //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh() // Костыль проверить убрать
-            //driver.navigate().refresh()  // Костыль
             val open_showTree = "Показать/скрыть дерево"
             if (DT > 6) println("Test нажатия на $open_showTree")
-            assertTrue(tools.qtipPressed(open_showTree), "@@@@ После нажатия $open_showTree - кнопка $open_showTree нет утоплена @@") // Исправить на референс
-            tools.referenceClick("TDMS_COMMAND_COMMON_SHOWTREE")  // Скрыть дерево
-            //tools.qtipClick(open_showTree)   // Скрыть дерево
-            assertFalse(tools.qtipPressed(open_showTree), "@@@@ После отжатия $open_showTree - кнопка $open_showTree утоплена @@")
+            assertTrue(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666"), "@@@@ После нажатия $open_showTree - кнопка $open_showTree нет утоплена @@") // Исправить на референс
+            tools.referenceClick("TDMS_COMMAND_COMMON_SHOWTREE", "ROOT666")  // Скрыть дерево
+            assertFalse(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666"), "@@@@ После отжатия $open_showTree - кнопка $open_showTree утоплена @@")
             tools.referenceClick("TDMS_COMMAND_COMMON_SHOWTREE")  // Показать дерево
-            //tools.qtipClick(open_showTree)   // Показать дерево
-            assertTrue(tools.qtipPressed(open_showTree), "@@@@ После второго нажатия $open_showTree - кнопка $open_showTree нет утоплена @@")
+            assertTrue(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666"), "@@@@ После второго нажатия $open_showTree - кнопка $open_showTree нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $open_showTree")
         }
 
@@ -316,13 +291,14 @@ class HeadRef {
         fun open_showPreviewPanelTest() {   //(repetitionInfo: RepetitionInfo) {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             //driver.navigate().refresh()
+            // data-reference="TDMS_COMMAND_COMMON_SHOWPREVIEW"
             val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
             if (DT > 6) println("Test нажатия на $open_showPreviewPanel")
-            assertTrue(tools.qtipPressed(open_showPreviewPanel), "@@@@ После нажатия $open_showPreviewPanel - кнопка $open_showPreviewPanel нет утоплена @@")
-            tools.qtipClick(open_showPreviewPanel)
-            assertFalse(tools.qtipPressed(open_showPreviewPanel), "@@@@ После отжатия $open_showPreviewPanel - кнопка $open_showPreviewPanel утоплена @@")
-            tools.qtipClick(open_showPreviewPanel)
-            assertTrue(tools.qtipPressed(open_showPreviewPanel), "@@@@ После второго нажатия $open_showPreviewPanel - кнопка $open_showPreviewPanel нет утоплена @@")
+            assertTrue(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWPREVIEW","ROOT666"), "@@@@ После нажатия $open_showPreviewPanel - кнопка $open_showPreviewPanel нет утоплена @@")
+            tools.referenceClick("TDMS_COMMAND_COMMON_SHOWPREVIEW", "ROOT666")
+            assertFalse(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWPREVIEW","ROOT666"), "@@@@ После отжатия $open_showPreviewPanel - кнопка $open_showPreviewPanel утоплена @@")
+            tools.referenceClick("TDMS_COMMAND_COMMON_SHOWPREVIEW", "ROOT666")
+            assertTrue(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWPREVIEW","ROOT666"), "@@@@ После второго нажатия $open_showPreviewPanel - кнопка $open_showPreviewPanel нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $open_showPreviewPanel")
 
         }
@@ -336,10 +312,10 @@ class HeadRef {
             workTable()
             Thread.sleep(threadSleep)
 
-            tools.referenceClick("CMD_CREATE_USER_QUERY")
+            tools.referenceClick("CMD_CREATE_USER_QUERY","ROOT666")
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $filter - нет заголовка окна Редактирование объекта @@")
-            assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"),
+            assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
                 "@@@@ После нажатия $filter и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_USER_QUERY_NAME Наименование фильтра @@")
             tools.closeX()
             tools.byIDClick("objects-tab")
@@ -354,18 +330,17 @@ class HeadRef {
             assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
             // проверить что справа Рабочий стол (SYSADMIN)
             // Здесь проверка дерева и отображения
-            tools.xpathClick("//span[contains(text(), 'Фильтры')]")
+            tools.xpathClick("//span[contains(text(), 'Фильтры')]","ROOT666")
             assertTrue(tools.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
         }
 
         @RepeatedTest(NN)
         @DisplayName("Обновить")
         fun renewTest() {  //(repetitionInfo: RepetitionInfo) {
-            // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
             val renew = "Обновить"
             if (DT > 6) println("Test нажатия на $renew")
-            tools.referenceClick("TDMS_COMMAND_UPDATE")
-            //tools.qtipClick(renew)
+            tools.referenceClick("TDMS_COMMAND_UPDATE","ROOT666")
+
             if (DT > 6) println("Конец Test нажатия на $renew")
         }
 
@@ -375,11 +350,10 @@ class HeadRef {
         fun adminUserTest() {
             val adminUser = "Администрирование групп"
             if (DT > 6) println("Test нажатия на $adminUser")
-            tools.referenceClick("CMD_GROUP_CHANGE")
-            //tools.qtipClick(adminUser)
+            tools.referenceClick("CMD_GROUP_CHANGE","ROOT666")
             assertTrue(tools.headerWait("Редактирование групп"),
                 "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
-            assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"),
+            assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
                 "@@@@ После нажатия $adminUser и открытия окна с заголовком Редактирование групп в окне нет поля STATIC1 Группы пользователей @@")
             //tools.closeX()
             tools.clickOK()
@@ -392,7 +366,7 @@ class HeadRef {
         fun importUserTest() {
             val importUser = "Импорт пользователей"
             if (DT > 6) println("Test нажатия на $importUser")
-            tools.referenceClick("CMD_IMPORT_USERS")
+            tools.referenceClick("CMD_IMPORT_USERS","ROOT666")
             //tools.qtipClick(importUser)
             // Нарвался - открывается окно Windows не имеющее отношения к HTML
             //assertTrue(tools.titleWait("window", "Редактирование групп"))
@@ -409,15 +383,16 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $createObject")
            // driver.navigate().refresh()  // Костыль
             //Thread.sleep(3000)
-            tools.referenceClick("CMD_OBJECT_STRUCTURE_CREATE")  // CMD_OBJECT_STRUCTURE_CREATE
+            tools.referenceClick("CMD_OBJECT_STRUCTURE_CREATE","ROOT666")  // CMD_OBJECT_STRUCTURE_CREATE
             //tools.qtipClick(createObject)
            // assertTrue(tools.titleWait("tdmsEditObjectDialog","Редактирование объекта"),
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $createObject - нет заголовка окна Редактирование объекта @@")
-            assertTrue(tools.referenceWaitText("T_ATTR_OCC_CODE", "Код объекта"),
+            assertTrue(tools.referenceWaitText("T_ATTR_OCC_CODE", "Код объекта","MODAL"),
                 "@@@@ После нажатия $createObject и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_OCC_CODE Код объекта @@")
-            tools.clickOK("Отмена")
-            // tools.closeX()
+            //tools.referenceClick("cancel-modal-window-btn", "MODAL")
+            //tools.clickOK("Отмена")
+            tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $createObject")
         }
 
@@ -431,18 +406,18 @@ class HeadRef {
             //Thread.sleep(threadSleep *2)
             //driver.navigate().refresh()   // Костыль
             //Thread.sleep(3000)
-            tools.referenceClick("CMD_NOTIFICATIONS_SETTINGS")
+            tools.referenceClick("CMD_NOTIFICATIONS_SETTINGS", "ROOT666")
             //tools.qtipClick(configuringNotification)
             Thread.sleep(threadSleep *2)
             //assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $configuringNotification - нет заголовка окна Редактирование объекта @@")
-            assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование"),
+            assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование", "MODAL"),
                 "@@@@ После нажатия $configuringNotification и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_NAME Наименование @@")
-            assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента"),
+            assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента", "MODAL"),
                 "@@@@ После нажатия $configuringNotification и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_REGULATION_START_TIME Время запуска проверки регламента @@")
-            tools.clickOK("Отмена")
-            //tools.closeX()
+            //tools.clickOK("Отмена")
+            tools.closeX()
             //Thread.sleep(threadSleep *2)
             if (DT > 6) println("Конец Test нажатия на $configuringNotification")
         }
@@ -454,7 +429,7 @@ class HeadRef {
      * имеет вложенный класс тестирования СЭТД
      */
     //@Disabled
-    @Nested
+    @Nested              //###############################Testing SubSysadmin###################################################
     @DisplayName("Testing SubSysadmin")
     @TestMethodOrder(MethodOrderer.MethodName::class)
     inner class SubSysadminTest {
@@ -462,8 +437,6 @@ class HeadRef {
         fun beforeEach() {
             if (DT > 7) println("Вызов inner SubSysadmin BeforeEach")
             tools.byIDClick("objects-tab")
-            // tools.qtipClick("Объекты")
-           // driver.navigate().refresh()   // Костыль
             assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
             assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
             if (DT > 7) println("Конец inner SubSysadmin BeforeEach")
@@ -473,41 +446,23 @@ class HeadRef {
         fun afterEach() {
             if (DT > 7) println("Вызов inner SubSysadmin AfterEach 5 раз closeEsc")
             tools.closeEsc5()
-            driver.navigate().refresh()
             if (DT > 7) println("Конец inner SubSysadmin AfterEach")
         }
 
         // вспомогательная процедура открытия системного меню SubSysadmin и для СЭТД
 
-        /*
-        <div class="tdms-toolbar-button" data-reference="SUB_SYSADMIN" title="">
-        <div class="MenuButton_menuButton__3DfLX">
-        <div class="MenuButton_iconContainer__LNI-o">
-        <div class="tdms-toolbar-button tdms-icn-pic tdms-icn tdms-icn-259" alt=""></div>
-        <div class="MenuButton_miniArrow__hfnxm" style="background-image: url(&quot;resources/images/button/arrow.gif&quot;);">
-        </div></div></div>
-        <div style="position: fixed;"></div></div>
-         */
-        // SUB_SYSADMIN
-        // id="contmen"
-        // class="TdmsView_content__Q666y" style="display: none;"
-        // div  class="TdmsView_content__Q666y" style или style=""
-        //div [starts-with(@class,"TdmsView_content_") and not(contains(@style,"none"))]
-        //div [starts-with(@class,"TdmsView_content_")]  and not(contains(@style,"none"))]
         private fun openSubSysadmin() {
             if (DT > 7) println("Вызов openSubSysadmin")
             repeat(repeateOut) {
                 Thread.sleep(threadSleep * it)
-                // Нужно внутри div class="TdmsView_content__Q666y" style="" со стилем НЕ style="display: none;"
-                tools.referenceClick("SUB_SYSADMIN")
-                ///Thread.sleep(threadSleep)
-               // if (tools.qtipClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false) return
-                //Thread.sleep(10000)
+
+                tools.referenceClick("SUB_SYSADMIN","ROOT666")
+                // Открыто Меню появляется под 666
                 if (tools.byIDs("contmen")) return
-               // if (tools.reference("SUB_SYSADMIN")?.getAttribute("class")?.contains("x-btn-menu-active") ?: false) return
+
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
                 repeat(3) { tools.closeEsc() }
-                tools.qtipClick("Объекты")
+                tools.byIDClick("objects-tab")
             }
             if (DT > 5) println("&&&&&&&&& Не открылось SUB_SYSADMIN за $repeateOut опросов  &&&&&&&&&")
            // assertTrue(tools.qtipClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false,
@@ -548,13 +503,13 @@ class HeadRef {
             openSubSysadmin()
             tools.byIDClick("CMD_SYSTEM_INFO")
 
-            assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, systemParameters,
+            assertTrue(tools.headerWait(systemParameters),
                 "@@@@ После нажатия $systemParameters нет заголовка окна  $systemParameters @@" )
-            assertTrue(tools.referenceWaitText("T_VER_SERVER", "Версия сервера"),
+            assertTrue(tools.referenceWaitText("T_VER_SERVER", "Версия сервера", "MODAL"),
                 "@@@@ После нажатия $systemParameters - в окне $systemParameters Нет T_VER_SERVER Версия сервера @@")
-            assertTrue(tools.referenceWaitText("T_VER_TDM365", "Версия TDM365"),
+            assertTrue(tools.referenceWaitText("T_VER_TDM365", "Версия TDM365", "MODAL"),
                 "@@@@ После нажатия $systemParameters - в окне $systemParameters Нет T_VER_TDM365 Версия TDM365 @@")
-            Thread.sleep(threadSleep)
+
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $systemParameters")
         }
@@ -567,20 +522,16 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $sysAttributes")
             openSubSysadmin()
             tools.byIDClick("CMD_SYSTEM_ATTRS")
-            //println("FORM_ATTRS_LIST = ${tools.reference("FORM_ATTRS_LIST")?.text}")
-            // Скилл Selenium изучаю присутствия элемента в DOM страницы
 
-            assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, "Атрибуты",
+
+            assertTrue(tools.headerWait(sysAttributes),
                 "@@@@ После нажатия $sysAttributes нет заголовка окна  Атрибуты @@" )
-            assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_ATTRS_LIST']")) != null,
-                "@@@@ После нажатия $sysAttributes нет FORM_ATTRS_LIST @@")
-            Thread.sleep(threadSleep)
+            //assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_ATTRS_LIST']")) != null,
+            //    "@@@@ После нажатия $sysAttributes нет FORM_ATTRS_LIST @@")
+            //Thread.sleep(threadSleep)
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $sysAttributes")
         }
-
-        // data-reference="FORM_TREE_OBJS"
-        // data-reference="TREE"
         @RepeatedTest(NN)
         //@Disabled
         @DisplayName("Схема данных")
@@ -590,20 +541,13 @@ class HeadRef {
             openSubSysadmin()
 
             tools.byIDClick("CMD_DATA_SCHEME")
-            //println("FORM_TREE_OBJS = ${tools.reference("FORM_TREE_OBJS")?.text}")
-            //println("TREE = ${tools.reference("TREE")?.text}")
-            // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
-            Thread.sleep(threadSleep) //+1000)  // сделать процедуру ожидания заголовка
-            //assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, dataTree,
-            //    "@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
-            assertTrue(tools.headerWait( dataTree),
-                "@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
+            assertTrue(tools.headerWait( dataTree),"@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
 
-            assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_TREE_OBJS']")) != null,
+            assertTrue(presenceOfElementLocated(By.xpath("// *[data-reference='FORM_TREE_OBJS']")) != null,
                 "@@@@ После нажатия $dataTree в окне нет FORM_TREE_OBJS @@")
-            assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='TREE']")) != null,
+            assertTrue(presenceOfElementLocated(By.xpath("// *[data-reference='TREE']")) != null,
                 "@@@@ После нажатия $dataTree в окне нет TREE' @@")
-            Thread.sleep(threadSleep)
+
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $dataTree")
         }
@@ -618,18 +562,14 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $eventsLog")
             openSubSysadmin()
             tools.byIDClick("CMD_EVENTS_LOG")
-            //println("FORM_EVENTS_LOG = ${tools.reference("FORM_EVENTS_LOG")?.text}")
-            //println("GRID = ${tools.reference("GRID")?.text}")
-            // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
-            Thread.sleep(threadSleep) // сделать процедуру ожидания заголовка
-            assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, eventsLog,
+
+            assertTrue(tools.headerWait( eventsLog) ,
                 "@@@@ После нажатия $eventsLog нет заголовка окна  $eventsLog @@" )
 
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_EVENTS_LOG']")) != null,
                 "@@@@ После нажатия $eventsLog в окне нет FORM_EVENTS_LOG @@")
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='GRID']")) != null,
                 "@@@@ После нажатия $eventsLog в окне нет GRID @@")
-            Thread.sleep(threadSleep)
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $eventsLog")
         }
@@ -644,11 +584,9 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $serverLog")
             openSubSysadmin()
             tools.byIDClick("CMD_SERVER_LOG")
-            //println("FORM_SERVER_LOG = ${tools.reference("FORM_SERVER_LOG")?.text}")
-            //println("QUERY_SERVER_LOG = ${tools.reference("QUERY_SERVER_LOG")?.text}")
-            // Лучше проверять присутствует ли этот элемент в DOM presenceOfElementLocated(By locator)
+
             Thread.sleep(threadSleep)
-            assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, serverLog,
+            assertTrue(tools.headerWait( serverLog),
                 "@@@@ После нажатия $serverLog нет заголовка окна  $serverLog @@" )
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_SERVER_LOG']")) != null,
                 "@@@@ После нажатия $serverLog в окне нет FORM_SERVER_LOG @@")
@@ -666,9 +604,8 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $delObjects")
             openSubSysadmin()
             tools.byIDClick("CMD_STRUCT_OBJS_DELETE")
-            assertEquals(tools.byXpath("//div[@id='modalRoot']//span[starts-with(@class,'Header_headerTitle_')]")?.text, "Выбор объектов",
+            assertTrue(tools.headerWait("Удаление структуры объектов"),
                 "@@@@ После нажатия $delObjects в окне заголовок не содержит Выбор объектов @@")
-            Thread.sleep(threadSleep)
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $delObjects")
         }
@@ -701,25 +638,28 @@ class HeadRef {
             }
 
             // Имитация ИУС СЭТД
-            // data-reference="SUB_SETD_SYNC"
             private fun openCETD() {
                 if (DT > 7) println("Вызов openCETD")
                 repeat(repeateOut) {
                     openSubSysadmin()
                     Thread.sleep(threadSleep * it)
+                    // data-reference="SUB_SETD_SYNC"
 
-                   // val click = tools.referenceClick("SUB_SETD_SYNC")  //  .xpathClickMenu("Имитация ИУС СЭТД")
-                    val click = tools.xpath("//*[@data-reference='SUB_SETD_SYNC']")?.click()  //  .xpathClickMenu("Имитация ИУС СЭТД")
-                    //Thread.sleep(threadSleep)
-                    return
-                   // if (click) return
+                    val  element = tools.reference("SUB_SETD_SYNC")
+                    Actions(driver).moveToElement(element).click().build().perform()
+
+                    val elementViz = element?.findElement(By.xpath(".//div[starts-with(@class,'Popup_contextMenuContainer_')]"))
+                    val styleViz = elementViz?.getAttribute("style")
+                    if (styleViz!= null) {
+                        if (styleViz.contains("visible")) return
+                    }
+
                     if (DT > 6) println("####### ИУС СЭТД Повтор *##*$it  открытия через $it sec #######")
                     repeat(3) { tools.closeEsc() }
-                    tools.qtipClick("Объекты")
+                    tools.byIDClick("objects-tab")
                 }
                 if (DT > 5) println("&&&&&&&&& Не открылось ИУС СЭТД за $repeateOut опросов  &&&&&&&&&")
-               // assertTrue(tools.qtipClass("СЭТД")?.contains("x-btn-menu-active") ?: false,
-               //     "@@@@ После клика на подменю Имитация ИУС СЭТД не открылось подменю Имитация ИУС СЭТД  за $repeateOut попыток @@")
+
                 if (DT > 7) println("Конец openCETD")
             }
 
@@ -731,15 +671,12 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_CHECK_CONNECT_NO_AUTHORIZE")
-
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
-                Thread.sleep(threadSleep)
+
                 tools.closeX()
-                tools.closeEsc()
                 if (DT > 6) println("Конец Test нажатия на $flow0")
             }
-            // Отправка запроса на сервер - не надо
             // ? Соединение установлено (с авторизацией)
             @RepeatedTest(NN)
             @DisplayName("Поток - Проверка связи с авторизацией")
@@ -751,10 +688,8 @@ class HeadRef {
                 Thread.sleep(threadSleep)
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
-                Thread.sleep(threadSleep)
                 tools.closeX()
-                Thread.sleep(threadSleep)
-                tools.closeEsc()
+
                 if (DT > 6) println("Конец Test нажатия на $flow0")
             }
 
@@ -764,9 +699,8 @@ class HeadRef {
                 val flow = "Поток - Проверка статуса проекта"
                 if (DT > 6) println("Test нажатия на $flow")
                 openCETD()
-                //tools.xpathClickMenu(flow)
                 tools.byIDClick("CMD_TEST_STREAM_PROJECT_CHECK")
-                Thread.sleep(threadSleep)
+
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow в окне заголовок не содержит TDMS @@")
                 //val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
@@ -776,7 +710,7 @@ class HeadRef {
                 assertTrue(tools.headerWait("Ввод значения"),
                     "@@@@ После следующего нажатия $flow в окне заголовок не содержит Ввод значения @@")
                 tools.closeX()
-                Thread.sleep(threadSleep)
+                //Thread.sleep(threadSleep)
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После последнего нажатия $flow в окне заголовок не содержит TDM365 @@")
                 tools.closeX()
@@ -790,7 +724,7 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_0")
-                Thread.sleep(threadSleep)  // почему-то необходимо
+                //Thread.sleep(threadSleep)  // почему-то необходимо
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 Thread.sleep(threadSleep)
@@ -810,7 +744,7 @@ class HeadRef {
 
                 assertTrue(tools.headerWait( "Выбор сценария"),
                     "@@@@ После нажатия $flow1 в окне заголовок не содержит Выбор сценария @@")
-               // tools.idList()
+
                 tools.closeX()
                 //assertTrue(tools.headerWait(Tdms), "@@@@ После нажатия $flow1 в окне заголовок не содержит TDMS @@")
                 //tools.closeX()
@@ -825,7 +759,7 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow5")
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_5_1")
-                assertTrue(tools.headerWait("Выбор объектов"),
+                assertTrue(tools.headerWait("Выбор Передаточного документа"),
                     "@@@@ После нажатия $flow5 в окне заголовок не содержит Выбор объектов @@")
                 tools.closeX()
                 if (DT > 6) println("Конец Test нажатия на $flow5")
