@@ -25,11 +25,10 @@ const val repeateOut= 3
 
 class Tools(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
-    private val DT: Int =
-        TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
+    private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
-    private val fluentInDuration = 50000L //TestsProperties.fluentInDurationNomber
-    private val pollingInDuration = 100L//TestsProperties.pollingInDurationNomber
+    private val fluentInDuration = TestsProperties.fluentInDurationNomber
+    private val pollingInDuration = TestsProperties.pollingInDurationNomber
     private val fluentOutDuration = TestsProperties.fluentOutDurationNomber
     private val pollingOutDuration = TestsProperties.pollingOutDurationNomber
     private val repeateIn = TestsProperties.repeateInNomber

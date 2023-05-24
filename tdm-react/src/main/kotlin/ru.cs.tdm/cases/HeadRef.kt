@@ -31,7 +31,7 @@ class HeadRef {
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 5                    // количество повторений тестов
+        private const val NN:Int = 100                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
@@ -211,15 +211,12 @@ class HeadRef {
             val search = "Искать"
             if (DT > 6) println("Test нажатия на $search")
             assertEquals(null, tools.byID("search-field-search")?.getAttribute("value"),
-                "@@@@ После очистки поля поиска в поле поиска не пусто @@")
+                "@@@@ При входе в поле поиска не пусто @@")
             tools.byID("search-field")?.sendKeys("Лебедев")
             assertEquals("Лебедев", tools.byID("search-field")?.getAttribute("value"), "@@@@ После ввода Лебедев в поле поиска в поле поиска не Лебедев @@")
 
             //tools.byIDClicked()
             tools.byIDClick("search-field-search")
-            Thread.sleep(threadSleep)
-            //assertTrue(tools.xpath("//span[contains(@class, 'Header_objDescription_')]")?.text?.contains("Результаты")?:false,
-            //"@@@@ После нажатия $search - нет заголовка вкладки Результаты @@")
             assertTrue(tools.titleContain("Результаты"), "@@@@ После нажатия лупы - нет заголовка вкладки Результаты @@")
             tools.byIDClick("search-field-clean")
             // Проверяется, что поле поиска пустое
@@ -252,7 +249,7 @@ class HeadRef {
      * системного подменю расположено ниже в отдельном классе
      */
     @Nested     //################################Testing Tools Box##################################################
-    @DisplayName("Testing Tools Box")
+    @DisplayName("Testing _Tools Box")
     @TestMethodOrder(MethodOrderer.MethodName::class)
     inner class ToolTest {
         @BeforeEach
@@ -310,8 +307,6 @@ class HeadRef {
             val filter = "Создать фильтр"
             if (DT > 6) println("Test нажатия на $filter")
             workTable()
-            Thread.sleep(threadSleep)
-
             tools.referenceClick("CMD_CREATE_USER_QUERY","ROOT666")
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $filter - нет заголовка окна Редактирование объекта @@")
@@ -381,11 +376,7 @@ class HeadRef {
         fun createObjectTest() {
             val createObject = "Создать объект разработки"
             if (DT > 6) println("Test нажатия на $createObject")
-           // driver.navigate().refresh()  // Костыль
-            //Thread.sleep(3000)
             tools.referenceClick("CMD_OBJECT_STRUCTURE_CREATE","ROOT666")  // CMD_OBJECT_STRUCTURE_CREATE
-            //tools.qtipClick(createObject)
-           // assertTrue(tools.titleWait("tdmsEditObjectDialog","Редактирование объекта"),
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $createObject - нет заголовка окна Редактирование объекта @@")
             assertTrue(tools.referenceWaitText("T_ATTR_OCC_CODE", "Код объекта","MODAL"),
@@ -400,25 +391,15 @@ class HeadRef {
         @DisplayName("Настройка шаблона уведомлений")
         fun configuringNotificationTest() { //repetitionInfo: RepetitionInfo) {
             val configuringNotification = "Настройка шаблона уведомлений"
-            //val nomerTesta: Int = repetitionInfo.currentRepetition
-            //if ((nomerTesta % 10 == 1)) driver.navigate().refresh()
             if (DT > 6) println("Test нажатия на $configuringNotification")
-            //Thread.sleep(threadSleep *2)
-            //driver.navigate().refresh()   // Костыль
-            //Thread.sleep(3000)
             tools.referenceClick("CMD_NOTIFICATIONS_SETTINGS", "ROOT666")
-            //tools.qtipClick(configuringNotification)
-            Thread.sleep(threadSleep *2)
-            //assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $configuringNotification - нет заголовка окна Редактирование объекта @@")
             assertTrue(tools.referenceWaitText("T_ATTR_NAME", "Наименование", "MODAL"),
                 "@@@@ После нажатия $configuringNotification и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_NAME Наименование @@")
             assertTrue(tools.referenceWaitText("T_ATTR_REGULATION_START_TIME", "Время запуска проверки регламента", "MODAL"),
                 "@@@@ После нажатия $configuringNotification и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_REGULATION_START_TIME Время запуска проверки регламента @@")
-            //tools.clickOK("Отмена")
             tools.closeX()
-            //Thread.sleep(threadSleep *2)
             if (DT > 6) println("Конец Test нажатия на $configuringNotification")
         }
     }  // конец inner - nested Testing Tools Box
@@ -454,7 +435,6 @@ class HeadRef {
         private fun openSubSysadmin() {
             if (DT > 7) println("Вызов openSubSysadmin")
             repeat(repeateOut) {
-                Thread.sleep(threadSleep * it)
 
                 tools.referenceClick("SUB_SYSADMIN","ROOT666")
                 // Открыто Меню появляется под 666
@@ -479,9 +459,7 @@ class HeadRef {
             if (DT > 7) println("Вызов clickMenu $menu $window $title")
             repeat(repeateOut) {
                 //openSubSysadmin()
-                Thread.sleep(threadSleep * it)
                 tools.xpathClickMenu(menu)
-                ///Thread.sleep(threadSleep)
                 if (tools.headerWait(title)) return true
                 if (DT > 6) println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
                 tools.closeEsc()
@@ -528,7 +506,6 @@ class HeadRef {
                 "@@@@ После нажатия $sysAttributes нет заголовка окна  Атрибуты @@" )
             //assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_ATTRS_LIST']")) != null,
             //    "@@@@ После нажатия $sysAttributes нет FORM_ATTRS_LIST @@")
-            //Thread.sleep(threadSleep)
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $sysAttributes")
         }
@@ -584,15 +561,12 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $serverLog")
             openSubSysadmin()
             tools.byIDClick("CMD_SERVER_LOG")
-
-            Thread.sleep(threadSleep)
             assertTrue(tools.headerWait( serverLog),
                 "@@@@ После нажатия $serverLog нет заголовка окна  $serverLog @@" )
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_SERVER_LOG']")) != null,
                 "@@@@ После нажатия $serverLog в окне нет FORM_SERVER_LOG @@")
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='QUERY_SERVER_LOG']")) != null,
                 "@@@@ После нажатия $serverLog в окне нет QUERY_SERVER_LOG @@")
-            Thread.sleep(threadSleep)
             tools.closeX()
             if (DT > 6) println("Конец Test нажатия на $serverLog")
         }
@@ -642,9 +616,7 @@ class HeadRef {
                 if (DT > 7) println("Вызов openCETD")
                 repeat(repeateOut) {
                     openSubSysadmin()
-                    Thread.sleep(threadSleep * it)
                     // data-reference="SUB_SETD_SYNC"
-
                     val  element = tools.reference("SUB_SETD_SYNC")
                     Actions(driver).moveToElement(element).click().build().perform()
 
@@ -685,7 +657,6 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_CHECK_CONNECT_WITH_AUTHORIZE")
-                Thread.sleep(threadSleep)
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
                 tools.closeX()
@@ -710,7 +681,6 @@ class HeadRef {
                 assertTrue(tools.headerWait("Ввод значения"),
                     "@@@@ После следующего нажатия $flow в окне заголовок не содержит Ввод значения @@")
                 tools.closeX()
-                //Thread.sleep(threadSleep)
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После последнего нажатия $flow в окне заголовок не содержит TDM365 @@")
                 tools.closeX()
@@ -724,10 +694,8 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 tools.byIDClick("CMD_TEST_STREAM_0")
-                //Thread.sleep(threadSleep)  // почему-то необходимо
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
-                Thread.sleep(threadSleep)
                 tools.closeX()
                 if (DT > 6) println("Конец Test нажатия на $flow0")
             }
