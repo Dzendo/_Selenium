@@ -1,9 +1,8 @@
-package com.example.selenium
+package com.example.selenium.selenide
 
 import com.codeborne.selenide.Condition.attribute
 import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Configuration
-import com.codeborne.selenide.Selectors.*
 import com.codeborne.selenide.Selenide
 import com.codeborne.selenide.Selenide.element
 import com.codeborne.selenide.Selenide.open
@@ -51,7 +50,7 @@ class MainPageTest {
     @Test
     fun navigationToAllTools() {
         mainPage.seeDeveloperToolsButton.click()
-        mainPage.findYourToolsButton.click()
+        //mainPage.findYourToolsButton.click()
 
         element("#products-page").shouldBe(visible)
 

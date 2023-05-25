@@ -56,6 +56,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${junitVersion}")
+
+    //implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.9.1")
 }
 
 test {

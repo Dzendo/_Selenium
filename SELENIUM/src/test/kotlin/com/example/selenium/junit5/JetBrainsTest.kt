@@ -1,4 +1,4 @@
-package ru.cs.tdm.cases
+package com.example.selenium.junit5
 /**
  * Selenium - это система управления браузером  - открыть, локация, считать, нажать, вкладки и т.д.
  * jupiter - это система тестирования чего угодно старты тестов, ассерты, отчеты, сетки, и более сложные вещи
@@ -11,9 +11,6 @@ import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.WebDriverWait
-import ru.cs.tdm.data.TestsProperties
-import ru.cs.tdm.data.startDriver
-import ru.cs.tdm.pages.JetBrainsPage
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -28,8 +25,7 @@ class JetBrainsTest {
     companion object {
         private lateinit var brainsPage: JetBrainsPage
         // задержки : 0- все сбоят 100 - 1 шт 1000 - 0 шт
-        private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
-        private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
+        private val DT: Int = 9          // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = repeateTestsNomber                       // количество повторений тестов
         private const val NN:Int = 3                                    // количество повторений тестов
 
@@ -46,13 +42,13 @@ class JetBrainsTest {
         @BeforeAll
         fun beforeAll() {
             if (DT >7) println("Начало BeforeAll JetBrainsTest")
-            // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
+            // Создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             driver = startDriver()
             brainsPage = JetBrainsPage(driver)
             val loginpage = "https://www.jetbrains.com/" //TestsProperties.loginpage
             if (DT > 8) println("Открытие страницы $loginpage")
-            val login = TestsProperties.login
-            val password = TestsProperties.password
+            val login = "login"
+            val password = "password"
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
             // JetBrains: Essential tools for software developers and teams
