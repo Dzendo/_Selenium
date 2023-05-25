@@ -21,7 +21,10 @@ const val repeateOut= 3
 // Рабочее поле экрана
 //div[@id="root"]//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]
 //div[@id="modalRoot"]//div[@data-modal-window='current']                   //span [starts-with(@class, 'Header_headerTitle')]
-
+fun WebElement.clickSend(str:String) {
+    this.click()
+    this.sendKeys(str)
+}
 
 class Tools(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
@@ -128,6 +131,9 @@ class Tools(val driver: WebDriver) {
     fun closeX() = WebDriverWait(driver, Duration.ofSeconds(13))
         .until(elementToBeClickable(xpath("//button[@data-reference='modal-window-close-button']","MODAL")))
         .click()
+    fun OK(OK:String = "ok-modal-window-btn" ) {
+        referenceClick(OK,"MODAL")
+    }
 
     fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath

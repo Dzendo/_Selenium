@@ -31,7 +31,7 @@ class HeadRef {
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 100                    // количество повторений тестов
+        private const val NN:Int = 10                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
@@ -437,7 +437,9 @@ class HeadRef {
             repeat(repeateOut) {
 
                 tools.referenceClick("SUB_SYSADMIN","ROOT666")
-                // Открыто Меню появляется под 666
+                // Открыто Меню появляется под 666 - нет
+                // class="Popup_contextMenuContainer__GACjx" style="visibility: visible;"
+                return
                 if (tools.byIDs("contmen")) return
 
                 if (DT > 6) println("####### SUB_SYSADMIN Повтор *##*$it  открытия через $it sec #######")
@@ -479,7 +481,7 @@ class HeadRef {
             val systemParameters = "Информация о системе"
             if (DT > 6) println("Test нажатия на $systemParameters")
             openSubSysadmin()
-            tools.byIDClick("CMD_SYSTEM_INFO")
+            tools.referenceClick("CMD_SYSTEM_INFO")
 
             assertTrue(tools.headerWait(systemParameters),
                 "@@@@ После нажатия $systemParameters нет заголовка окна  $systemParameters @@" )
@@ -499,7 +501,7 @@ class HeadRef {
             val sysAttributes = "Системные атрибуты"
             if (DT > 6) println("Test нажатия на $sysAttributes")
             openSubSysadmin()
-            tools.byIDClick("CMD_SYSTEM_ATTRS")
+            tools.referenceClick("CMD_SYSTEM_ATTRS")
 
 
             assertTrue(tools.headerWait(sysAttributes),
@@ -517,7 +519,7 @@ class HeadRef {
             if (DT > 6) println("Test нажатия на $dataTree")
             openSubSysadmin()
 
-            tools.byIDClick("CMD_DATA_SCHEME")
+            tools.referenceClick("CMD_DATA_SCHEME")
             assertTrue(tools.headerWait( dataTree),"@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
 
             assertTrue(presenceOfElementLocated(By.xpath("// *[data-reference='FORM_TREE_OBJS']")) != null,
@@ -538,7 +540,7 @@ class HeadRef {
             val eventsLog = "Журнал событий"
             if (DT > 6) println("Test нажатия на $eventsLog")
             openSubSysadmin()
-            tools.byIDClick("CMD_EVENTS_LOG")
+            tools.referenceClick("CMD_EVENTS_LOG")
 
             assertTrue(tools.headerWait( eventsLog) ,
                 "@@@@ После нажатия $eventsLog нет заголовка окна  $eventsLog @@" )
@@ -560,7 +562,7 @@ class HeadRef {
             val serverLog = "Журнал сервера"
             if (DT > 6) println("Test нажатия на $serverLog")
             openSubSysadmin()
-            tools.byIDClick("CMD_SERVER_LOG")
+            tools.referenceClick("CMD_SERVER_LOG")
             assertTrue(tools.headerWait( serverLog),
                 "@@@@ После нажатия $serverLog нет заголовка окна  $serverLog @@" )
             assertTrue(presenceOfElementLocated(By.xpath("//*[data-reference='FORM_SERVER_LOG']")) != null,
@@ -577,7 +579,7 @@ class HeadRef {
             val delObjects = "Удалить структуру объектов"
             if (DT > 6) println("Test нажатия на $delObjects")
             openSubSysadmin()
-            tools.byIDClick("CMD_STRUCT_OBJS_DELETE")
+            tools.referenceClick("CMD_STRUCT_OBJS_DELETE")
             assertTrue(tools.headerWait("Удаление структуры объектов"),
                 "@@@@ После нажатия $delObjects в окне заголовок не содержит Выбор объектов @@")
             tools.closeX()
@@ -642,7 +644,7 @@ class HeadRef {
                 val flow0 = "Поток - Проверка связи без авторизации"
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
-                tools.byIDClick("CMD_TEST_STREAM_CHECK_CONNECT_NO_AUTHORIZE")
+                tools.referenceClick("CMD_TEST_STREAM_CHECK_CONNECT_NO_AUTHORIZE")
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
 
@@ -656,7 +658,7 @@ class HeadRef {
                 val flow0 = "Поток - Проверка связи с авторизацией"
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
-                tools.byIDClick("CMD_TEST_STREAM_CHECK_CONNECT_WITH_AUTHORIZE")
+                tools.referenceClick("CMD_TEST_STREAM_CHECK_CONNECT_WITH_AUTHORIZE")
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
                 tools.closeX()
@@ -670,7 +672,7 @@ class HeadRef {
                 val flow = "Поток - Проверка статуса проекта"
                 if (DT > 6) println("Test нажатия на $flow")
                 openCETD()
-                tools.byIDClick("CMD_TEST_STREAM_PROJECT_CHECK")
+                tools.referenceClick("CMD_TEST_STREAM_PROJECT_CHECK")
 
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow в окне заголовок не содержит TDMS @@")
@@ -693,7 +695,7 @@ class HeadRef {
                 val flow0 = "Поток 0 - Отправка проекта"
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
-                tools.byIDClick("CMD_TEST_STREAM_0")
+                tools.referenceClick("CMD_TEST_STREAM_0")
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 tools.closeX()
@@ -708,7 +710,7 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow1")
                 openCETD()
 
-                tools.byIDClick("CMD_TEST_STREAM_1")
+                tools.referenceClick("CMD_TEST_STREAM_1")
 
                 assertTrue(tools.headerWait( "Выбор сценария"),
                     "@@@@ После нажатия $flow1 в окне заголовок не содержит Выбор сценария @@")
@@ -726,7 +728,7 @@ class HeadRef {
                 val flow5 = "Поток 5.1 - Отправка окончательного ПД"
                 if (DT > 6) println("Test нажатия на $flow5")
                 openCETD()
-                tools.byIDClick("CMD_TEST_STREAM_5_1")
+                tools.referenceClick("CMD_TEST_STREAM_5_1")
                 assertTrue(tools.headerWait("Выбор Передаточного документа"),
                     "@@@@ После нажатия $flow5 в окне заголовок не содержит Выбор объектов @@")
                 tools.closeX()

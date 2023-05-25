@@ -40,14 +40,14 @@ class LoginPage(val driver: WebDriver) {
      * Определение локатора поля ввода логина
      */
 
-    @FindBy(xpath = "//input[@id='login-authorization']")
+    @FindBy(xpath = "//input[@data-reference='login-authorization']")
     private lateinit var  loginAuthorization: WebElement
 
     /**
      * Определение локатора поля ввода пароля
      */
 
-    @FindBy(xpath = "//input[@id='password-authorization']") // Тема 1,2
+    @FindBy(xpath = "//input[@data-reference='password-authorization']") // Тема 1,2
     private lateinit var passwordAuthorization: WebElement
 
     /**
@@ -76,7 +76,7 @@ class LoginPage(val driver: WebDriver) {
      * Определение локатора пункта меню Сменить пароль
      */
     //div[@id="user-change-password"]  title="Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи." <span>Сменить пароль</span>
-    @FindBy(xpath = "//div[@id='user-change-password']")
+    @FindBy(xpath = "//div[@data-reference='user-change-password']")
     private lateinit var userChangePassword: WebElement
 
     /**
@@ -91,7 +91,7 @@ class LoginPage(val driver: WebDriver) {
      */
 
     //div [@id="user-logout"]  title="Выход из приложения"  <span>Выход</span>
-    @FindBy(xpath = "//div [@id='user-logout']")
+    @FindBy(xpath = "//div [@data-reference='user-logout']")
     private lateinit var userLogout: WebElement
 
     /**
@@ -105,12 +105,12 @@ class LoginPage(val driver: WebDriver) {
 
     // Да
     //button [@id="accept-logout-btn"] data-reference="accept-logout-btn"  <span class="Buttons_selectionsButtonDescription__-QPev">Да</span>
-    @FindBy(xpath = "//button [@id='accept-logout-btn']")
+    @FindBy(xpath = "//button [@data-reference='accept-logout-btn']")
     private lateinit var acceptLogoutBtn: WebElement
 
     // Нет
     //button [@id="deny-logout-btn"]  data-reference="deny-logout-btn" <span class="Buttons_selectionsButtonDescription__-QPev">Нет</span>
-    @FindBy(xpath = "//button [@id='deny-logout-btn']")
+    @FindBy(xpath = "//button [@data-reference='deny-logout-btn']")
     private lateinit var denyLogoutBtn: WebElement
 
     // Крестик - закрыть окно
