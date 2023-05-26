@@ -62,7 +62,7 @@ class ChangePass {
         fun afterAll() {
             //tools.idList()
             if (DT >7) println("Вызов AfterAll PassTest")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             driver.quit() //  закрытия окна браузера
             if (DT >7) println("Конец Вызов AfterAll PassTest")
         }
@@ -92,7 +92,7 @@ class ChangePass {
     @AfterEach
     fun afterEach() {
         if (DT > 7) println("Вызов AfterEach ChangePass")
-        tools.closeEsc5()
+        tools.closeEsc(5)
         Login(driver).loginOut()
         //driver.navigate().refresh()
         if (DT > 7) println("Конец Вызов AfterEach ChangePass")
@@ -101,13 +101,15 @@ class ChangePass {
      *  тест наличия/ удаление пользователя
      */
     private fun openAllUsers(click: String = "NONE") {
+        val adminUser = "Администрирование групп"
         val mainMenu = "Объекты"
+        val allUsers = "Все пользователи"
+        if (DT > 8) println("Test openAllUsers")
         if (DT > 8) println("Test нажатия на $mainMenu TDMS Web")
         tools.byIDClick("objects-tab")
         assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
 
-        val adminUser = "Администрирование групп"
         if (DT > 8) println("Test нажатия на $adminUser")
         tools.referenceClick("CMD_GROUP_CHANGE")
         assertTrue(tools.headerWait( "Редактирование групп"),
@@ -115,11 +117,11 @@ class ChangePass {
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
             "@@@@ В окне Редактирование групп нет обязательного заголовка списка Группы пользователей @@")
 
-        val allUsers = "Все пользователи"
+
         if (DT > 8) println("Test нажатия на $allUsers")
-        // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
+
         tools.referenceClick("GRID_GROUPS","MODAL","//descendant::span[text()= '$allUsers']")
-        //tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
+
         assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers,"MODAL"),  // xpath: /html/body//*[@data-reference= 'GROUP_NAME']]
             "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")
         if (DT > 7) println("Открыли всех пользователей")
@@ -241,7 +243,7 @@ class ChangePass {
          tools.OK()
 
          if (DT >7) println("Выход из под SYSADMIN")
-         tools.closeEsc5()
+         tools.closeEsc(5)
          login = "ChangePass"
          password = "tdm365"
          //Login(driver).loginIn(login, password)

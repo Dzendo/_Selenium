@@ -33,6 +33,7 @@ object TestsProperties {
         "tdms2012:443",
         "srv2b:443",
         "SRV10a:443",
+        "WKW-930:443",
     )
 
     val loginPages: Array<String> = arrayOf(
@@ -42,6 +43,7 @@ object TestsProperties {
         "http://tdms-temp-2012:443/client/#objects",
         "http://tdms-srv2b:443/client/#objects/",
         "http://TDMS-SRV10a:443/client/#objects/",
+        "http://WKW-930:443/client/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")

@@ -78,7 +78,7 @@ class HeadRef {
         @AfterAll
         fun afterAll() {
             if (DT > 7) println("Вызов afterAll")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
             if (DT > 7) println("Конец Вызов afterAll")
@@ -99,7 +99,7 @@ class HeadRef {
     @AfterEach
     fun afterEach() {
         if (DT > 7) println("Вызов AfterEach верхний")
-        tools.closeEsc5()
+        tools.closeEsc(5)
         // Можно послать CTRL/ALT/T
         if (DT > 7) println("Конец Вызов AfterEach верхний")
     }
@@ -128,7 +128,7 @@ class HeadRef {
         @AfterEach
         fun afterEach() {
             if (DT > 7) println("Вызов inner Head AfterEach 5 раз closeEsc")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             // Можно послать CTRL/ALT/T
             if (DT > 7) println("Конец Вызов inner Head AfterEach")
         }
@@ -264,7 +264,7 @@ class HeadRef {
         @AfterEach
         fun afterEach() {
             if (DT > 7) println("Вызов inner Tools AfterEach пять раз closeEsc")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             //driver.navigate().refresh()
             if (DT > 7) println("Конец inner Tools AfterEach пять раз closeEsc")
         }
@@ -314,7 +314,7 @@ class HeadRef {
                 "@@@@ После нажатия $filter и открытия окна с заголовком Редактирование объекта в окне нет поля T_ATTR_USER_QUERY_NAME Наименование фильтра @@")
             tools.closeX()
             tools.byIDClick("objects-tab")
-            driver.navigate().refresh()
+            //driver.navigate().refresh()
             if (DT > 6) println("Конец Test нажатия на $filter")
         }
         fun workTable() {
@@ -426,7 +426,7 @@ class HeadRef {
         @AfterEach
         fun afterEach() {
             if (DT > 7) println("Вызов inner SubSysadmin AfterEach 5 раз closeEsc")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             if (DT > 7) println("Конец inner SubSysadmin AfterEach")
         }
 
@@ -438,7 +438,9 @@ class HeadRef {
 
                 tools.referenceClick("SUB_SYSADMIN","ROOT666")
                 // Открыто Меню появляется под 666 - нет
-                // class="Popup_contextMenuContainer__GACjx" style="visibility: visible;"
+
+            //div  tabindex="-1" class="Popup_contextMenuContainer_..." style="... visibility: visible; ...position: fixed; left: 163px; top: 70px;"
+
                 return
                 if (tools.byIDs("contmen")) return
 
@@ -450,28 +452,6 @@ class HeadRef {
            // assertTrue(tools.qtipClass("Меню разработчика")?.contains("x-btn-menu-active") ?: false,
             //    "@@@@ После $repeateOut нажатия Меню разработчика меню все-таки не открылось @@")
             if (DT > 7) println("Конец openSubSysadmin")
-        }
-
-        /**
-         * Вспомогательная процедура нажатия на пункты системного меню SubSysadmin и СЭТД
-         * ожидает открытия попап окна с заданным заголовком
-         * вообще годится для любого меню - вынести в Tools.kt
-         */
-        private fun clickMenu(menu: String, window: String, title: String): Boolean {
-            if (DT > 7) println("Вызов clickMenu $menu $window $title")
-            repeat(repeateOut) {
-                //openSubSysadmin()
-                tools.xpathClickMenu(menu)
-                if (tools.headerWait(title)) return true
-                if (DT > 6) println("####### пункт MENU за *##*$it не нажалось  $menu - нет  $title ждем $it sec #######")
-                tools.closeEsc()
-                tools.qtipClick("Объекты")
-            }
-            if (DT > 5) println("&&&&&&&&& Не нажалось $menu за $repeateOut нажатий $title  &&&&&&&&&")
-            assertTrue(tools.headerWait(title),
-                "@@@@ После клика на меню $menu не открылось окно $window с заголовком $title за $repeateOut попыток @@")
-            if (DT > 7) println("Конец clickMenu $menu $window $title")
-            return false
         }
 
         // data-reference="FORM_SYSTEM_SETTINGS"
@@ -609,7 +589,7 @@ class HeadRef {
             @AfterEach
             fun afterEach() {
                 if (DT > 7) println("Вызов inner CETD AfterEach 5 раз closeEsc")
-                tools.closeEsc5()
+                tools.closeEsc(5)
                 if (DT > 7) println("Конец inner CETD AfterEach")
             }
 

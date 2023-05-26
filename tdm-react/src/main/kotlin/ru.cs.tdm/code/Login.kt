@@ -3,7 +3,6 @@ package ru.cs.tdm.code
 import org.junit.jupiter.api.Assertions.*
 import ru.cs.tdm.pages.LoginPage
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.support.ui.ExpectedConditions
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.TestsProperties
 
@@ -53,8 +52,8 @@ class Login(val driver: WebDriver) {
     }
 
     fun checkBrowser(url:String): Boolean {
-        loginPage.getBrowserUrl()
-        assertTrue(loginPage.getBrowserUrl() == url,"В Браузере не имеет открыт $url")
+        val bUrl = loginPage.getBrowserUrl().uppercase()
+        assertTrue(bUrl == url.uppercase(),"В Браузере не имеет открыт $url")
         return true
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
+import ru.cs.tdm.code.clickSend
 import ru.cs.tdm.data.TDM365
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
@@ -102,7 +103,7 @@ class Filter {
         fun afterAll() {
             //tools.idList()
             if (DT >7) println("Вызов AfterAll FilterTest")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
@@ -115,53 +116,47 @@ class Filter {
         if (DT > 7) println("Начало BeforeEach FilterTest")
         val mainMenu = "Объекты"
         if (DT > 7) println("Test нажатия на $mainMenu TDMS Web")
-        tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")  // сбоит нечасто заголовок страницы на создании
-        assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
+        tools.byIDClick("objects-tab")
+        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+        assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
         if (DT >7) println("Конец BeforeEach FilterTest")
 
     }
-    // пришлось ввести т.к. при рабочем столе два значка "создать фильтр"
+    // Пришлось ввести т.к. при рабочем столе два значка "создать фильтр"
     fun workTable() {
         val workTable = "Рабочий стол"
         if (DT >7) println("Test нажатия на $workTable")
-        tools.qtipClickLast(workTable)
-        //Thread.sleep(threadSleep)
-        tools.xpathClickLast("//span[text()= '$workTable (SYSADMIN)']") // встать в дереве на Рабочий стол (SYSADMIN)
+        tools.byIDClick("desktop-tab")
         assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")  // сбоит 1 раз на 100
-        assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
+        assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
         // Здесь проверка дерева и отображения
-        tools.xpathClickLast("//span[contains(text(), 'Фильтры')]")
-        Thread.sleep(threadSleep)
+        tools.xpathClick("//span[contains(text(), 'Фильтры')]","ROOT666")
+        assertTrue(tools.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
         val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
         val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") TDM365 else
                 if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
         if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
-        Thread.sleep(threadSleep)
-        tools.xpathClickLast("//*[contains(text(), 'Фильтр $localDateNow')]")
-        Thread.sleep(threadSleep)
-        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $localDateNow",false,
+        tools.xpathClick("//div [@title = 'Фильтры']//ancestor::ul//*[contains(text(), 'Фильтр $localDateNow')]", "ROOT666")
+
+        assertContains(tools.xpath("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $localDateNow",false,
             "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
-        Thread.sleep(threadSleep)
-        if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
+        if (tools.reference("CMD_DELETE_USER_QUERY","ROOT666") == null) {
             println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие: $clickRef")
             screenShot()
         }
 
-        Thread.sleep(threadSleep)
-        tools.referenceClickLast(clickRef)
-        Thread.sleep(threadSleep)
-        assertTrue(tools.titleWait(tipWindow, titleWindow),
-            "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $tipWindow @@")
-        Thread.sleep(threadSleep)
+        tools.referenceClick(clickRef, "ROOT666")
+        assertTrue(tools.headerWait(titleWindow),
+            "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $titleWindow @@")
+
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
-                tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+                tools.xpath("//div[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
             else
-                tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE"
+                tools.xpath("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input", "MODAL")?.getAttribute("value") ?: "NONE"
          assertContains(filterText, "Фильтр $localDateNow", false,
              "@@@@ Нет правильного текста Фильтр $localDateNow на всплывающем окне $filterText @@")
     }
@@ -169,9 +164,9 @@ class Filter {
     fun afterEach(){
         if (DT >7) println("Вызов AfterEach FilterTest")
         //screenShot()
-        tools.closeEsc5()
-        Thread.sleep(threadSleep)
-        driver.navigate().refresh()
+        tools.closeEsc(5)
+//        Thread.sleep(threadSleep)
+//        driver.navigate().refresh()
     }
     fun screenShot(name: String = "image") {
         val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
@@ -197,25 +192,27 @@ class Filter {
         // выбрать из дерева фильтры
 
 
-        tools.referenceClickLast("CMD_CREATE_USER_QUERY")
-        assertTrue(tools.titleWait("tdmsEditObjectDialog", "Редактирование объекта"),
+        tools.referenceClick("CMD_CREATE_USER_QUERY", "ROOT666")
+        assertTrue(tools.headerWait("Редактирование объекта"),
             "@@@@ После нажатия $createUser - нет окна с заголовком Редактирование объекта @@")
         //  оставить ждать Омск
         // tools.referenceClickLast("tabbar-FORM_USER_QUERY")
         //  assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
-        assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра"),
+        assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
             "@@@@ На форме фильтра при $createUser - не нашлось текста Наименование фильтра @@")
-        tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
-            ?.sendKeys(" $localDateNow")
-        Thread.sleep(threadSleep)
+        tools.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
+            ?.clickSend("Тест $localDateNow", true)
         // Проверить что в поле стоит дата, если нет, то Скрин
-        val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
+        val ATTR_USER_QUERY_NAME = tools.reference("ATTR_USER_QUERY_NAME", "MODAL", "//descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
          if (ATTR_USER_QUERY_NAME.contains(" $localDateNow").not()){
              if (DT > 0) println("&&&&&&&&&&01&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
              screenShot()
          }
-        tools.clickOK()
+        tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
+
+       // Thread.sleep(3000)
+        tools.OK()
         if (DT > 6) println("Конец Test нажатия на $createUser")
     }
     /**

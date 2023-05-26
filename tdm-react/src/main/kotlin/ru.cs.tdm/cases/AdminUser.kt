@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Tools
+import ru.cs.tdm.code.clickSend
 import ru.cs.tdm.data.TDM365
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
@@ -103,7 +104,7 @@ class AdminUser {
     lateinit var tools: Tools
 
     /**
-     * осуществление первоначальной настройки
+     * Осуществление первоначальной настройки
      * Предупреждение: Не смешивайте неявные и явные ожидания.
      * Это может привести к непредсказуемому времени ожидания.
      * Например, установка неявного ожидания 10 секунд и явного ожидания 15 секунд
@@ -113,7 +114,7 @@ class AdminUser {
         @BeforeAll
         fun beforeAll() {
         if (DT >7) println("Вызов BeforeAll AdminUserTest")
-            // создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
+            // Создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         driver = startDriver()
 
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
@@ -135,7 +136,7 @@ class AdminUser {
         @AfterAll
         fun afterAll() {
             if (DT >7) println("Вызов AfterAll AdminUserTest")
-            tools.closeEsc5()
+            tools.closeEsc(5)
             //Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
@@ -149,45 +150,30 @@ class AdminUser {
         // data-reference="GRID_GROUPS" - левый список групп
         // data-reference="GRID_USERS" - правый список пользователей
         if (DT >7) println("Начало BeforeEach AdminUserTest")
+
         val mainMenu = "Объекты"
         if (DT >8) println("Test нажатия на $mainMenu TDMS Web")
-        tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain(TDM365), "@@@@ Нажали на $mainMenu - нет заголовка вкладки TDM365 @@")
-        assertTrue(tools.qtipPressedLast("Объекты"),"@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
+        tools.byIDClick("objects-tab")
+        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
+        assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
 
         val adminUser = "Администрирование групп"
         if (DT >8) println("Test нажатия на $adminUser")
-        tools.qtipClickLast(adminUser)
+        tools.referenceClick("CMD_GROUP_CHANGE")
         println(" Hажатия на $adminUser")
-       // val nomberWindowAdminUser = tools.nomberTitle("window", "Редактирование групп")
         assertTrue(tools.headerWait("Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         println(" проверили заголовок на $adminUser")
-        assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей"),
+        assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
             "@@@@ В окне Редактирование групп нет обязательного заголовка списка Группы пользователей @@")
-
-       // data-reference="GRID_GROUPS"
-        //val headTeg = tools.idRef("GRID_GROUPS")
-        val allUsers = "Все пользователи"
-        if (DT >8) println("Test нажатия на $allUsers ")
-        // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
-        //tools.xpathLast("//*[@id='$headTeg']/descendant::div[text()= '$allUsers']")?.click()
-        tools.xpathLast("//*[@data-reference='GRID_GROUPS']/descendant::span[text()= '$allUsers']")?.click()
-
-        assertTrue(tools.referenceWaitText("GROUP_NAME", allUsers),
-            "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")
-
-        //tools.clickOK()
-
+        clickAllUsers()
         if (DT >7) println("Конец BeforeEach AdminUserTest")
     }
     @AfterEach
     fun afterEach(){
         if (DT >7) println("Вызов AfterEach AdminUserTest")
         //screenShot()
-        tools.closeEsc5()
-        // Thread.sleep(threadSleep)
-        //driver.navigate().refresh()
+        tools.closeEsc(5)
         if (DT >7) println("Конец Вызов AfterEach AdminUserTest")
     }
     fun screenShot(name: String = "image") {
@@ -196,55 +182,78 @@ class AdminUser {
         copyFile(scrFile, File("./$name$localDateNow.png"))
         if (DT >5) println("Скрин сохранен ")
     }
-    private fun openAllUsers(click: String) {
+    private fun clickAllUsers(click: String = "NONE") {
         val adminUser = "Администрирование групп"
-        val mainMenu = "Объекты"
+        val allUsers = "Все пользователи"
         if (DT > 8) println("Test openAllUsers")
-        /*
-        tools.qtipClickLast(mainMenu)
-        assertTrue(tools.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
-        assertTrue(tools.qtipPressedLast("Объекты"), "@@@@ После нажатия $mainMenu - кнопка Объекты нет утоплена @@")
-        if (DT > 8) println("Test нажатия на $adminUser")
-        tools.qtipClickLast(adminUser)
-        */
+
         assertTrue(
             tools.headerWait( "Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         assertTrue(
-            tools.referenceWaitText("STATIC1", "Группы пользователей"),
+            tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
             "@@@@ В окне Редактирование групп нет обязательного заголовка списка Группы пользователей @@")
 
-        // data-reference="GRID_GROUPS"
-        //val headTeg = tools.idRef("GRID_GROUPS")
-        val allUsers = "Все пользователи"
         if (DT > 8) println("Test нажатия на $allUsers")
-        // //div[text()= '$allUsers']   //*[@id='$headTeg']/descendant::div[text()= '$allUsers']
-        tools.xpathLast("//*[@data-reference='GRID_GROUPS']/descendant::span[text()= '$allUsers']")?.click()
+        tools.referenceClick("GRID_GROUPS","MODAL","//descendant::span[text()= '$allUsers']")
         assertTrue(
-            tools.referenceWaitText("GROUP_NAME", allUsers),
+            tools.referenceWaitText("GROUP_NAME", allUsers,"MODAL"),  // xpath: /html/body//*[@data-reference= 'GROUP_NAME']]
             "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")
         if (DT > 7) println("Открыли всех пользователей")
 
         if (DT >8) println("Test нажатия на $click")
         if (DT >8) println("Редактирование $localDateNow")
         if ((click == "BUTTON_USER_EDIT")  or (click == "BUTTON_USER_DELETE"))
-            tools.xpathLast("//div[contains(text(), '$localDateNow')]")?.click()
+            tools.referenceClick("GRID_USERS","MODAL","//descendant::span[contains(text(),'Тестовый')]")
 
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
         if ( (click == "NONE").not())
-            tools. referenceClickLast(click)
-        Thread.sleep(threadSleep)
+                tools. referenceClick(click,"MODAL")
+
         if ((click == "BUTTON_USER_CREATE") or (click == "BUTTON_USER_EDIT"))
-            assertTrue(
-                tools.headerWait("Редактирование пользователя"),
+            assertTrue(tools.headerWait("Редактирование пользователя"),
                 "@@@@ После нажатия $click - нет заголовка окна Редактирование пользователя @@")
         if (DT > 8) println("Конец Test openAllUsers")
     }
-     /**
-     * Общий длинный тест пока : создание, редактирование, добавление роли, удаление
-      */
+    fun isTestPresent(grid: String = "GRID_USERS"): Boolean {
+        clickAllUsers()
+        return tools.reference(grid, "MODAL")
+            ?.findElements(By.xpath("./descendant::span[contains(text(),'Тестов')]"))
+            .isNullOrEmpty().not()
+    }
+    @Test
+    //@DisplayName("Delete user TEST")
+    @DisplayName("0. Проверка пользователя Тестоый")
+    fun n00_checkUserPass() {
+        if (DT > 6) println("Test проверка user Тестоый")
+
+        while  (isTestPresent("GRID_USERS")) {
+            clickAllUsers("BUTTON_USER_DELETE")
+            assertTrue(tools.headerWait(TDM365),
+                "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
+            assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
+                "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
+            tools.OK("yes-modal-window-btn")  // удалить тестового
+            if (DT > 8) println("Удален Тестовой пользователь")
+        }
+
+        while  (isTestPresent("GRID_GROUPS")) {
+            tools.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
+            tools.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
+            assertTrue(tools.headerWait(TDM365),
+                "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить группу) @@")
+
+            assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
+                "@@@@ При удалить группу - нет в окне сообщения с заголовком TDMS Удалить группу @@")
+            tools.OK("yes-modal-window-btn")  // удалить тестовая
+            if (DT > 8) println("Удаление Тестовой группы")
+        }
+
+        tools.OK()
+        if (DT > 6) println("Конец Test проверка user Тестоый")
+    }
     /**
-     *  тест создание нового пользователя
+     *  Тест создание нового пользователя
      */
     @RepeatedTest(NN)
     @DisplayName("Создать пользователя")
@@ -252,19 +261,30 @@ class AdminUser {
         val createUser = "Создать пользователя"
         if (DT > 6) println("Test нажатия на $createUser")
 
-        openAllUsers("BUTTON_USER_CREATE")
+        clickAllUsers("BUTTON_USER_CREATE")
 
-        Thread.sleep(threadSleep)
-        //if (DT >8) println("Ура заработало = ${tools.nomberTitle("window", "Редактирование пользователя")}")
         assertTrue(tools.headerWait("Редактирование пользователя"),
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
-        tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/div/textarea")  // Описание
-            ?.sendKeys("Тестовый $localDateNow")
-        tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/div/textarea")  // Логин
-            ?.sendKeys("Логин $localDateNow")
 
-        tools.clickOK()
-        tools.clickOK()
+        tools.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
+            ?.clickSend("Тестовый $localDateNow")
+        tools.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
+            ?.clickSend("Логин $localDateNow")
+        tools.OK()
+
+        // Проверить что Pass есть в списке
+        assertTrue(
+            tools.headerWait("Редактирование групп"),
+            "@@@@ После создания  пользователя Логин $localDateNow ОК не стоим в родительском окне Редактирование групп @@")
+        if (DT > 6) println("Логин $localDateNow")
+        tools.referenceClick("GRID_USERS","MODAL","//descendant::span[contains(text(),'$localDateNow')]")
+
+        assertTrue((tools.reference("GRID_USERS","MODAL","//descendant::span[contains(text(),'$localDateNow')]//ancestor::tr")?.getAttribute("class")
+            ?.contains("Selected")?: false),
+            "@@@@ После выделения созданного пользователя $localDateNow в таблице нет такого пользователя @@")
+
+        tools.OK()
+       // tools.OK()
         if (DT > 6) println("Конец Test нажатия на $createUser")
     }
 
@@ -274,35 +294,33 @@ class AdminUser {
     @Test
     @DisplayName("Заполнение нового пользователя")
     fun n05_fillingUserTest() {
-
-            //val testFIO = "Тестовая Фамилия $localDateNow"
             val fillingUser = "Редактирование пользователя"
             if (DT > 6) println("Test нажатия на $fillingUser")
 
-            openAllUsers("BUTTON_USER_EDIT")
+            clickAllUsers("BUTTON_USER_EDIT")
 
-            assertTrue(tools.titleWait("window", fillingUser),
+            assertTrue(tools.headerWait(fillingUser),
                 "@@@@ После нажатия BUTTON_USER_EDIT - нет заголовка окна Редактирование пользователя @@")
             // //html/body/descendant::div[@data-reference]
-            tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
-                ?.sendKeys(" #")
-            tools.xpathLast("//*[@data-reference='ATTR_LOGIN']/descendant::input")  // Логин
-                ?.sendKeys(" #")
+            tools.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
+                ?.clickSend(" #")
+            tools.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
+                ?.clickSend(" #")
 
-            tools.xpathLast("//*[@data-reference='ATTR_TDMS_LOGIN_ENABLE']/descendant::input")  // Разрешить вход в TDMS
-                ?.click()
-            tools.xpathLast("//*[@data-reference='ATTR_USER_NAME']/descendant::input")  // Имя
-                ?.sendKeys("Имя")
-            tools.xpathLast("//*[@data-reference='ATTR_USER_MIDDLE_NAME']/descendant::input")  // Отчество
-                ?.sendKeys("Отчество")
-            tools.xpathLast("//*[@data-reference='ATTR_USER_LAST_NAME']/descendant::input")  // Фамилия
-                ?.sendKeys("Фамилия")
-            tools.xpathLast("//*[@data-reference='ATTR_USER_PHONE']/descendant::input")  // Телефон
-                ?.sendKeys("9291234567")
-            tools.xpathLast("//*[@data-reference='ATTR_USER_EMAIL']/descendant::input")  // E-mail
-                ?.sendKeys("ya@ya")
-            tools.clickOK()
-            tools.clickOK()
+            tools.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL","//descendant::span")  // Разрешить вход в TDMS
+
+            tools.reference("ATTR_USER_NAME","MODAL","/descendant::input")  // Имя
+                ?.clickSend("Имя")
+            tools.reference("ATTR_USER_MIDDLE_NAME","MODAL","//descendant::input")  // Отчество
+                ?.clickSend("Отчество")
+            tools.reference("ATTR_USER_LAST_NAME","MODAL","//descendant::input")  // Фамилия
+                ?.clickSend("Фамилия")
+            tools.reference("ATTR_USER_PHONE","MODAL","//descendant::input")  // Телефон
+                ?.clickSend("9291234567")
+            tools.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")  // E-mail
+                ?.clickSend("ya@ya")
+            tools.OK()
+            tools.OK()
             if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
         /**
@@ -315,34 +333,27 @@ class AdminUser {
     @DisplayName("Редактирование пользователя")
     fun n06_EditUserTest() {
 
-        //val testFIO = "Тестовая Фамилия $localDateNow"
         val fillingUser = "Редактирование пользователя"
         if (DT > 6) println("Test нажатия на $fillingUser")
 
-        openAllUsers("BUTTON_USER_EDIT")
+        clickAllUsers("BUTTON_USER_EDIT")
 
         val editUser = "Редактировать пользователя"
         if (DT > 6) println("Test нажатия на $editUser")
 
         if (DT > 8) println("Редактирование $localDateNow")
-        //tools.xpathLast("//div[contains(text(), '$localDateNow')]")?.click()
 
-        //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
-        //tools. referenceClickLast("BUTTON_USER_EDIT")
-        //Thread.sleep(threadSleep)
-        //assertTrue(tools.titleWait("window", "Редактирование пользователя"))
-
-        val description = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")  // Описание
+        val description = tools.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
 
         //.sendKeys("Тестовая Фамилия $localDateNow")
         assertTrue(description?.getAttribute("value") == "Тестовый $localDateNow #",
-            "@@@@ Нет измененного описания с # @@")
-        description?.sendKeys(" @")
+            "@@@@ Нет измененного описания с # ")
+        description?.clickSend(" @")
         assertTrue(description?.getAttribute("value") == "Тестовый $localDateNow # @",
-            "@@@@ Нет измененного описания с # и @ @@")
+            "@@@@ Нет измененного описания с # и @ ")
 
-        tools.clickOK()
-        tools.clickOK()
+        tools.OK()
+        tools.OK()
         if (DT > 6) println("Конец Test нажатия на $fillingUser")
     }
         /**
@@ -352,33 +363,30 @@ class AdminUser {
         @DisplayName("Добавление роли пользователю")
         fun n07_AddRoleUserTest() {
 
-            //val testFIO = "Тестовая Фамилия $localDateNow"
             val fillingUser = "Редактирование пользователя"
             if (DT > 6) println("Test n07_AddRoleUserTest нажатия на $fillingUser")
 
-            openAllUsers("BUTTON_USER_EDIT")
+            clickAllUsers("BUTTON_USER_EDIT")
             //  кнопка Добавить профиль data-reference="BUTTON_PROFILE_ADD"
-            tools.referenceClickLast("BUTTON_PROFILE_ADD")
-            //assertTrue(tools.selectedGridDialogTitleWait("Выбор профиля"))
-            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("tdmsSelectObjectGridDialog", "Выбор профиля")}")
-            assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор профиля"),
+            tools.referenceClick("BUTTON_PROFILE_ADD", "MODAL")
+            assertTrue(tools.headerWait("Выбор профиля"),
                 "@@@@ После нажатия BUTTON_PROFILE_ADD - нет заголовка окна Выбор профиля @@")
 
             val profileUser = "Руководитель"
             if (DT > 6) println("Test нажатия на $profileUser")
-            //tools.idList()
-            tools.xpathLast("//span[text()= '$profileUser']/ancestor::td")?.click()
-            tools.clickOK()  // закрыть выбор профиля с выбором руководителя
 
-            assertTrue(tools.titleWait("window", "Редактирование пользователя"),
+            tools.xpathClick("//span[text()= '$profileUser']", "MODAL", "//ancestor::td")
+            tools.OK()  // закрыть выбор профиля с выбором руководителя
+
+            assertTrue(tools.headerWait("Редактирование пользователя"),
                 "@@@@ После выхода из редактирования - нет заголовка окна Редактирование групп @@")
             // проверка что есть профиль руководитель
 
-            val description_new = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::input")
+            val description_new = tools.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
             assertTrue(description_new?.getAttribute("value") == "Тестовый $localDateNow # @",
                 "@@@@ После редактирования - нет пользователя Тестовый $localDateNow # @  @@")
-            tools.clickOK()
-            tools.clickOK()
+            tools.OK()
+            tools.OK()
             if (DT > 6) println("Конец Test n07_AddRoleUserTest нажатия на $fillingUser")
         }
 
@@ -393,25 +401,23 @@ class AdminUser {
             val createGroup = "Создание новой группы"
             if (DT > 6) println("Test нажатия на $createGroup")
             //  Создания Группы data-reference="BUTTON_GROUP_CREATE"
-            tools.referenceClickLast("BUTTON_GROUP_CREATE")
-            Thread.sleep(threadSleep)
-            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("messagebox", "Создание новой группы")}")
-            assertTrue(tools.titleWait("messagebox", "Создание новой группы"),
+            tools.referenceClick("BUTTON_GROUP_CREATE","MODAL")
+
+            assertTrue(tools.headerWait("Создание новой группы"),
                 "@@@@ После нажатия $createGroup - нет окна с заголовком Создание новой группы @@")
             val inputGpoup =
-                tools.xpathLast("//div[text() = 'Введите название новой группы']/parent::*/descendant::input")
+                tools.reference("FormSimpleEditDlg-prompt", "MODAL","//parent::div/descendant::input")
+                //tools.xpathLast("//span[text() = 'Введите название новой группы']/parent::*/descendant::input")
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
-            inputGpoup?.sendKeys("Тестовая $localDateNow")
-            tools.clickOK("OK")  // создать Тестовая
-            if (DT > 8) println("Ура заработало = ${tools.nomberTitle("messagebox", Tdms)}")
-            Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", Tdms),
-                "@@@@ При $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
-            Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", Tdms),
+            inputGpoup?.clickSend("Тестовая $localDateNow")
+            tools.OK()  // создать Тестовая
+
+            assertTrue(tools.headerWait(TDM365),
+                "@@@@ При $createGroup - нет окна сообщения с заголовком TDM365 (группа создана) @@")
+            assertTrue(tools.headerWait(TDM365),
                 "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
-            tools.clickOK("OK")  // создана тестовая
-            tools.clickOK("ОК")     // закрыть адимин
+            tools.OK()  // создана тестовая
+            tools.OK()     // закрыть адимин
             if (DT > 6) println("Конец Test нажатия на $createGroup")
         }
         /**
@@ -424,20 +430,20 @@ class AdminUser {
             val deleteGroup = "Удаление группы"
             if (DT > 6) println("Test нажатия на $deleteGroup")
             // data-reference="GRID_GROUPS"   data-reference="GRID_USERS"
-            tools.xpathLast("//div[contains(text(), 'Тестовая')]")?.click()
+            tools.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
+
             //  Проверить что выделенная группа Тестовая data-reference="GROUP_NAME"
-            tools.referenceClickLast("BUTTON_GROUP_DELETE")
-            Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", Tdms),
+            tools.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
+
+            assertTrue(tools.headerWait(TDM365),
                 "@@@@ При $deleteGroup - нет окна сообщения с заголовком TDMS (удалить группу) @@")
             //val msgGpoup = tools.xpathLast("//div[text() = 'Удалить группу \"Тестовая\"?']")
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
-            val nomberMessage = tools.nomberTitle("messagebox", Tdms)
-            // id="messagebox-1329-msg"
-            assertContains(tools.byID("messagebox-$nomberMessage-msg")?.text?: "None", "Удалить группу",false,
+
+            assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
                 "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDMS Удалить группу @@")
-            tools.clickOK("Да")  // удалить тестовая
-            tools.clickOK("ОК")     // закрыть адимин
+            tools.OK("yes-modal-window-btn")  // удалить тестовая
+            tools.OK()     // закрыть адимин
             if (DT > 6) println("Test нажатия на $deleteGroup")
         }
 
@@ -448,37 +454,49 @@ class AdminUser {
         @DisplayName("удаление пользователя")
         fun n10_DeleteUserTest() {
             if (DT > 6) println("Test нажатия на Удаление на $localDateNow")
-            openAllUsers("BUTTON_USER_DELETE")
-            //assertTrue(tools.titleWait("window", "Редактирование групп"))
-        //val testFIO = "Тестовая Фамилия"
-            Thread.sleep(threadSleep)
-            assertTrue(tools.titleWait("messagebox", Tdms),
+            clickAllUsers("BUTTON_USER_DELETE")
+            assertTrue(tools.headerWait(TDM365),
                 "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
-        //tools.xpathLast("//div[contains(text(), '$localDateNow')]")?.click()
-        //tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
-            val nomberMessage = tools.nomberTitle("messagebox", Tdms)
-            // id="messagebox-1329-msg"
-            assertContains(tools.byID("messagebox-$nomberMessage-msg")?.text?: "None", "Удалить пользователя",false,
-                "@@@@ При BUTTON_USER_DELETE - нет в окне подтверждения с заголовком TDMS Удалить группу @@")
 
-        tools.clickOK("Да")
-        tools.clickOK("ОК")
+            assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
+                "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
+
+        tools.OK("yes-modal-window-btn")
+        tools.OK()
             if (DT > 6) println("Конец Test нажатия на Удаление на $localDateNow")
     }
-    @RepeatedTest(92)
-    @Disabled
-    @DisplayName("Удаление пользователей")
-    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
-        val user = "Тестовый "
-        assertTrue(tools.titleWait("window", "Редактирование групп"),
-            "@@@@ После нажатия Администрирование - нет заголовка окна Редактирование групп @@")
-        //val testFIO = "Тестовая Фамилия"
-        if (DT > 6) println("Удаление на $user")
-        tools.xpathLast("//div[contains(text(), '$user')]")?.click()
-        tools.referenceClickLast("BUTTON_USER_DELETE")  // //  кнопка Удалить пользователя
-        tools.clickOK("Да")
-        tools.clickOK("ОК")
+//    @RepeatedTest(92)
 
+    @Test
+    //@DisplayName("Delete user TEST")
+    @DisplayName("99. Проверка пользователя Тестоый")
+    fun n99_checkUserPass() {
+        if (DT > 6) println("Test проверка user Тестоый")
+
+        while  (isTestPresent("GRID_USERS")) {
+            clickAllUsers("BUTTON_USER_DELETE")
+            assertTrue(tools.headerWait(TDM365),
+                "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
+            assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
+                "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
+            tools.OK("yes-modal-window-btn")  // удалить тестового
+            if (DT > 8) println("Удален Тестовой пользователь")
+        }
+
+        while  (isTestPresent("GRID_GROUPS")) {
+            tools.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
+            tools.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
+            assertTrue(tools.headerWait(TDM365),
+                "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить группу) @@")
+
+            assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
+                "@@@@ При удалить группу - нет в окне сообщения с заголовком TDMS Удалить группу @@")
+            tools.OK("yes-modal-window-btn")  // удалить тестовая
+            if (DT > 8) println("Удаление Тестовой группы")
+        }
+
+        tools.OK()
+        if (DT > 6) println("Конец Test проверка user Тестоый")
     }
 }
 

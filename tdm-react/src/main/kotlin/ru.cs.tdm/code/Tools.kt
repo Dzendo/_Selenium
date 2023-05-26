@@ -2,11 +2,9 @@ package ru.cs.tdm.code
 
 import org.openqa.selenium.*
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.support.ui.ExpectedConditions.*
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.WebDriverWait
-//import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
 /*
@@ -21,9 +19,16 @@ const val repeateOut= 3
 // Рабочее поле экрана
 //div[@id="root"]//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]
 //div[@id="modalRoot"]//div[@data-modal-window='current']                   //span [starts-with(@class, 'Header_headerTitle')]
-fun WebElement.clickSend(str:String) {
+fun WebElement.clickSend(str:String, clear: Boolean = false) {
+    this.click()
+    if (clear) this.clear()
+    this.sendKeys(str)
+    this.click()
+}
+fun WebElement.clickSendClick(str:String) {
     this.click()
     this.sendKeys(str)
+    this.click()
 }
 
 class Tools(val driver: WebDriver) {
@@ -123,18 +128,21 @@ class Tools(val driver: WebDriver) {
 
     fun headerWait(title: String): Boolean = fluentInWait.until(
                     textToBePresentInElementLocated(
-                By.xpath("/html/body//div[@id='modalRoot']//div[@data-modal-window='current']//span[starts-with(@class, 'Header_headerTitle_')]"),
-                title
-            )
+        By.xpath("/html/body//div[@id='modalRoot']//div[@data-modal-window='current']//span[starts-with(@class, 'Header_headerTitle_')]"), title 
+                    )
         )
 
     fun closeX() = WebDriverWait(driver, Duration.ofSeconds(13))
         .until(elementToBeClickable(xpath("//button[@data-reference='modal-window-close-button']","MODAL")))
         .click()
-    fun OK(OK:String = "ok-modal-window-btn" ) {
-        referenceClick(OK,"MODAL")
-    }
+    
+    // ok-modal-window-btn
+    fun OK(OK:String = "ok-modal-window-btn" ) = referenceClick(OK,"MODAL")
 
+    fun closeEsc( n:Int = 1) = repeat(n) { Actions(driver).sendKeys(Keys.ESCAPE).perform() }
+        .also {  if (DT >7) println("ESC $n раз закрыть что-либо (окно, поле и.т.д) ESC драйвера ") }
+
+    
     fun xpathLast(xpath: String, last: Boolean = true): WebElement? {
         //val xpathHtml = xpath
         val xpathHtml = "//html/body/descendant::${xpath.drop(2)}"
@@ -238,15 +246,6 @@ class Tools(val driver: WebDriver) {
     }
     fun closeXLast() = qtipClickLast("Закрыть")
 
-    fun closeEsc(): Boolean {
-        Actions(driver).sendKeys(Keys.ESCAPE).perform()
-        return true
-    }
-    fun closeEsc5(): Boolean {
-        if (DT >7) println("ESC закрыть что-либо (окно, поле и.т.д) ESC драйвера ")
-        repeat(5) { closeEsc() }
-        return true
-    }
     fun xpathClickMenu(menu:String): Boolean {
         repeat(repeateOut) {
             Thread.sleep(threadSleep / 10 * it)  // не нужно
