@@ -278,7 +278,7 @@ class HeadRef {
             assertTrue(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666"), "@@@@ После нажатия $open_showTree - кнопка $open_showTree нет утоплена @@") // Исправить на референс
             tools.referenceClick("TDMS_COMMAND_COMMON_SHOWTREE", "ROOT666")  // Скрыть дерево
             assertFalse(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666"), "@@@@ После отжатия $open_showTree - кнопка $open_showTree утоплена @@")
-            tools.referenceClick("TDMS_COMMAND_COMMON_SHOWTREE")  // Показать дерево
+            tools.referenceClick("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666")  // Показать дерево
             assertTrue(tools.referencePressed("TDMS_COMMAND_COMMON_SHOWTREE","ROOT666"), "@@@@ После второго нажатия $open_showTree - кнопка $open_showTree нет утоплена @@")
             if (DT > 6) println("Конец Test нажатия на $open_showTree")
         }
@@ -321,6 +321,7 @@ class HeadRef {
             val workTable = "Рабочий стол"
             if (DT >7) println("Test нажатия на $workTable")
             tools.byIDClick("desktop-tab")
+            tools.xpathClick("//div[contains(@title,'Рабочий стол')]","ROOT666")
             assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")  // сбоит 1 раз на 100
             assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
             // проверить что справа Рабочий стол (SYSADMIN)

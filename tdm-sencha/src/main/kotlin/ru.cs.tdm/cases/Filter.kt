@@ -374,15 +374,15 @@ class Filter {
                 //   Разделы документации / Марки РД - ни один нельзя присвоить надо раскрывать слева дерево до последнего
                 // Только SRV1: слева Марки РД - Справа АР Архитектурные решения (галочку) и ОК
 
-               // tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+                //tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 // table body tdr td div div+div(>)+img+span
-               // tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+                tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
                 // Ошибка Firefox
                 // Element: [[FirefoDriver: firefo on WINDOWS (1f8f6504-78cc-4d5e-9c4e-1642e0a2cf62)] -> xpath: //html/body/descendant::a[contains(text(),'АР Архитектурные решения')]/ancestor::tr]
                 // org.openqa.selenium.ElementNotInteractableException: Element <tr class="  x-grid-row"> could not be scrolled into view
                 //tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
-               // tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")?.click()
+                tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")?.click()
                 Thread.sleep(threadSleep)
                 tools.clickOK("Ок")
             }

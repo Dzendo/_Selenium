@@ -122,11 +122,11 @@ class Filter {
         if (DT >7) println("Конец BeforeEach FilterTest")
 
     }
-    // Пришлось ввести т.к. при рабочем столе два значка "создать фильтр"
     fun workTable() {
         val workTable = "Рабочий стол"
         if (DT >7) println("Test нажатия на $workTable")
         tools.byIDClick("desktop-tab")
+        tools.xpathClick("//div[contains(@title,'Рабочий стол')]","ROOT666")
         assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")  // сбоит 1 раз на 100
         assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
@@ -135,13 +135,14 @@ class Filter {
         assertTrue(tools.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
-        val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
+       // val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
         val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") TDM365 else
                 if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
         if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
-        tools.xpathClick("//div [@title = 'Фильтры']//ancestor::ul//*[contains(text(), 'Фильтр $localDateNow')]", "ROOT666")
+       // tools.xpathClick("//div [@title = 'Фильтры']//ancestor::ul//*[contains(text(), 'Тест $localDateNow')]", "ROOT666")
+        tools.xpathClick("//a [contains(text(), 'Тест $localDateNow')]", "ROOT666")
 
-        assertContains(tools.xpath("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр $localDateNow",false,
+        assertContains(tools.reference("ATTR_USER_QUERY_NAME","ROOT666","//descendant::input")?.getAttribute("value") ?: "NONE", "Тест $localDateNow",false,
             "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
         if (tools.reference("CMD_DELETE_USER_QUERY","ROOT666") == null) {
@@ -151,13 +152,13 @@ class Filter {
 
         tools.referenceClick(clickRef, "ROOT666")
         assertTrue(tools.headerWait(titleWindow),
-            "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $titleWindow @@")
+            "@@@@ После нажатия $clickRef - окно типа не имеет заголовка $titleWindow @@")
 
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
                 tools.xpath("//div[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
             else
                 tools.xpath("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input", "MODAL")?.getAttribute("value") ?: "NONE"
-         assertContains(filterText, "Фильтр $localDateNow", false,
+         assertContains(filterText, "Тест $localDateNow", false,
              "@@@@ Нет правильного текста Фильтр $localDateNow на всплывающем окне $filterText @@")
     }
     @AfterEach
@@ -230,7 +231,7 @@ class Filter {
         clickFilter(nomberFilter, "CMD_VIEW_ONLY")
 
         // Проверить что в поле стоит дата, если нет, то Скрин
-        val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Наименование фильтра
+        val ATTR_USER_QUERY_NAME = tools.reference("ATTR_USER_QUERY_NAME","MODAL","//descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
         if (ATTR_USER_QUERY_NAME.contains(" $localDateNow").not()){
             if (DT > 0) println("&&&&&&&&&02&&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")

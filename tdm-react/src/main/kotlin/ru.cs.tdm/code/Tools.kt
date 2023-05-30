@@ -75,14 +75,14 @@ class Tools(val driver: WebDriver) {
 
         val xpathHtml: String = when (prefix) {
             "ROOT" -> "/html/body//div[@id='root']$xpath$suffix"
-            "ROOT666" -> "/html/body//div[@id='root']//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]$xpath$suffix"
+            "ROOT666"  -> "/html/body//div[@id='root']//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]$xpath$suffix"
             "MODAL" -> "/html/body//div[@id='modalRoot']//div[@data-modal-window='current']$xpath$suffix"
             else -> "/html/body$prefix$xpath$suffix".also { println("xpath пришел неизвестный prefix = $prefix") }
         }
         if (DT >8) println("xpath будет произведен поиск элемента $xpathHtml")
         return try {  // fluentOutWait.until
             val element = driver.findElement(By.xpath(xpathHtml))
-            if (element == null)  println("xpath не найден элемент $xpathHtml")
+            if (element == null)  println("************xpath не найден элемент********* -> $xpathHtml")
                     else if (DT >7) println("xpath найден элемент $xpathHtml")
             element
         } catch (e: Exception) {
