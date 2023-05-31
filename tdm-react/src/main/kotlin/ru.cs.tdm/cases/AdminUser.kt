@@ -379,13 +379,15 @@ class AdminUser {
             tools.OK()  // закрыть выбор профиля с выбором руководителя
 
             assertTrue(tools.headerWait("Редактирование пользователя"),
-                "@@@@ После выхода из редактирования - нет заголовка окна Редактирование групп @@")
+                "@@@@ После выхода из редактирования - нет заголовка окна Редактирование пользователя @@")
             // проверка что есть профиль руководитель
 
             val description_new = tools.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
             assertTrue(description_new?.getAttribute("value") == "Тестовый $localDateNow # @",
                 "@@@@ После редактирования - нет пользователя Тестовый $localDateNow # @  @@")
             tools.OK()
+            assertTrue(tools.headerWait("Редактирование групп"),
+                "@@@@ После выхода из редактирования - нет заголовка окна Редактирование групп @@")
             tools.OK()
             if (DT > 6) println("Конец Test n07_AddRoleUserTest нажатия на $fillingUser")
         }
@@ -405,11 +407,10 @@ class AdminUser {
 
             assertTrue(tools.headerWait("Создание новой группы"),
                 "@@@@ После нажатия $createGroup - нет окна с заголовком Создание новой группы @@")
-            val inputGpoup =
-                tools.reference("FormSimpleEditDlg-prompt", "MODAL","//parent::div/descendant::input")
-                //tools.xpathLast("//span[text() = 'Введите название новой группы']/parent::*/descendant::input")
-            // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
-            inputGpoup?.clickSend("Тестовая $localDateNow")
+            assertTrue(tools.reference("FormSimpleEditDlg-prompt", "MODAL")?.text == "Введите название новой группы",
+                "@@@@ После нажатия $createGroup - нет окна с Введите название новой группы @@")
+            tools.reference("FormSimpleEditDlg-input", "MODAL")
+            ?.clickSend("Тестовая $localDateNow")
             tools.OK()  // создать Тестовая
 
             assertTrue(tools.headerWait(TDM365),
@@ -451,6 +452,7 @@ class AdminUser {
          *  тест удаление пользователя
          */
         @Test
+        //@Disabled
         @DisplayName("удаление пользователя")
         fun n10_DeleteUserTest() {
             if (DT > 6) println("Test нажатия на Удаление на $localDateNow")
@@ -468,6 +470,7 @@ class AdminUser {
 //    @RepeatedTest(92)
 
     @Test
+    //@Disabled
     //@DisplayName("Delete user TEST")
     @DisplayName("99. Проверка пользователя Тестоый")
     fun n99_checkUserPass() {

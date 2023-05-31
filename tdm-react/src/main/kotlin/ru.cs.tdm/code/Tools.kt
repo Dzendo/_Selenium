@@ -23,7 +23,7 @@ fun WebElement.clickSend(str:String, clear: Boolean = false) {
     this.click()
     if (clear) this.clear()
     this.sendKeys(str)
-    this.click()
+    //this.click()
 }
 fun WebElement.clickSendClick(str:String) {
     this.click()

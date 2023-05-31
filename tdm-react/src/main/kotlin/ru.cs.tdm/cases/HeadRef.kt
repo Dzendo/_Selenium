@@ -31,7 +31,7 @@ class HeadRef {
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 10                    // количество повторений тестов
+        private const val NN:Int = 5                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
@@ -656,13 +656,13 @@ class HeadRef {
                 tools.referenceClick("CMD_TEST_STREAM_PROJECT_CHECK")
 
                 assertTrue(tools.headerWait(TDM365),
-                    "@@@@ После нажатия $flow в окне заголовок не содержит TDMS @@")
+                    "@@@@ После нажатия $flow в окне заголовок не содержит $TDM365 @@")
                 //val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
                 //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
                 //assertTrue(msgText.contains("Нет")) // - Выбор проекта в системе"))
                 tools.closeX()
-                assertTrue(tools.headerWait("Ввод значения"),
-                    "@@@@ После следующего нажатия $flow в окне заголовок не содержит Ввод значения @@")
+                assertTrue(tools.headerWait("Выбор проекта"),
+                    "@@@@ После следующего нажатия $flow в окне заголовок не содержит Выбор проекта @@")
                 tools.closeX()
                 assertTrue(tools.headerWait(TDM365),
                     "@@@@ После последнего нажатия $flow в окне заголовок не содержит TDM365 @@")
