@@ -75,7 +75,13 @@ class Tools(val driver: WebDriver) {
 
         val xpathHtml: String = when (prefix) {
             "ROOT" -> "/html/body//div[@id='root']$xpath$suffix"
-            "ROOT666"  -> "/html/body//div[@id='root']//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]$xpath$suffix"
+            "ROOT666"  -> "/html/body//div[@id='root']//div[@data-tdms-view-content='current']$xpath$suffix"
+           // "ROOT666"  -> "/html/body//div[@id='root']//div [starts-with(@class,'TdmsView_content_') and not(contains(@style,'none'))]$xpath$suffix"
+
+            "Main-Tree" ->   "/html/body//div[@id='root']//div[@data-tdms-view-content='current']//div[@data-reference='Main-Tree']$xpath$suffix"
+            "Main-Grid" ->   "/html/body//div[@id='root']//div[@data-tdms-view-content='current']//div[@data-reference='Main-Grid']$xpath$suffix"
+            "Object-Preview"  ->   "/html/body//div[@id='root']//div[@data-tdms-view-content='current']//div[@data-reference='object-preview']$xpath$suffix"
+
             "MODAL" -> "/html/body//div[@id='modalRoot']//div[@data-modal-window='current']$xpath$suffix"
             else -> "/html/body$prefix$xpath$suffix".also { println("xpath пришел неизвестный prefix = $prefix") }
         }
@@ -136,7 +142,7 @@ class Tools(val driver: WebDriver) {
         .until(elementToBeClickable(xpath("//button[@data-reference='modal-window-close-button']","MODAL")))
         .click()
     
-    // ok-modal-window-btn
+    // ok-modal-window-btn  ok-modal-window-btn
     fun OK(OK:String = "ok-modal-window-btn" ) = referenceClick(OK,"MODAL")
 
     fun closeEsc( n:Int = 1) = repeat(n) { Actions(driver).sendKeys(Keys.ESCAPE).perform() }

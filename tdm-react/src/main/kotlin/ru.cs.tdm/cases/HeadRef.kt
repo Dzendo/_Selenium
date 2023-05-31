@@ -321,12 +321,12 @@ class HeadRef {
             val workTable = "Рабочий стол"
             if (DT >7) println("Test нажатия на $workTable")
             tools.byIDClick("desktop-tab")
-            tools.xpathClick("//div[contains(@title,'Рабочий стол')]","ROOT666")
+            tools.xpathClick("//div[contains(@title,'Рабочий стол')]","Main-Tree")
             assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")  // сбоит 1 раз на 100
             assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
             // проверить что справа Рабочий стол (SYSADMIN)
             // Здесь проверка дерева и отображения
-            tools.xpathClick("//span[contains(text(), 'Фильтры')]","ROOT666")
+            tools.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
             assertTrue(tools.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
         }
 

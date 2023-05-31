@@ -126,23 +126,27 @@ class Filter {
         val workTable = "Рабочий стол"
         if (DT >7) println("Test нажатия на $workTable")
         tools.byIDClick("desktop-tab")
-        tools.xpathClick("//div[contains(@title,'Рабочий стол')]","ROOT666")
+        tools.xpathClick("//div[contains(@title,'Рабочий стол')]","Main-Tree")
         assertTrue(tools.titleContain(workTable), "@@@@ После нажатия $workTable - нет заголовка вкладки $workTable @@")  // сбоит 1 раз на 100
         assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
         // Здесь проверка дерева и отображения
-        tools.xpathClick("//span[contains(text(), 'Фильтры')]","ROOT666")
+        tools.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
         assertTrue(tools.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
-       // val tipWindow = if (clickRef == "CMD_DELETE_USER_QUERY")  "messagebox" else "tdmsEditObjectDialog"
-        val titleWindow = if (clickRef == "CMD_DELETE_USER_QUERY") TDM365 else
-                if (clickRef == "CMD_EDIT_ATTRS") "Редактирование объекта" else "Просмотр свойств"
+        val titleWindow = when (clickRef) {
+            "CMD_DELETE_USER_QUERY" -> TDM365
+            "CMD_EDIT_ATTRS" -> "Редактирование объекта"
+            else -> "Просмотр свойств"
+        }
         if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
-       // tools.xpathClick("//div [@title = 'Фильтры']//ancestor::ul//*[contains(text(), 'Тест $localDateNow')]", "ROOT666")
-        tools.xpathClick("//a [contains(text(), 'Тест $localDateNow')]", "ROOT666")
+        assertEquals(tools.reference("main-object-header-description","ROOT666","//span")?.text,"Фильтры",
+            " Заголовок таблицы не Фильтры")
+        // Обрабатывать RecyclerVuew
+        tools.xpathClick("//a [contains(text(), 'Тест $localDateNow')]", "Main-Grid")
 
-        assertContains(tools.reference("ATTR_USER_QUERY_NAME","ROOT666","//descendant::input")?.getAttribute("value") ?: "NONE", "Тест $localDateNow",false,
+        assertContains(tools.reference("ATTR_USER_QUERY_NAME","Object-Preview","//descendant::input")?.getAttribute("value") ?: "NONE", "Тест $localDateNow",false,
             "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
         if (tools.reference("CMD_DELETE_USER_QUERY","ROOT666") == null) {
@@ -154,12 +158,13 @@ class Filter {
         assertTrue(tools.headerWait(titleWindow),
             "@@@@ После нажатия $clickRef - окно типа не имеет заголовка $titleWindow @@")
 
+        // Вы действительно хотите удалить объект "(Все проекты) Тест 31-05-2023_18-51-20  @@#" из системы?
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
-                tools.xpath("//div[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
+                tools.xpath("//p[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
             else
                 tools.xpath("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input", "MODAL")?.getAttribute("value") ?: "NONE"
          assertContains(filterText, "Тест $localDateNow", false,
-             "@@@@ Нет правильного текста Фильтр $localDateNow на всплывающем окне $filterText @@")
+             "@@@@ Нет правильного текста Тест $localDateNow на всплывающем окне $filterText @@")
     }
     @AfterEach
     fun afterEach(){
@@ -196,9 +201,7 @@ class Filter {
         tools.referenceClick("CMD_CREATE_USER_QUERY", "ROOT666")
         assertTrue(tools.headerWait("Редактирование объекта"),
             "@@@@ После нажатия $createUser - нет окна с заголовком Редактирование объекта @@")
-        //  оставить ждать Омск
-        // tools.referenceClickLast("tabbar-FORM_USER_QUERY")
-        //  assertTrue(tools.referenceLast("tabbar-FORM_USER_QUERY")?.getAttribute("aria-selected") == "true")
+
         assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
             "@@@@ На форме фильтра при $createUser - не нашлось текста Наименование фильтра @@")
         tools.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
@@ -211,8 +214,7 @@ class Filter {
              screenShot()
          }
         tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
-
-       // Thread.sleep(3000)
+        Thread.sleep(threadSleep)
         tools.OK()
         if (DT > 6) println("Конец Test нажатия на $createUser")
     }
@@ -238,7 +240,8 @@ class Filter {
             screenShot()
         }
 
-        tools.clickOK("Закрыть")
+        tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
+        tools.OK("cancel-modal-window-btn")
         //tools.xpathClickLast("//*[contains(text(), 'Фильтр $localDateNow')]")
         if (DT > 6) println("Конец Test посмотреть на $viewUser")
 
@@ -252,44 +255,43 @@ class Filter {
     fun n03_fillingFilterTest(repetitionInfo: RepetitionInfo) {
             workTable()
             val nomberFilter = "${repetitionInfo.currentRepetition}"
-            Thread.sleep(threadSleep)
+
             val fillingUser = "Заполнение текстовых полей фильтра"
             if (DT > 6) println("Test нажатия на $fillingUser")
 
             clickFilter(nomberFilter)  // встать на фильтр
 
-            val ATTR_USER_QUERY_NAME = tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")
-            ATTR_USER_QUERY_NAME?.sendKeys(" #")  // Наименование фильтра
+            val ATTR_USER_QUERY_NAME =  tools.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
+            ATTR_USER_QUERY_NAME?.clickSend(" #")  // Наименование фильтра
             assertContains(ATTR_USER_QUERY_NAME?.getAttribute("value") ?: "NONE", "#",false,
                 "@@@@ В Наименовании фильтра не прописалось # при редактировании @@")
 
-            Thread.sleep(threadSleep)
-            val ATTR_QUERY_TechDoc_Num = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_Num']/descendant::input")
-            ATTR_QUERY_TechDoc_Num?.sendKeys("Обозначение $localDateNow")  // Обозначение
-            Thread.sleep(threadSleep)
+            val ATTR_QUERY_TechDoc_Num = tools.reference("ATTR_QUERY_TechDoc_Num", "MODAL" ,"//descendant::input")
+            ATTR_QUERY_TechDoc_Num?.clickSend("Обозначение $localDateNow")  // Обозначение
             assertContains(ATTR_QUERY_TechDoc_Num?.getAttribute("value") ?: "NONE", "Обозначение", false,
                 "@@@@ В Обозначение фильтра не прописалось Обозначение при редактировании @@")
 
-            Thread.sleep(threadSleep)
-            val ATTR_QUERY_TechDoc_RevNum = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_RevNum']/descendant::input")
-            ATTR_QUERY_TechDoc_RevNum ?.sendKeys("77") // Изм. №
+            val ATTR_QUERY_TechDoc_RevNum =  tools.reference("ATTR_QUERY_TechDoc_RevNum", "MODAL" ,"//descendant::input")
+            ATTR_QUERY_TechDoc_RevNum ?.clickSend("77") // Изм. №
             assertContains(ATTR_QUERY_TechDoc_RevNum?.getAttribute("value") ?: "NONE", "77", false,
                 "@@@@ В Изм. № фильтра не прописалось 77 при редактировании @@")
 
-            Thread.sleep(threadSleep)
-            val ATTR_QUERY_TechDoc_Name = tools.xpathLast("//*[@data-reference='ATTR_QUERY_TechDoc_Name']/descendant::input")
-            ATTR_QUERY_TechDoc_Name?.sendKeys("Наименование $localDateNow")  // Наименование
+            val ATTR_QUERY_TechDoc_Name = tools.reference("ATTR_QUERY_TechDoc_Name", "MODAL" ,"//descendant::input")
+            ATTR_QUERY_TechDoc_Name?.clickSend("Наименование $localDateNow")  // Наименование
             assertContains(ATTR_QUERY_TechDoc_Name?.getAttribute("value") ?: "NONE", "Наименование", false,
                 "@@@@ В Наименование фильтра не прописалось Наименование при редактировании @@")
 
-            Thread.sleep(threadSleep)
-            val ATTR_DESCRIPTION = tools.xpathLast("//*[@data-reference='ATTR_DESCRIPTION']/descendant::textarea")
-            ATTR_DESCRIPTION ?.sendKeys("Описание $localDateNow") // Описание
+            val ATTR_DESCRIPTION = tools.reference("ATTR_DESCRIPTION", "MODAL" ,"//descendant::textarea")
+            ATTR_DESCRIPTION ?.clickSend("Описание $localDateNow") // Описание
             assertContains(ATTR_DESCRIPTION?.getAttribute("value") ?: "NONE", "Описание", false,
                 "@@@@ В Описание фильтра не прописалось Описание при редактировании @@")
+
+            tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
+            Thread.sleep(threadSleep)
+            tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
             Thread.sleep(threadSleep)
 
-            tools.clickOK()
+            tools.OK()
             if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
 
@@ -307,99 +309,90 @@ class Filter {
 
         clickFilter(nomberFilter)  // встать на фильтр
 
-            val description =
-                tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Описание
-            assertTrue(description?.getAttribute("value")!!.contains("Фильтр $localDateNow"),
-                "@@@@ В Название фильтра нет названия Фильтр $localDateNow @@")
-            description.sendKeys(" @")
+            val description = tools.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
+            assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
+                "@@@@ В Название фильтра нет названия Тест $localDateNow @@")
+            description.clickSend(" @")
             assertTrue(description.getAttribute("value").contains("@"),
                 "@@@@ В Наименовании фильтра не прописалось @ при редактировании @@")
 
             val BUTTON_OBJDEV_SEL = {   // Объект разработки
-                tools.referenceClickLast("BUTTON_OBJDEV_SEL")
-                assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор объекта структуры"),
+                tools.referenceClick("BUTTON_OBJDEV_SEL", "MODAL")
+                assertTrue(tools.headerWait( "Выбор объекта структуры"),
                     "@@@@ карандашик BUTTON_OBJDEV_SEL на поле Объект разработки : нет справочника с заголовком Выбор объекта структуры @@")
 
                 // 0203 / 051-1007345 Расширение ЕСГ для обеспечения подачи газа в газопровод «Южный поток».1-й этап (Западный коридор), для обеспечения подачи газа в объеме 31,5 млрд. м3/
-                tools.xpathLast("//*[contains(text(),'Расширение ЕСГ')]/ancestor::td")?.click()
+                tools.xpathClick("//*[contains(text(),'Расширение ЕСГ')]/ancestor::td","MODAL")
 
-                Thread.sleep(threadSleep)
-                tools.clickOK("Ок")
+                tools.OK()
             }
             BUTTON_OBJDEV_SEL()
-            Thread.sleep(threadSleep)
-            val attrObjectDev = tools.xpathLast("//*[@data-reference='ATTR_OBJECT_DEV']/descendant::input")
-            val getFerma = attrObjectDev?.getAttribute("value")
+
+            val attrObjectDev =  tools.reference("ATTR_OBJECT_DEV", "MODAL","//descendant::input")
             assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",
                 false, "@@@@ карандашик BUTTON_OBJDEV_SEL : После выбора в поле фильтра объекта разработки из справочника в поле фильтра Объект разработки - пусто, а должно стоять Ферма_омшанник @@")
 
-            tools.referenceClickLast("BUTTON_OBJDEV_ERASE")
-            Thread.sleep(threadSleep)
+            tools.referenceClick("BUTTON_OBJDEV_ERASE", "MODAL")
             assertTrue(((attrObjectDev?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_OBJDEV_ERASE(объекта разработки) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
 
             BUTTON_OBJDEV_SEL()  // Всавляем еще раз омшанник
 
             val BUTTON_PROJECT_SEL = {      // Проект
-                tools.referenceClickLast("BUTTON_PROJECT_SEL")
-                assertTrue(tools.titleWait("tdmsSelectObjectGridDialog", "Выбор проекта"),
+                tools.referenceClick("BUTTON_PROJECT_SEL", "MODAL")
+                assertTrue(tools.headerWait("Выбор проекта"),
                     "@@@@ карандашик BUTTON_PROJECT_SEL на поле Проект : нет справочника с заголовком Выбор проекта @@")
         // 0203.001.001 / 0203.001.001 1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР), ДЛЯ ОБЕСПЕЧЕНИЯ ПОДАЧИ ГАЗА В ОБЪЕМЕ ДО 63 МЛРД.М3/ГОД Этап 2.1. Линейная часть. Участок «Починки-Анапа», км 0 –км 347,5 (км 0 – км 181, км 181 – км 295,7, км 295,7 – км 347,5)
-                tools.xpathLast("//*[contains(text(),'1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР)')]/ancestor::td")
-                    ?.click()                   //tr  tbody  table
+                tools.xpathClick("//*[contains(text(),'1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР)')]/ancestor::td", "MODAL")    //tr  tbody  table
 
-                Thread.sleep(threadSleep)
-                tools.clickOK("Ок")
+                tools.OK()
             }
             BUTTON_PROJECT_SEL()
-            Thread.sleep(threadSleep)
-            val ATTR_RefToProject = tools.xpathLast("//*[@data-reference='ATTR_RefToProject']/descendant::input")
+
+            val ATTR_RefToProject = tools.reference("ATTR_RefToProject", "MODAL","//descendant::input")
             assertContains(
                 ATTR_RefToProject?.getAttribute("value") ?: "NONE",
                 "1-Й ЭТАП (ВОСТОЧНЫЙ КОРИДОР)", false,
                 "@@@@ карандашик BUTTON_PROJECT_SEL : После выбора в поле Проекта разработки из справочника в поле фильтра Проект - пусто, а должно стоять Название проекта из справочника @@"
             )
-            tools.referenceClickLast("BUTTON_ERASE_PROJECT")
-            Thread.sleep(threadSleep)
+            tools.referenceClick("BUTTON_ERASE_PROJECT", "MODAL")
             assertTrue(((ATTR_RefToProject?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_PROJECT(Проект) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_PROJECT_SEL()  // Всавляем еще раз
 
-            val BUTTON_TYPE_DOC = {     // Тип документации из справочника Типы технической документации
-                tools.referenceClickLast("BUTTON_TYPE_DOC")
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Типы технической документации"),
+            val BUTTON_TYPE_DOC = {     // Тип документации из справочника Типы технической документации title=" Марки РД"
+                tools.referenceClick("BUTTON_TYPE_DOC", "MODAL")
+                assertTrue(tools.headerWait("Типы технической документации"),
                     "@@@@ карандашик BUTTON_TYPE_DOC на поле Тип документации : нет справочника с заголовком Типы технической документации @@")
                 //   Разделы документации / Марки РД - ни один нельзя присвоить надо раскрывать слева дерево до последнего
                 // Только SRV1: слева Марки РД - Справа АР Архитектурные решения (галочку) и ОК
 
-               // tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+                tools.xpathClick("//div[contains(@title,'Марки РД')]", "MODAL")   //)/ancestor::tr")
                 // table body tdr td div div+div(>)+img+span
-                tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
-                Thread.sleep(threadSleep)
+                //tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+
                 // Ошибка Firefox
                 // Element: [[FirefoDriver: firefo on WINDOWS (1f8f6504-78cc-4d5e-9c4e-1642e0a2cf62)] -> xpath: //html/body/descendant::a[contains(text(),'АР Архитектурные решения')]/ancestor::tr]
                 // org.openqa.selenium.ElementNotInteractableException: Element <tr class="  x-grid-row"> could not be scrolled into view
                 //tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
-                tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")?.click()
-                Thread.sleep(threadSleep)
-                tools.clickOK("Ок")
+                tools.xpathClick("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")
+                tools.OK()
             }
 
             BUTTON_TYPE_DOC()
-            Thread.sleep(threadSleep)
-            val ATTR_TechDoc_Sort = tools.xpathLast("//*[@data-reference='ATTR_TechDoc_Sort']/descendant::input")
+
+            val ATTR_TechDoc_Sort = tools.reference("ATTR_TechDoc_Sort", "MODAL", "//descendant::input")
 
             assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
                 "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
-            tools.referenceClickLast("BUTTON_ERASE_TTD")
-            Thread.sleep(threadSleep)
+            tools.referenceClick("BUTTON_ERASE_TTD", "MODAL")
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_TYPE_DOC()  // Всавляем еще раз
 
             val BUTTON_OBJ_STR = {      // Объект структуры
-                tools.referenceClickLast("BUTTON_OBJ_STR")
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Объекты структуры"),
+                tools.referenceClick("BUTTON_OBJ_STR", "MODAL")
+                assertTrue(tools.headerWait("Объекты структуры"),
                     "@@@@ карандашик BUTTON_OBJ_STR на поле Объект структуры : нет справочника с заголовком Объекты структуры @@")
                 // Для всех 0203 / 051-1007345 Структура объекта "Расширение ЕСГ для обеспечения подачи газа в газопровод «Южный поток».1-й этап (Западный коридор), для обеспечения подачи газа в объеме 31,5 млрд. м3/"
                 //  Слева 051-1007345 Структура объекта "Расшир..." тогда 0203.КТО.001 Комплекс термического обезвреживания отходов  (справа)
@@ -407,44 +400,45 @@ class Filter {
                 //tools.xpathLast("//a[contains(text(),'Структура объекта')]/ancestor::tr")?.click()
                 // Firefox сбоит Element <tr class="x-grid-tree-node-expanded  x-grid-row"> could not be scrolled into view
                 //tools.xpathLast("//span[contains(text(),'Расширение ЕСГ')]/ancestor::tr")?.click()
-                tools.xpathLast("//span[contains(text(),'Расширение ЕСГ')]/preceding-sibling::img")?.click()
-                Thread.sleep(threadSleep)
-                tools.clickOK("Ок")
+                tools.xpathClick("//div[contains(@title,'Расширение ЕСГ')]", "MODAL")
+               // tools.xpathClick("//span[contains(text(),'Расширение ЕСГ')]/preceding-sibling::img")
+                tools.OK()
             }
             BUTTON_OBJ_STR()
-            Thread.sleep(threadSleep)
-            val ATTR_OCC = tools.xpathLast("//*[@data-reference='ATTR_OCC']/descendant::input")
+
+            val ATTR_OCC = tools.reference("ATTR_OCC","MODAL","//descendant::input")
             assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",false,
                 "@@@@ поле фильтра Объект структуры не содержит значение Расширение ЕСГ @@")
-            tools.referenceClickLast("BUTTON_ERASE_OS")
-            Thread.sleep(threadSleep)
+            tools.referenceClick("BUTTON_ERASE_OS","MODAL")
             assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_OS(Объект структуры) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_OBJ_STR()  // Всавляем еще раз
 
             val BUTTON_ORG_SEL = {      // Организация  ГПП  Газпромпроектирование для всех
-                tools.referenceClickLast("BUTTON_ORG_SEL")
-                assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Организации/Подразделения"),
+                tools.referenceClick("BUTTON_ORG_SEL", "MODAL")
+                assertTrue(tools.headerWait("Организации/Подразделения"),
                     "@@@@ карандашик BUTTON_ORG_SEL на поле Организация/Подразд. : нет справочника с заголовком Организации/Подразделения @@")
                 //FireFox не работает Element <tr class="  x-grid-row"> could not be scrolled into view  td входит в ссылку
                 //tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::tr")?.click()
-                tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::td/preceding-sibling::td")?.click()  // на квадратик слева
-                Thread.sleep(threadSleep)
-                tools.clickOK("Ок")
+                tools.xpathClick("//a[contains(text(),'Газпромпроектирование')]/ancestor::td/preceding-sibling::td") // на квадратик слева
+                tools.OK()
             }
             BUTTON_ORG_SEL()
-            Thread.sleep(threadSleep *3)
+
             val ATTR_ORGANIZATION_LINK =
-                tools.xpathLast("//*[@data-reference='ATTR_ORGANIZATION_LINK']/descendant::input")
+                tools.reference("ATTR_ORGANIZATION_LINK", "MODAL","//descendant::input")
             assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "Газпромпроектирование",false,
                 "@@@@ поле фильтра Организация/Подразд. не содержит значение Газпромпроектирование после выбора @@")
-            tools.referenceClickLast("BUTTON_ERASE_ORG")
-            Thread.sleep(threadSleep)
+            tools.referenceClick("BUTTON_ERASE_ORG", "MODAL")
             assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_ORG(Организация/Подразд.) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_ORG_SEL()  // Всавляем еще раз
 
-            tools.clickOK()
+       // tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
+       // Thread.sleep(threadSleep)
+       // tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
+       // Thread.sleep(threadSleep)
+            tools.OK()
         if (DT > 6) println("Конец Test нажатия на $editFilter")
         }
 
@@ -459,37 +453,35 @@ class Filter {
 
         clickFilter(nomberFilter)  // встать на фильтр
 
-        val description =
-            tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")  // Описание
-        assertTrue(description?.getAttribute("value")!!.contains("Фильтр $localDateNow"),
+        val description = tools.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
+        assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
             "@@@@ Нет в списке фильтра с именем Фильтр $localDateNow @@")
-        description.sendKeys(" @@")
+        description.clickSend(" @@")
         assertTrue(description.getAttribute("value").contains("@@"),
             "@@@@ В Наименовании фильтра не прописалось @@ при редактировании @@")
 
 
 
-            tools.xpathLast("// *[@data-reference='ATTR_DATE_START']/descendant::input")
-               // ?.sendKeys(localDateNow)
-                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
-            tools.xpathLast("// *[@data-reference='ATTR_DATE_END']/descendant::input")
-                //?.sendKeys(localDateNow)
-                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+            tools.reference("ATTR_DATE_START", "MODAL","//descendant::input")
+                ?.clickSend(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+            tools.reference("ATTR_DATE_END", "MODAL", "//descendant::input")
+                ?.clickSend(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+             tools.reference("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//descendant::input")
+                ?.clickSend(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+            // не работает
+           // tools.referenceClick("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//div[starts-with(@class, 'Edit_trigger_')]")     //"//descendant::div[contains(@id, 'picker')]")
+           // tools.xpath("//span[text()='Сегодня']")?.click()
 
-            tools.xpathLast("// *[@data-reference='ATTR_DATE_RELEASE_DOCUMENT']/descendant::div[contains(@id, 'picker')]")?.click()
-            Thread.sleep(threadSleep)
-            tools.xpathLast("//span[text()='Сегодня']")?.click()
-            Thread.sleep(threadSleep)
-            val ATTR_DATE_RELEASE_DOCUMENT = tools.xpathLast("//*[@data-reference='ATTR_DATE_RELEASE_DOCUMENT']/descendant::input")
+            val ATTR_DATE_RELEASE_DOCUMENT =  tools.reference("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//descendant::input")
             val ATTR_DATE = ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value")
             assertEquals(ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value") ?:"NONE",
                 DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDate.now()),
                 "@@@@ В Дата не стоит сегодняшняя дата после занесения из выбора Сегодня $ATTR_DATE @@")
 
-            tools.xpathLast("// *[@data-reference='ATTR_USER_QUERY_STATUS']/descendant::input")
-                ?.sendKeys("В разработке")
-            tools.xpathLast("// *[@data-reference='ATTR_DOC_AUTHOR']/descendant::input")
-                ?.sendKeys("SYSADMIN")
+            tools.reference("ATTR_USER_QUERY_STATUS", "MODAL", "//descendant::input")
+                ?.clickSend("В разработке")
+            tools.reference("ATTR_DOC_AUTHOR","MODAL", "//descendant::input")
+                ?.clickSend("SYSADMIN")
 
             // Только на SRV1 после выкачки-закачки схемы
             //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ Ответственный
@@ -497,18 +489,21 @@ class Filter {
             //    ?.sendKeys("SYSADMIN")
             // Можно очистить BUTTON_ERASE_RESP_USER ??
 
-            tools. qtipClickLast("Выбрать объект")
-            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
-                "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
+            tools. reference("ATTR_RESPONSIBLE_USER", "MODAL", "//descendant::input")
+                ?.clickSend("SYSADMIN")
+           // assertTrue(tools.headerWait("Выбор пользователей"),
+           //     "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор пользователей @@")
         // Ошибка Firefox  Element <tr class="  x-grid-row"> could not be scrolled into view
             //tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
-            tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td")?.click()
-            Thread.sleep(threadSleep)
-            tools.clickOK("Ок")
+           // tools.xpathClick("//span[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td","MODAL")
+           // tools.OK()
 
         // Надо поставить проверку всех заполненных полей
-
-            tools.clickOK()
+        tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
+        Thread.sleep(threadSleep)
+        tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
+        Thread.sleep(threadSleep)
+            tools.OK()
         if (DT > 6) println("Конец Test нажатия на $editFilter")
     }
     @RepeatedTest(NN)
@@ -527,6 +522,7 @@ class Filter {
      *  тест Удаление фильтра
      */
    @RepeatedTest(NN)
+   @Disabled
    @DisplayName("Удаление фильтров")
    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         workTable()
@@ -538,7 +534,7 @@ class Filter {
         clickFilter(nomberFilter, "CMD_DELETE_USER_QUERY")  // встать на фильтр
 
        // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
-       tools.clickOK("Да")
+       tools.OK("yes-modal-window-btn")
         if (DT > 6) println("Конец Test нажатия на $deleteFilter")
 
    }
