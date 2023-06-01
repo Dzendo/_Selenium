@@ -31,7 +31,7 @@ class HeadRef {
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 5                    // количество повторений тестов
+        private const val NN:Int = 1                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера

@@ -30,6 +30,7 @@ object TestsProperties {
 
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
+        "WKW-930:443",
         "srv2b.ru:443",
         "srv1a.ru:443",
         "srv10a.ru:443",
@@ -39,6 +40,7 @@ object TestsProperties {
     )
 
     val loginPages: Array<String> = arrayOf(
+        "http://WKW-930:443/tdms/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
         "http://tdms-srv1a.csoft-msc.ru:443/tdms/?classic#objects",
         "http://tdms-srv10a.csoft-msc.ru:443/tdms/?classic#objects",
@@ -47,7 +49,7 @@ object TestsProperties {
         "http://TDMS-SRV10a:443/tdms/#objects/",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
-    val passwords: Array<String> = arrayOf("Cons123", "753951", "tdm365")
+    val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")
 
     val testCases: MutableSet<String> = mutableSetOf("Pass", "Head", "User", "Filter")
 
@@ -63,7 +65,7 @@ object TestsProperties {
 
     var loginpage = "http://tdms-temp-2012:443/client/#objects/"
     var login = "SYSADMIN"
-    var password = "Cons123"
+    var password = "Tdm365"
 
     var summuryOfErrors = 0L
 
