@@ -282,7 +282,7 @@ class AdminUser {
         assertTrue((tools.reference("GRID_USERS","MODAL","//descendant::span[contains(text(),'$localDateNow')]//ancestor::tr")?.getAttribute("class")
             ?.contains("Selected")?: false),
             "@@@@ После выделения созданного пользователя $localDateNow в таблице нет такого пользователя @@")
-
+        Thread.sleep(threadSleep)
         tools.OK()
        // tools.OK()
         if (DT > 6) println("Конец Test нажатия на $createUser")
@@ -320,6 +320,7 @@ class AdminUser {
             tools.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")  // E-mail
                 ?.clickSend("ya@ya")
             tools.OK()
+            Thread.sleep(threadSleep)
             tools.OK()
             if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
@@ -353,6 +354,7 @@ class AdminUser {
             "@@@@ Нет измененного описания с # и @ ")
 
         tools.OK()
+        Thread.sleep(threadSleep)
         tools.OK()
         if (DT > 6) println("Конец Test нажатия на $fillingUser")
     }
@@ -388,6 +390,7 @@ class AdminUser {
             tools.OK()
             assertTrue(tools.headerWait("Редактирование групп"),
                 "@@@@ После выхода из редактирования - нет заголовка окна Редактирование групп @@")
+            Thread.sleep(threadSleep)
             tools.OK()
             if (DT > 6) println("Конец Test n07_AddRoleUserTest нажатия на $fillingUser")
         }
@@ -418,6 +421,7 @@ class AdminUser {
             assertTrue(tools.headerWait(TDM365),
                 "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
             tools.OK()  // создана тестовая
+            Thread.sleep(threadSleep)
             tools.OK()     // закрыть адимин
             if (DT > 6) println("Конец Test нажатия на $createGroup")
         }
@@ -444,6 +448,7 @@ class AdminUser {
             assertContains(tools.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
                 "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDMS Удалить группу @@")
             tools.OK("yes-modal-window-btn")  // удалить тестовая
+            Thread.sleep(threadSleep)
             tools.OK()     // закрыть адимин
             if (DT > 6) println("Test нажатия на $deleteGroup")
         }
@@ -464,6 +469,7 @@ class AdminUser {
                 "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
 
         tools.OK("yes-modal-window-btn")
+        Thread.sleep(threadSleep)
         tools.OK()
             if (DT > 6) println("Конец Test нажатия на Удаление на $localDateNow")
     }

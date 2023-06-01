@@ -7,7 +7,7 @@ const val TDM365 = "TDM365"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
-    var pollingInDurationNomber = 500L
+    var pollingInDurationNomber = 100L
     var fluentOutDurationNomber = 18000L
     var pollingOutDurationNomber = 1000L
     var repeateInNomber = 5
@@ -15,7 +15,7 @@ object TestsProperties {
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 5000L // задержки где они есть 1сек
+    var threadSleepNomber = 100L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome

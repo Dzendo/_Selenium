@@ -352,7 +352,7 @@ class HeadRef {
             assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
                 "@@@@ После нажатия $adminUser и открытия окна с заголовком Редактирование групп в окне нет поля STATIC1 Группы пользователей @@")
             //tools.closeX()
-            tools.clickOK()
+            tools.OK()
             if (DT > 6) println("Конец Test нажатия на $adminUser")
         }
 

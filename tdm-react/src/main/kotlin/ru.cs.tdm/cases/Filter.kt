@@ -169,6 +169,7 @@ class Filter {
     @AfterEach
     fun afterEach(){
         if (DT >7) println("Вызов AfterEach FilterTest")
+        Thread.sleep(threadSleep)
         //screenShot()
         tools.closeEsc(5)
 //        Thread.sleep(threadSleep)
@@ -180,6 +181,49 @@ class Filter {
         copyFile(scrFile, File("./$name${sdf.format(Date())}.png"))
     }
 
+    @RepeatedTest(NN)
+    @DisplayName("Удаление фильтров")
+    fun n00_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
+        val deleteFilter = "Удалить тестовые фильтры"
+        val nomberFilter = "${repetitionInfo.currentRepetition}"
+        if (DT > 6) println("Test нажатия на $deleteFilter")
+        val titleWindow =  TDM365
+        var nomerDel = 0
+
+        while(true) {
+            workTable()
+        val testPresent =  tools.xpath("//table", "Main-Grid")
+            ?.findElements(By.xpath("//descendant::a[contains(text(),'Тест')]"))?.toList()
+            if (testPresent.isNullOrEmpty()) break
+            if (testPresent.size <= nomerDel) break
+
+            // Обрабатывать RecyclerVuew
+            testPresent[nomerDel]?.click()
+
+            if (tools.reference("CMD_DELETE_USER_QUERY","ROOT666") == null) {
+                println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие:")
+                //screenShot()
+                nomerDel++
+                continue
+            }
+
+            tools.referenceClick("CMD_DELETE_USER_QUERY", "ROOT666")
+            assertTrue(tools.headerWait(titleWindow),
+                "@@@@ После нажатия CMD_DELETE_USER_QUERY - окно типа не имеет заголовка $titleWindow @@")
+
+            // Вы действительно хотите удалить объект "(Все проекты) Тест 31-05-2023_18-51-20  @@#" из системы?
+            val filterText =
+                tools.xpath("//p[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
+            assertContains(filterText, "Тест", false,
+                "@@@@ Нет правильного текста Тест на всплывающем окне $filterText @@")
+
+            // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
+            tools.OK("yes-modal-window-btn")
+        }
+
+        if (DT > 6) println("Конец Test нажатия на $deleteFilter Заблокировано $nomerDel фильтров")
+
+    }
      /**
      * Общий длинный тест пока : создание, редактирование, получение отчета, удаление
       */
@@ -213,9 +257,11 @@ class Filter {
              if (DT > 0) println("&&&&&&&&&&01&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
              screenShot()
          }
+        //Костыль
         tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
-        Thread.sleep(threadSleep)
+        
         tools.OK()
+        
         if (DT > 6) println("Конец Test нажатия на $createUser")
     }
     /**
@@ -239,12 +285,8 @@ class Filter {
             if (DT > 0) println("&&&&&&&&&02&&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
             screenShot()
         }
-
-        tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
         tools.OK("cancel-modal-window-btn")
-        //tools.xpathClickLast("//*[contains(text(), 'Фильтр $localDateNow')]")
         if (DT > 6) println("Конец Test посмотреть на $viewUser")
-
     }
         /**
          *  тест заполнение и сохранение фильтра
@@ -286,12 +328,12 @@ class Filter {
             assertContains(ATTR_DESCRIPTION?.getAttribute("value") ?: "NONE", "Описание", false,
                 "@@@@ В Описание фильтра не прописалось Описание при редактировании @@")
 
+            //Костыль
             tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
-            Thread.sleep(threadSleep)
             tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
-            Thread.sleep(threadSleep)
 
             tools.OK()
+            
             if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
 
@@ -333,6 +375,7 @@ class Filter {
                 false, "@@@@ карандашик BUTTON_OBJDEV_SEL : После выбора в поле фильтра объекта разработки из справочника в поле фильтра Объект разработки - пусто, а должно стоять Ферма_омшанник @@")
 
             tools.referenceClick("BUTTON_OBJDEV_ERASE", "MODAL")
+        Thread.sleep(threadSleep)
             assertTrue(((attrObjectDev?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_OBJDEV_ERASE(объекта разработки) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
 
@@ -356,6 +399,7 @@ class Filter {
                 "@@@@ карандашик BUTTON_PROJECT_SEL : После выбора в поле Проекта разработки из справочника в поле фильтра Проект - пусто, а должно стоять Название проекта из справочника @@"
             )
             tools.referenceClick("BUTTON_ERASE_PROJECT", "MODAL")
+            Thread.sleep(threadSleep)
             assertTrue(((ATTR_RefToProject?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_PROJECT(Проект) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_PROJECT_SEL()  // Всавляем еще раз
@@ -386,6 +430,7 @@ class Filter {
             assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
                 "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
             tools.referenceClick("BUTTON_ERASE_TTD", "MODAL")
+        Thread.sleep(threadSleep)
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_TYPE_DOC()  // Всавляем еще раз
@@ -410,6 +455,7 @@ class Filter {
             assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",false,
                 "@@@@ поле фильтра Объект структуры не содержит значение Расширение ЕСГ @@")
             tools.referenceClick("BUTTON_ERASE_OS","MODAL")
+        Thread.sleep(threadSleep)
             assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_OS(Объект структуры) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_OBJ_STR()  // Всавляем еще раз
@@ -430,15 +476,13 @@ class Filter {
             assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "Газпромпроектирование",false,
                 "@@@@ поле фильтра Организация/Подразд. не содержит значение Газпромпроектирование после выбора @@")
             tools.referenceClick("BUTTON_ERASE_ORG", "MODAL")
+        Thread.sleep(threadSleep)
             assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_ORG(Организация/Подразд.) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_ORG_SEL()  // Всавляем еще раз
 
-       // tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
-       // Thread.sleep(threadSleep)
-       // tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
-       // Thread.sleep(threadSleep)
             tools.OK()
+        
         if (DT > 6) println("Конец Test нажатия на $editFilter")
         }
 
@@ -499,11 +543,9 @@ class Filter {
            // tools.OK()
 
         // Надо поставить проверку всех заполненных полей
-        tools.referenceClick("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
-        Thread.sleep(threadSleep)
-        tools.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
-        Thread.sleep(threadSleep)
+
             tools.OK()
+        
         if (DT > 6) println("Конец Test нажатия на $editFilter")
     }
     @RepeatedTest(NN)
@@ -522,7 +564,7 @@ class Filter {
      *  тест Удаление фильтра
      */
    @RepeatedTest(NN)
-   @Disabled
+   //@Disabled
    @DisplayName("Удаление фильтров")
    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         workTable()
