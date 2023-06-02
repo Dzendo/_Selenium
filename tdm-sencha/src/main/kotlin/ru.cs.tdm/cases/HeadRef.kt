@@ -761,12 +761,12 @@ class HeadRef {
                 //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
                 //assertTrue(msgText.contains("Нет")) // - Выбор проекта в системе"))
                 tools.closeXLast()
-                assertTrue(tools.titleWait("messagebox","Ввод значения"),
-                    "@@@@ После следующего нажатия $flow в окне заголовок не содержит Ввод значения @@")
+                assertTrue(tools.titleWait("tdmsSelectObjectDialog","Выбор проекта"),
+                    "@@@@ После следующего нажатия $flow в окне заголовок не содержит Выбор проекта @@")
                 tools.closeXLast()
                 Thread.sleep(threadSleep)
                 assertTrue(tools.titleWait("messagebox","TDM365"),
-                    "@@@@ После последнего нажатия $flow в окне заголовок не содержит Ввод значения @@")
+                    "@@@@ После последнего нажатия $flow в окне заголовок не содержит TDM365 @@")
                 tools.closeXLast()
                 if (DT > 6) println("Конец Test нажатия на $flow")
             }

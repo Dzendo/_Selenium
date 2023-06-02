@@ -145,7 +145,7 @@ class Filter {
             " Заголовок таблицы не Фильтры")
         // Обрабатывать RecyclerVuew
         tools.xpathClick("//a [contains(text(), 'Тест $localDateNow')]", "Main-Grid")
-
+        Thread.sleep(threadSleep)
         assertContains(tools.reference("ATTR_USER_QUERY_NAME","Object-Preview","//descendant::input")?.getAttribute("value") ?: "NONE", "Тест $localDateNow",false,
             "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
