@@ -43,7 +43,7 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.9.3")
     //implementation("org.assertj:assertj-core:3.23.1")
     implementation("org.junit.platform:junit-platform-launcher:1.9.3")
-    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
+//    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
 
 }
 application {
