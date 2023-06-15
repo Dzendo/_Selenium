@@ -9,4 +9,6 @@ class MainPage {
     val findYourToolsButton = element(byXpath("//*[@data-test='suggestion-action']"))
     val toolsMenu = element(byXpath("//div[@data-test='main-menu-item' and @data-test-marker = 'Developer Tools']"))
     val searchButton = element("[data-test='site-header-search-action']")
+
+
 }

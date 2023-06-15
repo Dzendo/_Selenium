@@ -14,6 +14,7 @@ import io.qameta.allure.selenide.AllureSelenide
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.*
 
+// https://ru.selenide.org/documentation/selenide-vs-selenium.html
 class MainPageTest {
     private val mainPage = MainPage()
 
@@ -29,7 +30,8 @@ class MainPageTest {
     @BeforeEach
     fun setUp() {
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
-        Configuration.browserCapabilities = ChromeOptions().addArguments("--remote-allow-origins=*")
+        //Configuration.browserCapabilities = ChromeOptions().addArguments("--remote-allow-origins=*")
+       // Configuration.browserCapabilities = ChromeOptions()  //.addArguments("--remote-allow-origins=*")
         open("https://www.jetbrains.com/")
         WebDriverRunner.getWebDriver().manage().window().maximize()
     }
@@ -38,7 +40,8 @@ class MainPageTest {
     fun search() {
         mainPage.searchButton.click()
 
-        element("[data-test='search-input']").sendKeys("Selenium")
+        element("[data-test='search-input']").setValue("Selenium")  // .sendKeys("Selenium")
+        //element("[data-test='search-input']").setValue("Selenium")  // .sendKeys("Selenium")
         element("button[data-test='full-search-button']").click()
 
         element("input[data-test='search-input']").shouldHave(attribute("value", "Selenium"))

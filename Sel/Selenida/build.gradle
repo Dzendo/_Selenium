@@ -19,7 +19,7 @@ ext {
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
@@ -28,6 +28,20 @@ tasks.withType(JavaCompile) {
         jvmTarget = '17'
     }
 }
+
+kotlin {
+    jvmToolchain(17)
+}
+//tasks.withType<KotlinCompile> {
+//    kotlinOptions.jvmTarget = "17"
+//}
+//tasks.withType<KotlinTest> {
+//    //kotlinOptions.jvmTarget = "11"
+//    //options.jvmTarget = "11"  // "1.8"
+//}
+//tasks.withType<JavaCompile> {
+//    options.encoding = "UTF-8"
+//}
 
 dependencies {
     testImplementation('com.codeborne:selenide:6.15.0')
@@ -43,6 +57,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging { events("passed", "skipped", "failed") }
 }
 allure {
     autoconfigure = true
