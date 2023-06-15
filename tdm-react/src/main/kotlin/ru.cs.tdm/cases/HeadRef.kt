@@ -178,6 +178,7 @@ class HeadRef {
             assertTrue(tools.byIDPressed("chat-tab"),
                     "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@" )
             if (DT > 6) println("Конец Test нажатия на $meeting")
+            Thread.sleep(threadSleep)
         }
 
         @RepeatedTest(NN)
