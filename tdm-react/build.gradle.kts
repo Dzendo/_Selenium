@@ -40,9 +40,9 @@ dependencies {
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.7")
-    implementation("org.junit.jupiter:junit-jupiter:5.9.3")
+    implementation("org.junit.jupiter:junit-jupiter:5.10.0-M1")
     //implementation("org.assertj:assertj-core:3.23.1")
-    implementation("org.junit.platform:junit-platform-launcher:1.9.3")
+    implementation("org.junit.platform:junit-platform-launcher:1.10.0-M1")
 //    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
 
 }

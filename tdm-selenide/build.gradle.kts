@@ -6,8 +6,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
-    kotlin("jvm") version "1.8.21"
+    kotlin("jvm") version "1.8.22"
     application
+    id ("io.qameta.allure") version "2.11.2"
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
@@ -35,8 +36,8 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-test:1.8.21")  // 1.8.20-RC2
-    implementation("org.seleniumhq.selenium:selenium-java:4.9.1")
+    implementation("org.jetbrains.kotlin:kotlin-test:1.8.22")  // 1.8.20-RC2
+    implementation("org.seleniumhq.selenium:selenium-java:4.10.0")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.3")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
@@ -44,8 +45,19 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.9.3")
     //implementation("org.assertj:assertj-core:3.23.1")
     implementation("org.junit.platform:junit-platform-launcher:1.9.3")
-    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.9.1")
+//    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
+    implementation("com.codeborne:selenide:6.15.0")
+    implementation("io.qameta.allure:allure-selenide:2.22.2")
+    implementation("io.kotest.extensions:kotest-extensions-allure:1.3.0")
 
+}
+allure {
+    autoconfigure = true
+//    version = "2.22.2"
+
+    useJUnit5 {
+        version = "2.22.2"
+    }
 }
 application {
     mainClass.set("TdmKt")

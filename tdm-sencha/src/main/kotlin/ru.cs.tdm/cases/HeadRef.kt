@@ -215,6 +215,7 @@ class HeadRef {
             }
             else if (DT > 3) println("Отсутствует пункт меню $meeting")
             if (DT > 6) println("Конец Test нажатия на $meeting")
+            Thread.sleep(threadSleep)
         }
 
         @RepeatedTest(NN)
@@ -299,6 +300,10 @@ class HeadRef {
     @DisplayName("Testing Tools Box")
     @TestMethodOrder(MethodOrderer.MethodName::class)
     inner class ToolTest {
+        init{
+          //  afterAll()
+          //  beforeAll()
+        }
         @BeforeEach
         fun beforeEach() {
             if (DT > 7) println("Вызов inner Tools BeforeEach")
@@ -315,14 +320,14 @@ class HeadRef {
             if (DT > 7) println("Конец inner Tools AfterEach пять раз closeEsc")
         }
 
-        @RepeatedTest(NN)
+        @RepeatedTest(10)
         @DisplayName("Показать/скрыть дерево")
         // repetitionInfo (Junit) объект, который содержит в т.ч. номер повтора теста repetitionInfo.currentRepetition
         fun open_showTreeTest(){     //(repetitionInfo: RepetitionInfo) {
             // Если номер повтора теста 1,11,21 (остаток от деления на 10 равно 1) и тд, то обновить экран
             // У TDM подмерзает экран если много команд показать-скрыть
             //if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh() // Костыль проверить убрать
-            driver.navigate().refresh()
+           // driver.navigate().refresh()
             val open_showTree = "Показать/скрыть дерево"
             if (DT > 6) println("Test нажатия на $open_showTree")
             assertTrue(tools.qtipPressedLast(open_showTree), "@@@@ После нажатия $open_showTree - кнопка $open_showTree нет утоплена @@") // Исправить на референс
@@ -335,11 +340,12 @@ class HeadRef {
             if (DT > 6) println("Конец Test нажатия на $open_showTree")
         }
 
-        @RepeatedTest(NN)  // Не сделан reference
+        // data-reference="TDMS_COMMAND_COMMON_SHOWPREVIEW"
+        @RepeatedTest(10)  // Не сделан reference
         @DisplayName("Показать/скрыть панель предварительного просмотра")
         fun open_showPreviewPanelTest() {   //(repetitionInfo: RepetitionInfo) {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()
-            driver.navigate().refresh()
+           // driver.navigate().refresh()
             val open_showPreviewPanel = "Показать/скрыть панель предварительного просмотра"
             if (DT > 6) println("Test нажатия на $open_showPreviewPanel")
             assertTrue(tools.qtipPressedLast(open_showPreviewPanel), "@@@@ После нажатия $open_showPreviewPanel - кнопка $open_showPreviewPanel нет утоплена @@")

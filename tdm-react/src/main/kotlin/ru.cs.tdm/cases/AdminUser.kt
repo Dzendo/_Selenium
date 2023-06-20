@@ -159,7 +159,9 @@ class AdminUser {
 
         val adminUser = "Администрирование групп"
         if (DT >8) println("Test нажатия на $adminUser")
-        tools.referenceClick("CMD_GROUP_CHANGE")
+        Thread.sleep(threadSleep)  // ***#############################################################
+        tools.referenceClick("CMD_GROUP_CHANGE","ROOT666")
+//        Thread.sleep(threadSleep)
         println(" Hажатия на $adminUser")
         assertTrue(tools.headerWait("Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")

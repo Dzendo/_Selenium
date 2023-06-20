@@ -32,6 +32,7 @@ class Runner(private val povtor : Int) {
             //.selectors(selectPackage("ru.cs.tdm.cases"))
             //.filters(includeClassNamePatterns(".*Test"))
             .build()
+        Thread.sleep(3000)
         val launcher: Launcher = LauncherFactory.create()
         //val plan: TestPlan = launcher.discover(request)
 

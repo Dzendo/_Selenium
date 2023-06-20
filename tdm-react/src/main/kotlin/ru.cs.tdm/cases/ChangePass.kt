@@ -111,7 +111,9 @@ class ChangePass {
         assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
 
         if (DT > 8) println("Test нажатия на $adminUser")
-        tools.referenceClick("CMD_GROUP_CHANGE")
+        Thread.sleep(threadSleep)   // ***########################
+        tools.referenceClick("CMD_GROUP_CHANGE","ROOT666")
+       // Thread.sleep(threadSleep)
         assertTrue(tools.headerWait( "Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
