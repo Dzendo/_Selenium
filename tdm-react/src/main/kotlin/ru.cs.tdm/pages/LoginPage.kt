@@ -160,7 +160,7 @@ class LoginPage(val driver: WebDriver) {
      * И возвращает что определила.
      */
     fun titleLoginUserNameWait(): String = currentUserName().trim().split(" ")[0]
-        .also { println("ожидание $it пользователя из меню пользователя")}
+        //.also { println("ожидание $it пользователя из меню пользователя")}
     fun getBrowserUrl(): String = driver.currentUrl
 
 }

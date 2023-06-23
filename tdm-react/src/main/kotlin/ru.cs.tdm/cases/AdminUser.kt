@@ -162,10 +162,10 @@ class AdminUser {
         Thread.sleep(threadSleep)  // ***#############################################################
         tools.referenceClick("CMD_GROUP_CHANGE","ROOT666")
 //        Thread.sleep(threadSleep)
-        println(" Hажатия на $adminUser")
+        if (DT >7) println(" Hажатия на $adminUser")
         assertTrue(tools.headerWait("Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
-        println(" проверили заголовок на $adminUser")
+        if (DT >7) println(" проверили заголовок на $adminUser")
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
             "@@@@ В окне Редактирование групп нет обязательного заголовка списка Группы пользователей @@")
         clickAllUsers()

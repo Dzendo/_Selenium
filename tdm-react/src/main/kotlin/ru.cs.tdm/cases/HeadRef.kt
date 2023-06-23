@@ -308,7 +308,9 @@ class HeadRef {
             val filter = "Создать фильтр"
             if (DT > 6) println("Test нажатия на $filter")
             workTable()
+            Thread.sleep(threadSleep)
             tools.referenceClick("CMD_CREATE_USER_QUERY","ROOT666")
+            Thread.sleep(threadSleep)
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $filter - нет заголовка окна Редактирование объекта @@")
             assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),

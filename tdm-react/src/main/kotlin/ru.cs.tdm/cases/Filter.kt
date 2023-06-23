@@ -141,6 +141,9 @@ class Filter {
             else -> "Просмотр свойств"
         }
         if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
+        //tools.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Thread.sleep(threadSleep)
         assertEquals(tools.reference("main-object-header-description","ROOT666","//span")?.text,"Фильтры",
             " Заголовок таблицы не Фильтры")
         // Обрабатывать RecyclerVuew
@@ -153,8 +156,9 @@ class Filter {
             println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие: $clickRef")
             screenShot()
         }
-
+        Thread.sleep(threadSleep)
         tools.referenceClick(clickRef, "ROOT666")
+        Thread.sleep(threadSleep)
         assertTrue(tools.headerWait(titleWindow),
             "@@@@ После нажатия $clickRef - окно типа не имеет заголовка $titleWindow @@")
 
@@ -241,8 +245,9 @@ class Filter {
         workTable()
         // выбрать из дерева фильтры
 
-
+        Thread.sleep(threadSleep)
         tools.referenceClick("CMD_CREATE_USER_QUERY", "ROOT666")
+        Thread.sleep(threadSleep)
         assertTrue(tools.headerWait("Редактирование объекта"),
             "@@@@ После нажатия $createUser - нет окна с заголовком Редактирование объекта @@")
 
@@ -349,7 +354,7 @@ class Filter {
             val editFilter = "Заполнение ссылочных полей фильтра"
         if (DT > 6) println("Test нажатия на $editFilter")
 
-        clickFilter(nomberFilter)  // встать на фильтр
+        clickFilter(nomberFilter)  // встать на фильтр  !!!!!!!!!!!!!!!!!!!!!!!!
 
             val description = tools.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
             assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
@@ -419,7 +424,7 @@ class Filter {
                 // Element: [[FirefoDriver: firefo on WINDOWS (1f8f6504-78cc-4d5e-9c4e-1642e0a2cf62)] -> xpath: //html/body/descendant::a[contains(text(),'АР Архитектурные решения')]/ancestor::tr]
                 // org.openqa.selenium.ElementNotInteractableException: Element <tr class="  x-grid-row"> could not be scrolled into view
                 //tools.xpathLast("//a[contains(text(),'АР Архитектурные решения')]/ancestor::tr")?.click()
-                tools.xpathClick("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td")
+                tools.xpathClick("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td","MODAL")
                 tools.OK()
             }
 
@@ -466,7 +471,7 @@ class Filter {
                     "@@@@ карандашик BUTTON_ORG_SEL на поле Организация/Подразд. : нет справочника с заголовком Организации/Подразделения @@")
                 //FireFox не работает Element <tr class="  x-grid-row"> could not be scrolled into view  td входит в ссылку
                 //tools.xpathLast("//a[contains(text(),'Газпромпроектирование')]/ancestor::tr")?.click()
-                tools.xpathClick("//a[contains(text(),'Газпромпроектирование')]/ancestor::td/preceding-sibling::td") // на квадратик слева
+                tools.xpathClick("//a[contains(text(),'Газпромпроектирование')]/ancestor::td/preceding-sibling::td", "MODAL") // на квадратик слева
                 tools.OK()
             }
             BUTTON_ORG_SEL()
