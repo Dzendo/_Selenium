@@ -30,37 +30,35 @@ class ChangePass {
    private lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы
    private lateinit var tools: Tools
-   private lateinit var loginSYS: String
-   private lateinit var passwordSYS: String
-   private lateinit var loginpage: String
-   private lateinit var login: String
-   private lateinit var password: String
+   private val loginSYS: String = TestsProperties.login
+   private val passwordSYS: String = TestsProperties.password
+   private val loginpage: String = TestsProperties.loginpage
+   private var login: String = loginSYS
+   private var password: String = passwordSYS
         @JvmStatic
-        @BeforeAll
+//        @BeforeAll
         fun beforeAll() {
         if (DT >7) println("Вызов BeforeAll PassTest")
             // Создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
             driver = startDriver()
-
             // Создаем экземпляры классов созданных ранее страниц, и присвоим ссылки на них.
             // В качестве параметра указываем созданный перед этим объект driver,
             tools = Tools(driver)
 
-            loginpage = TestsProperties.loginpage
+            //loginpage = TestsProperties.loginpage
             if (DT > 8) println("Открытие страницы $loginpage")
-            loginSYS = TestsProperties.login
-            passwordSYS = TestsProperties.password
+            //loginSYS = TestsProperties.login
+            //passwordSYS = TestsProperties.password
             driver.get(loginpage)
             assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
-            login = loginSYS
-            password = passwordSYS
+            //login = loginSYS
+            //password = passwordSYS
             if (DT >7) println("Конец Вызов BeforeAll PassTest")
         }
 
         @JvmStatic
-        @AfterAll
+//        @AfterAll
         fun afterAll() {
-            //tools.idList()
             if (DT >7) println("Вызов AfterAll PassTest")
             tools.closeEsc(5)
             driver.quit() //  закрытия окна браузера
@@ -81,6 +79,7 @@ class ChangePass {
     // Как обычно, выполняется перед каждым тестом, только он пустой
     @BeforeEach
     fun beforeEach() {
+        beforeAll()
         if (DT > 7) println("Вызов BeforeEach ChangePass")
         //driver.navigate().refresh()
        if (DT > 8) println("login= $login   password= $password")
@@ -96,6 +95,7 @@ class ChangePass {
         Login(driver).loginOut()
         //driver.navigate().refresh()
         if (DT > 7) println("Конец Вызов AfterEach ChangePass")
+        afterAll()
     }
     /**
      *  тест наличия/ удаление пользователя
@@ -111,7 +111,9 @@ class ChangePass {
         assertTrue(tools.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
 
         if (DT > 8) println("Test нажатия на $adminUser")
-        tools.referenceClick("CMD_GROUP_CHANGE")
+        Thread.sleep(threadSleep)   // ***########################
+        tools.referenceClick("CMD_GROUP_CHANGE","ROOT666")
+       // Thread.sleep(threadSleep)
         assertTrue(tools.headerWait( "Редактирование групп"),
             "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
         assertTrue(tools.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),

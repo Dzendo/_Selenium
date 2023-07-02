@@ -1,12 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
-
+// 28.03.2023 rev IDEA 2022.3  xx2023.1
+// 1.4.39_7.0.20
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
     kotlin("jvm") version "1.8.22"
     application
+    id ("io.qameta.allure") version "2.11.2"
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
@@ -40,11 +42,22 @@ dependencies {
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.7")
-    implementation("org.junit.jupiter:junit-jupiter:5.10.0-M1")
+    implementation("org.junit.jupiter:junit-jupiter:5.9.3")
     //implementation("org.assertj:assertj-core:3.23.1")
-    implementation("org.junit.platform:junit-platform-launcher:1.10.0-M1")
+    implementation("org.junit.platform:junit-platform-launcher:1.9.3")
 //    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
+    implementation("com.codeborne:selenide:6.15.0")
+    implementation("io.qameta.allure:allure-selenide:2.22.2")
+    implementation("io.kotest.extensions:kotest-extensions-allure:1.3.0")
 
+}
+allure {
+    autoconfigure = true
+//    version = "2.22.2"
+
+    useJUnit5 {
+        version = "2.22.2"
+    }
 }
 application {
     mainClass.set("TdmKt")

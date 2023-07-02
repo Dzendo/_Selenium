@@ -320,7 +320,7 @@ class HeadRef {
             if (DT > 7) println("Конец inner Tools AfterEach пять раз closeEsc")
         }
 
-        @RepeatedTest(10)
+        @RepeatedTest(NN)
         @DisplayName("Показать/скрыть дерево")
         // repetitionInfo (Junit) объект, который содержит в т.ч. номер повтора теста repetitionInfo.currentRepetition
         fun open_showTreeTest(){     //(repetitionInfo: RepetitionInfo) {
@@ -341,7 +341,7 @@ class HeadRef {
         }
 
         // data-reference="TDMS_COMMAND_COMMON_SHOWPREVIEW"
-        @RepeatedTest(10)  // Не сделан reference
+        @RepeatedTest(NN)  // Не сделан reference
         @DisplayName("Показать/скрыть панель предварительного просмотра")
         fun open_showPreviewPanelTest() {   //(repetitionInfo: RepetitionInfo) {
             // if (repetitionInfo.currentRepetition % 10 == 1) driver.navigate().refresh()

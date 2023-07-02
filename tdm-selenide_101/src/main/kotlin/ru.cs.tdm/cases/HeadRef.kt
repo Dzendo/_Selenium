@@ -308,9 +308,7 @@ class HeadRef {
             val filter = "Создать фильтр"
             if (DT > 6) println("Test нажатия на $filter")
             workTable()
-            Thread.sleep(threadSleep)
             tools.referenceClick("CMD_CREATE_USER_QUERY","ROOT666")
-            Thread.sleep(threadSleep)
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $filter - нет заголовка окна Редактирование объекта @@")
             assertTrue(tools.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
@@ -349,7 +347,6 @@ class HeadRef {
         fun adminUserTest() {
             val adminUser = "Администрирование групп"
             if (DT > 6) println("Test нажатия на $adminUser")
-            Thread.sleep(threadSleep)  // ***##########################################################
             tools.referenceClick("CMD_GROUP_CHANGE","ROOT666")
             assertTrue(tools.headerWait("Редактирование групп"),
                 "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
@@ -381,7 +378,6 @@ class HeadRef {
         fun createObjectTest() {
             val createObject = "Создать объект разработки"
             if (DT > 6) println("Test нажатия на $createObject")
-            Thread.sleep(threadSleep)           // ***#######################################################
             tools.referenceClick("CMD_OBJECT_STRUCTURE_CREATE","ROOT666")  // CMD_OBJECT_STRUCTURE_CREATE
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $createObject - нет заголовка окна Редактирование объекта @@")
@@ -398,7 +394,6 @@ class HeadRef {
         fun configuringNotificationTest() { //repetitionInfo: RepetitionInfo) {
             val configuringNotification = "Настройка шаблона уведомлений"
             if (DT > 6) println("Test нажатия на $configuringNotification")
-            Thread.sleep(threadSleep)   // 7.0.33   // ***#############################################
             tools.referenceClick("CMD_NOTIFICATIONS_SETTINGS", "ROOT666")
             assertTrue(tools.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $configuringNotification - нет заголовка окна Редактирование объекта @@")

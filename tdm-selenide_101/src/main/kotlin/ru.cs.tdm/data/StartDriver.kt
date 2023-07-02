@@ -13,20 +13,11 @@ fun startDriver(indexBrowser: Int = TestsProperties.browserIndex, xPoint:Int = 2
     //  "Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari"
     when(indexBrowser) {
         0 -> {
-             driver = ChromeDriver()
-            // driver = ChromeDriver(ChromeOptions().addArguments("--remote-allow-origins=*"))
-           /* val options = ChromeOptions()
-            // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
-            options.addArguments("--remote-allow-origins=*")
-            driver = ChromeDriver(options)
-            */
-            /*
             driver = WebDriverManager
                 .chromedriver()
-                // отключился Chrome 111 - костыль 2 из 2: первый в Tdm System.setProperty("webdriver.http.factory", "jdk-http-client") (достаточно одного) снял 14.06.2023
-               // .capabilities(ChromeOptions().addArguments("--remote-allow-origins=*"))
+                // отключился Chrome 111 - костыль 2 из 2: первый в Tdm System.setProperty("webdriver.http.factory", "jdk-http-client") (достаточно одного)
+                .capabilities(ChromeOptions().addArguments("--remote-allow-origins=*"))
                 .create()
-             */
             //WebDriverManager.chromedriver().setup()
             //driver = ChromeDriver()
         }
