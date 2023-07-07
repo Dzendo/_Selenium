@@ -164,7 +164,7 @@ class Filter {
 
         // Вы действительно хотите удалить объект "(Все проекты) Тест 31-05-2023_18-51-20  @@#" из системы?
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
-                tools.xpath("//p[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
+                tools.xpath("//*[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
             else
                 tools.xpath("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input", "MODAL")?.getAttribute("value") ?: "NONE"
          assertContains(filterText, "Тест $localDateNow", false,
@@ -217,7 +217,7 @@ class Filter {
 
             // Вы действительно хотите удалить объект "(Все проекты) Тест 31-05-2023_18-51-20  @@#" из системы?
             val filterText =
-                tools.xpath("//p[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
+                tools.xpath("//*[contains(text(),'Вы действительно хотите удалить объект')]", "MODAL")?.text ?: "NONE"
             assertContains(filterText, "Тест", false,
                 "@@@@ Нет правильного текста Тест на всплывающем окне $filterText @@")
 
