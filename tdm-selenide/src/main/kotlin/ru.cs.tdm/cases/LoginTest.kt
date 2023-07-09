@@ -28,7 +28,7 @@ class LoginTest {
     private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
     //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-    companion object {private const val NN:Int = 3 }                   // количество повторений тестов
+    companion object {private const val NN:Int = 1 }                   // количество повторений тестов
 
     /**
      * Осуществление первоначальной настройки

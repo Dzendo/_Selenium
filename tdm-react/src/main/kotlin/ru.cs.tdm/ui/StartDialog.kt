@@ -15,7 +15,7 @@ import kotlin.system.exitProcess
  * https://java-online.ru/swing-layout.xhtml
  */
 
-class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.47_7.0.35 React_1"), ActionListener  {
+class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48_7.0.35 React_1"), ActionListener  {
     //private val classStart = StartTests(this)  // перенес вниз чтобы был повторный старт
     //private var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()

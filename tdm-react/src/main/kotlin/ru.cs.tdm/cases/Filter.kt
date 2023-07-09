@@ -131,7 +131,8 @@ class Filter {
         assertTrue(tools.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
         // Здесь проверка дерева и отображения
-        tools.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
+        //tools.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
+        tools.xpathClick("//span[text()='Фильтры']","Main-Tree")
         assertTrue(tools.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {

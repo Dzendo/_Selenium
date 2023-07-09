@@ -131,7 +131,8 @@ class Filter {
         assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
         // Здесь проверка дерева и отображения
-        tools.xpathClickLast("//span[contains(text(), 'Фильтры')]")
+        //tools.xpathClickLast("//span[contains(text(), 'Фильтры')]")
+        tools.xpathClickLast("//span[text()='Фильтры']")
         Thread.sleep(threadSleep)
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
