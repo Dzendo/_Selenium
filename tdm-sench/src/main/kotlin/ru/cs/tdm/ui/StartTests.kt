@@ -23,7 +23,7 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
         super.process(chunk)
         // get last result
         val counterChunk = chunk[chunk.size - 1]
-        println( "counterChunk = $counterChunk")
+        //println( "counterChunk = $counterChunk")
     }
     //@Throws(Exception::class)
     override fun doInBackground(): Long {
@@ -36,16 +36,16 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
         var allSumErrors: Long = 0L     // сумма ошибок для всех тестов для всех повторов
         for (repeat in 1..TestsProperties.repeateCasesNomber) {
             var repeatSumErrors: Long = 0L     // сумма ошибок для всех тестов для текущего повтора repeat
-                    if (TestsProperties.isStartStop == 2) break
+            if (TestsProperties.isStartStop == 2) break
 
-             for (test in TestsProperties.testCases) {
+            for (test in TestsProperties.testCases) {
 
                 if (TestsProperties.isStartStop == 2) break         // STOP
                 while(TestsProperties.isPaused) Thread.sleep(1000L)     // PAUSE
 
                 startDialog?.showActionCase(repeat, test, allSumErrors)
 
-                 // process(chunk:
+                // process(chunk:
                 publish(repeat)
 
                 var caseErrors: Long = 0L        // сумма ошибок для текущего теста test при текущем повторе repeat

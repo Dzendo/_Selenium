@@ -53,7 +53,7 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
 
                 when (test) {
                     "Pass" -> {
-                        caseErrors += Runner(repeat).runTest(ChangePassInOut::class.java)
+                        caseErrors += Runner(repeat).runTest(ChangePass::class.java)
                     }
 
                     "Head" -> {
@@ -72,7 +72,7 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
                     }
 
                     "ALL" -> {
-                        caseErrors += Runner(repeat).runTest(ChangePassInOut::class.java)
+                        caseErrors += Runner(repeat).runTest(ChangePass::class.java)
                         caseErrors += Runner(repeat).runTest(HeadRef::class.java)
                         caseErrors += Runner(repeat).runTest(AdminUser::class.java)
                         caseErrors += Runner(repeat).runTest(Filter::class.java)

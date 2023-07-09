@@ -1,4 +1,3 @@
-
 // Top-level build file where you can add configuration options common to all sub--projects/modules.
 // https://habr.com/ru/post/305974/
 
@@ -11,7 +10,7 @@ plugins {
 }
 group = "ru.cs.tdm"
 version = "1.0-SNAPSHOT"
-val junitVersion = "5.10.0-M1"
+val junitVersion = "5.9.3"
 
 repositories {
     mavenCentral()
@@ -26,7 +25,6 @@ kotlin {
 }
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
-//    kotlinOptions.jvmTarget = "1.8"
 }
 tasks.withType<KotlinTest> {
     //kotlinOptions.jvmTarget = "11"
@@ -36,18 +34,18 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 dependencies {
-//    testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-test:1.9.0")  // 1.8.20-RC2
-    implementation("org.seleniumhq.selenium:selenium-java:4.10.0")  // 4.10.0
-    implementation("io.github.bonigarcia:webdrivermanager:5.4.0") // 5.3.3
+    implementation("org.seleniumhq.selenium:selenium-java:4.10.0")
+    implementation("io.github.bonigarcia:webdrivermanager:5.4.0")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.7")
-    implementation("org.junit.jupiter:junit-jupiter:5.10.0-RC1")  // 5.10.0-M1
+    implementation("org.junit.jupiter:junit-jupiter:5.10.0-RC1")
     //implementation("org.assertj:assertj-core:3.23.1")
-    implementation("org.junit.platform:junit-platform-launcher:1.10.0-RC1") // 1.10.0-M1
+    implementation("org.junit.platform:junit-platform-launcher:1.10.0-RC1")
 //    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
+
 }
-//application {
-//    mainClass.set("TdmKt")
-//}
+application {
+    mainClass.set("TdmKt")
+}

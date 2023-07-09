@@ -15,7 +15,7 @@ import kotlin.system.exitProcess
  * https://java-online.ru/swing-layout.xhtml
  */
 
-class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48-7.0.35 Sencha"), ActionListener  {
+class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48_7.0.35 Sench_1"), ActionListener  {
     //private val classStart = StartTests(this)  // перенес вниз чтобы был повторный старт
     //private var summuryOfErrors : Long = 0L
     //private val testCases: MutableSet<String> = mutableSetOf()
@@ -49,11 +49,11 @@ class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48-7.0.35 Sencha"), 
     // https://jetbrains.design/intellij/
     */
     private val spinRepeateCases =JSpinner( SpinnerNumberModel(
-            3,  //initial value
-            1,  //min
-            999,  //max
-            1   //step
-        ))
+        3,  //initial value
+        1,  //min
+        999,  //max
+        1   //step
+    ))
     private val spinRepeateTests =JSpinner( SpinnerNumberModel(
         1,  //initial value
         1,  //min
@@ -158,11 +158,11 @@ class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48-7.0.35 Sencha"), 
 
         showButtons()
 
-       setDefaultLookAndFeelDecorated(true)
-       pack()
-       setLocationRelativeTo(null)
-       setSize(550, 350)
-       isVisible = true
+        setDefaultLookAndFeelDecorated(true)
+        pack()
+        setLocationRelativeTo(null)
+        setSize(550, 350)
+        isVisible = true
 
 
     }
@@ -221,8 +221,8 @@ class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48-7.0.35 Sencha"), 
         when (TestsProperties.isStartStop) {
             -2 -> buttonStartStop.text = "START"
             -1 -> buttonStartStop.text = "Starting.."
-             1 -> buttonStartStop.text = "STOP"
-             2 -> buttonStartStop.text = "Stopping"
+            1 -> buttonStartStop.text = "STOP"
+            2 -> buttonStartStop.text = "Stopping"
             else -> buttonStartStop.text = "ELSE"
         }
         buttonStartStop.isVisible = true
@@ -239,64 +239,64 @@ class StartDialog : JFrame("TDM365 Tests from Elena Ver 1.4.48-7.0.35 Sencha"), 
         if (e == null) return
         when (e.source) {
             buttonStartStop -> {
-                    when (TestsProperties.isStartStop) {
-                        -2 -> {     // START
-                            TestsProperties.isStartStop = -1
-                            showButtons()
-                            with(TestsProperties) {
-                                repeateCasesNomber = spinRepeateCases.value.toString().toInt()
-                                repeateTestsNomber = spinRepeateTests.value.toString().toInt()
-                                threadSleepNomber = spinThreadSleep.value.toString().toLong() * 1000L
-                                debugPrintNomber = spinDebugPrint.value.toString().toInt()
+                when (TestsProperties.isStartStop) {
+                    -2 -> {     // START
+                        TestsProperties.isStartStop = -1
+                        showButtons()
+                        with(TestsProperties) {
+                            repeateCasesNomber = spinRepeateCases.value.toString().toInt()
+                            repeateTestsNomber = spinRepeateTests.value.toString().toInt()
+                            threadSleepNomber = spinThreadSleep.value.toString().toLong() * 1000L
+                            debugPrintNomber = spinDebugPrint.value.toString().toInt()
 
-                                browserIndex = browserBox.selectedIndex
-                                pageIndex = serverBox.selectedIndex
-                                //loginpage = server.selectedItem.toString()
-                                loginpage = loginPages[pageIndex]
-                                loginIndex = loginBox.selectedIndex
-                                //login = login.selectedItem.toString()
-                                login = logins[loginIndex]
-                                passwordIndex = passwordBox.selectedIndex
-                                //password = password.selectedItem.toString()
-                                password = passwords[passwordIndex]
+                            browserIndex = browserBox.selectedIndex
+                            pageIndex = serverBox.selectedIndex
+                            //loginpage = server.selectedItem.toString()
+                            loginpage = loginPages[pageIndex]
+                            loginIndex = loginBox.selectedIndex
+                            //login = login.selectedItem.toString()
+                            login = logins[loginIndex]
+                            passwordIndex = passwordBox.selectedIndex
+                            //password = password.selectedItem.toString()
+                            password = passwords[passwordIndex]
 
-                                testCases.clear()
-                                if (passBox.isSelected) testCases.add("Pass")
-                                if (headBox.isSelected) testCases.add("Head")
-                                if (userBox.isSelected) testCases.add("User")
-                                if (filterBox.isSelected) testCases.add("Filter")
+                            testCases.clear()
+                            if (passBox.isSelected) testCases.add("Pass")
+                            if (headBox.isSelected) testCases.add("Head")
+                            if (userBox.isSelected) testCases.add("User")
+                            if (filterBox.isSelected) testCases.add("Filter")
 
-                                fileOutCheck = outBox.isSelected
-                                consOutCheck = consBox.isSelected
-                                uiOutCheck = uiBox.isSelected
-                                assertOutCheck = errBox.isSelected
+                            fileOutCheck = outBox.isSelected
+                            consOutCheck = consBox.isSelected
+                            uiOutCheck = uiBox.isSelected
+                            assertOutCheck = errBox.isSelected
 
-                            }
-                            //println("@@@@@ actionCase.text = ${actionCase.text}  @@@")
-                            // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
-                            // #################################################################################################
-                            val classStart = StartTests(this)
-                            val executeStart = classStart.execute()  // СТАРТ циклов тестов
-                            //classStart.cancel(true) - не срабатывает
-                            // #################################################################################################
-                            with(TestsProperties) {
-                                isStartStop = 1
-                                // summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
-                                showButtons()
-                                println("@@@@@ START summuryOfErrors = ${summuryOfErrors}  @@@")
-                            }
                         }
-
-                        1 -> {   // STOP
-                            // НЕ РАБОТАЕТ переделать в флажки
-                            //classStart.cancel(true)
-                            TestsProperties.isStartStop = 2
+                        //println("@@@@@ actionCase.text = ${actionCase.text}  @@@")
+                        // Здесь надо организовывать поток и стартовать в нем + Листенер с указанием туда в поток
+                        // #################################################################################################
+                        val classStart = StartTests(this)
+                        val executeStart = classStart.execute()  // СТАРТ циклов тестов
+                        //classStart.cancel(true) - не срабатывает
+                        // #################################################################################################
+                        with(TestsProperties) {
+                            isStartStop = 1
+                            // summuryOfErrors = classStart.get()  // нельзя здесь спрашивать - заморожу интерфейс
                             showButtons()
-                            println("@@@@@ STOP summuryOfErrors = ${TestsProperties.summuryOfErrors}  @@@")
+                            println("@@@@@ START summuryOfErrors = ${summuryOfErrors}  @@@")
                         }
-
-                        else -> println("ELSE Нельзя нажимать на ing... ${TestsProperties.isStartStop}")
                     }
+
+                    1 -> {   // STOP
+                        // НЕ РАБОТАЕТ переделать в флажки
+                        //classStart.cancel(true)
+                        TestsProperties.isStartStop = 2
+                        showButtons()
+                        println("@@@@@ STOP summuryOfErrors = ${TestsProperties.summuryOfErrors}  @@@")
+                    }
+
+                    else -> println("ELSE Нельзя нажимать на ing... ${TestsProperties.isStartStop}")
+                }
 
             }
 
