@@ -1,7 +1,7 @@
 package ru.cs.tdm.code
 
 import org.junit.jupiter.api.Assertions.*
-import ru.cs.tdm.pages.LoginPage
+import ru.cs.tdm.pages.LoginPageR
 import org.openqa.selenium.WebDriver
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.TestsProperties
@@ -14,12 +14,12 @@ import ru.cs.tdm.data.TestsProperties
  *
  * Тест считается успешно пройденным в случае, когда пользователю удалось выполнить все вышеперечисленные пункты.
  */
-class Login(val driver: WebDriver) {
+class LoginR(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
     //val threadSleep = 1000L
     // объявления переменных на созданные ранее классы-страницы
-    private val loginPage: LoginPage = LoginPage(driver)
+    private val loginPageR: LoginPageR = LoginPageR(driver)
 
     /**
      * метод для осуществления аутентификации
@@ -27,32 +27,32 @@ class Login(val driver: WebDriver) {
 
     fun loginIn(login: String, password: String) {
         //driver.navigate().refresh()  // Костыль из-за заголовка браузера
-        assertTrue(loginPage.titleContain(Tdms),"Браузер не имеет вкладку с заголовком $Tdms для ввода пароля")
-        assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
+        assertTrue(loginPageR.titleContain(Tdms),"Браузер не имеет вкладку с заголовком $Tdms для ввода пароля")
+        assertEquals(loginPageR.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
         //получение доступа к методам класса LoginPage для взаимодействия с элементами страницы
         //вводим логин
-        loginPage.inputLogin(login)
+        loginPageR.inputLogin(login)
         //вводим пароль
-        loginPage.inputPasswd(password)
+        loginPageR.inputPasswd(password)
         //нажимаем кнопку входа
-        loginPage.clickAuthorizationButton()
+        loginPageR.clickAuthorizationButton()
         //получаем отображаемый логин и сравниваем его с логином из файла настроек
-        assertTrue(loginPage.titleLoginUserNameWait() == login,
+        assertTrue(loginPageR.titleLoginUserNameWait() == login,
             "@@@@ Не вошли под пользователем $login @@")
         if (DT >6) println(" Проверили под login= $login   password= $password")
     }
 
     fun loginOut() {
-        loginPage.clickCurrentUser()
-        loginPage.clickUserLogout()
-        loginPage.clickYesBtn()
+        loginPageR.clickCurrentUser()
+        loginPageR.clickUserLogout()
+        loginPageR.clickYesBtn()
         //driver.navigate().refresh()  // Костыль из-за заголовка браузера
-        assertTrue(loginPage.titleContain(Tdms),"Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
-        assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
+        assertTrue(loginPageR.titleContain(Tdms),"Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
+        assertEquals(loginPageR.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
     }
 
     fun checkBrowser(url:String): Boolean {
-        val bUrl = loginPage.getBrowserUrl().uppercase()
+        val bUrl = loginPageR.getBrowserUrl().uppercase()
         assertTrue(bUrl == url.uppercase(),"В Браузере не имеет открыт $url")
         return true
     }

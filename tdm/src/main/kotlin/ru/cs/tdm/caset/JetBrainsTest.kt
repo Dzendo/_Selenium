@@ -1,4 +1,4 @@
-package ru.cs.tdm.cases
+package ru.cs.tdm.caset
 /**
  * Selenium - это система управления браузером  - открыть, локация, считать, нажать, вкладки и т.д.
  * jupiter - это система тестирования чего угодно старты тестов, ассерты, отчеты, сетки, и более сложные вещи
@@ -56,7 +56,8 @@ class JetBrainsTest {
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
             // JetBrains: Essential tools for software developers and teams
-            assertTrue(driver.title == "JetBrains: Essential tools for software developers and teams",
+            assertTrue(
+                driver.title == "JetBrains: Essential tools for software developers and teams",
                 "@@@@ Не открылась страница $loginpage - нет заголовка вкладки JB @@")
             //Login(driver).loginIn(login, password)
 
@@ -88,7 +89,7 @@ class JetBrainsTest {
         if (DT >7) println("Конец BeforeEach JetBrainsTest")
     }
     /**
-     * Функция которая выполняется после каждого теста, в т.ч. после повторного
+     * Функция, которая выполняется после каждого теста, в т.ч. после повторного
      */
     @AfterEach
     fun tearDown() {

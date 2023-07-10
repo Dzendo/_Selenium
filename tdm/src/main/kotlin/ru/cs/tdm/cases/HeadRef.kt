@@ -5,7 +5,7 @@ import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated
-import ru.cs.tdm.code.Login
+import ru.cs.tdm.code.LoginS
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
@@ -67,7 +67,7 @@ class HeadRef {
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
             assertTrue(driver.title == "Tdms", "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
-            Login(driver).loginIn(login, password)
+            LoginS(driver).loginIn(login, password)
 
             // Запоминаю логин и пароль для диаграммы Ганта - костыль.
             loginGantt = login
@@ -82,7 +82,7 @@ class HeadRef {
             //tools.idList()
             if (DT > 7) println("Вызов afterAll")
             tools.closeEsc5()
-            Login(driver).loginOut()
+            LoginS(driver).loginOut()
             driver.quit() //  закрытия окна браузера
             if (DT > 7) println("Конец Вызов afterAll")
         }
@@ -236,7 +236,7 @@ class HeadRef {
                 Thread.sleep(threadSleep)
                 driver.navigate().refresh()
                 Thread.sleep(threadSleep)
-                if (driver.title == "Tdms") Login(driver).loginIn(loginGantt, passwordGantt) // Костыль
+                if (driver.title == "Tdms") LoginS(driver).loginIn(loginGantt, passwordGantt) // Костыль
             }
             else if (DT > 3) println("Отсутствует пункт меню $ganttchart")
             if (DT > 6) println("Конец Test нажатия на $ganttchart")

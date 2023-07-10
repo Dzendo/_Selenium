@@ -1,4 +1,4 @@
-package ru.cs.tdm.caser
+package ru.cs.tdm.caset
 
 import ru.cs.tdm.data.ConfProperties
 import org.openqa.selenium.WebDriver
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
-import ru.cs.tdm.code.Login
+import ru.cs.tdm.code.LoginR
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
@@ -20,10 +20,10 @@ import java.time.Duration
  *
  * Тест считается успешно пройденным в случае, когда пользователю удалось выполнить все вышеперечисленные пункты.
  */
-class LoginTest {
+class LoginRTest {
     // переменная для драйвера
     private lateinit var driver: WebDriver
-    private lateinit var loginClass: Login
+    private lateinit var loginRClass: LoginR
     private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
     //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
@@ -39,7 +39,7 @@ class LoginTest {
         // задержка на выполнение теста = 10 сек.
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
         // Берем ссылку на класс Логин, которую будем использовать ниже в тестах.
-        loginClass = Login(driver)
+        loginRClass = LoginR(driver)
 
         //получение ссылки на страницу входа из файла настроек
         val loginpageTDM = ConfProperties.getProperty("loginpageTDM")
@@ -51,7 +51,7 @@ class LoginTest {
         //val password = TestsProperties.password
         driver.get(loginpage)
 
-        loginClass.checkBrowser(loginpage)
+        loginRClass.checkBrowser(loginpage)
         //assertTrue(driver.title == Tdms, "Браузер не имеет вкладку с заголовком Tdms ")
     }
 
@@ -67,7 +67,7 @@ class LoginTest {
         val login = TestsProperties.login
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
-        loginClass.loginIn(login, password)
+        loginRClass.loginIn(login, password)
         if (DT >7) println(" Вошли под login= $login   password= $password")
     }
     // После теста зовет login.loginOut(), а тот нажимает на что надо, что бы выйти из логина
@@ -75,9 +75,9 @@ class LoginTest {
     @AfterEach
         fun tearDown() {
         val loginpage = TestsProperties.loginpage
-            loginClass.loginOut()
+            loginRClass.loginOut()
         if (DT >7) println(" Вышли из-под пароля")
-        loginClass.checkBrowser(loginpage)
+        loginRClass.checkBrowser(loginpage)
             driver.quit() //  закрытия окна браузера
         }
 }

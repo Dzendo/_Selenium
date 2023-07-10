@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
-import ru.cs.tdm.code.Login
+import ru.cs.tdm.code.LoginR
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.code.clickSend
 import ru.cs.tdm.data.TDM365
@@ -128,7 +128,7 @@ class AdminUser {
         if (DT > 8) println("login= $login   password= $password")
         driver.get(loginpage)
         assertTrue(driver.title == Tdms,"@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
-        Login(driver).loginIn(login, password)
+        LoginR(driver).loginIn(login, password)
         if (DT >7) println("Конец Вызов BeforeAll AdminUserTest")
         }
 

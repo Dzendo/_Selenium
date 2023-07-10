@@ -1,4 +1,4 @@
-package ru.cs.tdm.cases
+package ru.cs.tdm.caset
 
 import ru.cs.tdm.data.ConfProperties
 import org.openqa.selenium.WebDriver
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.RepeatedTest
-import ru.cs.tdm.code.Login
+import ru.cs.tdm.code.LoginS
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
@@ -20,10 +20,10 @@ import java.time.Duration
  *
  * Тест считается успешно пройденным в случае, когда пользователю удалось выполнить все вышеперечисленные пункты.
  */
-class LoginTest {
+class LoginSTest {
     // переменная для драйвера
     private lateinit var driver: WebDriver
-    private lateinit var loginClass: Login
+    private lateinit var loginSClass: LoginS
     private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
     //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
@@ -51,7 +51,7 @@ class LoginTest {
         assertTrue(driver.title == "Tdms")
         //Login(driver).loginIn(login, password)
         // Берем ссылку на класс Логин, которую будем использовать ниже в тестах.
-        loginClass = Login(driver)
+        loginSClass = LoginS(driver)
     }
 
     /**
@@ -68,7 +68,7 @@ class LoginTest {
         val login = TestsProperties.login
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
-        loginClass.loginIn(login, password)
+        loginSClass.loginIn(login, password)
 
         //получаем отображаемый логин
         //val user = login.loginUserName()
@@ -76,15 +76,14 @@ class LoginTest {
         //assertEquals(loginTDM, user)
         //assertTrue(login.loginUserNameWait(loginTDM))
         // assertTrue проверяет труе или фалс возвращает функция qtipLoginUserNameWait из класса login
-        // Убрал по React 10,07,2023 временно - разбираться
-       // assertTrue(loginClass.qtipLoginUserNameWait(login),
-       //     "@@@@ Не вошли под пользователем $login @@")
+        assertTrue(loginSClass.qtipLoginUserNameWait(login),
+            "@@@@ Не вошли под пользователем $login @@")
     }
     // После теста зовет login.loginOut(), а тот используя мой тулс через qtip нажимает на что надо, что бы выйти из логина
     // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
-            loginClass.loginOut()
+            loginSClass.loginOut()
             driver.quit() //  закрытия окна браузера
         }
 }

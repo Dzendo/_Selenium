@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
-import ru.cs.tdm.code.Login
+import ru.cs.tdm.code.LoginS
 import ru.cs.tdm.code.Tools
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
@@ -80,7 +80,7 @@ class ChangePass {
         //driver.navigate().refresh()
        if (DT > 8) println("login= $login   password= $password")
 //     assertTrue(driver.title == "Tdms", "@@@@ нет заголовка вкладки Tdms @@")
-        Login(driver).loginIn(login, password)
+        LoginS(driver).loginIn(login, password)
         if (DT > 7) println("Конец Вызов BeforeEach ChangePass")
     }
 
@@ -89,7 +89,7 @@ class ChangePass {
     fun afterEach() {
         if (DT > 7) println("Вызов AfterEach ChangePass")
         tools.closeEsc5()
-        Login(driver).loginOut()
+        LoginS(driver).loginOut()
         //driver.navigate().refresh()
         if (DT > 7) println("Конец Вызов AfterEach ChangePass")
     }
@@ -266,7 +266,7 @@ class ChangePass {
         tools.clickOK("Сменить пароль")  // Сменить пароль
         login = "ChangePass"
         password = "Tdm365"
-        Login(driver).loginIn(login, password)
+        LoginS(driver).loginIn(login, password)
         //Login(driver).loginIn("ChangePass", "Tdm365")
         // Проверить, что вошли
         //Thread.sleep(threadSleep)
@@ -298,7 +298,7 @@ class ChangePass {
 // Проверить, что вышли
         login = "ChangePass"
         password = "TDm365"
-        Login(driver).loginIn(login, password)
+        LoginS(driver).loginIn(login, password)
         //Login(driver).loginIn
         //Login(driver).loginIn("ChangePass", "TDm365")
         // Проверить, что вошли
