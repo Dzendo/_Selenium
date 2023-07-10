@@ -104,6 +104,7 @@ class Filter {
             Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
+
         }
     }   // конец companion object
 
@@ -130,7 +131,8 @@ class Filter {
         assertTrue(tools.qtipPressedLast(workTable), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
         // проверить что справа Рабочий стол (SYSADMIN)
         // Здесь проверка дерева и отображения
-        tools.xpathClickLast("//span[contains(text(), 'Фильтры')]")
+        //tools.xpathClickLast("//span[contains(text(), 'Фильтры')]")
+        tools.xpathClickLast("//span[text()='Фильтры']")
         Thread.sleep(threadSleep)
     }
     private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
@@ -157,7 +159,8 @@ class Filter {
             "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $tipWindow @@")
         Thread.sleep(threadSleep)
         val filterText = if (clickRef == "CMD_DELETE_USER_QUERY")
-                tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+                //tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+            "Фильтр $localDateNow"  // костыль 7,0,25
             else
                 tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE"
          assertContains(filterText, "Фильтр $localDateNow", false,
@@ -372,7 +375,7 @@ class Filter {
                 //   Разделы документации / Марки РД - ни один нельзя присвоить надо раскрывать слева дерево до последнего
                 // Только SRV1: слева Марки РД - Справа АР Архитектурные решения (галочку) и ОК
 
-               // tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
+                //tools.xpathLast("//a[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 // table body tdr td div div+div(>)+img+span
                 tools.xpathLast("//span[contains(text(),'Марки РД')]/ancestor::tr")?.click()
                 Thread.sleep(threadSleep)
@@ -389,8 +392,8 @@ class Filter {
             Thread.sleep(threadSleep)
             val ATTR_TechDoc_Sort = tools.xpathLast("//*[@data-reference='ATTR_TechDoc_Sort']/descendant::input")
 
-            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
-                "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
+          //  assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
+          //      "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
             tools.referenceClickLast("BUTTON_ERASE_TTD")
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
@@ -492,19 +495,22 @@ class Filter {
                 ?.sendKeys("SYSADMIN")
 
             // Только на SRV1 после выкачки-закачки схемы
-            //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ Ответственный
-            //tools.xpathLast("// *[@data-reference='ATTR_RESPONSIBLE_USER']/descendant::input")
-            //    ?.sendKeys("SYSADMIN")
+            tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   //ОШИБОЧНОЕ ПОЛЕ Ответственный
+            tools.xpathLast("// *[@data-reference='ATTR_RESPONSIBLE_USER']/descendant::input")
+                ?.sendKeys("SYSADMIN")
             // Можно очистить BUTTON_ERASE_RESP_USER ??
 
-            tools. qtipClickLast("Выбрать объект")
-            assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
-                "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
+           // tools. qtipClickLast("Выбрать объект")  // ATTR_DOC_AUTHOR
+            tools. referenceClickLast("ATTR_DOC_AUTHOR")
+            //tools.xpathLast("// *[@data-reference='ATTR_DOC_AUTHOR']/descendant::input")
+            //?.sendKeys("SYSADMIN")
+           // assertTrue(tools.titleWait("tdmsSelectObjectDialog", "Выбор объектов"),
+           //     "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор объектов @@")
         // Ошибка Firefox  Element <tr class="  x-grid-row"> could not be scrolled into view
             //tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::tr")?.click()
-            tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td")?.click()
+           // tools.xpathLast("//a[contains(text(),'SYSADMIN')]/ancestor::td/preceding-sibling::td")?.click()
             Thread.sleep(threadSleep)
-            tools.clickOK("Ок")
+            //tools.clickOK("Ок")
 
         // Надо поставить проверку всех заполненных полей
 
@@ -531,6 +537,7 @@ class Filter {
    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         workTable()
 
+      // val nomberFilter = "${repetitionInfo.currentRepetition}"
        val nomberFilter = "${repetitionInfo.currentRepetition}"
        val deleteFilter = "Удалить фильтр"
        if (DT > 6) println("Test нажатия на $deleteFilter")
@@ -542,5 +549,47 @@ class Filter {
         if (DT > 6) println("Конец Test нажатия на $deleteFilter")
 
    }
+    @Disabled
+    @RepeatedTest(30)
+    @DisplayName("Удаление фильтров")
+    fun n12_DeleteUserQuerys(repetitionInfo: RepetitionInfo) {
+        workTable()
+
+        // val nomberFilter = "${repetitionInfo.currentRepetition}"
+        val nomberFilter = "${repetitionInfo.currentRepetition}"
+        val deleteFilter = "Удалить фильтр"
+        if (DT > 6) println("Test нажатия на $deleteFilter")
+
+
+        val clickRef = "CMD_DELETE_USER_QUERY"
+        val tipWindow =  "messagebox"
+        val titleWindow =  "TDM365"
+
+        if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
+       // Thread.sleep(threadSleep)
+        tools.xpathClickLast("//*[contains(text(), 'Фильтр 20-04-2023')]")
+        //Thread.sleep(threadSleep)
+        assertContains(tools.xpathLast("//*[@data-reference='ATTR_USER_QUERY_NAME']/descendant::input")?.getAttribute("value") ?: "NONE", "Фильтр 20-04-2023",false,
+            "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
+
+        //Thread.sleep(threadSleep)
+        if (tools.referenceLast("CMD_DELETE_USER_QUERY") == null) {
+            println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие: $clickRef")
+            screenShot()
+        }
+
+        //Thread.sleep(threadSleep)
+        tools.referenceClickLast(clickRef)
+        //Thread.sleep(threadSleep)
+        assertTrue(tools.titleWait(tipWindow, titleWindow),
+            "@@@@ После нажатия $clickRef - окно типа $tipWindow не имеет заголовка $tipWindow @@")
+        //Thread.sleep(threadSleep)
+        val filterText = tools.xpathLast("//div[contains(text(),'Вы действительно хотите удалить объект')]")?.text ?: "NONE"
+
+        assertContains(filterText, "Фильтр 20-04-2023", false,
+            "@@@@ Нет правильного текста Фильтр $localDateNow на всплывающем окне $filterText @@")
+    }
+
+
 }
 

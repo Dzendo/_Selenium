@@ -60,59 +60,14 @@
 #
 #       You can find Gradle at https://github.com/gradle/gradle/.
 #
-#   Gradle запускает скрипт для POSIX, сгенерированный Gradle.
-#
-#   Важно для запуска:
-#
-#   (1) Для запуска этого скрипта вам нужна оболочка, совместимая с POSIX. Если ваш /bin/sh является
-#       несоответствующий, но у вас есть какая-то другая совместимая оболочка, такая как ksh или
-#       bash, затем, чтобы запустить этот скрипт, введите это имя оболочки перед целым
-#       командная строка, например:
-#
-#       ksh Gradle
-#
-#       Busybox и подобные уменьшенные оболочки НЕ будут работать, потому что этот скрипт
-#       требуются все эти функции оболочки POSIX:
-#       * функции;
-#       * расширения «$var», «${var}», «${var:-default}», «${var+SET}»,
-#       * «${var#префикс}», «${var%суффикс}» и «$( cmd )»;
-#       * составные команды, имеющие проверяемый статус завершения, особенно «case»;
-#       * различные встроенные команды, включая «command», «set» и «ulimit».
-#
-#   Важно для исправления (patching):
-#
-#   (2) Этот скрипт нацелен на любую оболочку POSIX, поэтому он избегает предоставляемых расширений
-#       by Bash, Ksh и т.д.; в частности, избегаются массивы.
-#
-#       "Традиционная" практика упаковки нескольких параметров в
-#       строка, разделенная пробелом #, является хорошо документированным источником ошибок и безопасности
-#       проблем, так что этого (в основном) можно избежать, постепенно накапливая
-#       options в "$ @" и в конечном итоге передать это в Java.
-#
-#       Где наследуемые переменные среды (DEFAULT_JVM_OPTS, JAVA_OPTS,
-#       и GRADLE_OPTS) полагаются на разделение слов, это выполняется явно;
-#       подробности смотрите в комментариях в строке.
-#
-#       Существуют настройки для конкретных операционных систем, таких как AIX, CygWin,
-#       Дарвин, MinGW и безостановочно.
-#
-#   (3) Этот скрипт генерируется из шаблона Groovy
-#       https://github.com/gradle/gradle/blob/master/subprojects/plugins/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
-#       в рамках проекта Gradle.
-#
-#   Вы можете найти Gradle по адресу https://github.com/gradle/gradle /.
-#
 ##############################################################################
 
 # Attempt to set APP_HOME
-# Попытка установить APP_HOME
 
 # Resolve links: $0 may be a link
-# Разрешить ссылки: $0 может быть ссылкой
 app_path=$0
 
 # Need this for daisy-chained symlinks.
-# Это нужно для символических ссылок с последовательной цепочкой.
 while
     APP_HOME=${app_path%"${app_path##*/}"}  # leaves a trailing /; empty if no leading path
     [ -h "$app_path" ]
@@ -131,12 +86,9 @@ APP_NAME="Gradle"
 APP_BASE_NAME=${0##*/}
 
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-# Добавьте здесь параметры JVM по умолчанию.
-# Вы также можете использовать JAVA_OPTS и GRADLE_OPTS для передачи параметров JVM в этот скрипт.
 DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
-# Используйте максимально доступное значение или установите MAX_FD != -1, чтобы использовать это значение.
 MAX_FD=maximum
 
 warn () {
@@ -151,7 +103,6 @@ die () {
 } >&2
 
 # OS specific support (must be 'true' or 'false').
-# Поддержка конкретной ОС (должно быть 'true' или 'false').
 cygwin=false
 msys=false
 darwin=false
@@ -167,7 +118,6 @@ CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
 
 # Determine the Java command to use to start the JVM.
-# Определите команду Java, которую следует использовать для запуска JVM.
 if [ -n "$JAVA_HOME" ] ; then
     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
         # IBM's JDK on AIX uses strange locations for the executables
@@ -190,7 +140,6 @@ location of your Java installation."
 fi
 
 # Increase the maximum file descriptors if we can.
-# Увеличьте максимальное количество файловых дескрипторов, если мы сможем.
 if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
     case $MAX_FD in #(
       max*)
@@ -212,16 +161,8 @@ fi
 #   * -D...appname settings
 #   * --module-path (only if needed)
 #   * DEFAULT_JVM_OPTS, JAVA_OPTS, and GRADLE_OPTS environment variables.
-# Соберите все аргументы для команды java, укладывая их в обратном порядке:
-#   * аргументы из командной строки
-#   * имя основного класса
-#   * -путь к классу
-#   * -D...настройки имени приложения
-#   * --путь к модулю (только при необходимости)
-#   * Переменные среды DEFAULT_JVM_OPTS, JAVA_OPTS и GRADLE_OPTS по умолчанию.
 
 # For Cygwin or MSYS, switch paths to Windows format before running java
-# Для Cygwin или MSYS переключите пути в формат Windows перед запуском java
 if "$cygwin" || "$msys" ; then
     APP_HOME=$( cygpath --path --mixed "$APP_HOME" )
     CLASSPATH=$( cygpath --path --mixed "$CLASSPATH" )
@@ -229,7 +170,6 @@ if "$cygwin" || "$msys" ; then
     JAVACMD=$( cygpath --unix "$JAVACMD" )
 
     # Now convert the arguments - kludge to limit ourselves to /bin/sh
-    # Теперь преобразуем аргументы - kludge, чтобы ограничить себя /bin/sh
     for arg do
         if
             case $arg in                                #(
@@ -244,16 +184,10 @@ if "$cygwin" || "$msys" ; then
         # Roll the args list around exactly as many times as the number of
         # args, so each arg winds up back in the position where it started, but
         # possibly modified.
-        # Прокручивайте список аргументов ровно столько раз, сколько
-        # аргументов, так что каждый аргумент возвращается в ту позицию, с которой он начался, но
-        # возможно, измененный.
         #
         # NB: a `for` loop captures its iteration list before it begins, so
         # changing the positional parameters here affects neither the number of
         # iterations, nor the values presented in `arg`.
-        # ПРИМЕЧАНИЕ: цикл `for` захватывает свой список итераций до его начала, поэтому
-        # изменение позиционных параметров здесь не влияет ни на количество
-        # итераций, ни на значения, представленные в `arg`.
         shift                   # remove old arg
         set -- "$@" "$arg"      # push replacement arg
     done
@@ -264,11 +198,6 @@ fi
 #     shell script including quotes and variable substitutions, so put them in
 #     double quotes to make sure that they get re-expanded; and
 #   * put everything else in single quotes, so that it's not re-expanded.
-# Соберите все аргументы для команды java;
-#   * $DEFAULT_JVM_OPTS, $JAVA_OPTS и $GRADLE_OPTS могут содержать фрагменты
-#       сценарий оболочки, включающий кавычки и замены переменных, поэтому поместите их в
-#       двойные кавычки, чтобы убедиться, что они будут повторно расширены; и
-#   * заключите все остальное в одинарные кавычки, чтобы оно не расширялось повторно.
 
 set -- \
         "-Dorg.gradle.appname=$APP_BASE_NAME" \
@@ -293,24 +222,6 @@ set -- \
 #
 # This will of course break if any of these variables contains a newline or
 # an unmatched quote.
-#
-# Используйте "xargs" для анализа аргументов в кавычках.
-#
-# With -n1 выводит по одному аргументу на строку с удалением кавычек и обратной косой черты.
-#
-# В Баш мы могли бы просто пойти:
-#
-#   readarray ARGS < <( xargs -n1 <<<"$var" ) &&
-#   set -- "${ARGS[@]}" "$@"
-#
-# но оболочка POSIX не имеет ни массивов, ни подстановки команд, поэтому вместо этого мы
-# последующая обработка каждого аргумента (как строки ввода в sed) для экранирования обратной косой черты любого
-# символ, который может быть метасимволом оболочки, затем используйте eval для обратного
-# этот процесс (сохраняя разделение между аргументами) и завершите
-# все это в виде одного оператора "set".
-#
-# Это, конечно, приведет к сбою, если какая-либо из этих переменных содержит новую строку или
-# непревзойденная цитата.
 #
 
 eval "set -- $(

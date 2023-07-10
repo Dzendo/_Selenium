@@ -1,6 +1,6 @@
 package ru.cs.tdm.ui
 
-import ru.cs.tdm.cases.*
+import ru.cs.tdm.caser.*
 import ru.cs.tdm.code.Runner
 import ru.cs.tdm.data.TestsProperties
 import java.time.LocalDateTime
@@ -23,7 +23,7 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
         super.process(chunk)
         // get last result
         val counterChunk = chunk[chunk.size - 1]
-        println( "counterChunk = $counterChunk")
+        //println( "counterChunk = $counterChunk")
     }
     //@Throws(Exception::class)
     override fun doInBackground(): Long {

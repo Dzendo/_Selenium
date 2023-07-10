@@ -195,7 +195,7 @@ class Tools(val driver: WebDriver) {
         xpathLast("//div[starts-with(@id, 'window-') and contains(@id, '_header-title-textEl') and not(contains(@id, 'ghost'))]")?.text?:"NULL"
     fun clickOK(OK: String = ""): Boolean {
         //41e 43a 41e 41a 4f 4b 414 430
-        repeat(repeateOut) {
+        repeat(repeateOut) {  //span[text() = 'Сменить пароль']/ancestor::a
             Thread.sleep(threadSleep / 10 * it)  // не нужно
             val xpath: String = if (OK.isNotEmpty()) "//span[text() = '$OK']/ancestor::a"
                                 else "//span[text() = 'Ок' or text() = 'ОК' or text() = 'OK' or text() = 'Да']/ancestor::a"
