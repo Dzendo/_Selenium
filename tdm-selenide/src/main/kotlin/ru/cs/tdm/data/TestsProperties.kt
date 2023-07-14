@@ -4,7 +4,7 @@ import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 const val TDM365 = "TDM365"
-const val VER = "1.4.48_7.0.35 ALL_2"
+const val VER = "1.4.48_7.0.35 Selenide_2"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
