@@ -54,7 +54,9 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
                     "Pass" -> {
                         caseErrors += if (sencha)
                             Runner(repeat).runTest(ru.cs.tdm.cases.ChangePass::class.java)
-                       else Runner(repeat).runTest(ru.cs.tdm.caser.ChangePass::class.java)
+                       else Runner(repeat).runTest(ru.cs.tdm.caser.ChangePassInOut::class.java)
+//                        Runner(repeat).runTest(ru.cs.tdm.caset.LoginSTest::class.java)
+//                        else Runner(repeat).runTest(ru.cs.tdm.caset.LoginRTest::class.java)
                     }
 
                     "Head" -> {
@@ -85,7 +87,7 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.cases.AdminUser::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.cases.Filter::class.java)
                         } else {
-                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.ChangePass::class.java)
+                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.ChangePassInOut::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.HeadRef::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.AdminUser::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.Filter::class.java)

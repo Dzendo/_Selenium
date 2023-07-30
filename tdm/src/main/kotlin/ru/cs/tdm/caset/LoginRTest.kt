@@ -27,7 +27,7 @@ class LoginRTest {
     private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
     //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-    companion object {private const val NN:Int = 1 }                   // количество повторений тестов
+    companion object {private const val NN:Int = 10 }                   // количество повторений тестов
 
     /**
      * Осуществление первоначальной настройки
@@ -42,13 +42,14 @@ class LoginRTest {
         loginRClass = LoginR(driver)
 
         //получение ссылки на страницу входа из файла настроек
-        val loginpageTDM = ConfProperties.getProperty("loginpageTDM")
+        //val loginpageTDM = ConfProperties.getProperty("loginpageTDM")
         // Драйверу командуем открыть эту страницу
-        driver.get(loginpageTDM)
+        // driver.get(loginpageTDM)
         val loginpage = TestsProperties.loginpage
+        driver.get(loginpage)
         if (DT > 8) println("Открытие страницы $loginpage")
-        //val login = TestsProperties.login
-        //val password = TestsProperties.password
+        val login = TestsProperties.login
+        val password = TestsProperties.password
         driver.get(loginpage)
 
         loginRClass.checkBrowser(loginpage)
