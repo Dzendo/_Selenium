@@ -4,7 +4,7 @@ import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 const val TDM365 = "TDM365"
-const val VER = "1.4.49_7.0.38 Selenium_in_out"
+const val VER = "1.4.50_7.0.38 Login"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -16,7 +16,7 @@ object TestsProperties {
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 3000L // задержки где они есть 1сек
+    var threadSleepNomber = 1000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome

@@ -53,10 +53,11 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
                 when (test) {
                     "Pass" -> {
                         caseErrors += if (sencha)
-                            Runner(repeat).runTest(ru.cs.tdm.cases.ChangePass::class.java)
-                       else Runner(repeat).runTest(ru.cs.tdm.caser.ChangePassInOut::class.java)
-//                        Runner(repeat).runTest(ru.cs.tdm.caset.LoginSTest::class.java)
-//                        else Runner(repeat).runTest(ru.cs.tdm.caset.LoginRTest::class.java)
+//                            Runner(repeat).runTest(ru.cs.tdm.cases.ChangePass::class.java)
+//                       else Runner(repeat).runTest(ru.cs.tdm.caser.ChangePassInOut::class.java)
+                        Runner(repeat).runTest(ru.cs.tdm.caset.LoginSTest::class.java)
+                        //else Runner(repeat).runTest(ru.cs.tdm.caset.LoginRTest::class.java)
+                        else Runner(repeat).runTest(ru.cs.tdm.caset.ChangePassTest::class.java)
                     }
 
                     "Head" -> {
