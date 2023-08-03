@@ -341,7 +341,7 @@ class ChangePassTest {
         if (DT > 6) println("Test удаление n09_deleteUserPass user ChangePass")
     }
     @RepeatedTest(10)
-    //@Disabled
+    @Disabled
     //@DisplayName("Create user Pass")
     @DisplayName("1. Создание нового пользователя ChangePass")
     fun n000_ChangePassTest() {
@@ -444,6 +444,69 @@ class ChangePassTest {
         // Login(driver).loginOut() // Переехало в BeforeEach
         if (DT > 6) println("Конец Test нажатия на n02_FillingChangePass")
 
+    }
+
+    @RepeatedTest(10)
+    //@Disabled
+    //@DisplayName("Enter User Pass")
+    @DisplayName("4. ТОЛЬКО  Смена пользовательского пароля ChangePass")
+    fun n044_changeUserPass() {
+        val fillingUser = "Смена пароля"
+        if (DT > 6) println("Test нажатия на n04_changeUserPass $fillingUser")
+        toolr.byIDClick("current-user")
+        //tools.qtipClickLast("Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи.")
+        toolr.referenceClick("user-change-password","MODAL")
+        assertTrue(toolr.headerWait(fillingUser),
+            "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
+        toolr.reference("current-password","MODAL")  // Старый пароль
+            ?.clickSend("tdm365")
+        toolr.reference("new-password-first","MODAL")  // Новый пароль
+            ?.clickSend("Tdm365")
+        toolr.reference("new-password-second","MODAL")  // Подтверждение
+            ?.clickSend("Tdm365")
+        toolr.OK("change-password-accept")
+        login = "ChangePass"
+        password = "Tdm365"
+//        Login(driver).loginIn(login, password)
+        //Login(driver).loginIn("ChangePass", "Tdm365")
+        // Проверить, что вошли
+        //Thread.sleep(threadSleep)
+        //assertTrue( Login(driver).loginUserName() == "ChangePass")
+        if (DT > 6) println("Конец Test нажатия на n04_changeUserPass $fillingUser")
+
+//    }
+//    @Test
+//    @Disabled
+//    //@DisplayName("Enter User Pass")
+//    @DisplayName("5. Смена пользовательского пароля ChangePass")
+//    fun n055_changeUserPass() {
+        //val fillingUser = "Смена пароля"
+        if (DT > 6) println("Test нажатия на n04_changeUserPass $fillingUser")
+        toolr.byIDClick("current-user")
+        //tools.qtipClickLast("Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи.")
+        toolr.referenceClick("user-change-password","MODAL")
+        assertTrue(toolr.headerWait(fillingUser),
+            "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
+        toolr.reference("current-password","MODAL")  // Старый пароль
+            ?.clickSend("Tdm365")
+        toolr.reference("new-password-first","MODAL")  // Новый пароль
+            ?.clickSend("tdm365")
+        toolr.reference("new-password-second","MODAL")  // Подтверждение
+            ?.clickSend("tdm365")
+        toolr.OK("change-password-accept")
+// Проверить, что вышли
+        login = "ChangePass"
+        password = "tdm365"
+        //Login(driver).loginIn(login, password)
+        //Login(driver).loginIn
+        //Login(driver).loginIn("ChangePass", "TDm365")
+        // Проверить, что вошли
+        //Thread.sleep(threadSleep)
+        //assertTrue( Login(driver).loginUserName() == "ChangePass")
+        //Login(driver).loginOut()
+        login = loginSYS
+        password = passwordSYS
+        if (DT > 6) println("Конец Test нажатия на n05_changeUserPass $fillingUser")
     }
 }
 
