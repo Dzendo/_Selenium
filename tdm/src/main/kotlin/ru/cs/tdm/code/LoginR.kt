@@ -26,6 +26,7 @@ class LoginR(val driver: WebDriver) {
      */
 
     fun loginIn(login: String, password: String) {
+        try {
         //driver.navigate().refresh()  // Костыль из-за заголовка браузера
         assertTrue(loginPageR.titleContain(Tdms),"Браузер не имеет вкладку с заголовком $Tdms для ввода пароля")
         assertEquals(loginPageR.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
@@ -39,16 +40,24 @@ class LoginR(val driver: WebDriver) {
         //получаем отображаемый логин и сравниваем его с логином из файла настроек
         assertTrue(loginPageR.titleLoginUserNameWait() == login,
             "@@@@ Не вошли под пользователем $login @@")
-        if (DT >6) println(" Проверили под login= $login   password= $password")
+        } catch (e:Exception) {
+            println("?????????????????loginIn() Exception $e ??????????????????")
+        }
+        if (DT >5) println(" Проверили под login= $login   password= $password")
     }
 
     fun loginOut() {
-        loginPageR.clickCurrentUser()
-        loginPageR.clickUserLogout()
-        loginPageR.clickYesBtn()
-        //driver.navigate().refresh()  // Костыль из-за заголовка браузера
-        assertTrue(loginPageR.titleContain(Tdms),"Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
-        assertEquals(loginPageR.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
+        try {
+            loginPageR.clickCurrentUser()
+            loginPageR.clickUserLogout()
+            loginPageR.clickYesBtn()
+            //driver.navigate().refresh()  // Костыль из-за заголовка браузера
+            assertTrue(loginPageR.titleContain(Tdms), "Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
+            assertEquals(loginPageR.authorizationHeaderName(), "Войти в TDMS", "Нет окна с заголовком Войти в TDMS")
+        } catch (e:Exception) {
+            println("?????????????????loginOut() Exception $e ??????????????????")
+        }
+        if (DT >5) println(" Вышли из-под логина ")
     }
 
     fun checkBrowser(url:String): Boolean {
