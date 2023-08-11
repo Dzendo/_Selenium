@@ -25,7 +25,7 @@ class ChangePass {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 10                    // количество повторений тестов
+        private const val NN:Int = 1                    // количество повторений тестов
     // переменная для драйвера
    private lateinit var driver: WebDriver
     // объявления переменных на созданные ранее классы-страницы

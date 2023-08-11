@@ -4,7 +4,7 @@ import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 const val TDM365 = "TDM365"
-const val VER = "1.4.50_7.0.38_Try_10"
+const val VER = "1.4.50_7.0.38_Dima"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -32,6 +32,8 @@ object TestsProperties {
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
 
+        "R hp-work:442",
+        "S hp-work:442",
         "R srv2b.ru",
         "S srv2b.ru",
         "R WKW-930",
@@ -50,6 +52,8 @@ object TestsProperties {
 
     val loginPages: Array<String> = arrayOf(
 
+        "http://hp-work:442/tdms/?classic#objects",
+        "http://hp-work:442/client/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
         "http://WKW-930:443/tdms/?classic#objects",
