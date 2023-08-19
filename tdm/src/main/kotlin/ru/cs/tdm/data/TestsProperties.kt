@@ -4,7 +4,7 @@ import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 const val TDM365 = "TDM365"
-const val VER = "1.4.50_7.0.38_Dima"
+const val VER = "1.4.51_7.0.39"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -16,7 +16,7 @@ object TestsProperties {
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 1000L // задержки где они есть 1сек
+    var threadSleepNomber = 3000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome
@@ -32,8 +32,6 @@ object TestsProperties {
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
 
-        "R hp-work:442",
-        "S hp-work:442",
         "R srv2b.ru",
         "S srv2b.ru",
         "R WKW-930",
@@ -48,12 +46,12 @@ object TestsProperties {
         "S srv2b",
         "R SRV10a",
         "S SRV10a",
+        "R hp-work:442",
+        "S hp-work:442",
     )
 
     val loginPages: Array<String> = arrayOf(
 
-        "http://hp-work:442/tdms/?classic#objects",
-        "http://hp-work:442/client/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
         "http://WKW-930:443/tdms/?classic#objects",
@@ -68,6 +66,8 @@ object TestsProperties {
         "http://tdms-srv2b:443/client/#objects/",
         "http://TDMS-SRV10a:443/tdms/#objects/",
         "http://TDMS-SRV10a:443/client/#objects/",
+        "http://hp-work:442/tdms/?classic#objects",
+        "http://hp-work:442/client/?classic#objects",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")

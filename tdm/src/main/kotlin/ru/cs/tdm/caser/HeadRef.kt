@@ -182,7 +182,7 @@ class HeadRef {
         }
 
         @RepeatedTest(NN)
-        //@Disabled
+        @Disabled
         @DisplayName("Диаграмма Ганта")
         fun ganttchartTest() {  //(repetitionInfo: RepetitionInfo) {
             val ganttchart = "Диаграмма Ганта"

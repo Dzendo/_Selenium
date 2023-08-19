@@ -153,6 +153,7 @@ class AdminUser {
 
         val mainMenu = "Объекты"
         if (DT >8) println("Test нажатия на $mainMenu TDMS Web")
+       // Thread.sleep(threadSleep*2)  //39
         toolr.byIDClick("objects-tab")
         assertTrue(toolr.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
@@ -198,6 +199,7 @@ class AdminUser {
 
         if (DT > 8) println("Test нажатия на $allUsers")
         toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[text()= '$allUsers']")
+        //Thread.sleep(threadSleep) //39
         assertTrue(
             toolr.referenceWaitText("GROUP_NAME", allUsers,"MODAL"),  // xpath: /html/body//*[@data-reference= 'GROUP_NAME']]
             "@@@@ В окне Редактирование групп после выделения $adminUser нет обязательного заголовка списка $adminUser @@")

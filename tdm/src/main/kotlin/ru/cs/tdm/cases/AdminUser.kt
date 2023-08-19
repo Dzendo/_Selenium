@@ -229,7 +229,7 @@ class AdminUser {
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
         if ( (click == "NONE").not())
             tools. referenceClickLast(click)
-        Thread.sleep(threadSleep)
+        // Thread.sleep(threadSleep*2)  //39
         if ((click == "BUTTON_USER_CREATE") or (click == "BUTTON_USER_EDIT"))
             assertTrue(
                 tools.titleWait("window", "Редактирование пользователя"),
