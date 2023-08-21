@@ -7,10 +7,7 @@ import org.openqa.selenium.*
 import ru.cs.tdm.code.LoginR
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.code.clickSend
-import ru.cs.tdm.data.TDM365
-import ru.cs.tdm.data.Tdms
-import ru.cs.tdm.data.startDriver
-import ru.cs.tdm.data.TestsProperties
+import ru.cs.tdm.data.*
 import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -227,13 +224,14 @@ class AdminUser {
     }
     @Test
     //@DisplayName("Delete user TEST")
-    @DisplayName("0. Проверка пользователя Тестоый")
+    @DisplayName("0. Проверка пользователя Тестовый")
     fun n00_checkUserPass() {
         if (DT > 6) println("Test проверка user Тестоый")
 
         while  (isTestPresent("GRID_USERS")) {
             clickAllUsers("BUTTON_USER_DELETE")
             assertTrue(toolr.headerWait(TDM365),
+                //TDMS assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
             assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
                 "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
@@ -421,8 +419,10 @@ class AdminUser {
             toolr.OK()  // создать Тестовая
 
             assertTrue(toolr.headerWait(TDM365),
+                //TDMS assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При $createGroup - нет окна сообщения с заголовком TDM365 (группа создана) @@")
             assertTrue(toolr.headerWait(TDM365),
+                //TDMS assertTrue(toolr.headerWait(TDMS),
                 "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
             toolr.OK()  // создана тестовая
             Thread.sleep(threadSleep)
@@ -445,6 +445,7 @@ class AdminUser {
             toolr.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
 
             assertTrue(toolr.headerWait(TDM365),
+                 //TDMS assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При $deleteGroup - нет окна сообщения с заголовком TDMS (удалить группу) @@")
             //val msgGpoup = tools.xpathLast("//div[text() = 'Удалить группу \"Тестовая\"?']")
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
@@ -467,6 +468,7 @@ class AdminUser {
             if (DT > 6) println("Test нажатия на Удаление на $localDateNow")
             clickAllUsers("BUTTON_USER_DELETE")
             assertTrue(toolr.headerWait(TDM365),
+                //TDMS assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
 
             assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
@@ -500,6 +502,7 @@ class AdminUser {
             toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
             toolr.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
             assertTrue(toolr.headerWait(TDM365),
+                //TDMS assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить группу) @@")
 
             assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,

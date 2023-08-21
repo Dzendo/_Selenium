@@ -4,7 +4,7 @@ import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 const val TDM365 = "TDM365"
-const val VER = "1.4.51_7.0.39"
+const val VER = "1.4.52_7.0.39_OMSK"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -31,11 +31,12 @@ object TestsProperties {
 
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
-
+        "R tdms1:555",
+        "S tdms1:555",
+        "R localhost:443",
+        "S localhost:443",
         "R srv2b.ru",
         "S srv2b.ru",
-        "R WKW-930",
-        "S WKW-930",
         "R srv1a.ru",
         "S srv1a.ru",
         "R srv10a.ru",
@@ -52,10 +53,12 @@ object TestsProperties {
 
     val loginPages: Array<String> = arrayOf(
 
+        "http://tdms1:555/tdms/?classic#objects",
+        "http://tdms1:555/client/?classic#objects",
+        "http://localhost:443/tdms/?classic#objects",
+        "http://localhost:443/client/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
-        "http://WKW-930:443/tdms/?classic#objects",
-        "http://WKW-930:443/client/?classic#objects",
         "http://tdms-srv1a.csoft-msc.ru:443/tdms/?classic#objects",
         "http://tdms-srv1a.csoft-msc.ru:443/client/?classic#objects",
         "http://tdms-srv10a.csoft-msc.ru:443/tdms/?classic#objects",

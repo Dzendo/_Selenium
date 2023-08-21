@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocate
 import ru.cs.tdm.code.LoginR
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.data.TDM365
+import ru.cs.tdm.data.TDMS
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 
@@ -633,6 +634,7 @@ class HeadRef {
                 openCETD()
                 toolr.referenceClick("CMD_TEST_STREAM_CHECK_CONNECT_NO_AUTHORIZE")
                 assertTrue(toolr.headerWait(TDM365),
+                    //TDMS assertTrue(toolr.headerWait(TDMS),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
 
                 toolr.closeX()
@@ -646,7 +648,8 @@ class HeadRef {
                 if (DT > 6) println("Test нажатия на $flow0")
                 openCETD()
                 toolr.referenceClick("CMD_TEST_STREAM_CHECK_CONNECT_WITH_AUTHORIZE")
-                assertTrue(toolr.headerWait(TDM365),
+                 assertTrue(toolr.headerWait(TDM365),
+                     //TDMS assertTrue(toolr.headerWait(TDMS),
                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDMS @@")
                 toolr.closeX()
 
@@ -661,8 +664,9 @@ class HeadRef {
                 openCETD()
                 toolr.referenceClick("CMD_TEST_STREAM_PROJECT_CHECK")
 
-                assertTrue(toolr.headerWait(TDM365),
-                    "@@@@ После нажатия $flow в окне заголовок не содержит $TDM365 @@")
+               assertTrue(toolr.headerWait(TDM365),
+                   //TDMS assertTrue(toolr.headerWait(TDMS),
+                  "@@@@ После нажатия $flow в окне заголовок не содержит $TDM365 @@")
                 //val msgText = tools.xpathGetText("//div[starts-with(@id,'messagebox-') and  contains(@id,'-msg')]")
                 //assertTrue(msgText.contains("Да")) // - Ввод GUID проекта вручную"))
                 //assertTrue(msgText.contains("Нет")) // - Выбор проекта в системе"))
@@ -671,6 +675,7 @@ class HeadRef {
                     "@@@@ После следующего нажатия $flow в окне заголовок не содержит Выбор проекта @@")
                 toolr.closeX()
                 assertTrue(toolr.headerWait(TDM365),
+                    //TDMS assertTrue(toolr.headerWait(TDMS),
                     "@@@@ После последнего нажатия $flow в окне заголовок не содержит TDM365 @@")
                 toolr.closeX()
                 if (DT > 6) println("Конец Test нажатия на $flow")
@@ -684,7 +689,8 @@ class HeadRef {
                 openCETD()
                 toolr.referenceClick("CMD_TEST_STREAM_0")
                 assertTrue(toolr.headerWait(TDM365),
-                    "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
+                    //TDMS assertTrue(toolr.headerWait(TDMS),
+                     "@@@@ После нажатия $flow0 в окне заголовок не содержит TDM365 @@")
                 toolr.closeX()
                 if (DT > 6) println("Конец Test нажатия на $flow0")
             }

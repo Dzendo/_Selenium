@@ -388,7 +388,7 @@ class Filter {
                 tools.clickOK("Ок")
             }
 
-            BUTTON_TYPE_DOC()
+//OMSK            BUTTON_TYPE_DOC()
             Thread.sleep(threadSleep)
             val ATTR_TechDoc_Sort = tools.xpathLast("//*[@data-reference='ATTR_TechDoc_Sort']/descendant::input")
 
@@ -398,7 +398,7 @@ class Filter {
             Thread.sleep(threadSleep)
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
-            BUTTON_TYPE_DOC()  // Всавляем еще раз
+//OMSK         BUTTON_TYPE_DOC()  // Всавляем еще раз
 
             val BUTTON_OBJ_STR = {      // Объект структуры
                 tools.referenceClickLast("BUTTON_OBJ_STR")
