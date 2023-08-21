@@ -428,7 +428,7 @@ class Filter {
                 toolr.xpathClick("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td","MODAL")
                 toolr.OK()
             }
-/* //OMSK
+//OMSK
             BUTTON_TYPE_DOC()
 
             val ATTR_TechDoc_Sort = toolr.reference("ATTR_TechDoc_Sort", "MODAL", "//descendant::input")
@@ -440,7 +440,7 @@ class Filter {
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_TYPE_DOC()  // Всавляем еще раз
-*/
+//OMSK
             val BUTTON_OBJ_STR = {      // Объект структуры
                 toolr.referenceClick("BUTTON_OBJ_STR", "MODAL")
                 assertTrue(toolr.headerWait("Объекты структуры"),

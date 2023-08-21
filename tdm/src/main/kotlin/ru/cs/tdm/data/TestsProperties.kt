@@ -4,7 +4,7 @@ import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 const val TDM365 = "TDM365"
-const val VER = "1.4.52_7.0.39_OMSK"
+const val VER = "1.4.52_7.0.39"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -31,8 +31,7 @@ object TestsProperties {
 
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
-        "R tdms1:555",
-        "S tdms1:555",
+
         "R localhost:443",
         "S localhost:443",
         "R srv2b.ru",
@@ -49,12 +48,13 @@ object TestsProperties {
         "S SRV10a",
         "R hp-work:442",
         "S hp-work:442",
+        "R tdms1:555",
+        "S tdms1:555",
     )
 
     val loginPages: Array<String> = arrayOf(
 
-        "http://tdms1:555/tdms/?classic#objects",
-        "http://tdms1:555/client/?classic#objects",
+
         "http://localhost:443/tdms/?classic#objects",
         "http://localhost:443/client/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
@@ -71,6 +71,8 @@ object TestsProperties {
         "http://TDMS-SRV10a:443/client/#objects/",
         "http://hp-work:442/tdms/?classic#objects",
         "http://hp-work:442/client/?classic#objects",
+        "http://tdms1:555/tdms/?classic#objects",
+        "http://tdms1:555/client/?classic#objects",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")
