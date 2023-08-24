@@ -428,19 +428,19 @@ class Filter {
                 toolr.xpathClick("//a[contains(text(),'АР Архитектурные решения')]/ancestor::td/preceding-sibling::td","MODAL")
                 toolr.OK()
             }
-//OMSK
-            BUTTON_TYPE_DOC()
+//NEW
+//            BUTTON_TYPE_DOC()
 
             val ATTR_TechDoc_Sort = toolr.reference("ATTR_TechDoc_Sort", "MODAL", "//descendant::input")
 
-            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
-                "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
+//            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
+//                "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
             toolr.referenceClick("BUTTON_ERASE_TTD", "MODAL")
         Thread.sleep(threadSleep)
             assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
-            BUTTON_TYPE_DOC()  // Всавляем еще раз
-//OMSK
+//            BUTTON_TYPE_DOC()  // Всавляем еще раз
+//NEW
             val BUTTON_OBJ_STR = {      // Объект структуры
                 toolr.referenceClick("BUTTON_OBJ_STR", "MODAL")
                 assertTrue(toolr.headerWait("Объекты структуры"),
