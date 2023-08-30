@@ -39,7 +39,7 @@ dependencies {
 //    testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-test:1.9.10")  // 1.8.20-RC2
     implementation("org.seleniumhq.selenium:selenium-java:4.11.0")
-    implementation("io.github.bonigarcia:webdrivermanager:5.5.0")
+    implementation("io.github.bonigarcia:webdrivermanager:5.5.2")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.7")
@@ -52,29 +52,3 @@ dependencies {
 application {
     mainClass.set("TdmKt")
 }
-
-
-//import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-//
-//plugins {
-//    kotlin("jvm") version "1.9.0"
-//}
-//
-//group = "ru.cs.tdm"
-//version = "1.0-SNAPSHOT"
-//
-//repositories {
-//    mavenCentral()
-//}
-//
-//dependencies {
-//    testImplementation(kotlin("test"))
-//}
-//
-//tasks.test {
-//    useJUnitPlatform()
-//}
-//
-//tasks.withType<KotlinCompile> {
-//    kotlinOptions.jvmTarget = "1.8"
-//}

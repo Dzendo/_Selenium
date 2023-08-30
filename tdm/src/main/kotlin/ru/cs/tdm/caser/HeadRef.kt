@@ -607,10 +607,11 @@ class HeadRef {
                 repeat(repeateOut) {
                     openSubSysadmin()
                     // data-reference="SUB_SETD_SYNC"
-                    val  element = toolr.reference("SUB_SETD_SYNC")
-                    Actions(driver).moveToElement(element).click().build().perform()
+                    //val  element = toolr.reference("SUB_SETD_SYNC")
+                   // Actions(driver).moveToElement(element).click().build().perform()
+                    toolr.referenceClick("SUB_SETD_SYNC")
 
-                    val elementViz = element?.findElement(By.xpath(".//div[starts-with(@class,'Popup_contextMenuContainer_')]"))
+                    val elementViz = toolr.reference("SUB_SETD_SYNC")?.findElement(By.xpath(".//div[starts-with(@class,'Popup_contextMenuContainer_')]"))
                     val styleViz = elementViz?.getAttribute("style")
                     if (styleViz!= null) {
                         if (styleViz.contains("visible")) return
