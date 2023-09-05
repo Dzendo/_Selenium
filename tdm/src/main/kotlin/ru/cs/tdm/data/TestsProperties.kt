@@ -3,8 +3,9 @@ package ru.cs.tdm.data
 import ru.cs.tdm.ui.StartDialog
 const val Tdms = "Tdms"
 const val TDMS = "TDMS"
+//const val TDM365 = "Объекты"
 const val TDM365 = "TDM365"
-const val VER = "1.4.53_7.0.41"
+const val VER = "1.4.54_7.0.41"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L

@@ -257,6 +257,7 @@ class HeadRef {
         @BeforeEach
         fun beforeEach() {
             if (DT > 7) println("Вызов inner Tools BeforeEach")
+            Thread.sleep((threadSleep)) // 53-41
             toolr.byIDClick("objects-tab")
             assertTrue(toolr.titleContain(TDM365), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
             assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")

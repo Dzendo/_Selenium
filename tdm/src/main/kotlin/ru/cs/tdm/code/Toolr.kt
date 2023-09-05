@@ -29,7 +29,7 @@ class Toolr(val driver: WebDriver) {
 
     //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(fluentOutDuration))// Явное ожидание
     init {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000L))  // Неявное ожидание
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(7000L))  // Неявное ожидание
     }
 
     private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(7))
