@@ -5,7 +5,7 @@ const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 //const val TDM365 = "Объекты"
 const val TDM365 = "TDM365"
-const val VER = "1.4.54_7.0.41"
+const val VER = "1.4.54_7.0.42"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -17,7 +17,7 @@ object TestsProperties {
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 4000L // задержки где они есть 1сек
+    var threadSleepNomber = 3000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome

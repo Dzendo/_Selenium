@@ -38,7 +38,7 @@ tasks.withType<JavaCompile> {
 dependencies {
 //    testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-test:1.9.10")  // 1.8.20-RC2
-    implementation("org.seleniumhq.selenium:selenium-java:4.12.0")
+    implementation("org.seleniumhq.selenium:selenium-java:4.12.1")
     implementation("io.github.bonigarcia:webdrivermanager:5.5.3")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
