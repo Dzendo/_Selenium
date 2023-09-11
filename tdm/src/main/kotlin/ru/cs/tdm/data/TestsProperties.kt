@@ -5,7 +5,7 @@ const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 //const val TDM365 = "Объекты"
 const val TDM365 = "TDM365"
-const val VER = "1.4.54_7.0.42"
+const val VER = "1.4.54_7.0.44"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -56,24 +56,24 @@ object TestsProperties {
     val loginPages: Array<String> = arrayOf(
 
 
-        "http://localhost:443/tdms/?classic#objects",
         "http://localhost:443/client/?classic#objects",
-        "http://tdms-srv2b.csoft-msc.ru:443/tdms/?classic#objects",
+        "http://localhost:443/clientold/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv1a.csoft-msc.ru:443/tdms/?classic#objects",
+        "http://tdms-srv2b.csoft-msc.ru:443/clientold/?classic#objects",
         "http://tdms-srv1a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv10a.csoft-msc.ru:443/tdms/?classic#objects",
+        "http://tdms-srv1a.csoft-msc.ru:443/clientold/?classic#objects",
         "http://tdms-srv10a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-temp-2012:443/tdms/#objects",
+        "http://tdms-srv10a.csoft-msc.ru:443/clientold/?classic#objects",
         "http://tdms-temp-2012:443/client/#objects",
-        "http://tdms-srv2b:443/tdms/#objects/",
+        "http://tdms-temp-2012:443/clientold/#objects",
         "http://tdms-srv2b:443/client/#objects/",
-        "http://TDMS-SRV10a:443/tdms/#objects/",
+        "http://tdms-srv2b:443/clientold/#objects/",
         "http://TDMS-SRV10a:443/client/#objects/",
-        "http://hp-work:442/tdms/?classic#objects",
+        "http://TDMS-SRV10a:443/clientold/#objects/",
         "http://hp-work:442/client/?classic#objects",
-        "http://tdms1:555/tdms/?classic#objects",
+        "http://hp-work:442/clientold/?classic#objects",
         "http://tdms1:555/client/?classic#objects",
+        "http://tdms1:555/clientold/?classic#objects",
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")
