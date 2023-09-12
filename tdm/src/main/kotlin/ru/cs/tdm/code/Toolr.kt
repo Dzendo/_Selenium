@@ -57,6 +57,18 @@ class Toolr(val driver: WebDriver) {
                 StaleElementReferenceException::class.java
             )
         )
+    private val fluentClickWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
+        .withTimeout(Duration.ofMillis(fluentOutDuration))
+        .pollingEvery(Duration.ofMillis(pollingOutDuration))
+        .ignoreAll(
+            listOf(
+                NoSuchElementException::class.java,
+                ElementNotInteractableException::class.java,
+                ElementClickInterceptedException::class.java,
+                StaleElementReferenceException::class.java,
+                StaleElementReferenceException::class.java
+            )
+        )
 
     fun xpath(xpath: String, prefix: String = "ROOT", suffix: String = ""): WebElement? {
 
@@ -86,7 +98,7 @@ class Toolr(val driver: WebDriver) {
 
     fun byID(id: String): WebElement? = driver.findElement(By.id(id))
     fun byIDs(id: String): Boolean = driver.findElements(By.id(id)).isNotEmpty()
-    fun byIDClick(id: String) = byID(id)?.click()
+    fun byIDClick(id: String) = fluentClickWait.until { byID(id)?.click() }
     fun byIDPressed(id: String): Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
     fun byXpath(xpath: String): WebElement? = driver.findElement(By.xpath(xpath))
 

@@ -27,11 +27,12 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
     //@Throws(Exception::class)
     override fun doInBackground(): Long {
         if (TestsProperties.testCases.isEmpty()) TestsProperties.testCases.add("JetBrains")
+        val sencha:Boolean =  (TestsProperties.loginpage.contains("clientold"))
         println("startTests ${LocalDateTime.now().withNano(0)} arguments: ${TestsProperties.testCases.joinToString()}")
         if (TestsProperties.debugPrintNomber > 1) println("Повторов ${TestsProperties.repeateCasesNomber} Задержка ${TestsProperties.threadSleepNomber} Печать ${TestsProperties.debugPrintNomber}")
-        if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage}")
+        if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage} Secha = $sencha")
         if (TestsProperties.debugPrintNomber > 1) println("Браузер = ${TestsProperties.browsers[TestsProperties.browserIndex]} login= ${TestsProperties.login}   password= ${TestsProperties.password}")
-        val sencha:Boolean =  (TestsProperties.loginpage.contains("client"))
+
         var allSumErrors: Long = 0L     // сумма ошибок для всех тестов для всех повторов
         for (repeat in 1..TestsProperties.repeateCasesNomber) {
             var repeatSumErrors: Long = 0L     // сумма ошибок для всех тестов для текущего повтора repeat

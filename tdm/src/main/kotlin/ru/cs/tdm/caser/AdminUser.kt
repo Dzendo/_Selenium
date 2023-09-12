@@ -150,7 +150,7 @@ class AdminUser {
 
         val mainMenu = "Объекты"
         if (DT >8) println("Test нажатия на $mainMenu TDMS Web")
-        Thread.sleep(threadSleep)  //54-41
+        //Thread.sleep(threadSleep)  //54-41
         toolr.byIDClick("objects-tab")
         assertTrue(toolr.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
