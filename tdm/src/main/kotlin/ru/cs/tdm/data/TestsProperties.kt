@@ -5,7 +5,8 @@ const val Tdms = "Tdms"
 const val TDMS = "TDMS"
 //const val TDM365 = "Объекты"
 const val TDM365 = "TDM365"
-const val VER = "1.4.55_7.0.44"
+//const val TDM365 = "TDMS"
+const val VER = "1.4.56_7.0.45 Astra"
 object TestsProperties {
 
     var fluentInDurationNomber = 13000L
@@ -17,7 +18,7 @@ object TestsProperties {
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 3000L // задержки где они есть 1сек
+    var threadSleepNomber = 5000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome
@@ -51,6 +52,8 @@ object TestsProperties {
         "S hp-work:442",
         "R tdms1:555",
         "S tdms1:555",
+        "R Astra:5001",
+        "S Astar:5001",
     )
 
     val loginPages: Array<String> = arrayOf(
@@ -74,6 +77,9 @@ object TestsProperties {
         "http://hp-work:442/clientold/?classic#objects",
         "http://tdms1:555/client/?classic#objects",
         "http://tdms1:555/clientold/?classic#objects",
+        "http://10.19.1.129:5001/clientclientold/#objects",
+        "http://10.19.1.129:5001/client/#objects",
+
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
     val passwords: Array<String> = arrayOf("Tdm365","Cons123", "753951", "tdm365")
