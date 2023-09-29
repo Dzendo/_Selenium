@@ -27,10 +27,9 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
     //@Throws(Exception::class)
     override fun doInBackground(): Long {
         if (TestsProperties.testCases.isEmpty()) TestsProperties.testCases.add("JetBrains")
-        val sencha:Boolean =  (TestsProperties.loginpage.contains("clientold"))
         println("startTests ${LocalDateTime.now().withNano(0)} arguments: ${TestsProperties.testCases.joinToString()}")
         if (TestsProperties.debugPrintNomber > 1) println("Повторов ${TestsProperties.repeateCasesNomber} Задержка ${TestsProperties.threadSleepNomber} Печать ${TestsProperties.debugPrintNomber}")
-        if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage} Secha = $sencha")
+        if (TestsProperties.debugPrintNomber > 1) println("Открытие страницы ${TestsProperties.loginpage} ")
         if (TestsProperties.debugPrintNomber > 1) println("Браузер = ${TestsProperties.browsers[TestsProperties.browserIndex]} login= ${TestsProperties.login}   password= ${TestsProperties.password}")
 
         var allSumErrors: Long = 0L     // сумма ошибок для всех тестов для всех повторов
@@ -53,47 +52,29 @@ class StartTests(private val startDialog: StartDialog? = null) : SwingWorker<Lon
 
                 when (test) {
                     "Pass" -> {
-                        caseErrors += if (sencha)
-                            Runner(repeat).runTest(ru.cs.tdm.cases.ChangePass::class.java)
-                       else Runner(repeat).runTest(ru.cs.tdm.caser.ChangePass::class.java)
-//                        Runner(repeat).runTest(ru.cs.tdm.caset.LoginSTest::class.java)
-//                        //else Runner(repeat).runTest(ru.cs.tdm.caset.LoginRTest::class.java)
-//                        else Runner(repeat).runTest(ru.cs.tdm.caset.ChangePassTest::class.java)
+                        caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.ChangePass::class.java)
                     }
 
                     "Head" -> {
-                        caseErrors += if (sencha)
-                            Runner(repeat).runTest(ru.cs.tdm.cases.HeadRef::class.java)
-                       else Runner(repeat).runTest(ru.cs.tdm.caser.HeadRef::class.java)
+                        caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.HeadRef::class.java)
                     }
 
                     "User" -> {
-                        caseErrors += if (sencha)
-                            Runner(repeat).runTest(ru.cs.tdm.cases.AdminUser::class.java)
-                       else Runner(repeat).runTest(ru.cs.tdm.caser.AdminUser::class.java)
+                        caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.AdminUser::class.java)
                     }
 
                     "Filter" -> {
-                        caseErrors += if (sencha)
-                            Runner(repeat).runTest(ru.cs.tdm.cases.Filter::class.java)
-                       else Runner(repeat).runTest(ru.cs.tdm.caser.Filter::class.java)
+                        caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.Filter::class.java)
                     }
                     "JetBrains" -> {
                         caseErrors += Runner(repeat).runTest(ru.cs.tdm.caset.JetBrainsTest::class.java)
                     }
 
                     "ALL" -> {
-                        if (sencha) {
-                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.cases.ChangePass::class.java)
-                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.cases.HeadRef::class.java)
-                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.cases.AdminUser::class.java)
-                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.cases.Filter::class.java)
-                        } else {
-                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.ChangePassInOut::class.java)
+                            caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.ChangePass::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.HeadRef::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.AdminUser::class.java)
                             caseErrors += Runner(repeat).runTest(ru.cs.tdm.caser.Filter::class.java)
-                        }
                     }
 
                     else -> { println("Test $test! Unknowns") }

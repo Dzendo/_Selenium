@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
-import ru.cs.tdm.code.LoginR
+import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.code.clickSend
 import ru.cs.tdm.data.TDM365
@@ -85,7 +85,7 @@ class ChangePassTest {
         if (DT > 7) println("Вызов BeforeEach ChangePass")
         //driver.navigate().refresh()
        if (DT > 8) println("login= $login   password= $password")
-       LoginR(driver).loginIn(login, password)
+       Login(driver).loginIn(login, password)
         if (DT > 7) println("Конец Вызов BeforeEach ChangePass")
     }
 
@@ -94,7 +94,7 @@ class ChangePassTest {
     fun afterEach() {
         if (DT > 7) println("Вызов AfterEach ChangePass")
         toolr.closeEsc(5)
-        LoginR(driver).loginOut()
+        Login(driver).loginOut()
         //driver.navigate().refresh()
         if (DT > 7) println("Конец Вызов AfterEach ChangePass")
 //        afterAll()

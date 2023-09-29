@@ -21,7 +21,7 @@ import java.time.Duration
  * following-sibling - следующий брат-сестра
  * descendant - потомок = дети и их внуки и правнуки и т.д.
  */
-class LoginPageR(val driver: WebDriver) {
+class LoginPage(val driver: WebDriver) {
     private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(10))
 
     /**

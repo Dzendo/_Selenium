@@ -18,7 +18,7 @@ object TestsProperties {
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 5000L // задержки где они есть 1сек
+    var threadSleepNomber = 2000L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome
@@ -34,50 +34,30 @@ object TestsProperties {
     val browsers: Array<String> = arrayOf("Chrome", "Edge", "Firefox", "Opera", "Brave", "Yandex", "CCleaner", "IntExp", "Safari")
     val servers: Array<String> = arrayOf(
 
-        "R localhost:443",
-        "S localhost:443",
-        "R srv2b.ru",
-        "S srv2b.ru",
-        "R srv1a.ru",
-        "S srv1a.ru",
-        "R srv10a.ru",
-        "S srv10a.ru",
-        "R tdms2012",
-        "S tdms2012",
-        "R srv2b",
-        "S srv2b",
-        "R SRV10a",
-        "S SRV10a",
-        "R hp-work:442",
-        "S hp-work:442",
-        "R tdms1:555",
-        "S tdms1:555",
-        "R Astra:5001",
-        "S Astar:5001",
+        "localhost:443",
+        "srv2b.ru",
+        "srv1a.ru",
+        "srv10a.ru",
+        "tdms2012",
+        "srv2b",
+        "SRV10a",
+        "hp-work:442",
+        "tdms1:555",
+        "Astra:5001",
     )
 
     val loginPages: Array<String> = arrayOf(
 
 
         "http://localhost:443/client/?classic#objects",
-        "http://localhost:443/clientold/?classic#objects",
         "http://tdms-srv2b.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv2b.csoft-msc.ru:443/clientold/?classic#objects",
         "http://tdms-srv1a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv1a.csoft-msc.ru:443/clientold/?classic#objects",
         "http://tdms-srv10a.csoft-msc.ru:443/client/?classic#objects",
-        "http://tdms-srv10a.csoft-msc.ru:443/clientold/?classic#objects",
         "http://tdms-temp-2012:443/client/#objects",
-        "http://tdms-temp-2012:443/clientold/#objects",
         "http://tdms-srv2b:443/client/#objects/",
-        "http://tdms-srv2b:443/clientold/#objects/",
         "http://TDMS-SRV10a:443/client/#objects/",
-        "http://TDMS-SRV10a:443/clientold/#objects/",
         "http://hp-work:442/client/?classic#objects",
-        "http://hp-work:442/clientold/?classic#objects",
         "http://tdms1:555/client/?classic#objects",
-        "http://tdms1:555/clientold/?classic#objects",
-        "http://10.19.1.129:5001/clientclientold/#objects",
         "http://10.19.1.129:5001/client/#objects",
 
     )
@@ -96,7 +76,7 @@ object TestsProperties {
     var isLog: Boolean =false
     var isExit: Boolean =false
 
-    var loginpage = "http://WKW-930:443/tdms/?classic#objects"
+    var loginpage = "http://localhost:443/client/?classic#objects"
     var login = "SYSADMIN"
     var password = "Tdm365"
 

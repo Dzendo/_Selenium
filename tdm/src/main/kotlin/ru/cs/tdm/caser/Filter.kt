@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
-import ru.cs.tdm.code.LoginR
+import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.code.clickSend
 import ru.cs.tdm.data.TDM365
@@ -95,7 +95,7 @@ class Filter {
             if (DT > 7) println("login= $login   password= $password")
             driver.get(loginpage)
             assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
-            LoginR(driver).loginIn(login, password)
+            Login(driver).loginIn(login, password)
         }
 
         @JvmStatic
@@ -104,7 +104,7 @@ class Filter {
             //tools.idList()
             if (DT >7) println("Вызов AfterAll FilterTest")
             toolr.closeEsc(5)
-            LoginR(driver).loginOut()
+            Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
 
         }

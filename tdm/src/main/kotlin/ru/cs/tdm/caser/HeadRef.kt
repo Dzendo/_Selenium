@@ -3,12 +3,10 @@ package ru.cs.tdm.caser
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
-import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated
-import ru.cs.tdm.code.LoginR
+import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.data.TDM365
-import ru.cs.tdm.data.TDMS
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 
@@ -69,7 +67,7 @@ class HeadRef {
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
             //###assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
-            LoginR(driver).loginIn(login, password)
+            Login(driver).loginIn(login, password)
 
             if (DT > 7) println("Конец Вызов BeforeAll")
         }
@@ -80,7 +78,7 @@ class HeadRef {
         fun afterAll() {
             if (DT > 7) println("Вызов afterAll")
             toolr.closeEsc(5)
-            LoginR(driver).loginOut()
+            Login(driver).loginOut()
             driver.quit() //  закрытия окна браузера
             if (DT > 7) println("Конец Вызов afterAll")
         }
