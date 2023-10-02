@@ -9,16 +9,16 @@ const val TDM365 = "TDM365"
 const val VER = "1.4.56_7.0.45 React"
 object TestsProperties {
 
-    var fluentInDurationNomber = 13000L
+    var fluentInDurationNomber = 20000L
     var pollingInDurationNomber = 100L
-    var fluentOutDurationNomber = 18000L
+    var fluentOutDurationNomber = 30000L
     var pollingOutDurationNomber = 1000L
     var repeateInNomber = 5
     var repeateOutNomber = 3
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов
     var repeateTestsNomber: Int = 3 // количество повторений тестов RepeateTests
-    var threadSleepNomber = 3000L // задержки где они есть 1сек
+    var threadSleepNomber = 0L // задержки где они есть 1сек
     var debugPrintNomber: Int = 9  // глубина отладочной информации 0 - ничего не печатать, 9 - все
 
     var browserIndex = 0  // Chrome

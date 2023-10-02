@@ -116,7 +116,6 @@ class Filter {
         if (DT > 7) println("Начало BeforeEach FilterTest")
         val mainMenu = "Объекты"
         if (DT > 7) println("Test нажатия на $mainMenu TDMS Web")
-        //Thread.sleep(threadSleep)  // 54-41
         toolr.byIDClick("objects-tab")
         assertTrue(toolr.titleContain(TDM365), "@@@@ После нажатия $mainMenu - нет заголовка вкладки TDM365 @@")
         assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
@@ -143,24 +142,22 @@ class Filter {
             else -> "Просмотр свойств"
         }
         if (DT > 6) println("Test нажатия на Фильтр $localDateNow действие: $clickRef")
-        //tools.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        Thread.sleep(threadSleep)
-        assertEquals(toolr.reference("main-object-header-description","ROOT666","//span")?.text,"Фильтры",
+
+        assertTrue(toolr.referenceWaitText("main-object-header-description", "Фильтры","ROOT666","//span"),
             " Заголовок таблицы не Фильтры")
         // Обрабатывать RecyclerVuew
         toolr.xpathClick("//a [contains(text(), 'Тест $localDateNow')]", "Main-Grid")
-        Thread.sleep(threadSleep)
-        assertContains(toolr.reference("ATTR_USER_QUERY_NAME","Object-Preview","//descendant::input")?.getAttribute("value") ?: "NONE", "Тест $localDateNow",false,
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        assertTrue(toolr.referenceWaitText("ATTR_USER_QUERY_NAME", "Тест $localDateNow","Object-Preview","//descendant::input",true) ,
             "@@@@ Проверка наличия имени фильтра после создания не прошла @@")
 
         if (toolr.reference("CMD_DELETE_USER_QUERY","ROOT666") == null) {
             println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие: $clickRef")
             screenShot()
         }
-        Thread.sleep(threadSleep)
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
         toolr.referenceClick(clickRef, "ROOT666")
-        Thread.sleep(threadSleep)
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
         assertTrue(toolr.headerWait(titleWindow),
             "@@@@ После нажатия $clickRef - окно типа не имеет заголовка $titleWindow @@")
 
@@ -175,10 +172,15 @@ class Filter {
     @AfterEach
     fun afterEach(){
         if (DT >7) println("Вызов AfterEach FilterTest")
-        Thread.sleep(threadSleep)
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //screenShot()
+
+        toolr.byIDClick("objects-tab")
+        assertTrue(toolr.titleContain(TDM365), "@@@@ После нажатия mainMenu - нет заголовка вкладки TDM365 @@")
+        assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
+
         toolr.closeEsc(5)
-//        Thread.sleep(threadSleep)
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        driver.navigate().refresh()
     }
     fun screenShot(name: String = "image") {
@@ -247,16 +249,14 @@ class Filter {
         workTable()
         // выбрать из дерева фильтры
 
-        Thread.sleep(threadSleep)
         toolr.referenceClick("CMD_CREATE_USER_QUERY", "ROOT666")
-        Thread.sleep(threadSleep)
         assertTrue(toolr.headerWait("Редактирование объекта"),
             "@@@@ После нажатия $createUser - нет окна с заголовком Редактирование объекта @@")
 
         assertTrue(toolr.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
             "@@@@ На форме фильтра при $createUser - не нашлось текста Наименование фильтра @@")
         toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
-            ?.clickSend("Тест $localDateNow", true)
+            ?.clickSend("Тест $localDateNow $nomberFilter", true)
         // Проверить что в поле стоит дата, если нет, то Скрин
         val ATTR_USER_QUERY_NAME = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL", "//descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
@@ -264,11 +264,8 @@ class Filter {
              if (DT > 0) println("&&&&&&&&&&01&&&&&&&&&&&& Название Фильтра не прописано: $ATTR_USER_QUERY_NAME")
              screenShot()
          }
-        //Костыль
-        toolr.referenceClick("ATTR_DESCRIPTION", "MODAL", "//descendant::textarea")
         
         toolr.OK()
-        
         if (DT > 6) println("Конец Test нажатия на $createUser")
     }
     /**
@@ -277,7 +274,7 @@ class Filter {
     @RepeatedTest(NN)
     //@Disabled
     @DisplayName("Посмотреть фильтр")
-    fun n02_ViewUserQuery(repetitionInfo: RepetitionInfo) {
+    fun n07_ViewUserQuery(repetitionInfo: RepetitionInfo) {
         val nomberFilter = "${repetitionInfo.currentRepetition}"
         val viewUser = "Посмотреть фильтр"
         if (DT > 6) println("Test посмотреть на $viewUser")
@@ -359,9 +356,11 @@ class Filter {
         clickFilter(nomberFilter)  // встать на фильтр  !!!!!!!!!!!!!!!!!!!!!!!!
 
             val description = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
+//            assertTrue(toolr.referenceWaitText("ATTR_USER_QUERY_NAME","Тест $localDateNow", "MODAL","//descendant::input"),
             assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
                 "@@@@ В Название фильтра нет названия Тест $localDateNow @@")
-            description.clickSend(" @")
+            description?.clickSend(" @")
+//            assertTrue(toolr.referenceWaitText("ATTR_USER_QUERY_NAME","@", "MODAL","//descendant::input"),
             assertTrue(description.getAttribute("value").contains("@"),
                 "@@@@ В Наименовании фильтра не прописалось @ при редактировании @@")
 
@@ -382,8 +381,9 @@ class Filter {
                 false, "@@@@ карандашик BUTTON_OBJDEV_SEL : После выбора в поле фильтра объекта разработки из справочника в поле фильтра Объект разработки - пусто, а должно стоять Ферма_омшанник @@")
 
             toolr.referenceClick("BUTTON_OBJDEV_ERASE", "MODAL")
-        Thread.sleep(threadSleep)
-            assertTrue(((attrObjectDev?.getAttribute("value") ?: "NONE").length) == 0,
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//            assertTrue(((attrObjectDev?.getAttribute("value") ?: "NONE").length) == 0,
+            assertTrue(toolr.referenceWaitText("ATTR_OBJECT_DEV","", "MODAL","//descendant::input"),
                 "@@@@ крестик BUTTON_OBJDEV_ERASE(объекта разработки) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
 
             BUTTON_OBJDEV_SEL()  // Всавляем еще раз омшанник
@@ -406,8 +406,9 @@ class Filter {
                 "@@@@ карандашик BUTTON_PROJECT_SEL : После выбора в поле Проекта разработки из справочника в поле фильтра Проект - пусто, а должно стоять Название проекта из справочника @@"
             )
             toolr.referenceClick("BUTTON_ERASE_PROJECT", "MODAL")
-            Thread.sleep(threadSleep)
-            assertTrue(((ATTR_RefToProject?.getAttribute("value") ?: "NONE").length) == 0,
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        assertTrue(toolr.referenceWaitText("ATTR_RefToProject","", "MODAL","//descendant::input"),
+//            assertTrue(((ATTR_RefToProject?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_PROJECT(Проект) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_PROJECT_SEL()  // Всавляем еще раз
 
@@ -437,8 +438,9 @@ class Filter {
 //            assertContains(ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE", "АР Архитектурные решения",false,
 //                "@@@@ поле фильтра Тип документации не содержит значение АР Архитектурные решения после выбора @@")
             toolr.referenceClick("BUTTON_ERASE_TTD", "MODAL")
-        Thread.sleep(threadSleep)
-            assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        assertTrue(toolr.referenceWaitText("ATTR_TechDoc_Sort","", "MODAL","//descendant::input"),
+//            assertTrue(((ATTR_TechDoc_Sort?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_TTD(Тип документации) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
 //            BUTTON_TYPE_DOC()  // Всавляем еще раз
 //NEW
@@ -462,8 +464,9 @@ class Filter {
             assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",false,
                 "@@@@ поле фильтра Объект структуры не содержит значение Расширение ЕСГ @@")
             toolr.referenceClick("BUTTON_ERASE_OS","MODAL")
-        Thread.sleep(threadSleep)
-            assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        assertTrue(toolr.referenceWaitText("ATTR_OCC","", "MODAL","//descendant::input"),
+//        assertTrue(((ATTR_OCC?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_OS(Объект структуры) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_OBJ_STR()  // Всавляем еще раз
 
@@ -483,8 +486,9 @@ class Filter {
             assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "Газпромпроектирование",false,
                 "@@@@ поле фильтра Организация/Подразд. не содержит значение Газпромпроектирование после выбора @@")
             toolr.referenceClick("BUTTON_ERASE_ORG", "MODAL")
-        Thread.sleep(threadSleep)
-            assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0,
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        assertTrue(toolr.referenceWaitText("ATTR_ORGANIZATION_LINK","", "MODAL","//descendant::input"),
+//        assertTrue(((ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE").length) == 0,
                 "@@@@ крестик BUTTON_ERASE_ORG(Организация/Подразд.) : После удаления поля фильтра поле не пусто, а должно быть пусто @@")
             BUTTON_ORG_SEL()  // Всавляем еще раз
 

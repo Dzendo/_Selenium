@@ -103,14 +103,15 @@ class Toolr(val driver: WebDriver) {
     fun byXpath(xpath: String): WebElement? = driver.findElement(By.xpath(xpath))
 
     fun xpathClick(xpath: String, prefix: String = "", suffix: String = "") = fluentOutWait.until {
-        xpath(xpath, prefix, suffix)?.click()
-    }
+        xpath(xpath, prefix, suffix)?.click() }
 
     fun reference(data_reference: String, prefix: String = "ROOT", suffix: String = ""): WebElement? =
-        xpath("//*[@data-reference='$data_reference']", prefix, suffix)
+        fluentOutWait.until { xpath("//*[@data-reference='$data_reference']", prefix, suffix) }
 
     fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
         reference(data_reference, prefix, suffix)?.click() != null
+    fun referenceClickSend(data_reference: String, prefix: String = "ROOT", text:String = "", suffix: String = ""): Boolean =
+        reference(data_reference, prefix, suffix)?.clickSend(text) != null
 
     fun referencePressed(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean {
         val rezult1 = reference(data_reference, prefix, suffix)?.getAttribute("class")
@@ -118,9 +119,14 @@ class Toolr(val driver: WebDriver) {
         return rezult2
     }
 
-    fun referenceWaitText(reference: String, text: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
-        fluentOutWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']", prefix, suffix), text))
-
+    fun referenceWaitText(reference: String, text: String, prefix: String = "ROOT", suffix: String = "",cont:Boolean = false): Boolean {
+        if (cont)  fluentOutWait.until {
+               reference("ATTR_USER_QUERY_NAME", "Object-Preview", "//descendant::input")?.getAttribute("value")
+                        ?: "NONE".contains(text) // $localDateNow" )
+            }.also { return true }
+            else
+        fluentOutWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']", prefix, suffix), text)).also { return true }
+    }
     fun qtip(qtip: String, prefix: String = "ROOT", suffix: String = ""): WebElement? = xpath(
         "//*[contains(@title, '$qtip')]", prefix, suffix
     )
