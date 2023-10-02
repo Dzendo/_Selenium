@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable
 import org.openqa.selenium.support.ui.WebDriverWait
+import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
 
 /**
@@ -22,14 +23,16 @@ import java.time.Duration
  * descendant - потомок = дети и их внуки и правнуки и т.д.
  */
 class LoginPage(val driver: WebDriver) {
-    private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(10))
+    private val implicitlyDuration = TestsProperties.implicitlyDurationNomber
+    private val WebDriverDuration = TestsProperties.WebDriverDurationNomber
+    private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(WebDriverDuration/1000))
 
     /**
      * Конструктор класса, занимающийся инициализацией полей класса
      */
     init {
         PageFactory.initElements(driver, this)
-        //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000L))  // Неявное ожидание
+        //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(implicitlyDuration))  // Неявное ожидание
     }
 
 
@@ -148,7 +151,7 @@ class LoginPage(val driver: WebDriver) {
 
     fun clickUserLogout() = webDriverWait.until(elementToBeClickable(userLogout)).click()
 
-    fun currentUserName(): String = currentUserName.text
+    fun currentUserName(): String =  webDriverWait.until(elementToBeClickable(currentUserName)).text
 
     /**
      * Метод для осуществления нажатия кнопки подтверждения выхода из TDMS

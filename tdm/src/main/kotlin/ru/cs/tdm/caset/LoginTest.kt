@@ -9,6 +9,7 @@ import ru.cs.tdm.code.Login
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
+import kotlin.test.assertTrue
 
 /**
  * при выходе на http://tdms-srv2a:444/client/#objects/ открывает страницу аутентификации;
@@ -25,7 +26,7 @@ class LoginTest {
     private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
     //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-    companion object {private const val NN:Int = 10 }                   // количество повторений тестов
+    companion object {private const val NN:Int = 100 }                   // количество повторений тестов
 
     /**
      * Осуществление первоначальной настройки
@@ -35,7 +36,7 @@ class LoginTest {
         // Создание экземпляра драйвера (т.к. он объявлен в качестве переменной):
         driver = startDriver()
         // задержка на выполнение теста = 10 сек.
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10))
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7))
         // Берем ссылку на класс Логин, которую будем использовать ниже в тестах.
         loginClass = Login(driver)
 
@@ -48,7 +49,7 @@ class LoginTest {
         if (DT > 8) println("Открытие страницы $loginpage")
         val login = TestsProperties.login
         val password = TestsProperties.password
-        driver.get(loginpage)
+//        driver.get(loginpage)
 
         loginClass.checkBrowser(loginpage)
         //assertTrue(driver.title == Tdms, "Браузер не имеет вкладку с заголовком Tdms ")
@@ -66,17 +67,22 @@ class LoginTest {
         val login = TestsProperties.login
         val password = TestsProperties.password
         if (DT > 8) println("login= $login   password= $password")
-        loginClass.loginIn(login, password)
+        assertTrue( loginClass.loginIn(login, password),
+            "Срыв входа под $login $password ")
         if (DT >7) println(" Вошли под login= $login   password= $password")
     }
     // После теста зовет login.loginOut(), а тот нажимает на что надо, что бы выйти из логина
     // Потом закрывает окно драйвера
     @AfterEach
         fun tearDown() {
+        //    Thread.sleep(20000L)
         val loginpage = TestsProperties.loginpage
-            loginClass.loginOut()
+        val out = loginClass.loginOut()
+        //assertTrue( loginClass.loginOut(),
+        //    "Срыв выхода из-под пользователя ")
         if (DT >7) println(" Вышли из-под пароля")
         loginClass.checkBrowser(loginpage)
             driver.quit() //  закрытия окна браузера
+        assertTrue(out)
         }
 }

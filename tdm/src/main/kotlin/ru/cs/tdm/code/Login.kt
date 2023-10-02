@@ -17,7 +17,7 @@ import ru.cs.tdm.data.TestsProperties
 class Login(val driver: WebDriver) {
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
-    //val threadSleep = 1000L
+
     // объявления переменных на созданные ранее классы-страницы
     private val loginPage: LoginPage = LoginPage(driver)
 
@@ -25,8 +25,7 @@ class Login(val driver: WebDriver) {
      * метод для осуществления аутентификации
      */
 
-    fun loginIn(login: String, password: String) {
-        try {
+    fun loginIn(login: String, password: String): Boolean = try{
         //driver.navigate().refresh()  // Костыль из-за заголовка браузера
         assertTrue(loginPage.titleContain(Tdms),"Браузер не имеет вкладку с заголовком $Tdms для ввода пароля")
         assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
@@ -40,25 +39,26 @@ class Login(val driver: WebDriver) {
         //получаем отображаемый логин и сравниваем его с логином из файла настроек
         assertTrue(loginPage.titleLoginUserNameWait() == login,
             "@@@@ Не вошли под пользователем $login @@")
+        if (DT >5) println(" Проверили под login= $login   password= $password")
+    true
         } catch (e:Exception) {
             println("?????????????????loginIn() Exception $e ??????????????????")
+    false
         }
-        if (DT >5) println(" Проверили под login= $login   password= $password")
-    }
 
-    fun loginOut() {
-        try {
+    fun loginOut(): Boolean = try {
             loginPage.clickCurrentUser()
             loginPage.clickUserLogout()
             loginPage.clickYesBtn()
             //driver.navigate().refresh()  // Костыль из-за заголовка браузера
             assertTrue(loginPage.titleContain(Tdms), "Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
             assertEquals(loginPage.authorizationHeaderName(), "Войти в TDMS", "Нет окна с заголовком Войти в TDMS")
+            if (DT >5) println(" Вышли из-под логина ")
+    true
         } catch (e:Exception) {
             println("?????????????????loginOut() Exception $e ??????????????????")
+    false
         }
-        if (DT >5) println(" Вышли из-под логина ")
-    }
 
     fun checkBrowser(url:String): Boolean {
         val bUrl = loginPage.getBrowserUrl().uppercase()

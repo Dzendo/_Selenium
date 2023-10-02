@@ -30,7 +30,7 @@ class HeadRef {
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 1                    // количество повторений тестов
+        private const val NN:Int = 10                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
@@ -330,7 +330,7 @@ class HeadRef {
             assertTrue(toolr.byIDPressed("desktop-tab"), "@@@@ После нажатия $workTable - кнопка $workTable нет утоплена @@")
             // проверить что справа Рабочий стол (SYSADMIN)
             // Здесь проверка дерева и отображения
-            toolr.xpathClick("//span[contains(text(), 'Фильтры')]","Main-Tree")
+            toolr.xpathClick("//span[text()='Фильтры']","Main-Tree")
             assertTrue(toolr.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
         }
 

@@ -24,15 +24,18 @@ class Toolr(val driver: WebDriver) {
     private val pollingInDuration = TestsProperties.pollingInDurationNomber
     private val fluentOutDuration = TestsProperties.fluentOutDurationNomber
     private val pollingOutDuration = TestsProperties.pollingOutDurationNomber
+    private val implicitlyDuration = TestsProperties.implicitlyDurationNomber
+    private val WebDriverDuration = TestsProperties.WebDriverDurationNomber
     private val repeateIn = TestsProperties.repeateInNomber
     private val repeateOut = TestsProperties.repeateOutNomber
 
-    //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(fluentOutDuration))// Явное ожидание
+    //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(WebDriverDuration))// Явное ожидание
     init {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(7000L))  // Неявное ожидание
+        // Предупреждение: Не смешивайте неявные и явные ожидания.
+       driver.manage().timeouts().implicitlyWait(Duration.ofMillis(implicitlyDuration))  // Неявное ожидание
     }
 
-    private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(7))
+//    private val webDriverWait = WebDriverWait(driver, Duration.ofSeconds(WebDriverDuration/1000))
 
     private val fluentOutWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
         .withTimeout(Duration.ofMillis(fluentOutDuration))
@@ -42,7 +45,8 @@ class Toolr(val driver: WebDriver) {
                 NoSuchElementException::class.java,
                 ElementNotInteractableException::class.java,
                 ElementClickInterceptedException::class.java,
-                StaleElementReferenceException::class.java
+                StaleElementReferenceException::class.java,
+                Exception::class.java
             )
         )
     private val fluentInWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
@@ -54,7 +58,9 @@ class Toolr(val driver: WebDriver) {
                 ElementNotInteractableException::class.java,
                 ElementClickInterceptedException::class.java,
                 StaleElementReferenceException::class.java,
-                StaleElementReferenceException::class.java
+                StaleElementReferenceException::class.java,
+                NullPointerException::class.java,
+
             )
         )
     private val fluentClickWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
@@ -120,12 +126,12 @@ class Toolr(val driver: WebDriver) {
     }
 
     fun referenceWaitText(reference: String, text: String, prefix: String = "ROOT", suffix: String = "",cont:Boolean = false): Boolean {
-        if (cont)  fluentOutWait.until {
+        if (cont)  fluentInWait.until {
                reference("ATTR_USER_QUERY_NAME", "Object-Preview", "//descendant::input")?.getAttribute("value")
                         ?: "NONE".contains(text) // $localDateNow" )
             }.also { return true }
             else
-        fluentOutWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']", prefix, suffix), text)).also { return true }
+        fluentInWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']", prefix, suffix), text)).also { return true }
     }
     fun qtip(qtip: String, prefix: String = "ROOT", suffix: String = ""): WebElement? = xpath(
         "//*[contains(@title, '$qtip')]", prefix, suffix
