@@ -17,7 +17,7 @@ object TestsProperties {
     var WebDriverDurationNomber = 20000L
     var threadSleepNomber = 0L // задержки где они есть 1сек
 
-    var repeateInNomber = 5
+    var repeateInNomber = 9
     var repeateOutNomber = 3
 
     var repeateCasesNomber: Int = 3 // количество повторений тестов

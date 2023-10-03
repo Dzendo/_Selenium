@@ -8,7 +8,20 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.data.TestsProperties
 import java.time.Duration
 
-fun WebElement.clickSend(str:String, clear: Boolean = false) {
+fun WebElement.Click() {
+    for (repeate in 1..TestsProperties.repeateInNomber) {
+        try {
+            this.click()
+            //js.executeScript("arguments[0].click();", this)
+        return
+        } catch (e: ElementClickInterceptedException) {
+        if (TestsProperties.debugPrintNomber >5) println("####ElementClickInterceptedException - повтор $repeate $e")
+        }
+    }
+    throw ElementClickInterceptedException("&&&&&&& Not Click &&&&&&&& за ${TestsProperties.repeateInNomber} повторов ")
+}
+
+fun WebElement.SendKeys(str:String, clear: Boolean = false) {
     this.click()
     if (clear) this.clear()
     this.sendKeys(str)
@@ -28,6 +41,8 @@ class Toolr(val driver: WebDriver) {
     private val WebDriverDuration = TestsProperties.WebDriverDurationNomber
     private val repeateIn = TestsProperties.repeateInNomber
     private val repeateOut = TestsProperties.repeateOutNomber
+
+     private val js = driver as JavascriptExecutor
 
     //private val webDriverWait = WebDriverWait(driver, Duration.ofMillis(WebDriverDuration))// Явное ожидание
     init {
@@ -58,21 +73,20 @@ class Toolr(val driver: WebDriver) {
                 ElementNotInteractableException::class.java,
                 ElementClickInterceptedException::class.java,
                 StaleElementReferenceException::class.java,
-                StaleElementReferenceException::class.java,
                 NullPointerException::class.java,
+                ElementClickInterceptedException::class.java,
 
             )
         )
     private val fluentClickWait = FluentWait<WebDriver>(driver)                               // Беглое ожидание
-        .withTimeout(Duration.ofMillis(fluentOutDuration))
-        .pollingEvery(Duration.ofMillis(pollingOutDuration))
+        .withTimeout(Duration.ofMillis(fluentInDuration))
+        .pollingEvery(Duration.ofMillis(pollingInDuration))
         .ignoreAll(
             listOf(
                 NoSuchElementException::class.java,
                 ElementNotInteractableException::class.java,
                 ElementClickInterceptedException::class.java,
                 StaleElementReferenceException::class.java,
-                StaleElementReferenceException::class.java
             )
         )
 
@@ -92,7 +106,10 @@ class Toolr(val driver: WebDriver) {
         }
         if (DT > 8) println("xpath будет произведен поиск элемента $xpathHtml")
         return try {  // fluentOutWait.until
-            val element =  driver.findElement(By.xpath(xpathHtml))
+            //Эксперимент
+            val element =   fluentInWait.until ( presenceOfElementLocated(By.xpath(xpathHtml)) )
+//            val element =   fluentInWait.until { driver.findElement(By.xpath(xpathHtml)) }
+//            val element =  driver.findElement(By.xpath(xpathHtml))
             if (element == null) println("************xpath не найден элемент********* -> $xpathHtml")
             else if (DT > 7) println("xpath найден элемент $xpathHtml")
             element
@@ -102,22 +119,53 @@ class Toolr(val driver: WebDriver) {
         }
     }
 
-    fun byID(id: String): WebElement? = driver.findElement(By.id(id))
+    //Эксперимент
+    fun byID(id: String): WebElement? =  fluentInWait.until ( presenceOfElementLocated(By.id(id)))
+//    fun byID(id: String): WebElement? = driver.findElement(By.id(id))
     fun byIDs(id: String): Boolean = driver.findElements(By.id(id)).isNotEmpty()
-    fun byIDClick(id: String) = fluentClickWait.until { byID(id)?.click() }
+
+
+    //Эксперимент
+    fun byIDClick(id: String) = fluentClickWait.until(elementToBeClickable(By.id(id))).Click()
+//    fun byIDClick(id: String) = fluentClickWait.until(elementToBeClickable(byID(id))).click()
+//    fun byIDClick(id: String) = fluentClickWait.until { byID(id)?.click() }
+//    fun byIDClick(id: String) =  driver.findElement(By.id(id)).click()
+    // попытка решить ElementClickInterceptedException - неудачно
+/*    fun byIDClick(id: String) {
+        val button = fluentClickWait.until(elementToBeClickable(By.id(id)))
+        var ready:Boolean
+        do {
+            ready = try {
+        //        val button = driver.findElement(By.id(id))
+                js.executeScript("arguments[0].click();", button)
+                false
+            } catch (e: ElementClickInterceptedException) {
+                println("####ElementClickInterceptedException - повтор $e")
+                true
+            }
+        } while (ready)
+    }
+ */
+
     fun byIDPressed(id: String): Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
     fun byXpath(xpath: String): WebElement? = driver.findElement(By.xpath(xpath))
 
-    fun xpathClick(xpath: String, prefix: String = "", suffix: String = "") = fluentOutWait.until {
-        xpath(xpath, prefix, suffix)?.click() }
+    //Эксперимент
+    fun xpathClick(xpath: String, prefix: String = "", suffix: String = "") =
+        fluentOutWait.until(elementToBeClickable(xpath(xpath, prefix, suffix))).click()
+//    fun xpathClick(xpath: String, prefix: String = "", suffix: String = "") = fluentOutWait.until {
+//        xpath(xpath, prefix, suffix)?.click() }
 
     fun reference(data_reference: String, prefix: String = "ROOT", suffix: String = ""): WebElement? =
         fluentOutWait.until { xpath("//*[@data-reference='$data_reference']", prefix, suffix) }
 
+    //Эксперимент
     fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
         reference(data_reference, prefix, suffix)?.click() != null
+//    fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
+//        reference(data_reference, prefix, suffix)?.click() != null
     fun referenceClickSend(data_reference: String, prefix: String = "ROOT", text:String = "", suffix: String = ""): Boolean =
-        reference(data_reference, prefix, suffix)?.clickSend(text) != null
+        reference(data_reference, prefix, suffix)?.SendKeys(text) != null
 
     fun referencePressed(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean {
         val rezult1 = reference(data_reference, prefix, suffix)?.getAttribute("class")

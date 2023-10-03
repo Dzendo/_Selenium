@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocate
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.data.TDM365
+import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 
@@ -66,7 +67,7 @@ class HeadRef {
             val password = TestsProperties.password
             if (DT > 8) println("login= $login   password= $password")
             driver.get(loginpage)
-            //###assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
+            assertTrue(driver.title == Tdms, "@@@@ Не открылась страница $loginpage - нет заголовка вкладки Tdms @@")
             Login(driver).loginIn(login, password)
 
             if (DT > 7) println("Конец Вызов BeforeAll")

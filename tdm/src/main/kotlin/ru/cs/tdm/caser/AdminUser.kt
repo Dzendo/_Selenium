@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
-import ru.cs.tdm.code.clickSend
+import ru.cs.tdm.code.SendKeys
 import ru.cs.tdm.data.*
 import java.io.File
 import java.time.LocalDateTime
@@ -268,9 +268,9 @@ class AdminUser {
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
 
         toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-            ?.clickSend("Тестовый $localDateNow")
+            ?.SendKeys("Тестовый $localDateNow")
         toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-            ?.clickSend("Логин $localDateNow")
+            ?.SendKeys("Логин $localDateNow")
         toolr.OK()
 
         // Проверить что Pass есть в списке
@@ -304,22 +304,22 @@ class AdminUser {
                 "@@@@ После нажатия BUTTON_USER_EDIT - нет заголовка окна Редактирование пользователя @@")
             // //html/body/descendant::div[@data-reference]
             toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-                ?.clickSend(" #")
+                ?.SendKeys(" #")
             toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-                ?.clickSend(" #")
+                ?.SendKeys(" #")
 
             toolr.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL","//descendant::span")  // Разрешить вход в TDMS
 
             toolr.reference("ATTR_USER_NAME","MODAL","/descendant::input")  // Имя
-                ?.clickSend("Имя")
+                ?.SendKeys("Имя")
             toolr.reference("ATTR_USER_MIDDLE_NAME","MODAL","//descendant::input")  // Отчество
-                ?.clickSend("Отчество")
+                ?.SendKeys("Отчество")
             toolr.reference("ATTR_USER_LAST_NAME","MODAL","//descendant::input")  // Фамилия
-                ?.clickSend("Фамилия")
+                ?.SendKeys("Фамилия")
             toolr.reference("ATTR_USER_PHONE","MODAL","//descendant::input")  // Телефон
-                ?.clickSend("9291234567")
+                ?.SendKeys("9291234567")
             toolr.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")  // E-mail
-                ?.clickSend("ya@ya")
+                ?.SendKeys("ya@ya")
             toolr.OK()
             Thread.sleep(threadSleep)
             toolr.OK()
@@ -350,7 +350,7 @@ class AdminUser {
         //.sendKeys("Тестовая Фамилия $localDateNow")
         assertTrue(description?.getAttribute("value") == "Тестовый $localDateNow #",
             "@@@@ Нет измененного описания с # ")
-        description?.clickSend(" @")
+        description?.SendKeys(" @")
         assertTrue(description?.getAttribute("value") == "Тестовый $localDateNow # @",
             "@@@@ Нет измененного описания с # и @ ")
 
@@ -414,7 +414,7 @@ class AdminUser {
             assertTrue(toolr.reference("FormSimpleEditDlg-prompt", "MODAL")?.text == "Введите название новой группы",
                 "@@@@ После нажатия $createGroup - нет окна с Введите название новой группы @@")
             toolr.reference("FormSimpleEditDlg-input", "MODAL")
-            ?.clickSend("Тестовая $localDateNow")
+            ?.SendKeys("Тестовая $localDateNow")
             toolr.OK()  // создать Тестовая
 
             assertTrue(toolr.headerWait(TDM365),
