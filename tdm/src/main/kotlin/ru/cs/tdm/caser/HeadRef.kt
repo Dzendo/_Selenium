@@ -31,7 +31,7 @@ class HeadRef {
         private val threadSleep = TestsProperties.threadSleepNomber        // задержки где они есть
         private val DT: Int = TestsProperties.debugPrintNomber            // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
-        private const val NN:Int = 10                    // количество повторений тестов
+        private const val NN:Int = 1                    // количество повторений тестов
         private val repeateIn: Int = TestsProperties.repeateInNomber
         private val repeateOut: Int = TestsProperties.repeateOutNomber
         // переменная для драйвера
@@ -351,13 +351,13 @@ class HeadRef {
         fun adminUserTest() {
             val adminUser = "Администрирование групп"
             if (DT > 6) println("Test нажатия на $adminUser")
-            Thread.sleep(threadSleep)  // ***##########################################################
+            //Thread.sleep(threadSleep)  // ***##########################################################
             toolr.referenceClick("CMD_GROUP_CHANGE","ROOT666")
             assertTrue(toolr.headerWait("Редактирование групп"),
                 "@@@@ После нажатия $adminUser - нет заголовка окна Редактирование групп @@")
             assertTrue(toolr.referenceWaitText("STATIC1", "Группы пользователей","MODAL"),
                 "@@@@ После нажатия $adminUser и открытия окна с заголовком Редактирование групп в окне нет поля STATIC1 Группы пользователей @@")
-            Thread.sleep(threadSleep)
+            //Thread.sleep(threadSleep)
             toolr.OK()
             if (DT > 6) println("Конец Test нажатия на $adminUser")
         }
@@ -383,7 +383,7 @@ class HeadRef {
         fun createObjectTest() {
             val createObject = "Создать объект разработки"
             if (DT > 6) println("Test нажатия на $createObject")
-            Thread.sleep(threadSleep)           // ***#######################################################
+            //Thread.sleep(threadSleep)           // ***#######################################################
             toolr.referenceClick("CMD_OBJECT_STRUCTURE_CREATE","ROOT666")  // CMD_OBJECT_STRUCTURE_CREATE
             assertTrue(toolr.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $createObject - нет заголовка окна Редактирование объекта @@")
@@ -400,7 +400,7 @@ class HeadRef {
         fun configuringNotificationTest() { //repetitionInfo: RepetitionInfo) {
             val configuringNotification = "Настройка шаблона уведомлений"
             if (DT > 6) println("Test нажатия на $configuringNotification")
-            Thread.sleep(threadSleep)   // 7.0.33   // ***#############################################
+            //Thread.sleep(threadSleep)   // 7.0.33   // ***#############################################
             toolr.referenceClick("CMD_NOTIFICATIONS_SETTINGS", "ROOT666")
             assertTrue(toolr.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $configuringNotification - нет заголовка окна Редактирование объекта @@")

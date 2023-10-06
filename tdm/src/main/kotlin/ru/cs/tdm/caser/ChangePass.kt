@@ -13,6 +13,8 @@ import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.io.File
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -22,6 +24,7 @@ import java.util.*
 class ChangePass {
 
     companion object {
+    private val localDateNow: String = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss").format(LocalDateTime.now())
     private val threadSleep = TestsProperties.threadSleepNomber     // задержки где они есть
     private val DT: Int = TestsProperties.debugPrintNomber          // глубина отладочной информации 0 - ничего не печатать, 9 - все
         //private val NN:Int = TestsProperties.repeateTestsNomber        // количество повторений тестов
@@ -113,7 +116,7 @@ class ChangePass {
         assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
 
         if (DT > 8) println("Test нажатия на $adminUser")
-        Thread.sleep(threadSleep)   // ***########################
+        //Thread.sleep(threadSleep)   // ***########################
         toolr.referenceClick("CMD_GROUP_CHANGE","ROOT666")
        // Thread.sleep(threadSleep)
         assertTrue(toolr.headerWait( "Редактирование групп"),
@@ -133,7 +136,7 @@ class ChangePass {
         if (DT >8) println("Test нажатия на $click")
         if (DT >8) println("Редактирование ChangePass")
         if ((click == "BUTTON_USER_EDIT")  or (click == "BUTTON_USER_DELETE"))
-            toolr.referenceClick("GRID_USERS","MODAL","//descendant::span[contains(text(),'ChangePass')]")
+            toolr.referenceClick("GRID_USERS","MODAL","//descendant::span[starts-with(text(),'ChangePass $localDateNow')]")
 
 
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
@@ -162,6 +165,7 @@ class ChangePass {
         if (DT > 6) println("Test проверка user Pass")
 
         while  (isChangePassPresent()) {
+            Thread.sleep(1000L)
             openAllUsers("BUTTON_USER_DELETE")
             if (DT > 8) println("Удаление Pass")
             toolr.OK("yes-modal-window-btn")
@@ -181,9 +185,9 @@ class ChangePass {
          openAllUsers("BUTTON_USER_CREATE")
 
          toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-             ?.SendKeys("ChangePass")
+             ?.SendKeys("ChangePass $localDateNow")
          toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-             ?.SendKeys("ChangePass")
+             ?.SendKeys("ChangePass $localDateNow")
          toolr.OK()
          //Thread.sleep(threadSleep)
          // Проверить что Pass есть в списке
@@ -248,7 +252,7 @@ class ChangePass {
 
          if (DT >7) println("Выход из под SYSADMIN")
          toolr.closeEsc(5)
-         login = "ChangePass"
+         login = "ChangePass $localDateNow"
          password = "tdm365"
          //Login(driver).loginIn(login, password)
         // Login(driver).loginOut() // Переехало в BeforeEach
@@ -262,6 +266,8 @@ class ChangePass {
     fun n04_changeUserPass() {
         val fillingUser = "Смена пароля"
         if (DT > 6) println("Test нажатия на n04_changeUserPass $fillingUser")
+        assertTrue(Login(driver).checkLoginName("ChangePass"),
+            "пользователь не ChangePass")
         toolr.byIDClick("current-user")
         //tools.qtipClickLast("Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи.")
         toolr.referenceClick("user-change-password","MODAL")
@@ -274,7 +280,7 @@ class ChangePass {
         toolr.reference("new-password-second","MODAL")  // Подтверждение
             ?.SendKeys("Tdm365")
         toolr.OK("change-password-accept")
-        login = "ChangePass"
+        login = "ChangePass $localDateNow"
         password = "Tdm365"
 //        Login(driver).loginIn(login, password)
         //Login(driver).loginIn("ChangePass", "Tdm365")
@@ -291,6 +297,8 @@ class ChangePass {
     fun n05_changeUserPass() {
         val fillingUser = "Смена пароля"
         if (DT > 6) println("Test нажатия на n04_changeUserPass $fillingUser")
+        assertTrue(Login(driver).checkLoginName("ChangePass"),
+            "пользователь не ChangePass")
         toolr.byIDClick("current-user")
         //tools.qtipClickLast("Надежный пароль предотвращает несанкционированный доступ к вашей учетной записи.")
         toolr.referenceClick("user-change-password","MODAL")
@@ -304,7 +312,7 @@ class ChangePass {
             ?.SendKeys("TDm365")
         toolr.OK("change-password-accept")
 // Проверить, что вышли
-        login = "ChangePass"
+        login = "ChangePass $localDateNow"
         password = "TDm365"
         //Login(driver).loginIn(login, password)
         //Login(driver).loginIn
@@ -327,12 +335,13 @@ class ChangePass {
     fun n09_deleteUserPass() {
         if (DT > 6) println("Test удаление n09_deleteUserPass user ChangePass")
 
-        while  (isChangePassPresent()) {
+       // while  (isChangePassPresent()) {
+       //     Thread.sleep(1000L)
             openAllUsers("BUTTON_USER_DELETE")
             if (DT > 8) println("Удаление Pass")
             toolr.OK("yes-modal-window-btn")
             toolr.OK()
-        }
+       // }
 
         if (DT > 6) println("Test удаление n09_deleteUserPass user ChangePass")
     }

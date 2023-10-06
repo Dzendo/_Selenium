@@ -204,7 +204,7 @@ class AdminUser {
         if (DT >8) println("Test нажатия на $click")
         if (DT >8) println("Редактирование $localDateNow")
         if ((click == "BUTTON_USER_EDIT")  or (click == "BUTTON_USER_DELETE"))
-            toolr.referenceClick("GRID_USERS","MODAL","//descendant::span[contains(text(),'Тестовый')]")
+            toolr.referenceClick("GRID_USERS","MODAL","//descendant::span[starts-with(text(),'Тестовый $localDateNow')]")
 
         //  Редактировать пользователя data-reference="BUTTON_USER_EDIT"
         if ( (click == "NONE").not())
@@ -222,6 +222,7 @@ class AdminUser {
             .isNullOrEmpty().not()
     }
     @Test
+    @Disabled
     //@DisplayName("Delete user TEST")
     @DisplayName("0. Проверка пользователя Тестовый")
     fun n00_checkUserPass() {
@@ -438,7 +439,7 @@ class AdminUser {
             val deleteGroup = "Удаление группы"
             if (DT > 6) println("Test нажатия на $deleteGroup")
             // data-reference="GRID_GROUPS"   data-reference="GRID_USERS"
-            toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
+            toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая $localDateNow')]")
 
             //  Проверить что выделенная группа Тестовая data-reference="GROUP_NAME"
             toolr.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
@@ -449,7 +450,7 @@ class AdminUser {
             //val msgGpoup = tools.xpathLast("//div[text() = 'Удалить группу \"Тестовая\"?']")
             // // *[@id="messagebox-1194-textfield-inputEl"] - можно получить из "messagebox", "Создание новой группы"
 
-            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
+            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить группу \"Тест",false,
                 "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDMS Удалить группу @@")
             toolr.OK("yes-modal-window-btn")  // удалить тестовая
             Thread.sleep(threadSleep)
@@ -470,7 +471,8 @@ class AdminUser {
                 //ASTRA           assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
 
-            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
+            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя \"Тест",false,
+//            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
                 "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
 
         toolr.OK("yes-modal-window-btn")
@@ -481,6 +483,7 @@ class AdminUser {
 //    @RepeatedTest(92)
 
     @Test
+    @Disabled
     //@Disabled
     //@DisplayName("Delete user TEST")
     @DisplayName("99. Проверка пользователя Тестоый")

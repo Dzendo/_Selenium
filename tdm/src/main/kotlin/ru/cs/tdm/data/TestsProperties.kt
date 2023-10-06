@@ -6,11 +6,11 @@ const val TDMS = "TDMS"
 //const val TDM365 = "Объекты"
 const val TDM365 = "TDM365"
 //const val TDM365 = "TDMS"
-const val VER = "1.4.56_7.0.45 React"
+const val VER = "1.4.57_7.0.46 Wait"
 object TestsProperties {
 
     var fluentInDurationNomber = 15000L
-    var pollingInDurationNomber = 200L
+    var pollingInDurationNomber = 500L
     var fluentOutDurationNomber = 30000L
     var pollingOutDurationNomber = 1000L
     var implicitlyDurationNomber = 7000L

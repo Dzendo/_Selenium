@@ -37,7 +37,7 @@ class Login(val driver: WebDriver) {
         //нажимаем кнопку входа
         loginPage.clickAuthorizationButton()
         //получаем отображаемый логин и сравниваем его с логином из файла настроек
-        assertTrue(loginPage.titleLoginUserNameWait() == login,
+        assertTrue(loginPage.titleLoginUserNameWait() == login.trim().split(" ")[0],
             "@@@@ Не вошли под пользователем $login @@")
         if (DT >5) println(" Проверили под login= $login   password= $password")
     true
@@ -59,6 +59,8 @@ class Login(val driver: WebDriver) {
             println("?????????????????loginOut() Exception $e ??????????????????")
     false
         }
+    fun checkLoginName(name:String): Boolean =
+        loginPage.titleLoginUserNameWait().contains(name)
 
     fun checkBrowser(url:String): Boolean {
         val bUrl = loginPage.getBrowserUrl().uppercase()

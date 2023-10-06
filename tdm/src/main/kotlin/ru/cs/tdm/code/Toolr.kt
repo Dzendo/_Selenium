@@ -22,7 +22,7 @@ fun WebElement.Click() {
 }
 
 fun WebElement.SendKeys(str:String, clear: Boolean = false) {
-    this.click()
+  //  this.click()
     if (clear) this.clear()
     this.sendKeys(str)
     //this.click()
@@ -126,33 +126,20 @@ class Toolr(val driver: WebDriver) {
 
 
     //Эксперимент
-    fun byIDClick(id: String) = fluentClickWait.until(elementToBeClickable(By.id(id))).Click()
+    fun byIDClick(id: String) =    // Click
+        fluentClickWait.until { fluentInWait.until(elementToBeClickable(By.id(id))).click() }
+
 //    fun byIDClick(id: String) = fluentClickWait.until(elementToBeClickable(byID(id))).click()
 //    fun byIDClick(id: String) = fluentClickWait.until { byID(id)?.click() }
 //    fun byIDClick(id: String) =  driver.findElement(By.id(id)).click()
-    // попытка решить ElementClickInterceptedException - неудачно
-/*    fun byIDClick(id: String) {
-        val button = fluentClickWait.until(elementToBeClickable(By.id(id)))
-        var ready:Boolean
-        do {
-            ready = try {
-        //        val button = driver.findElement(By.id(id))
-                js.executeScript("arguments[0].click();", button)
-                false
-            } catch (e: ElementClickInterceptedException) {
-                println("####ElementClickInterceptedException - повтор $e")
-                true
-            }
-        } while (ready)
-    }
- */
+
 
     fun byIDPressed(id: String): Boolean = byID(id)?.getAttribute("class")?.contains("_pressed_") ?: false
     fun byXpath(xpath: String): WebElement? = driver.findElement(By.xpath(xpath))
 
     //Эксперимент
     fun xpathClick(xpath: String, prefix: String = "", suffix: String = "") =
-        fluentOutWait.until(elementToBeClickable(xpath(xpath, prefix, suffix))).click()
+        fluentClickWait.until { fluentOutWait.until(elementToBeClickable(xpath(xpath, prefix, suffix))).click() }
 //    fun xpathClick(xpath: String, prefix: String = "", suffix: String = "") = fluentOutWait.until {
 //        xpath(xpath, prefix, suffix)?.click() }
 
@@ -161,7 +148,7 @@ class Toolr(val driver: WebDriver) {
 
     //Эксперимент
     fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
-        reference(data_reference, prefix, suffix)?.click() != null
+        fluentClickWait.until { reference(data_reference, prefix, suffix)?.click() != null }
 //    fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
 //        reference(data_reference, prefix, suffix)?.click() != null
     fun referenceClickSend(data_reference: String, prefix: String = "ROOT", text:String = "", suffix: String = ""): Boolean =
@@ -175,25 +162,24 @@ class Toolr(val driver: WebDriver) {
 
     fun referenceWaitText(reference: String, text: String, prefix: String = "ROOT", suffix: String = "",cont:Boolean = false): Boolean {
         if (cont)  fluentInWait.until {
-               reference("ATTR_USER_QUERY_NAME", "Object-Preview", "//descendant::input")?.getAttribute("value")
+              reference("ATTR_USER_QUERY_NAME", "Object-Preview", "//descendant::input")?.getAttribute("value")
                         ?: "NONE".contains(text) // $localDateNow" )
             }.also { return true }
             else
         fluentInWait.until(textToBePresentInElement(xpath("//*[@data-reference= '$reference']", prefix, suffix), text)).also { return true }
     }
+  /*   нигде не используется
     fun qtip(qtip: String, prefix: String = "ROOT", suffix: String = ""): WebElement? = xpath(
-        "//*[contains(@title, '$qtip')]", prefix, suffix
+        "// *[contains(@title, '$qtip')]", prefix, suffix
     )
-
     fun qtipPressed(qtip: String, prefix: String = "ROOT", suffix: String = ""): Boolean {
         val rezult1 = qtip(qtip, prefix, suffix)?.getAttribute("class")
         val rezult2 = rezult1?.contains("_pressed_") ?: false
         return rezult2
     }
-
     fun qtipClick(qtip: String, prefix: String = "ROOT666", suffix: String = ""): Boolean =
         qtip(qtip, prefix, suffix)?.click() != null
-
+*/
     fun headerWait(title: String): Boolean = fluentInWait.until(
         textToBePresentInElementLocated(
             By.xpath("/html/body//div[@id='modalRoot']//div[@data-modal-window='current']//span[starts-with(@class, 'Header_headerTitle_')]"),
@@ -201,7 +187,7 @@ class Toolr(val driver: WebDriver) {
         )
     )
 
-    fun closeX() = WebDriverWait(driver, Duration.ofSeconds(13))
+    fun closeX() = WebDriverWait(driver, Duration.ofSeconds(WebDriverDuration))
         .until(elementToBeClickable(xpath("//button[@data-reference='modal-window-close-button']", "MODAL")))
         .click()
 

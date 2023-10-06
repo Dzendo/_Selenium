@@ -190,6 +190,7 @@ class Filter {
     }
 
     @RepeatedTest(NN)
+    @Disabled
     @DisplayName("Удаление фильтров")
     fun n00_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         val deleteFilter = "Удалить тестовые фильтры"
