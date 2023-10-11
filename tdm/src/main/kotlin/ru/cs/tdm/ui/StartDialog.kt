@@ -62,7 +62,7 @@ class StartDialog : JFrame("TDM365 Tests from Elena Ver $VER"), ActionListener  
         1   //step
     ))
     private val spinThreadSleep =JSpinner(SpinnerNumberModel(
-        3,  //initial value
+        1,  //initial value
         0,  //min
         99,  //max
         1   //step

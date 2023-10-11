@@ -48,6 +48,7 @@ object TestsProperties {
         "hp-work:442",
         "tdms1:555",
         "Astra:5001",
+        "Franky"
     )
 
     val loginPages: Array<String> = arrayOf(
@@ -63,6 +64,7 @@ object TestsProperties {
         "http://hp-work:442/client/?classic#objects",
         "http://tdms1:555/client/?classic#objects",
         "http://10.19.1.129:5001/client/#objects",
+        "http://franky74.ddns.net"
 
     )
     val logins: Array<String> = arrayOf("SYSADMIN", "Cher", "rest", "ChangePass")
