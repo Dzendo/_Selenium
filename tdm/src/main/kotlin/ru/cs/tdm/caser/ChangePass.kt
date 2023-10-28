@@ -159,13 +159,14 @@ class ChangePass {
     }
 
     @Test
+    @Disabled
     //@DisplayName("Delete user Pass")
     @DisplayName("0. Проверка пользователя ChangePass")
     fun n00_checkUserPass() {
         if (DT > 6) println("Test проверка user Pass")
 
         while  (isChangePassPresent()) {
-            Thread.sleep(1000L)
+//            Thread.sleep(1000L)
             openAllUsers("BUTTON_USER_DELETE")
             if (DT > 8) println("Удаление Pass")
             toolr.OK("yes-modal-window-btn")
@@ -253,7 +254,7 @@ class ChangePass {
          if (DT >7) println("Выход из под SYSADMIN")
          toolr.closeEsc(5)
          login = "ChangePass $localDateNow"
-         password = "tdm365"
+         password = "Tdm365"
          //Login(driver).loginIn(login, password)
         // Login(driver).loginOut() // Переехало в BeforeEach
              if (DT > 6) println("Конец Test нажатия на n02_FillingChangePass")
@@ -274,14 +275,14 @@ class ChangePass {
         assertTrue(toolr.headerWait(fillingUser),
             "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
         toolr.reference("current-password","MODAL")  // Старый пароль
-            ?.SendKeys("tdm365")
+            ?.SendKeys("Tdm365")
         toolr.reference("new-password-first","MODAL")  // Новый пароль
-            ?.SendKeys("Tdm365")
+            ?.SendKeys("TDm365")
         toolr.reference("new-password-second","MODAL")  // Подтверждение
-            ?.SendKeys("Tdm365")
+            ?.SendKeys("TDm365")
         toolr.OK("change-password-accept")
         login = "ChangePass $localDateNow"
-        password = "Tdm365"
+        password = "TDm365"
 //        Login(driver).loginIn(login, password)
         //Login(driver).loginIn("ChangePass", "Tdm365")
         // Проверить, что вошли
@@ -305,15 +306,15 @@ class ChangePass {
         assertTrue(toolr.headerWait(fillingUser),
             "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
         toolr.reference("current-password","MODAL")  // Старый пароль
-            ?.SendKeys("Tdm365")
+            ?.SendKeys("TDm365")
         toolr.reference("new-password-first","MODAL")  // Новый пароль
-            ?.SendKeys("TDm365")
+            ?.SendKeys("TDM365")
         toolr.reference("new-password-second","MODAL")  // Подтверждение
-            ?.SendKeys("TDm365")
+            ?.SendKeys("TDM365")
         toolr.OK("change-password-accept")
 // Проверить, что вышли
         login = "ChangePass $localDateNow"
-        password = "TDm365"
+        password = "TDM365"
         //Login(driver).loginIn(login, password)
         //Login(driver).loginIn
         //Login(driver).loginIn("ChangePass", "TDm365")

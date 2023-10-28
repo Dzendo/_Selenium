@@ -179,7 +179,7 @@ class HeadRef {
             assertTrue(toolr.byIDPressed("chat-tab"),
                     "@@@@ После нажатия $meeting - кнопка $meeting нет утоплена @@" )
             if (DT > 6) println("Конец Test нажатия на $meeting")
-            Thread.sleep(threadSleep)
+          //  Thread.sleep(threadSleep)
         }
 
         @RepeatedTest(NN)
@@ -310,9 +310,9 @@ class HeadRef {
             val filter = "Создать фильтр"
             if (DT > 6) println("Test нажатия на $filter")
             workTable()
-            Thread.sleep(threadSleep)
+           // Thread.sleep(threadSleep)
             toolr.referenceClick("CMD_CREATE_USER_QUERY","ROOT666")
-            Thread.sleep(threadSleep)
+           // Thread.sleep(threadSleep)
             assertTrue(toolr.headerWait("Редактирование объекта"),
                 "@@@@ После нажатия $filter - нет заголовка окна Редактирование объекта @@")
             assertTrue(toolr.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
@@ -509,6 +509,7 @@ class HeadRef {
             openSubSysadmin()
 
             toolr.referenceClick("CMD_DATA_SCHEME")
+           // Thread.sleep(15000L)
             assertTrue(toolr.headerWait( dataTree),"@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
 
             assertTrue(presenceOfElementLocated(By.xpath("// *[data-reference='FORM_TREE_OBJS']")) != null,
@@ -610,9 +611,11 @@ class HeadRef {
                     // data-reference="SUB_SETD_SYNC"
                     //val  element = toolr.reference("SUB_SETD_SYNC")
                    // Actions(driver).moveToElement(element).click().build().perform()
-                    toolr.referenceClick("SUB_SETD_SYNC")
+                   // toolr.referenceClick("SUB_SETD_SYNC")
+                    toolr.referenceClick("SUB_EXTERNAL_SYSTEM_SETD")
 
-                    val elementViz = toolr.reference("SUB_SETD_SYNC")?.findElement(By.xpath(".//div[starts-with(@class,'Popup_contextMenuContainer_')]"))
+                  //  val elementViz = toolr.reference("SUB_SETD_SYNC")?.findElement(By.xpath(".//div[starts-with(@class,'Popup_contextMenuContainer_')]"))
+                    val elementViz = toolr.reference("SUB_EXTERNAL_SYSTEM_SETD")?.findElement(By.xpath(".//div[starts-with(@class,'Popup_contextMenuContainer_')]"))
                     val styleViz = elementViz?.getAttribute("style")
                     if (styleViz!= null) {
                         if (styleViz.contains("visible")) return

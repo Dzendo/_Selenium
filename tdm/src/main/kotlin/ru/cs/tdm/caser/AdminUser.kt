@@ -156,7 +156,7 @@ class AdminUser {
 
         val adminUser = "Администрирование групп"
         if (DT >8) println("Test нажатия на $adminUser")
-        Thread.sleep(threadSleep)  // ***#############################################################
+//        Thread.sleep(threadSleep)  // ***#############################################################
         toolr.referenceClick("CMD_GROUP_CHANGE","ROOT666")
 //        Thread.sleep(threadSleep)
         if (DT >7) println(" Hажатия на $adminUser")
@@ -284,7 +284,7 @@ class AdminUser {
         assertTrue((toolr.reference("GRID_USERS","MODAL","//descendant::span[contains(text(),'$localDateNow')]//ancestor::tr")?.getAttribute("class")
             ?.contains("Selected")?: false),
             "@@@@ После выделения созданного пользователя $localDateNow в таблице нет такого пользователя @@")
-        Thread.sleep(threadSleep)
+//        Thread.sleep(threadSleep)
         toolr.OK()
        // tools.OK()
         if (DT > 6) println("Конец Test нажатия на $createUser")
@@ -322,7 +322,7 @@ class AdminUser {
             toolr.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")  // E-mail
                 ?.SendKeys("ya@ya")
             toolr.OK()
-            Thread.sleep(threadSleep)
+//            Thread.sleep(threadSleep)
             toolr.OK()
             if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
@@ -356,7 +356,7 @@ class AdminUser {
             "@@@@ Нет измененного описания с # и @ ")
 
         toolr.OK()
-        Thread.sleep(threadSleep)
+//        Thread.sleep(threadSleep)
         toolr.OK()
         if (DT > 6) println("Конец Test нажатия на $fillingUser")
     }
@@ -392,7 +392,7 @@ class AdminUser {
             toolr.OK()
             assertTrue(toolr.headerWait("Редактирование групп"),
                 "@@@@ После выхода из редактирования - нет заголовка окна Редактирование групп @@")
-            Thread.sleep(threadSleep)
+//            Thread.sleep(threadSleep)
             toolr.OK()
             if (DT > 6) println("Конец Test n07_AddRoleUserTest нажатия на $fillingUser")
         }
@@ -425,7 +425,7 @@ class AdminUser {
 //ASTRA            assertTrue(toolr.headerWait(TDMS),
                 "@@@@ Повторная проверка $createGroup - нет окна сообщения с заголовком TDMS (группа создана) @@")
             toolr.OK()  // создана тестовая
-            Thread.sleep(threadSleep)
+ //           Thread.sleep(threadSleep)
             toolr.OK()     // закрыть адимин
             if (DT > 6) println("Конец Test нажатия на $createGroup")
         }
@@ -453,7 +453,7 @@ class AdminUser {
             assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить группу \"Тест",false,
                 "@@@@ При $deleteGroup - нет в окне сообщения с заголовком TDMS Удалить группу @@")
             toolr.OK("yes-modal-window-btn")  // удалить тестовая
-            Thread.sleep(threadSleep)
+//            Thread.sleep(threadSleep)
             toolr.OK()     // закрыть адимин
             if (DT > 6) println("Test нажатия на $deleteGroup")
         }
@@ -476,7 +476,7 @@ class AdminUser {
                 "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
 
         toolr.OK("yes-modal-window-btn")
-        Thread.sleep(threadSleep)
+ //       Thread.sleep(threadSleep)
         toolr.OK()
             if (DT > 6) println("Конец Test нажатия на Удаление на $localDateNow")
     }
