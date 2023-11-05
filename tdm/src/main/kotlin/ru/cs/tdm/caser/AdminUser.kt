@@ -272,6 +272,7 @@ class AdminUser {
             ?.SendKeys("Тестовый $localDateNow")
         toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
             ?.SendKeys("Логин $localDateNow")
+        Thread.sleep(threadSleep)
         toolr.OK()
 
         // Проверить что Pass есть в списке
@@ -285,6 +286,7 @@ class AdminUser {
             ?.contains("Selected")?: false),
             "@@@@ После выделения созданного пользователя $localDateNow в таблице нет такого пользователя @@")
 //        Thread.sleep(threadSleep)
+        Thread.sleep(threadSleep)
         toolr.OK()
        // tools.OK()
         if (DT > 6) println("Конец Test нажатия на $createUser")
@@ -321,8 +323,10 @@ class AdminUser {
                 ?.SendKeys("9291234567")
             toolr.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")  // E-mail
                 ?.SendKeys("ya@ya")
+        //    Thread.sleep(threadSleep)
             toolr.OK()
 //            Thread.sleep(threadSleep)
+      //      Thread.sleep(threadSleep)
             toolr.OK()
             if (DT > 6) println("Конец Test нажатия на $fillingUser")
         }
