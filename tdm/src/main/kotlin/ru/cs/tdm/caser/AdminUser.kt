@@ -311,7 +311,7 @@ class AdminUser {
             toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
                 ?.SendKeys(" #")
 
-            toolr.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL","//descendant::span")  // Разрешить вход в TDMS
+         //   toolr.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL","//descendant::span")  // Разрешить вход в TDMS
 
             toolr.reference("ATTR_USER_NAME","MODAL","/descendant::input")  // Имя
                 ?.SendKeys("Имя")

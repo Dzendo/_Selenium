@@ -509,7 +509,7 @@ class HeadRef {
             openSubSysadmin()
 
             toolr.referenceClick("CMD_DATA_SCHEME")
-           // Thread.sleep(15000L)
+            //Thread.sleep(10000L)
             assertTrue(toolr.headerWait( dataTree),"@@@@ После нажатия $dataTree нет заголовка окна  $dataTree @@" )
 
             assertTrue(presenceOfElementLocated(By.xpath("// *[data-reference='FORM_TREE_OBJS']")) != null,
