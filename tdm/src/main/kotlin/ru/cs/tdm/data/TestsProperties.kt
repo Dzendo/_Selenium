@@ -13,7 +13,7 @@ object TestsProperties {
     var pollingInDurationNomber = 500L
     var fluentOutDurationNomber = 30000L
     var pollingOutDurationNomber = 1000L
-    var implicitlyDurationNomber = 7000L
+    var implicitlyDurationNomber = 1000L
     var WebDriverDurationNomber = 20000L
     var threadSleepNomber = 0L // задержки где они есть 1сек
 

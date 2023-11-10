@@ -4,6 +4,7 @@ import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
+import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
 import ru.cs.tdm.code.SendKeys
@@ -13,11 +14,13 @@ import ru.cs.tdm.data.startDriver
 import ru.cs.tdm.data.TestsProperties
 import java.io.File
 import java.text.SimpleDateFormat
+import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.test.assertContains
+
 
 /**
  * Халтура - недоделки:
@@ -135,7 +138,7 @@ class Filter {
         toolr.xpathClick("//span[text()='Фильтры']","Main-Tree")
         assertTrue(toolr.titleContain("Фильтры"), "@@@@ После нажатия Фильтры - нет заголовка вкладки Фильтры @@")
     }
-    private fun clickFilter(nomberFilter: String, clickRef: String = "CMD_EDIT_ATTRS" ) {
+    private fun clickFilter(clickRef: String = "CMD_EDIT_ATTRS" ) {
         val titleWindow = when (clickRef) {
             "CMD_DELETE_USER_QUERY" -> TDM365
             "CMD_EDIT_ATTRS" -> "Редактирование объекта"
@@ -190,7 +193,7 @@ class Filter {
     }
 
     @RepeatedTest(NN)
-    @Disabled
+    //@Disabled
     @DisplayName("Удаление фильтров")
     fun n00_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         val deleteFilter = "Удалить тестовые фильтры"
@@ -199,15 +202,18 @@ class Filter {
         val titleWindow =  TDM365
         var nomerDel = 0
 
-        while(true) {
+        while(true){
             workTable()
         val testPresent =  toolr.xpath("//table", "Main-Grid")
             ?.findElements(By.xpath("//descendant::a[contains(text(),'Тест')]"))?.toList()
-            if (testPresent.isNullOrEmpty()) break
+        //val testPresent =  WebDriverWait(driver, Duration.ofMillis(3000L)).until {toolr.xpath("//table", "Main-Grid")
+        //    ?.findElements(By.xpath("//descendant::a[contains(text(),'Тест')]"))}?.toList()
+            if (testPresent.isNullOrEmpty()) return //break
             if (testPresent.size <= nomerDel) break
 
             // Обрабатывать RecyclerVuew
             testPresent[nomerDel]?.click()
+
 
             if (toolr.reference("CMD_DELETE_USER_QUERY","ROOT666") == null) {
                 println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ $localDateNow действие:")
@@ -257,7 +263,9 @@ class Filter {
         assertTrue(toolr.referenceWaitText("T_ATTR_USER_QUERY_NAME", "Наименование фильтра", "MODAL"),
             "@@@@ На форме фильтра при $createUser - не нашлось текста Наименование фильтра @@")
         toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
-            ?.SendKeys("Тест $localDateNow $nomberFilter", true)
+            ?.clear()
+        toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
+            ?.SendKeys("Тест $localDateNow $nomberFilter", false) //true)
         // Проверить что в поле стоит дата, если нет, то Скрин
         val ATTR_USER_QUERY_NAME = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL", "//descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
@@ -281,7 +289,7 @@ class Filter {
         if (DT > 6) println("Test посмотреть на $viewUser")
         // проверка что фильтр создан, если нет
         workTable()
-        clickFilter(nomberFilter, "CMD_VIEW_ONLY")
+        clickFilter("CMD_VIEW_ONLY")
 
         // Проверить что в поле стоит дата, если нет, то Скрин
         val ATTR_USER_QUERY_NAME = toolr.reference("ATTR_USER_QUERY_NAME","MODAL","//descendant::input")  // Наименование фильтра
@@ -306,7 +314,7 @@ class Filter {
             val fillingUser = "Заполнение текстовых полей фильтра"
             if (DT > 6) println("Test нажатия на $fillingUser")
 
-            clickFilter(nomberFilter)  // встать на фильтр
+            clickFilter()  // встать на фильтр
 
             val ATTR_USER_QUERY_NAME =  toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
             ATTR_USER_QUERY_NAME?.SendKeys(" #")  // Наименование фильтра
@@ -354,7 +362,7 @@ class Filter {
             val editFilter = "Заполнение ссылочных полей фильтра"
         if (DT > 6) println("Test нажатия на $editFilter")
 
-        clickFilter(nomberFilter)  // встать на фильтр  !!!!!!!!!!!!!!!!!!!!!!!!
+        clickFilter()  // встать на фильтр  !!!!!!!!!!!!!!!!!!!!!!!!
 
             val description = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
 //            assertTrue(toolr.referenceWaitText("ATTR_USER_QUERY_NAME","Тест $localDateNow", "MODAL","//descendant::input"),
@@ -507,7 +515,7 @@ class Filter {
         val editFilter = "Заполнение дат и выпадающих фильтра"
         if (DT > 6) println("Test нажатия на $editFilter")
 
-        clickFilter(nomberFilter)  // встать на фильтр
+        clickFilter()  // встать на фильтр
 
         val description = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
         assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
@@ -527,7 +535,7 @@ class Filter {
             // не работает
            // tools.referenceClick("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//div[starts-with(@class, 'Edit_trigger_')]")     //"//descendant::div[contains(@id, 'picker')]")
            // tools.xpath("//span[text()='Сегодня']")?.click()
-
+            //********************* здесь путается в датах ************************** естественно, т.к. val срабатывает ранее чем Send?????
             val ATTR_DATE_RELEASE_DOCUMENT =  toolr.reference("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//descendant::input")
             val ATTR_DATE = ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value")
             assertEquals(ATTR_DATE_RELEASE_DOCUMENT?.getAttribute("value") ?:"NONE",
@@ -560,24 +568,13 @@ class Filter {
         
         if (DT > 6) println("Конец Test нажатия на $editFilter")
     }
-    @RepeatedTest(NN)
-    @Disabled
-    @DisplayName("Очистка фильтров")
-    fun n08_clearUserQuery(repetitionInfo: RepetitionInfo) {
-        workTable()
-        val nomberFilter = "${repetitionInfo.currentRepetition}"
-        val clearFilter = "Очистка фильтров"
-        if (DT > 6) println("Test нажатия на $clearFilter")
-
-        clickFilter(nomberFilter)  // встать на фильтр
-    }
 
     /**
      *  тест Удаление фильтра
      */
    @RepeatedTest(NN)
    //@Disabled
-   @DisplayName("Удаление фильтров")
+   @DisplayName("Удаление фильтра")
    fun n11_DeleteUserQuery(repetitionInfo: RepetitionInfo) {
         workTable()
 
@@ -585,7 +582,7 @@ class Filter {
        val deleteFilter = "Удалить фильтр"
        if (DT > 6) println("Test нажатия на $deleteFilter")
 
-        clickFilter(nomberFilter, "CMD_DELETE_USER_QUERY")  // встать на фильтр
+        clickFilter("CMD_DELETE_USER_QUERY")  // встать на фильтр
 
        // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
        toolr.OK("yes-modal-window-btn")
