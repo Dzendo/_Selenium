@@ -6,7 +6,7 @@ const val TDMS = "TDMS"
 //const val TDM365 = "Объекты"
 const val TDM365 = "TDM365"
 //const val TDM365 = "TDMS"
-const val VER = "1.4.59_7.0.54"
+const val VER = "1.4.59_7.0.54_3"
 object TestsProperties {
 
     var fluentInDurationNomber = 25000L

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
-import ru.cs.tdm.code.SendKeys
+import ru.cs.tdm.code.sendKeys
 import ru.cs.tdm.data.TDM365
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
@@ -183,9 +183,9 @@ class ChangePassInOut {
          openAllUsers("BUTTON_USER_CREATE")
 
          toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-             ?.SendKeys("ChangePass")
+             ?.sendKeys("ChangePass")
          toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-             ?.SendKeys("ChangePass")
+             ?.sendKeys("ChangePass")
          toolr.OK()
          //Thread.sleep(threadSleep)
          // Проверить что Pass есть в списке
@@ -223,20 +223,20 @@ class ChangePassInOut {
 
          // //html/body/descendant::div[@data-reference]
          toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-         ?.SendKeys(" @")
+         ?.sendKeys(" @")
 //       tools.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
 //       ?.clickSend("ChangePass")
          toolr.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL")  // Разрешить вход в TDMS
          toolr.reference("ATTR_USER_NAME","MODAL","//descendant::input")    // Имя
-             ?.SendKeys("Имя")
+             ?.sendKeys("Имя")
          toolr.reference("ATTR_USER_MIDDLE_NAME","MODAL","//descendant::input")    // Отчество
-             ?.SendKeys("Отчество")
+             ?.sendKeys("Отчество")
          toolr.reference("ATTR_USER_LAST_NAME","MODAL","//descendant::input")   // Фамилия
-                 ?.SendKeys("Фамилия")
+                 ?.sendKeys("Фамилия")
          toolr.reference("ATTR_USER_PHONE","MODAL","//descendant::input")    // Телефон
-                 ?.SendKeys("9291234567")
+                 ?.sendKeys("9291234567")
          toolr.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")    // E-mail
-                 ?.SendKeys("ya@ya")
+                 ?.sendKeys("ya@ya")
 
          toolr.OK()
          //    Thread.sleep(threadSleep)
@@ -274,11 +274,11 @@ class ChangePassInOut {
             toolr.headerWait(fillingUser),
             "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
         toolr.reference("current-password","MODAL")  // Старый пароль
-            ?.SendKeys("tdm365")
+            ?.sendKeys("tdm365")
         toolr.reference("new-password-first","MODAL")  // Новый пароль
-            ?.SendKeys("Tdm365")
+            ?.sendKeys("Tdm365")
         toolr.reference("new-password-second","MODAL")  // Подтверждение
-            ?.SendKeys("Tdm365")
+            ?.sendKeys("Tdm365")
         toolr.OK("change-password-accept")
         login = "ChangePass"
         password = "Tdm365"
@@ -304,11 +304,11 @@ class ChangePassInOut {
             toolr.headerWait(fillingUser),
             "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
         toolr.reference("current-password","MODAL")  // Старый пароль
-            ?.SendKeys("Tdm365")
+            ?.sendKeys("Tdm365")
         toolr.reference("new-password-first","MODAL")  // Новый пароль
-            ?.SendKeys("TDm365")
+            ?.sendKeys("TDm365")
         toolr.reference("new-password-second","MODAL")  // Подтверждение
-            ?.SendKeys("TDm365")
+            ?.sendKeys("TDm365")
         toolr.OK("change-password-accept")
 // Проверить, что вышли
         login = "ChangePass"

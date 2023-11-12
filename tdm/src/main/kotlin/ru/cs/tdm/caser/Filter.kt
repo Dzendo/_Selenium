@@ -7,7 +7,7 @@ import org.openqa.selenium.*
 import org.openqa.selenium.support.ui.WebDriverWait
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
-import ru.cs.tdm.code.SendKeys
+import ru.cs.tdm.code.sendKeys
 import ru.cs.tdm.data.TDM365
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
@@ -206,9 +206,8 @@ class Filter {
             workTable()
         val testPresent =  toolr.xpath("//table", "Main-Grid")
             ?.findElements(By.xpath("//descendant::a[contains(text(),'Тест')]"))?.toList()
-        //val testPresent =  WebDriverWait(driver, Duration.ofMillis(3000L)).until {toolr.xpath("//table", "Main-Grid")
-        //    ?.findElements(By.xpath("//descendant::a[contains(text(),'Тест')]"))}?.toList()
-            if (testPresent.isNullOrEmpty()) return //break
+
+            if (testPresent.isNullOrEmpty()) break
             if (testPresent.size <= nomerDel) break
 
             // Обрабатывать RecyclerVuew
@@ -265,7 +264,7 @@ class Filter {
         toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
             ?.clear()
         toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")  // Наименование фильтра
-            ?.SendKeys("Тест $localDateNow $nomberFilter", false) //true)
+            ?.sendKeys("Тест $localDateNow $nomberFilter", false) //true)
         // Проверить что в поле стоит дата, если нет, то Скрин
         val ATTR_USER_QUERY_NAME = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL", "//descendant::input")  // Наименование фильтра
             ?.getAttribute("value") ?: "NONE"
@@ -317,27 +316,27 @@ class Filter {
             clickFilter()  // встать на фильтр
 
             val ATTR_USER_QUERY_NAME =  toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input")
-            ATTR_USER_QUERY_NAME?.SendKeys(" #")  // Наименование фильтра
+            ATTR_USER_QUERY_NAME?.sendKeys(" #")  // Наименование фильтра
             assertContains(ATTR_USER_QUERY_NAME?.getAttribute("value") ?: "NONE", "#",false,
                 "@@@@ В Наименовании фильтра не прописалось # при редактировании @@")
 
             val ATTR_QUERY_TechDoc_Num = toolr.reference("ATTR_QUERY_TechDoc_Num", "MODAL" ,"//descendant::input")
-            ATTR_QUERY_TechDoc_Num?.SendKeys("Обозначение $localDateNow")  // Обозначение
+            ATTR_QUERY_TechDoc_Num?.sendKeys("Обозначение $localDateNow")  // Обозначение
             assertContains(ATTR_QUERY_TechDoc_Num?.getAttribute("value") ?: "NONE", "Обозначение", false,
                 "@@@@ В Обозначение фильтра не прописалось Обозначение при редактировании @@")
 
             val ATTR_QUERY_TechDoc_RevNum =  toolr.reference("ATTR_QUERY_TechDoc_RevNum", "MODAL" ,"//descendant::input")
-            ATTR_QUERY_TechDoc_RevNum ?.SendKeys("77") // Изм. №
+            ATTR_QUERY_TechDoc_RevNum ?.sendKeys("77") // Изм. №
             assertContains(ATTR_QUERY_TechDoc_RevNum?.getAttribute("value") ?: "NONE", "77", false,
                 "@@@@ В Изм. № фильтра не прописалось 77 при редактировании @@")
 
             val ATTR_QUERY_TechDoc_Name = toolr.reference("ATTR_QUERY_TechDoc_Name", "MODAL" ,"//descendant::input")
-            ATTR_QUERY_TechDoc_Name?.SendKeys("Наименование $localDateNow")  // Наименование
+            ATTR_QUERY_TechDoc_Name?.sendKeys("Наименование $localDateNow")  // Наименование
             assertContains(ATTR_QUERY_TechDoc_Name?.getAttribute("value") ?: "NONE", "Наименование", false,
                 "@@@@ В Наименование фильтра не прописалось Наименование при редактировании @@")
 
             val ATTR_DESCRIPTION = toolr.reference("ATTR_DESCRIPTION", "MODAL" ,"//descendant::textarea")
-            ATTR_DESCRIPTION ?.SendKeys("Описание $localDateNow") // Описание
+            ATTR_DESCRIPTION ?.sendKeys("Описание $localDateNow") // Описание
             assertContains(ATTR_DESCRIPTION?.getAttribute("value") ?: "NONE", "Описание", false,
                 "@@@@ В Описание фильтра не прописалось Описание при редактировании @@")
 
@@ -368,7 +367,7 @@ class Filter {
 //            assertTrue(toolr.referenceWaitText("ATTR_USER_QUERY_NAME","Тест $localDateNow", "MODAL","//descendant::input"),
             assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
                 "@@@@ В Название фильтра нет названия Тест $localDateNow @@")
-            description?.SendKeys(" @")
+            description?.sendKeys(" @")
 //            assertTrue(toolr.referenceWaitText("ATTR_USER_QUERY_NAME","@", "MODAL","//descendant::input"),
             assertTrue(description.getAttribute("value").contains("@"),
                 "@@@@ В Наименовании фильтра не прописалось @ при редактировании @@")
@@ -520,18 +519,18 @@ class Filter {
         val description = toolr.reference("ATTR_USER_QUERY_NAME", "MODAL" ,"//descendant::input") // Описание
         assertTrue(description?.getAttribute("value")!!.contains("Тест $localDateNow"),
             "@@@@ Нет в списке фильтра с именем Фильтр $localDateNow @@")
-        description.SendKeys(" @@")
+        description.sendKeys(" @@")
         assertTrue(description.getAttribute("value").contains("@@"),
             "@@@@ В Наименовании фильтра не прописалось @@ при редактировании @@")
 
 
 
             toolr.reference("ATTR_DATE_START", "MODAL","//descendant::input")
-                ?.SendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
             toolr.reference("ATTR_DATE_END", "MODAL", "//descendant::input")
-                ?.SendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
              toolr.reference("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//descendant::input")
-                ?.SendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
+                ?.sendKeys(DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now()))
             // не работает
            // tools.referenceClick("ATTR_DATE_RELEASE_DOCUMENT", "MODAL", "//div[starts-with(@class, 'Edit_trigger_')]")     //"//descendant::div[contains(@id, 'picker')]")
            // tools.xpath("//span[text()='Сегодня']")?.click()
@@ -543,9 +542,9 @@ class Filter {
                 "@@@@ В Дата не стоит сегодняшняя дата после занесения из выбора Сегодня $ATTR_DATE @@")
 
             toolr.reference("ATTR_USER_QUERY_STATUS", "MODAL", "//descendant::input")
-                ?.SendKeys("В разработке")
+                ?.sendKeys("В разработке")
             toolr.reference("ATTR_DOC_AUTHOR","MODAL", "//descendant::input")
-                ?.SendKeys("SYSADMIN")
+                ?.sendKeys("SYSADMIN")
 
             // Только на SRV1 после выкачки-закачки схемы
             //tools. referenceClickLast("ATTR_RESPONSIBLE_USER")   ОШИБОЧНОЕ ПОЛЕ Ответственный
@@ -554,7 +553,7 @@ class Filter {
             // Можно очистить BUTTON_ERASE_RESP_USER ??
 
             toolr. reference("ATTR_RESPONSIBLE_USER", "MODAL", "//descendant::input")
-                ?.SendKeys("SYSADMIN")
+                ?.sendKeys("SYSADMIN")
            // assertTrue(tools.headerWait("Выбор пользователей"),
            //     "@@@@ стрелочка ATTR_RESPONSIBLE_USER (Ответственный) на поле Ответственный : нет справочника с заголовком Выбор пользователей @@")
         // Ошибка Firefox  Element <tr class="  x-grid-row"> could not be scrolled into view

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
-import ru.cs.tdm.code.SendKeys
+import ru.cs.tdm.code.sendKeys
 import ru.cs.tdm.data.TDM365
 import ru.cs.tdm.data.Tdms
 import ru.cs.tdm.data.startDriver
@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.test.assertContains
 
 
 @DisplayName("Pass Change Test")
@@ -102,9 +103,7 @@ class ChangePass {
         if (DT > 7) println("Конец Вызов AfterEach ChangePass")
 //        afterAll()
     }
-    /**
-     *  тест наличия/ удаление пользователя
-     */
+
     private fun openAllUsers(click: String = "NONE") {
         val adminUser = "Администрирование групп"
         val mainMenu = "Объекты"
@@ -154,24 +153,33 @@ class ChangePass {
             ?.findElements(By.xpath("./descendant::span[contains(text(),'ChangePass')]"))
             .isNullOrEmpty().not()
 
-        toolr.OK()
+       // toolr.OK()
         return rez
     }
-
+    /**
+     *  тест наличия/ удаление пользователя
+     */
     @Test
-    @Disabled
+    //@Disabled
     //@DisplayName("Delete user Pass")
     @DisplayName("0. Проверка пользователя ChangePass")
     fun n00_checkUserPass() {
         if (DT > 6) println("Test проверка user Pass")
-
         while  (isChangePassPresent()) {
-//            Thread.sleep(1000L)
-            openAllUsers("BUTTON_USER_DELETE")
-            if (DT > 8) println("Удаление Pass")
-            toolr.OK("yes-modal-window-btn")
+            toolr.referenceClick("GRID_USERS","MODAL","//descendant::span[contains(text(), 'ChangePass')]")
+            toolr.referenceClick("BUTTON_USER_DELETE", "MODAL")
+            assertTrue(
+                toolr.headerWait(TDM365),
+                "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить Change) @@")
+
+            assertContains(
+                toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя \"ChangePass",false,
+                "@@@@ При удалить группу - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
+            toolr.OK("yes-modal-window-btn")  // удалить тестовая
+
             toolr.OK()
         }
+
         if (DT > 6) println("Конец Test проверка user Pass")
     }
 
@@ -186,9 +194,9 @@ class ChangePass {
          openAllUsers("BUTTON_USER_CREATE")
 
          toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-             ?.SendKeys("ChangePass $localDateNow")
+             ?.sendKeys("ChangePass $localDateNow")
          toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-             ?.SendKeys("ChangePass $localDateNow")
+             ?.sendKeys("ChangePass $localDateNow")
          toolr.OK()
          //Thread.sleep(threadSleep)
          // Проверить что Pass есть в списке
@@ -224,20 +232,20 @@ class ChangePass {
 
          // //html/body/descendant::div[@data-reference]
          toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-         ?.SendKeys(" @")
+         ?.sendKeys(" @")
 //       tools.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
 //       ?.clickSend("ChangePass")
          toolr.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL")  // Разрешить вход в TDMS
          toolr.reference("ATTR_USER_NAME","MODAL","//descendant::input")    // Имя
-             ?.SendKeys("Имя")
+             ?.sendKeys("Имя")
          toolr.reference("ATTR_USER_MIDDLE_NAME","MODAL","//descendant::input")    // Отчество
-             ?.SendKeys("Отчество")
+             ?.sendKeys("Отчество")
          toolr.reference("ATTR_USER_LAST_NAME","MODAL","//descendant::input")   // Фамилия
-                 ?.SendKeys("Фамилия")
+                 ?.sendKeys("Фамилия")
          toolr.reference("ATTR_USER_PHONE","MODAL","//descendant::input")    // Телефон
-                 ?.SendKeys("9291234567")
+                 ?.sendKeys("9291234567")
          toolr.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")    // E-mail
-                 ?.SendKeys("ya@ya")
+                 ?.sendKeys("ya@ya")
 
          toolr.OK()
          //    Thread.sleep(threadSleep)
@@ -275,11 +283,11 @@ class ChangePass {
         assertTrue(toolr.headerWait(fillingUser),
             "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
         toolr.reference("current-password","MODAL")  // Старый пароль
-            ?.SendKeys("Tdm365")
+            ?.sendKeys("Tdm365")
         toolr.reference("new-password-first","MODAL")  // Новый пароль
-            ?.SendKeys("TDm365")
+            ?.sendKeys("TDm365")
         toolr.reference("new-password-second","MODAL")  // Подтверждение
-            ?.SendKeys("TDm365")
+            ?.sendKeys("TDm365")
         toolr.OK("change-password-accept")
         login = "ChangePass $localDateNow"
         password = "TDm365"
@@ -306,11 +314,11 @@ class ChangePass {
         assertTrue(toolr.headerWait(fillingUser),
             "@@@@ После click Надежный пароль не открыто окно $fillingUser @@")
         toolr.reference("current-password","MODAL")  // Старый пароль
-            ?.SendKeys("TDm365")
+            ?.sendKeys("TDm365")
         toolr.reference("new-password-first","MODAL")  // Новый пароль
-            ?.SendKeys("TDM365")
+            ?.sendKeys("TDM365")
         toolr.reference("new-password-second","MODAL")  // Подтверждение
-            ?.SendKeys("TDM365")
+            ?.sendKeys("TDM365")
         toolr.OK("change-password-accept")
 // Проверить, что вышли
         login = "ChangePass $localDateNow"

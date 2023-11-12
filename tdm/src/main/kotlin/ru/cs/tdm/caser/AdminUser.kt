@@ -4,11 +4,12 @@ import org.apache.commons.io.FileUtils.copyFile
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.openqa.selenium.*
+import org.openqa.selenium.support.ui.FluentWait
 import ru.cs.tdm.code.Login
 import ru.cs.tdm.code.Toolr
-import ru.cs.tdm.code.SendKeys
 import ru.cs.tdm.data.*
 import java.io.File
+import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.test.assertContains
@@ -222,27 +223,69 @@ class AdminUser {
             .isNullOrEmpty().not()
     }
     @Test
-    @Disabled
-    //@DisplayName("Delete user TEST")
-    @DisplayName("0. Проверка пользователя Тестовый")
-    fun n00_checkUserPass() {
-        if (DT > 6) println("Test проверка user Тестоый")
+    @DisplayName("0. Проверка и удаление пользователей и групп Тестовый")
+    fun n00_checkUsersAndGroups() {
+        if (DT > 6) println("Test проверка user Тестовый")
 
-        while  (isTestPresent("GRID_USERS")) {
-            clickAllUsers("BUTTON_USER_DELETE")
-            assertTrue(toolr.headerWait(TDM365),
-                "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
-            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
-                "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
+        var nomerDel = 0
+
+        while(true){
+            clickAllUsers()
+            val testPresent =  toolr.reference("GRID_USERS", "MODAL")
+                ?.findElements(By.xpath("./descendant::span[contains(text(),'Тестов')]"))?.toList()
+
+            if (testPresent.isNullOrEmpty()) break
+            if (testPresent.size <= nomerDel) break
+
+            // Обрабатывать RecyclerVuew
+            testPresent[nomerDel]?.click()
+
+
+            if (toolr.reference("BUTTON_USER_DELETE","MODAL") == null) {
+                println("$$$$$$$$$$$$$$$ НЕТ ИНСТРУМЕНТОВ удаления Тестовый действие:")
+                //screenShot()
+                nomerDel++
+                continue
+            }
+
+            toolr.referenceClick("BUTTON_USER_DELETE", "MODAL")
+            assertTrue(
+                toolr.headerWait(TDM365),
+                "@@@@ После нажатия BUTTON_USER_DELETE - окно типа не имеет заголовка $TDM365 @@")
+
+            // Вы действительно хотите удалить объект "(Все проекты) Тест 31-05-2023_18-51-20  @@#" из системы?
+            val userText =
+                toolr.xpath("//*[contains(text(),'Удалить пользователя \"Тест')]", "MODAL")?.text ?: "NONE"
+            assertContains(userText, "Тест", false,
+                "@@@@ Нет правильного текста Тест на всплывающем окне $userText @@")
+
+            // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
             toolr.OK("yes-modal-window-btn")  // удалить тестового
-            if (DT > 8) println("Удален Тестовой пользователь")
         }
+//      return // Linux не работает
+        if (DT > 6) println("Test проверка групп Тестовый")
+        while  (true) { // (isTestPresent("GRID_GROUPS")) {
+            val testPresent =  toolr.reference("GRID_GROUPS", "MODAL")
+                ?.findElements(By.xpath("./descendant::span[contains(text(),'Тестов')]"))?.toList()
+            if (testPresent.isNullOrEmpty()) break
 
-        while  (isTestPresent("GRID_GROUPS")) {
+/*            FluentWait<WebDriver>(driver)                               // Беглое ожидание
+                .withTimeout(Duration.ofMillis(15000L))
+                .pollingEvery(Duration.ofMillis(200L))
+                .ignoreAll(
+                    listOf(
+                        NoSuchElementException::class.java,
+                        ElementNotInteractableException::class.java,
+                        ElementClickInterceptedException::class.java,
+                        StaleElementReferenceException::class.java,
+                    )
+                ).until { testPresent[0]?.click() !=null}
+
+ */
+            //testPresent[0]?.click()
             toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
             toolr.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
             assertTrue(toolr.headerWait(TDM365),
-//ASTRA            assertTrue(toolr.headerWait(TDMS),
                 "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить группу) @@")
 
             assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
@@ -252,7 +295,7 @@ class AdminUser {
         }
 
         toolr.OK()
-        if (DT > 6) println("Конец Test проверка user Тестоый")
+        if (DT > 6) println("Конец Test нажатия на проверка user Тестовый Заблокировано $nomerDel фильтров")
     }
     /**
      *  Тест создание нового пользователя
@@ -269,10 +312,10 @@ class AdminUser {
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
 
         toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-            ?.SendKeys("Тестовый $localDateNow")
+            ?.sendKeys("Тестовый $localDateNow")
         toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-            ?.SendKeys("Логин $localDateNow")
-        Thread.sleep(threadSleep)
+            ?.sendKeys("Логин $localDateNow ${repetitionInfo.currentRepetition}") // ") //
+      //  Thread.sleep(threadSleep)
         toolr.OK()
 
         // Проверить что Pass есть в списке
@@ -285,15 +328,14 @@ class AdminUser {
         assertTrue((toolr.reference("GRID_USERS","MODAL","//descendant::span[contains(text(),'$localDateNow')]//ancestor::tr")?.getAttribute("class")
             ?.contains("Selected")?: false),
             "@@@@ После выделения созданного пользователя $localDateNow в таблице нет такого пользователя @@")
-//        Thread.sleep(threadSleep)
-        Thread.sleep(threadSleep)
+
         toolr.OK()
-       // tools.OK()
+
         if (DT > 6) println("Конец Test нажатия на $createUser")
     }
 
         /**
-         *  тест заполнение и сохранение нового пользователя
+         *  Тест заполнение и сохранение нового пользователя
          */
     @Test
     @DisplayName("Заполнение нового пользователя")
@@ -307,22 +349,22 @@ class AdminUser {
                 "@@@@ После нажатия BUTTON_USER_EDIT - нет заголовка окна Редактирование пользователя @@")
             // //html/body/descendant::div[@data-reference]
             toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-                ?.SendKeys(" #")
+                ?.sendKeys(" #")
             toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-                ?.SendKeys(" #")
+                ?.sendKeys(" #")
 
          //   toolr.referenceClick("ATTR_TDMS_LOGIN_ENABLE","MODAL","//descendant::span")  // Разрешить вход в TDMS
 
             toolr.reference("ATTR_USER_NAME","MODAL","/descendant::input")  // Имя
-                ?.SendKeys("Имя")
+                ?.sendKeys("Имя")
             toolr.reference("ATTR_USER_MIDDLE_NAME","MODAL","//descendant::input")  // Отчество
-                ?.SendKeys("Отчество")
+                ?.sendKeys("Отчество")
             toolr.reference("ATTR_USER_LAST_NAME","MODAL","//descendant::input")  // Фамилия
-                ?.SendKeys("Фамилия")
+                ?.sendKeys("Фамилия")
             toolr.reference("ATTR_USER_PHONE","MODAL","//descendant::input")  // Телефон
-                ?.SendKeys("9291234567")
+                ?.sendKeys("9291234567")
             toolr.reference("ATTR_USER_EMAIL","MODAL","//descendant::input")  // E-mail
-                ?.SendKeys("ya@ya")
+                ?.sendKeys("ya@ya")
         //    Thread.sleep(threadSleep)
             toolr.OK()
 //            Thread.sleep(threadSleep)
@@ -355,7 +397,7 @@ class AdminUser {
         //.sendKeys("Тестовая Фамилия $localDateNow")
         assertTrue(description?.getAttribute("value") == "Тестовый $localDateNow #",
             "@@@@ Нет измененного описания с # ")
-        description?.SendKeys(" @")
+        description?.sendKeys(" @")
         assertTrue(description?.getAttribute("value") == "Тестовый $localDateNow # @",
             "@@@@ Нет измененного описания с # и @ ")
 
@@ -405,9 +447,9 @@ class AdminUser {
          *  тест Создания Группы
          */
 
-    @Test
+    @RepeatedTest(NN)
     @DisplayName("Создание новой группы")
-    fun n08_AddGroupUserTest() {
+    fun n08_AddGroupUserTest(repetitionInfo: RepetitionInfo) {
 
             val createGroup = "Создание новой группы"
             if (DT > 6) println("Test нажатия на $createGroup")
@@ -419,7 +461,7 @@ class AdminUser {
             assertTrue(toolr.reference("FormSimpleEditDlg-prompt", "MODAL")?.text == "Введите название новой группы",
                 "@@@@ После нажатия $createGroup - нет окна с Введите название новой группы @@")
             toolr.reference("FormSimpleEditDlg-input", "MODAL")
-            ?.SendKeys("Тестовая $localDateNow")
+            ?.sendKeys("Тестовая $localDateNow ${repetitionInfo.currentRepetition}")
             toolr.OK()  // создать Тестовая
 
             assertTrue(toolr.headerWait(TDM365),
@@ -483,42 +525,6 @@ class AdminUser {
  //       Thread.sleep(threadSleep)
         toolr.OK()
             if (DT > 6) println("Конец Test нажатия на Удаление на $localDateNow")
-    }
-//    @RepeatedTest(92)
-
-    @Test
-    @Disabled
-    //@Disabled
-    //@DisplayName("Delete user TEST")
-    @DisplayName("99. Проверка пользователя Тестоый")
-    fun n99_checkUserPass() {
-        if (DT > 6) println("Test проверка user Тестоый")
-
-        while  (isTestPresent("GRID_USERS")) {
-            clickAllUsers("BUTTON_USER_DELETE")
-            assertTrue(toolr.headerWait(TDM365),
-                "@@@@ При BUTTON_USER_DELETE - нет окна подтверждения с заголовком TDMS (удалить пользователя) @@")
-            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить пользователя",false,
-                "@@@@ При Удалить пользователя - нет в окне сообщения с заголовком TDMS Удалить пользователя @@")
-            toolr.OK("yes-modal-window-btn")  // удалить тестового
-            if (DT > 8) println("Удален Тестовой пользователь")
-        }
-
-        while  (isTestPresent("GRID_GROUPS")) {
-            toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
-            toolr.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
-            assertTrue(toolr.headerWait(TDM365),
-//ASTRA            assertTrue(toolr.headerWait(TDMS),
-                "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить группу) @@")
-
-            assertContains(toolr.xpath("", "MODAL")?.text?: "None", "Удалить группу",false,
-                "@@@@ При удалить группу - нет в окне сообщения с заголовком TDMS Удалить группу @@")
-            toolr.OK("yes-modal-window-btn")  // удалить тестовая
-            if (DT > 8) println("Удаление Тестовой группы")
-        }
-
-        toolr.OK()
-        if (DT > 6) println("Конец Test проверка user Тестоый")
     }
 }
 

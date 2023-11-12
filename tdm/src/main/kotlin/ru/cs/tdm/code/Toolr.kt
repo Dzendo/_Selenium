@@ -21,7 +21,7 @@ fun WebElement.Click() {
     throw ElementClickInterceptedException("&&&&&&& Not Click &&&&&&&& за ${TestsProperties.repeateInNomber} повторов ")
 }
 
-fun WebElement.SendKeys(str:String, clear: Boolean = false) {
+fun WebElement.sendKeys(str:String, clear: Boolean = false) {
   //  this.click()
     if (clear) this.clear()
     this.sendKeys(str)
@@ -152,7 +152,7 @@ class Toolr(val driver: WebDriver) {
 //    fun referenceClick(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean =
 //        reference(data_reference, prefix, suffix)?.click() != null
     fun referenceClickSend(data_reference: String, prefix: String = "ROOT", text:String = "", suffix: String = ""): Boolean =
-        reference(data_reference, prefix, suffix)?.SendKeys(text) != null
+        reference(data_reference, prefix, suffix)?.sendKeys(text) != null
 
     fun referencePressed(data_reference: String, prefix: String = "ROOT", suffix: String = ""): Boolean {
         val rezult1 = reference(data_reference, prefix, suffix)?.getAttribute("class")
