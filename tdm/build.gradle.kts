@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "1.9.21"
     application
 }
 group = "ru.cs.tdm"
@@ -37,15 +37,15 @@ tasks.withType<JavaCompile> {
 }
 dependencies {
 //    testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin:kotlin-test:1.9.20")  // 1.8.20-RC2
+    implementation("org.jetbrains.kotlin:kotlin-test:1.9.21")  // 1.8.20-RC2
     implementation("org.seleniumhq.selenium:selenium-java:4.15.0")
-    implementation("io.github.bonigarcia:webdrivermanager:5.6.0")
+    implementation("io.github.bonigarcia:webdrivermanager:5.6.2")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
     implementation("org.slf4j:slf4j-simple:2.0.9")
-    implementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    implementation("org.junit.jupiter:junit-jupiter:5.10.1")
     //implementation("org.assertj:assertj-core:3.23.1")
-    implementation("org.junit.platform:junit-platform-launcher:1.10.0")
+    implementation("org.junit.platform:junit-platform-launcher:1.10.1")
 //    implementation("org.seleniumhq.selenium:selenium-http-jdk-client:4.10.0")
 
 }

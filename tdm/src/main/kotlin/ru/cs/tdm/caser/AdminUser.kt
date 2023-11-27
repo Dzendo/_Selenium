@@ -233,7 +233,7 @@ class AdminUser {
             clickAllUsers()
             val testPresent =  toolr.reference("GRID_USERS", "MODAL")
                 ?.findElements(By.xpath("./descendant::span[contains(text(),'Тестов')]"))?.toList()
-
+                ?.reversed()
             if (testPresent.isNullOrEmpty()) break
             if (testPresent.size <= nomerDel) break
 
@@ -267,23 +267,12 @@ class AdminUser {
         while  (true) { // (isTestPresent("GRID_GROUPS")) {
             val testPresent =  toolr.reference("GRID_GROUPS", "MODAL")
                 ?.findElements(By.xpath("./descendant::span[contains(text(),'Тестов')]"))?.toList()
+                ?.reversed()
             if (testPresent.isNullOrEmpty()) break
 
-/*            FluentWait<WebDriver>(driver)                               // Беглое ожидание
-                .withTimeout(Duration.ofMillis(15000L))
-                .pollingEvery(Duration.ofMillis(200L))
-                .ignoreAll(
-                    listOf(
-                        NoSuchElementException::class.java,
-                        ElementNotInteractableException::class.java,
-                        ElementClickInterceptedException::class.java,
-                        StaleElementReferenceException::class.java,
-                    )
-                ).until { testPresent[0]?.click() !=null}
 
- */
-            //testPresent[0]?.click()
-            toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
+            testPresent[0]?.click()
+            //toolr.referenceClick("GRID_GROUPS","MODAL","//descendant::span[contains(text(), 'Тестовая')]")
             toolr.referenceClick("BUTTON_GROUP_DELETE", "MODAL")
             assertTrue(toolr.headerWait(TDM365),
                 "@@@@ При удалить группу - нет окна сообщения с заголовком TDMS (удалить группу) @@")
@@ -300,7 +289,7 @@ class AdminUser {
     /**
      *  Тест создание нового пользователя
      */
-    @RepeatedTest(NN)
+    @RepeatedTest(300)
     @DisplayName("Создать пользователя")
     fun n04_createUserTest(repetitionInfo: RepetitionInfo) {
         val createUser = "Создать пользователя"
@@ -312,7 +301,7 @@ class AdminUser {
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
 
         toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-            ?.sendKeys("Тестовый $localDateNow")
+            ?.sendKeys("Тестовый $localDateNow ${repetitionInfo.currentRepetition}")
         toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
             ?.sendKeys("Логин $localDateNow ${repetitionInfo.currentRepetition}") // ") //
       //  Thread.sleep(threadSleep)
@@ -447,7 +436,8 @@ class AdminUser {
          *  тест Создания Группы
          */
 
-    @RepeatedTest(NN)
+    @RepeatedTest(300)
+    //@Disabled
     @DisplayName("Создание новой группы")
     fun n08_AddGroupUserTest(repetitionInfo: RepetitionInfo) {
 
@@ -479,6 +469,7 @@ class AdminUser {
          *  тест Удаление Группы
          */
         @Test
+       //@Disabled
         @DisplayName("Удаление Группы")
         fun n09_DeleteGroupUserTest() {
 

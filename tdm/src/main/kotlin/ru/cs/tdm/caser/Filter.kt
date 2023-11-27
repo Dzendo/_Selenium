@@ -206,7 +206,7 @@ class Filter {
             workTable()
         val testPresent =  toolr.xpath("//table", "Main-Grid")
             ?.findElements(By.xpath("//descendant::a[contains(text(),'Тест')]"))?.toList()
-
+            ?.reversed()
             if (testPresent.isNullOrEmpty()) break
             if (testPresent.size <= nomerDel) break
 
@@ -244,7 +244,7 @@ class Filter {
     /**
      *  тест создание нового фильтра
      */
-    @RepeatedTest(NN)
+    @RepeatedTest(300)
     @DisplayName("Создать фильтры")
     fun n01_CreateUserQuery(repetitionInfo: RepetitionInfo) {
         val nomberFilter = "${repetitionInfo.currentRepetition}"
