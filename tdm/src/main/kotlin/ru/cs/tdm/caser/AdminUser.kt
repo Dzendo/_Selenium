@@ -262,7 +262,7 @@ class AdminUser {
             // Вы действительно хотите удалить объект "(Все проекты) Фильтр" из системы?
             toolr.OK("yes-modal-window-btn")  // удалить тестового
         }
-//      return // Linux не работает
+     // return // Linux не работает
         if (DT > 6) println("Test проверка групп Тестовый")
         while  (true) { // (isTestPresent("GRID_GROUPS")) {
             val testPresent =  toolr.reference("GRID_GROUPS", "MODAL")
@@ -289,7 +289,7 @@ class AdminUser {
     /**
      *  Тест создание нового пользователя
      */
-    @RepeatedTest(300)
+    @RepeatedTest(NN)
     @DisplayName("Создать пользователя")
     fun n04_createUserTest(repetitionInfo: RepetitionInfo) {
         val createUser = "Создать пользователя"
@@ -301,9 +301,9 @@ class AdminUser {
             "@@@@ После нажатия BUTTON_USER_CREATE - нет заголовка окна Редактирование пользователя @@")
 
         toolr.reference("ATTR_DESCRIPTION","MODAL","//descendant::input")  // Описание
-            ?.sendKeys("Тестовый $localDateNow ${repetitionInfo.currentRepetition}")
+            ?.sendKeys("Тестовый $localDateNow")  //  ${repetitionInfo.currentRepetition}
         toolr.reference("ATTR_LOGIN","MODAL","//descendant::input")  // Логин
-            ?.sendKeys("Логин $localDateNow ${repetitionInfo.currentRepetition}") // ") //
+            ?.sendKeys("Логин $localDateNow") // ") //  ${repetitionInfo.currentRepetition}
       //  Thread.sleep(threadSleep)
         toolr.OK()
 
@@ -436,7 +436,7 @@ class AdminUser {
          *  тест Создания Группы
          */
 
-    @RepeatedTest(300)
+    @RepeatedTest(NN)
     //@Disabled
     @DisplayName("Создание новой группы")
     fun n08_AddGroupUserTest(repetitionInfo: RepetitionInfo) {
@@ -469,7 +469,7 @@ class AdminUser {
          *  тест Удаление Группы
          */
         @Test
-       //@Disabled
+      // @Disabled
         @DisplayName("Удаление Группы")
         fun n09_DeleteGroupUserTest() {
 

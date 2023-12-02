@@ -244,7 +244,7 @@ class Filter {
     /**
      *  тест создание нового фильтра
      */
-    @RepeatedTest(300)
+    @RepeatedTest(NN)
     @DisplayName("Создать фильтры")
     fun n01_CreateUserQuery(repetitionInfo: RepetitionInfo) {
         val nomberFilter = "${repetitionInfo.currentRepetition}"
@@ -384,6 +384,7 @@ class Filter {
             }
             BUTTON_OBJDEV_SEL()
 
+        Thread.sleep(threadSleep)
             val attrObjectDev =  toolr.reference("ATTR_OBJECT_DEV", "MODAL","//descendant::input")
             assertContains(attrObjectDev?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",
                 false, "@@@@ карандашик BUTTON_OBJDEV_SEL : После выбора в поле фильтра объекта разработки из справочника в поле фильтра Объект разработки - пусто, а должно стоять Ферма_омшанник @@")
@@ -407,6 +408,7 @@ class Filter {
             }
             BUTTON_PROJECT_SEL()
 
+        Thread.sleep(threadSleep)
             val ATTR_RefToProject = toolr.reference("ATTR_RefToProject", "MODAL","//descendant::input")
             assertContains(
                 ATTR_RefToProject?.getAttribute("value") ?: "NONE",
@@ -468,6 +470,7 @@ class Filter {
             }
             BUTTON_OBJ_STR()
 
+        Thread.sleep(threadSleep)
             val ATTR_OCC = toolr.reference("ATTR_OCC","MODAL","//descendant::input")
             assertContains(ATTR_OCC?.getAttribute("value") ?: "NONE", "Расширение ЕСГ",false,
                 "@@@@ поле фильтра Объект структуры не содержит значение Расширение ЕСГ @@")
@@ -489,6 +492,7 @@ class Filter {
             }
             BUTTON_ORG_SEL()
 
+        Thread.sleep(threadSleep)
             val ATTR_ORGANIZATION_LINK =
                 toolr.reference("ATTR_ORGANIZATION_LINK", "MODAL","//descendant::input")
             assertContains(ATTR_ORGANIZATION_LINK?.getAttribute("value") ?: "NONE", "Газпромпроектирование",false,
