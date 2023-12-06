@@ -437,7 +437,7 @@ class AdminUser {
          */
 
     @RepeatedTest(NN)
-    //@Disabled
+//    @Disabled
     @DisplayName("Создание новой группы")
     fun n08_AddGroupUserTest(repetitionInfo: RepetitionInfo) {
 
@@ -469,7 +469,7 @@ class AdminUser {
          *  тест Удаление Группы
          */
         @Test
-      // @Disabled
+//       @Disabled
         @DisplayName("Удаление Группы")
         fun n09_DeleteGroupUserTest() {
 
