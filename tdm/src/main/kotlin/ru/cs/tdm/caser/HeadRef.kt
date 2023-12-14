@@ -256,6 +256,7 @@ class HeadRef {
     inner class ToolTest {
         @BeforeEach
         fun beforeEach() {
+           // driver.navigate().refresh()
             if (DT > 7) println("Вызов inner Tools BeforeEach")
             //Thread.sleep((threadSleep)) // 54-41
             toolr.byIDClick("objects-tab")
@@ -418,7 +419,7 @@ class HeadRef {
      * во второй строке под SYSADMIN не только ОБЪЕКТЫ
      * имеет вложенный класс тестирования СЭТД
      */
-    //@Disabled
+    @Disabled
     @Nested              //###############################Testing SubSysadmin###################################################
     @DisplayName("Testing SubSysadmin")
     @TestMethodOrder(MethodOrderer.MethodName::class)
