@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "1.9.22"
     application
 }
 group = "ru.cs.tdm"
@@ -37,7 +37,7 @@ tasks.withType<JavaCompile> {
 }
 dependencies {
 //    testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin:kotlin-test:1.9.21")  // 1.8.20-RC2
+    implementation("org.jetbrains.kotlin:kotlin-test:1.9.22")  // 1.8.20-RC2
     implementation("org.seleniumhq.selenium:selenium-java:4.16.1")
     implementation("io.github.bonigarcia:webdrivermanager:5.6.2")
     { exclude ("org.bouncycastle") }
