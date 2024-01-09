@@ -176,12 +176,7 @@ class AdminUser {
         toolr.closeEsc(5)
         if (DT >7) println("Конец Вызов AfterEach AdminUserTest")
     }
-    fun screenShot(name: String = "image") {
-        val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
-        val localDateNow = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm").format(LocalDateTime.now())
-        copyFile(scrFile, File("./$name$localDateNow.png"))
-        if (DT >5) println("Скрин сохранен ")
-    }
+
     private fun clickAllUsers(click: String = "NONE") {
         val adminUser = "Администрирование групп"
         val allUsers = "Все пользователи"

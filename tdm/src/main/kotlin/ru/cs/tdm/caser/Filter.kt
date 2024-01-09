@@ -117,6 +117,7 @@ class Filter {
     fun beforeEach() {
 
         if (DT > 7) println("Начало BeforeEach FilterTest")
+        driver.navigate().refresh()
         val mainMenu = "Объекты"
         if (DT > 7) println("Test нажатия на $mainMenu TDMS Web")
         toolr.byIDClick("objects-tab")

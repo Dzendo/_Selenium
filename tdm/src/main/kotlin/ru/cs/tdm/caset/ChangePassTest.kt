@@ -68,15 +68,6 @@ class ChangePassTest {
         }
     }   // конец companion object
 
-    /**
-     * screenShot
-     */
-        fun screenShot(name: String = "image") {
-        val scrFile = (driver as TakesScreenshot).getScreenshotAs<File>(OutputType.FILE)
-        val sdf = SimpleDateFormat("ddMMyyyyhhmmss")
-        copyFile(scrFile, File("./$name${sdf.format(Date())}.png"))
-            if (DT >5) println("Скрин сохранен ")
-    }
 
     // Как обычно, выполняется перед каждым тестом, только он пустой
     @BeforeEach

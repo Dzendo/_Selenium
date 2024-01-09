@@ -14,6 +14,8 @@ import ru.cs.tdm.data.TestsProperties
 /**
  *
  * data-reference="SUB_SYSADMIN"
+ * data-reference="global-commands-popup"
+ * data-reference="toolbar-commands-popup"
  */
 // Видимое имя класса при тестах, но нигде не показывается
 @DisplayName("Testing Tools Menu-Icons Test")
@@ -256,7 +258,7 @@ class HeadRef {
     inner class ToolTest {
         @BeforeEach
         fun beforeEach() {
-           // driver.navigate().refresh()
+            driver.navigate().refresh()
             if (DT > 7) println("Вызов inner Tools BeforeEach")
             //Thread.sleep((threadSleep)) // 54-41
             toolr.byIDClick("objects-tab")
@@ -419,7 +421,7 @@ class HeadRef {
      * во второй строке под SYSADMIN не только ОБЪЕКТЫ
      * имеет вложенный класс тестирования СЭТД
      */
-    @Disabled
+    //@Disabled
     @Nested              //###############################Testing SubSysadmin###################################################
     @DisplayName("Testing SubSysadmin")
     @TestMethodOrder(MethodOrderer.MethodName::class)
@@ -427,6 +429,7 @@ class HeadRef {
         @BeforeEach
         fun beforeEach() {
             if (DT > 7) println("Вызов inner SubSysadmin BeforeEach")
+            driver.navigate().refresh()
             toolr.byIDClick("objects-tab")
             assertTrue(toolr.titleContain(TDM365), "@@@@ После нажатия Объекты - нет заголовка вкладки TDM365 @@")
             assertTrue(toolr.byIDPressed("objects-tab"), "@@@@ После нажатия Объекты - кнопка Объекты нет утоплена @@")
@@ -444,6 +447,12 @@ class HeadRef {
 
         private fun openSubSysadmin() {
             if (DT > 7) println("Вызов openSubSysadmin")
+            try {
+                toolr.referenceClick("global-commands-popup")
+            }catch (e: Exception) {
+                println("####### SUB_SYSADMIN открытие стрелочки #######")
+            }
+
             repeat(repeateOut) {
 
                 toolr.referenceClick("SUB_SYSADMIN","ROOT666")

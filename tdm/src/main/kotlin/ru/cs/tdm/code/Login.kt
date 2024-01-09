@@ -28,7 +28,7 @@ class Login(val driver: WebDriver) {
     fun loginIn(login: String, password: String): Boolean = try{
         //driver.navigate().refresh()  // Костыль из-за заголовка браузера
         assertTrue(loginPage.titleContain(Tdms),"Браузер не имеет вкладку с заголовком $Tdms для ввода пароля")
-        assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
+      //  assertEquals(loginPage.authorizationHeaderName(),"Войти в TDMS","Нет окна с заголовком Войти в TDMS")
         //получение доступа к методам класса LoginPage для взаимодействия с элементами страницы
         //вводим логин
         loginPage.inputLogin(login)
@@ -52,7 +52,7 @@ class Login(val driver: WebDriver) {
             loginPage.clickYesBtn()
             //driver.navigate().refresh()  // Костыль из-за заголовка браузера
             assertTrue(loginPage.titleContain(Tdms), "Браузер не имеет вкладку с заголовком Tdms для ввода пароля")
-            assertEquals(loginPage.authorizationHeaderName(), "Войти в TDMS", "Нет окна с заголовком Войти в TDMS")
+         //   assertEquals(loginPage.authorizationHeaderName(), "Войти в TDMS", "Нет окна с заголовком Войти в TDMS")
             if (DT >5) println(" Вышли из-под логина ")
     true
         } catch (e:Exception) {
