@@ -39,10 +39,10 @@ dependencies {
 //    testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-test:1.9.22")  // 1.8.20-RC2
     implementation("org.seleniumhq.selenium:selenium-java:4.16.1")
-    implementation("io.github.bonigarcia:webdrivermanager:5.6.2")
+    implementation("io.github.bonigarcia:webdrivermanager:5.6.3")
     { exclude ("org.bouncycastle") }
     // https://coderlessons.com/tutorials/java-tekhnologii/vyuchi-slf4j/slf4j-kratkoe-rukovodstvo
-    implementation("org.slf4j:slf4j-simple:2.0.9")
+    implementation("org.slf4j:slf4j-simple:2.0.11")
     implementation("org.junit.jupiter:junit-jupiter:5.10.1")
     //implementation("org.assertj:assertj-core:3.23.1")
     implementation("org.junit.platform:junit-platform-launcher:1.10.1")
